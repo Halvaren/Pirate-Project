@@ -54,7 +54,10 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Alvaro\Scripts\BuoyancyScripts\BoatPhysics.cs" />
+     <Compile Include="Assets\Alvaro\Scripts\BuoyancyScripts\BoatPhysicsMath.cs" />
+     <Compile Include="Assets\Alvaro\Scripts\BuoyancyScripts\DebugPhysics.cs" />
      <Compile Include="Assets\Alvaro\Scripts\BuoyancyScripts\ModifyBoatMesh.cs" />
+     <Compile Include="Assets\Alvaro\Scripts\BuoyancyScripts\SlammingForceData.cs" />
      <Compile Include="Assets\Alvaro\Scripts\BuoyancyScripts\TriangleData.cs" />
      <Compile Include="Assets\Alvaro\Scripts\BuoyancyScripts\WaterController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\ExtendedFlycam.cs" />
@@ -81,19 +84,19 @@
      <None Include="Assets\Asset Packs\Standard Assets\Environment\Water\Water4\Shaders\WaterInclude.cginc" />
      <None Include="Assets\Asset Packs\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Advanced.shader" />
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>C:/Users/halva/Desktop/ORGANIZAR/Unity/Pirates Project/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>C:/Users/halva/Documents/GitHub/Pirate-Project/Pirates Project/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.PackageManagerUI.Editor">
- <HintPath>C:/Users/halva/Desktop/ORGANIZAR/Unity/Pirates Project/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+ <HintPath>C:/Users/halva/Documents/GitHub/Pirate-Project/Pirates Project/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.CollabProxy.Editor">
- <HintPath>C:/Users/halva/Desktop/ORGANIZAR/Unity/Pirates Project/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+ <HintPath>C:/Users/halva/Documents/GitHub/Pirate-Project/Pirates Project/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>C:/Users/halva/Desktop/ORGANIZAR/Unity/Pirates Project/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>C:/Users/halva/Documents/GitHub/Pirate-Project/Pirates Project/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.DataPrivacy">
- <HintPath>C:/Users/halva/Desktop/ORGANIZAR/Unity/Pirates Project/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+ <HintPath>C:/Users/halva/Documents/GitHub/Pirate-Project/Pirates Project/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.2f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -297,13 +300,13 @@
  <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.2f1/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.Editor">
- <HintPath>C:/Users/halva/Desktop/ORGANIZAR/Unity/Pirates Project/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
+ <HintPath>C:/Users/halva/Documents/GitHub/Pirate-Project/Pirates Project/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.StandardEvents">
- <HintPath>C:/Users/halva/Desktop/ORGANIZAR/Unity/Pirates Project/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
+ <HintPath>C:/Users/halva/Documents/GitHub/Pirate-Project/Pirates Project/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.Tracker">
- <HintPath>C:/Users/halva/Desktop/ORGANIZAR/Unity/Pirates Project/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
+ <HintPath>C:/Users/halva/Documents/GitHub/Pirate-Project/Pirates Project/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
  </Reference>
  <Reference Include="netstandard">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.2f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
