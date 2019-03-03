@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoatController : MonoBehaviour
+public class BoatController0 : MonoBehaviour
 {
     public Vector3 COM;
     public float speed = 1.0f;

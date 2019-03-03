@@ -58,7 +58,7 @@ public class ExtendedFlycam : MonoBehaviour
 	 	{
 	 		transform.position += transform.forward * normalMoveSpeed * Input.GetAxis("Vertical") * Time.deltaTime;
 			transform.position += transform.right * normalMoveSpeed * Input.GetAxis("Horizontal") * Time.deltaTime;
-	 	}
+		 }
  
  
 		if (Input.GetKey (KeyCode.Q)) {transform.position += transform.up * climbSpeed * Time.deltaTime;}
