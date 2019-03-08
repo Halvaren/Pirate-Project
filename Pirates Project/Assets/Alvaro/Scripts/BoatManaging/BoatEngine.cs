@@ -83,8 +83,6 @@ public class BoatEngine : MonoBehaviour
         {
             WaterJetRotation_Y = waterJetTransform.localEulerAngles.y - steerVelocity;
 
-            print(WaterJetRotation_Y);
-
             if(WaterJetRotation_Y < 150f)
             {
                 WaterJetRotation_Y = 150f;
