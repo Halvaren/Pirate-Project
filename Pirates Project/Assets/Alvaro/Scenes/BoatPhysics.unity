@@ -1940,12 +1940,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c3a7af9b634da641b21f2a95692481c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isMoving: 0
-  scale: 0.1
+  isMoving: 1
+  scale: 1
   speed: 1
-  waveDistance: 1
-  noiseStrength: 1
-  noiseWalk: 1
+  waveDistance: 20
+  noiseStrength: 0.05
+  noiseWalk: 0.1
 --- !u!4 &1939601212
 Transform:
   m_ObjectHideFlags: 0

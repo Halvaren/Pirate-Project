@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+namespace DuplicatedScripts
 {
+    public class PlayerMovement : MonoBehaviour
+    {
     
+    }
 }
