@@ -106,7 +106,7 @@ public class WaterSquare
         //Triangles
         List<int> tris = new List<int>();
         //Texturing
-        //List<Vector2> uvs = new List<Vector2>();
+        List<Vector2> uvs = new List<Vector2>();
 
         for(int z = 0; z < width; z++)
         {
@@ -123,7 +123,7 @@ public class WaterSquare
 
                 verts[z][x] = current_point;
 
-                //uvs.Add(new Vector2(x, z));
+                uvs.Add(new Vector2(x, z));
 
                 //Don't generate a triangle the first coordinate on each row
                 //Because that's just one point
@@ -158,7 +158,7 @@ public class WaterSquare
         //Generate the mesh object
         Mesh newMesh = new Mesh();
         newMesh.vertices = unfolded_verts;
-        //newMesh.uv = uvs.ToArray();
+        newMesh.uv = uvs.ToArray();
         newMesh.triangles = tris.ToArray();
 
         //Ensure the bounding volume is correct
