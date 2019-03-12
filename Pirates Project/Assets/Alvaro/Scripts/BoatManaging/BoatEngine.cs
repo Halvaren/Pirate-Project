@@ -7,6 +7,7 @@ public class BoatEngine : MonoBehaviour
 {
     //Drags
     public Transform waterJetTransform;
+    public Transform sailTransform;
     public Slider steerSlider; //Esto hay que modificarlo, obviamente
 
     //How fast should the engine accelerate?
@@ -24,9 +25,11 @@ public class BoatEngine : MonoBehaviour
 
     private Rigidbody boatRB;
 
-    private float WaterJetRotation_Y = 0f;
+    private float WaterJetRotation_Y = 180f;
 
     BoatController boatController;
+
+    const float factorConversion = 80f / 30f;
 
     // Start is called before the first frame update
     void Start()
@@ -49,18 +52,18 @@ public class BoatEngine : MonoBehaviour
 
     void UserInput()
     {
-        //Forward / reverse
+        /* //Forward / reverse
         if(Input.GetKey(KeyCode.W))
-        {
+        {*/
             if(boatController.CurrentSpeed < 50f && currentJetPower < maxPower)
             {
                 currentJetPower += 1f * powerFactor;
             }
-        }
-        else
-        {
-            currentJetPower = 0f;
-        }
+        //}
+        //else
+        //{
+            //currentJetPower = 0f;
+        //}
 
         //Steer left
         if(Input.GetKey(KeyCode.A))
@@ -74,9 +77,6 @@ public class BoatEngine : MonoBehaviour
 
             steerSlider.value = WaterJetRotation_Y - 180f;
 
-            Vector3 newRotation = new Vector3(0f, WaterJetRotation_Y, 0f);
-
-            waterJetTransform.localEulerAngles = newRotation;
         }
         //Steer right
         else if(Input.GetKey(KeyCode.D))
@@ -89,19 +89,15 @@ public class BoatEngine : MonoBehaviour
             }
 
             steerSlider.value = WaterJetRotation_Y - 180f;
-
-            Vector3 newRotation = new Vector3(0f, WaterJetRotation_Y, 0f);
-
-            waterJetTransform.localEulerAngles = newRotation;
         }
         else if(Input.GetKey(KeyCode.Space))
         {
-            WaterJetRotation_Y = 180f;
-
-            steerSlider.value = 0f;
-
-            waterJetTransform.localEulerAngles = new Vector3(0f, WaterJetRotation_Y, 0f);
+            StartCoroutine(RotateSailToCenter(0.2f));
         }
+
+        waterJetTransform.localEulerAngles = new Vector3(0f, WaterJetRotation_Y, 0f);
+        
+        sailTransform.localEulerAngles = new Vector3(0f, (WaterJetRotation_Y - 180) * factorConversion, 0f);
     }
 
     void UpdateWaterJet()
@@ -123,5 +119,35 @@ public class BoatEngine : MonoBehaviour
         {
             boatRB.AddForceAtPosition(Vector3.zero, waterJetTransform.position);
         }
+    }
+
+    IEnumerator RotateSailToCenter(float time)
+    {
+        Quaternion initialRotationEngine = waterJetTransform.localRotation;
+        Quaternion initialRotationSail = sailTransform.localRotation;
+
+        Quaternion finalRotationEngine = Quaternion.Euler(0f, 180f, 0f);
+        Quaternion finalRotationSail = Quaternion.Euler(0f, 0f, 0f);
+
+        float initialSteerValue = steerSlider.value;
+        float finalSteerValue = 0f;
+
+        float elapsedTime = 0.0f;
+        while(elapsedTime < time)
+        {
+            elapsedTime += Time.deltaTime;
+
+            waterJetTransform.localRotation = Quaternion.Lerp(initialRotationEngine, finalRotationEngine, elapsedTime / time);
+            sailTransform.localRotation = Quaternion.Lerp(initialRotationSail, finalRotationSail, elapsedTime / time);
+
+            steerSlider.value = Mathf.Lerp(initialSteerValue, finalSteerValue, elapsedTime / time);
+
+            yield return null;
+        }
+        waterJetTransform.localRotation = finalRotationEngine;
+        sailTransform.localRotation = finalRotationSail;
+        steerSlider.value = 0f;
+
+        WaterJetRotation_Y = 180f;
     }
 }
