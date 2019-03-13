@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 6f;            // The speed that the player will move at.
+    public float speed = 5f;
 
     Vector3 movement;                   // The vector to store the direction of the player's movement.
     Animator anim;                      // Reference to the animator component.
@@ -42,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
         // Set the movement vector based on the axis input.
         //movement.Set (h, 0f, v);
         
+        
         // Normalise the movement vector and make it proportional to the speed per second.
         movement = (transform.forward * v + transform.right * h) * speed * Time.deltaTime;
 
@@ -80,9 +82,13 @@ public class PlayerMovement : MonoBehaviour
         bool walking = v != 0f;
         bool rotating = Input.GetAxis("Mouse X") != 0f || Input.GetAxis("Mouse Y") != 0f;
         bool sideRunning = h != 0f;
+        bool running = Input.GetButton("Fire3");
 
-        // Tell the animator whether or not the player is walking.
         anim.SetBool ("IsWalking", (walking || rotating) && !sideRunning);
         anim.SetBool ("IsSideRunning", sideRunning);
+        anim.SetBool("IsRunning", running);
+
+        if(running) speed = 8f;
+        else speed = 5f;
     }
 }
