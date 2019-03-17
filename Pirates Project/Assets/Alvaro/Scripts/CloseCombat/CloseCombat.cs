@@ -5,18 +5,27 @@ using UnityEngine;
 public class CloseCombat : MonoBehaviour
 {
     private Animator anim;
+    public Transform swordTransform;
+    private MeshCollider swordCollider;
+    private SwordCollisionDetector swordScript;
 
     private int comboCount;
 
     private bool chaining;
     private bool nextAttack;
 
-    public bool attackType; //True para si se puede introducir el combo completo en cualquier momento, false para si se tienen que encadenar bien todos los golpes
+    public float Damage = 10f;
+
+    public bool AttackType; //True para si se puede introducir el combo completo en cualquier momento, false para si se tienen que encadenar bien todos los golpes
 
     // Start is called before the first frame update
     void Awake()
     {
         anim = GetComponent<Animator>();
+        swordCollider = swordTransform.GetComponentInChildren<MeshCollider>();
+        swordCollider.enabled = false;
+
+        swordScript = swordTransform.GetComponentInChildren<SwordCollisionDetector>();
     }
 
     void Start()
@@ -24,12 +33,14 @@ public class CloseCombat : MonoBehaviour
         chaining = true;
         nextAttack = false;
         comboCount = 0;
+
+        swordScript.SetDamage(Damage);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(attackType)
+        if(AttackType)
         {
             if(Input.GetMouseButtonDown(0))
             {
@@ -51,15 +62,25 @@ public class CloseCombat : MonoBehaviour
          
     }
 
-    public void DetectNextAttack()
+    public void StartAttack()
     {
         chaining = true;
         nextAttack = false;
     }
 
-    public void ResetCombo(int attackId)
+    public void EnableSwordCollider()
     {
-        if(attackType)
+        swordCollider.enabled = true;
+    }
+    
+    public void DisableSwordCollider()
+    {
+        swordCollider.enabled = false;
+    }
+
+    public void FinishAttack(int attackId)
+    {
+        if(AttackType)
         {
             if(comboCount == attackId || attackId > 2) {
                 comboCount = 0;

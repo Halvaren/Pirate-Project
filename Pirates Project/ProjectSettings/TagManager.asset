@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - CharacterSword
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -15,10 +17,10 @@ TagManager:
   - 
   - PostProcessing
   - Floor
-  - 
-  - 
-  - 
-  - 
+  - Character
+  - CharacterSword
+  - Enemy
+  - EnemySword
   - 
   - 
   - 
