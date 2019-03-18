@@ -4,10 +4,12 @@ using System.Collections;
 public class PlayerMovement : MonoBehaviour
 {
     public float speed = 5f;
+    public float gravity = 20.0f;
 
     Vector3 movement;                   // The vector to store the direction of the player's movement.
     Animator anim;                      // Reference to the animator component.
-    Rigidbody playerRigidbody;          // Reference to the player's rigidbody.
+    //Rigidbody playerRigidbody;          // Reference to the player's rigidbody.
+    CharacterController controller;
     int floorMask;                      // A layer mask so that a ray can be cast just at gameobjects on the floor layer.
     float camRayLength = 100f;          // The length of the ray from the camera into the scene.
 
@@ -15,10 +17,10 @@ public class PlayerMovement : MonoBehaviour
     {
         // Create a layer mask for the floor layer.
         floorMask = LayerMask.GetMask ("Floor");
-
         // Set up references.
         anim = GetComponent <Animator> ();
-        playerRigidbody = GetComponent <Rigidbody> ();
+       // playerRigidbody = GetComponent <Rigidbody> ();
+        controller = GetComponent <CharacterController> ();
     }
 
 
@@ -42,13 +44,21 @@ public class PlayerMovement : MonoBehaviour
     {
         // Set the movement vector based on the axis input.
         //movement.Set (h, 0f, v);
-        
-        
-        // Normalise the movement vector and make it proportional to the speed per second.
-        movement = (transform.forward * v + transform.right * h) * speed * Time.deltaTime;
+         if (controller.isGrounded)
+        {
+            // We are grounded, so recalculate
+            // move direction directly from axes
 
-        // Move the player to it's current position plus the movement.
-        playerRigidbody.MovePosition (transform.position + movement);
+            movement = new Vector3(h, 0.0f, v);
+            movement = transform.TransformDirection(movement);
+            movement = movement * speed;
+        }
+
+        // Apply gravity
+        movement.y = movement.y - (gravity * Time.deltaTime);
+
+        // Move the controller
+        controller.Move(movement * Time.deltaTime);
     }
 
     void Turning ()
@@ -72,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
             Quaternion newRotation = Quaternion.LookRotation (playerToMouse);
 
             // Set the player's rotation to this new rotation.
-            playerRigidbody.MoveRotation (newRotation);
+            transform.rotation = newRotation;
         }
     }
 
@@ -86,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
 
         anim.SetBool ("IsWalking", (walking || rotating) && !sideRunning);
         anim.SetBool ("IsSideRunning", sideRunning);
-        anim.SetBool("IsRunning", running);
+        anim.SetBool("IsRunning",  walking && running);
 
         if(running) speed = 8f;
         else speed = 5f;
