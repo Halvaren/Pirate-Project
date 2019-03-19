@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
         Move (h, v);
 
         // Turn the player to face the mouse cursor.
-        Turning ();
+        //Turning ();
 
         // Animate the player.
         Animating (h, v);
@@ -90,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // Create a boolean that is true if either of the input axes is non-zero.
         bool walking = v != 0f;
-        bool rotating = Input.GetAxis("Mouse X") != 0f || Input.GetAxis("Mouse Y") != 0f;
+        bool rotating = false;//Input.GetAxis("Mouse X") != 0f || Input.GetAxis("Mouse Y") != 0f;
         bool sideRunning = h != 0f;
         bool running = Input.GetButton("Fire3");
 
