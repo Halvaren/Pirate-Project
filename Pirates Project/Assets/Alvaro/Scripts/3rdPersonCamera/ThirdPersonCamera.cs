@@ -28,6 +28,11 @@ public class ThirdPersonCamera : MonoBehaviour
     private float rotX = 0.0f;
     private float rotY = 0.0f;
 
+    public Transform naturalPosition;
+    public Transform aimingPosition;
+    public float aimingSpeed = 10f;
+    private bool aiming;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,12 +47,13 @@ public class ThirdPersonCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RotateCamera(); //Gira la cámara en función del input
+        if(!aiming) RotateCamera(); //Gira la cámara en función del input
+        else AimCamera();
     }
 
     void LateUpdate()
     {
-        MoveCamera(); //Mueve la cámara siguiendo al target
+        if(!aiming) MoveCamera(); //Mueve la cámara siguiendo al target
     }
 
     void RotateCamera()
@@ -69,6 +75,12 @@ public class ThirdPersonCamera : MonoBehaviour
         Quaternion localRotation = Quaternion.Euler(rotX, rotY, 0.0f);
         transform.rotation = localRotation;
     }
+    
+    void AimCamera()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, aimingPosition.position, aimingSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, cameraFollowObj.transform.rotation, aimingSpeed * Time.deltaTime);
+    }
 
     void MoveCamera()
     {
@@ -76,5 +88,10 @@ public class ThirdPersonCamera : MonoBehaviour
 
         float step = movingSpeed * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, target.position, step);
+    }
+
+    public void SetAiming(bool param)
+    {
+        aiming = param;
     }
 }

@@ -53,6 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Alvaro\Scripts\3rdPersonCamera\CameraCollision.cs" />
      <Compile Include="Assets\Alvaro\Scripts\3rdPersonCamera\ThirdPersonCamera.cs" />
      <Compile Include="Assets\Alvaro\Scripts\BoatPhysics\BoatManaging\BoatController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\BoatPhysics\BoatManaging\BoatEngine.cs" />
@@ -76,6 +77,15 @@
      <Compile Include="Assets\Alvaro\ToonWater\Scripts\CameraDepthTextureMode.cs" />
      <Compile Include="Assets\Alvaro\ToonWater\Scripts\NormalsReplacementShader.cs" />
      <Compile Include="Assets\Alvaro\ToonWater\Scripts\WaterBob.cs" />
+     <Compile Include="Assets\Asset Packs\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\Camera\vThirdPersonCamera.cs" />
+     <Compile Include="Assets\Asset Packs\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\CharacterController\vThirdPersonAnimator.cs" />
+     <Compile Include="Assets\Asset Packs\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\CharacterController\vThirdPersonController.cs" />
+     <Compile Include="Assets\Asset Packs\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\CharacterController\vThirdPersonInput.cs" />
+     <Compile Include="Assets\Asset Packs\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\CharacterController\vThirdPersonMotor.cs" />
+     <Compile Include="Assets\Asset Packs\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\Generic\vComment.cs" />
+     <Compile Include="Assets\Asset Packs\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\Generic\vDestroyGameObject.cs" />
+     <Compile Include="Assets\Asset Packs\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\Generic\vExtensions.cs" />
+     <Compile Include="Assets\Asset Packs\Invector-3rdPersonController\Basic Locomotion LITE\Scripts\Generic\vPickupItem.cs" />
      <Compile Include="Assets\Asset Packs\Standard Assets\Environment\Water (Basic)\Scripts\WaterBasic.cs" />
      <Compile Include="Assets\Asset Packs\Standard Assets\Environment\Water\Water\Scripts\Displace.cs" />
      <Compile Include="Assets\Asset Packs\Standard Assets\Environment\Water\Water\Scripts\GerstnerDisplace.cs" />
@@ -182,6 +192,7 @@
      <None Include="Assets\Miguel\Assets\Escenario de árboles 1\NatureStarterKit2\Standard Assets\Effects\ImageEffects\Shaders\ContrastComposite.shader" />
      <None Include="Assets\Miguel\Assets\Escenario de árboles 1\NatureStarterKit2\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\FXAAPreset3.shader" />
      <None Include="Assets\Miguel\Assets\Escenario de árboles 1\NatureStarterKit2\Standard Assets\Effects\ImageEffects\Shaders\FisheyeShader.shader" />
+     <None Include="Assets\Asset Packs\Invector-3rdPersonController\Basic Locomotion LITE\README_Basic.txt" />
      <None Include="Assets\Miguel\Assets\Survival Shooter\SurvivalShooter_Third-PartyNotice.txt" />
      <None Include="Assets\Miguel\Assets\Escenario de árboles 1\NatureStarterKit2\Standard Assets\Effects\ImageEffects\Shaders\Contrast Stretch\Apply.shader" />
      <None Include="Assets\Asset Packs\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
