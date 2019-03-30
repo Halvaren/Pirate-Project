@@ -28,14 +28,18 @@ public class ThirdPersonCamera : MonoBehaviour
     private float rotX = 0.0f;
     private float rotY = 0.0f;
 
-    public Transform naturalPosition;
-    public Transform aimingPosition;
-    public float aimingSpeed = 10f;
-    private bool aiming;
+    private Transform firstLocation;
+    public Transform secondLocation;
+    public float changingTime = 0.3f;
+    private bool changing;
+    private bool mode; //3rd person camera = false, zoomed 3rd person camera = true
 
     // Start is called before the first frame update
     void Start()
     {
+        firstLocation = new GameObject().transform;
+        firstLocation.localPosition = cameraFollowObj.transform.localPosition;
+
         Vector3 rot = transform.localRotation.eulerAngles;
         rotY = rot.y;
         rotX = rot.x;
@@ -47,13 +51,12 @@ public class ThirdPersonCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!aiming) RotateCamera(); //Gira la cámara en función del input
-        else AimCamera();
+        RotateCamera(); //Gira la cámara en función del input
     }
 
     void LateUpdate()
     {
-        if(!aiming) MoveCamera(); //Mueve la cámara siguiendo al target
+        MoveCamera(); //Mueve la cámara siguiendo al target
     }
 
     void RotateCamera()
@@ -75,12 +78,6 @@ public class ThirdPersonCamera : MonoBehaviour
         Quaternion localRotation = Quaternion.Euler(rotX, rotY, 0.0f);
         transform.rotation = localRotation;
     }
-    
-    void AimCamera()
-    {
-        transform.position = Vector3.MoveTowards(transform.position, aimingPosition.position, aimingSpeed * Time.deltaTime);
-        transform.rotation = Quaternion.Lerp(transform.rotation, cameraFollowObj.transform.rotation, aimingSpeed * Time.deltaTime);
-    }
 
     void MoveCamera()
     {
@@ -90,8 +87,32 @@ public class ThirdPersonCamera : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, target.position, step);
     }
 
-    public void SetAiming(bool param)
+    public void SetMode(bool param)
     {
-        aiming = param;
+        mode = param;
+        StartCoroutine(AimCamera());
+    }
+
+    IEnumerator AimCamera()
+    {
+        changing = true;
+
+        Vector3 initialPositionTarget = cameraFollowObj.transform.localPosition;
+
+        Vector3 finalPositionTarget = mode ? secondLocation.localPosition : firstLocation.localPosition;
+        
+        float elapsedTime = 0.0f;
+
+        while(elapsedTime < changingTime)
+        {
+            elapsedTime += Time.deltaTime;
+
+            cameraFollowObj.transform.localPosition = Vector3.Lerp(initialPositionTarget, finalPositionTarget, elapsedTime / changingTime);
+
+            yield return null;
+        }
+        cameraFollowObj.transform.localPosition = finalPositionTarget;
+
+        changing = false;
     }
 }

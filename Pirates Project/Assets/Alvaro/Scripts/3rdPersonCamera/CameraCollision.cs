@@ -27,7 +27,6 @@ public class CameraCollision : MonoBehaviour
 
         if(Physics.Linecast(transform.parent.position, desiredCameraPos, out hit, 1 << LayerMask.NameToLayer("Floor")))
         {
-            print("hola");
             distance = Mathf.Clamp (hit.distance * 0.8f, minDistance, maxDistance);
         }
         else

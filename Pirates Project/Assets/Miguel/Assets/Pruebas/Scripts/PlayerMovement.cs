@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerMovement : MonoBehaviour
 {
     public float movementSpeed = 5f;
-    public float rotationSpeed = 5f;
+    public float rotationSpeed = 20f;
     public float gravity = 20.0f;
 
     Vector3 movement;                   // The vector to store the direction of the player's movement.
@@ -19,7 +19,8 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 targetDirection;
 
-    private bool aiming;
+    [SerializeField]
+    private bool movementMode; //3rd person mode = false, Aiming mode = true
 
     void Awake ()
     {
@@ -31,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
         controller = GetComponent <CharacterController> ();
 
         camera = cameraTransform.GetComponent<ThirdPersonCamera>();
+
+        movementMode = false;
     }
 
 
@@ -40,8 +43,11 @@ public class PlayerMovement : MonoBehaviour
         float h = Input.GetAxisRaw ("Horizontal");
         float v = Input.GetAxisRaw ("Vertical");
 
-        aiming = Input.GetButton("Aiming");
-        camera.SetAiming(aiming);
+        if(Input.GetButtonDown("Aiming"))
+        {
+            movementMode = !movementMode;
+            camera.SetMode(movementMode);
+        }
 
         UpdateTargetDirection(h, v);
 
@@ -49,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
         Move (h, v);
 
         // Turn the player to face the mouse cursor.
-        if(!aiming) Turning ();
+        Turning ();
 
         // Animate the player.
         Animating (h, v);
@@ -58,13 +64,13 @@ public class PlayerMovement : MonoBehaviour
     void Move (float h, float v)
     {
         // Set the movement vector based on the axis input.
-        //movement.Set (h, 0f, v);
+        movement.Set (h, 0f, v);
          if (controller.isGrounded)
         {
             // We are grounded, so recalculate
             // move direction directly from axes
 
-            movement = targetDirection;
+            movement = movementMode ? transform.TransformDirection(movement) : targetDirection;
             //movement = transform.TransformDirection(movement);
             movement = movement * movementSpeed;
         }
@@ -83,16 +89,25 @@ public class PlayerMovement : MonoBehaviour
 
     void Turning ()
     {
-        Vector3 lookDirection = targetDirection.normalized;
-        if(lookDirection != Vector3.zero)
+        if(movementMode) //Aiming mode
         {
-            Quaternion newRotation = Quaternion.LookRotation(lookDirection, transform.up);
-            float differenceRotation = newRotation.eulerAngles.y - transform.eulerAngles.y;
-            float eulerY = newRotation.eulerAngles.y;
-            
-            Vector3 euler = new Vector3(transform.eulerAngles.x, eulerY, transform.eulerAngles.z);
+            Vector3 euler = new Vector3(transform.eulerAngles.x, cameraTransform.eulerAngles.y, transform.eulerAngles.z);
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(euler), rotationSpeed * Time.deltaTime);
-        }    
+        }
+        else //3rd person mode
+        {
+            Vector3 lookDirection = targetDirection.normalized;
+            if(lookDirection != Vector3.zero)
+            {
+                Quaternion newRotation = Quaternion.LookRotation(lookDirection, transform.up);
+                float differenceRotation = newRotation.eulerAngles.y - transform.eulerAngles.y;
+                float eulerY = newRotation.eulerAngles.y;
+                
+                Vector3 euler = new Vector3(transform.eulerAngles.x, eulerY, transform.eulerAngles.z);
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(euler), rotationSpeed * Time.deltaTime);
+            }
+        }
+            
 
         /* // Create a ray from the mouse cursor on screen in the direction of the camera.
         Ray camRay = Camera.main.ScreenPointToRay (Input.mousePosition);
@@ -120,13 +135,13 @@ public class PlayerMovement : MonoBehaviour
     void Animating (float h, float v)
     {
         // Create a boolean that is true if either of the input axes is non-zero.
-        bool walking = v != 0f || (h != 0f && !aiming);
+        bool walking = v != 0f || h != 0f;
         bool rotating = false;//Input.GetAxis("Mouse X") != 0f || Input.GetAxis("Mouse Y") != 0f;
-        bool sideRunning = aiming && h != 0f;
+        //bool sideRunning = aiming && h != 0f;
         bool running = Input.GetButton("Fire3");
 
-        anim.SetBool ("IsWalking", (walking || rotating) && !sideRunning);
-        anim.SetBool ("IsSideRunning", sideRunning);
+        anim.SetBool ("IsWalking", (walking || rotating));
+        //anim.SetBool ("IsSideRunning", sideRunning);
         anim.SetBool("IsRunning",  walking && running);
 
         if(running) movementSpeed = 8f;
