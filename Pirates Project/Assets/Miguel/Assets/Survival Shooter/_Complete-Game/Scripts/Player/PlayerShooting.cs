@@ -6,14 +6,14 @@ namespace CompleteProject
     public class PlayerShooting : MonoBehaviour
     {
         public int damagePerShot = 20;                  // The damage inflicted by each bullet.
-        public float timeBetweenBullets = 0.15f;        // The time between each shot.
-        public float range = 100f;                      // The distance the gun can fire.
+        public float timeBetweenBullets = 10.0f;        // The time between each shot.
+        public float range = 50f;                      // The distance the gun can fire.
 
 
         float timer;                                    // A timer to determine when to fire.
         Ray shootRay = new Ray();                       // A ray from the gun end forwards.
         RaycastHit shootHit;                            // A raycast hit to get information about what was hit.
-        int shootableMask;                              // A layer mask so the raycast only hits things on the shootable layer.
+       int shootableMask;                              // A layer mask so the raycast only hits things on the shootable layer.
         ParticleSystem gunParticles;                    // Reference to the particle system.
         LineRenderer gunLine;                           // Reference to the line renderer.
         AudioSource gunAudio;                           // Reference to the audio source.
@@ -25,7 +25,7 @@ namespace CompleteProject
         void Awake ()
         {
             // Create a layer mask for the Shootable layer.
-            shootableMask = LayerMask.GetMask ("Shootable");
+         //  shootableMask = LayerMask.GetMask ("Shootable");
 
             // Set up the references.
             gunParticles = GetComponent<ParticleSystem> ();
@@ -99,7 +99,7 @@ namespace CompleteProject
             shootRay.direction = transform.forward;
 
             // Perform the raycast against gameobjects on the shootable layer and if it hits something...
-            if(Physics.Raycast (shootRay, out shootHit, range, shootableMask))
+            if(Physics.Raycast (shootRay, out shootHit, range))
             {
                 // Try and find an EnemyHealth script on the gameobject hit.
                 EnemyHealth enemyHealth = shootHit.collider.GetComponent <EnemyHealth> ();
