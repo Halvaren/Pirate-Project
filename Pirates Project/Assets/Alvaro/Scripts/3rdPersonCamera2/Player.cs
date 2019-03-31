@@ -132,7 +132,10 @@ namespace DefinitiveScript
                 running = running && (playerInput.Vertical != 0f || playerInput.Horizontal != 0f);
 
                 CharacterAnimationController.MovingAnimation(playerInput.Vertical, playerInput.Horizontal, playerInput.MouseInput.x, movementMode, running);
+                CharacterAnimationController.GunAnimation(movementMode, playerInput.ShootingInput);
             }
+
+            if(!movementMode && playerInput.AttackInput) CloseCombat.ComboAttack();
         }
     }
 }

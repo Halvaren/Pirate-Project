@@ -21,7 +21,14 @@ namespace DefinitiveScript {
 
         private bool moving;
 
-        public bool AttackType; //True para si se puede introducir el combo completo en cualquier momento, false para si se tienen que encadenar bien todos los golpes
+        private CharacterAnimationController m_CharacterAnimationController;
+        public CharacterAnimationController CharacterAnimationController
+        {
+            get {
+                if(m_CharacterAnimationController == null) m_CharacterAnimationController = GetComponent<CharacterAnimationController>();
+                return m_CharacterAnimationController;
+            }
+        }
 
         // Start is called before the first frame update
         void Awake()
@@ -43,41 +50,23 @@ namespace DefinitiveScript {
         }
 
         // Update is called once per frame
-        void Update()
+        public void ComboAttack()
         {
-            if(AttackType)
+            if(chaining && comboCount < 3)
             {
-                if(Input.GetMouseButtonDown(0))
-                {
-                    comboCount++;
-                    if(comboCount == 1) anim.SetTrigger("Attack");
-                }  
-            }
-            else
-            {
-                if(Input.GetMouseButtonDown(0) && chaining && comboCount < 3)
-                {
-                    chaining = false;
-                    nextAttack = true;
+                chaining = false;
+                nextAttack = true;
 
-                    if(comboCount == 0) anim.SetTrigger("Attack");
-                    comboCount++;
-                }
+                if(comboCount == 0) CharacterAnimationController.Attack();
+                comboCount++;
             }
-
-            /* if(moving)
-            {
-                transform.Translate(transform.InverseTransformDirection(transform.forward) * attackMovementSpeed[comboCount - 1] * Time.deltaTime);
-            }*/
-            
         }
 
-        public void StartAttack(int attackId)
+        public void StartAttack(int attackId, float time)
         {
             chaining = true;
             nextAttack = false;
 
-            float time = anim.GetNextAnimatorClipInfo(0)[0].clip.length;
             StartCoroutine(Displacement(attackMovementSpeed[attackId - 1], time));  
         }
 
@@ -109,28 +98,14 @@ namespace DefinitiveScript {
 
         public void FinishAttack(int attackId)
         {
-            if(AttackType)
+            if(nextAttack)
             {
-                if(comboCount == attackId || attackId > 2) {
-                    comboCount = 0;
-                    if(attackId < 3) anim.SetTrigger("StopAttack");
-                }
-                else
-                {
-                    anim.SetTrigger("Attack");
-                }
+                CharacterAnimationController.Attack();
             }
             else
             {
-                if(nextAttack)
-                {
-                    anim.SetTrigger("Attack");
-                }
-                else
-                {
-                    comboCount = 0;
-                    if(attackId < 3) anim.SetTrigger("StopAttack");
-                }
+                comboCount = 0;
+                if(attackId < 3) CharacterAnimationController.StopAttack();
             }
         }
     }
