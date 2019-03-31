@@ -3,52 +3,99 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    public float damage = 10f;
-    public float range = 50f; 
+    private float damage = 10f;
+    private float range = 10f; 
+    private float timeBetweenBullets = 1f;
+    private float effectsDisplayTime = 0.1f; 
+
 
     //public GameObject player; 
-    public ParticleSystem gunParticles; 
+    private ParticleSystem gunParticles; 
 
-    public GameObject impactEffect;
+    private GameObject impactEffect;
     public Camera cam; 
-
-    public LineRenderer gunLine;
-
+    private int shootableMask;
+    RaycastHit hit;
+    //private Animator anim;
+    private GameObject player;
+    private float timer;
+    private LineRenderer gunLine;
+    [HideInInspector] public bool shot;
+    [HideInInspector] public bool isShooting = false;
     private Ray raymouse;
 
      void Awake ()
     {
-        //shootableMask = LayerMask.GetMask ("Shootable");
-       //gunParticles = GetComponent<ParticleSystem> ();
+        shootableMask = LayerMask.GetMask ("Enemy");
+        gunParticles = GetComponent<ParticleSystem> ();
         gunLine = GetComponent <LineRenderer> ();
-        //player = GameObject.FindWithTag("Player");
+        //anim = GetComponent<Animator>();
+        
+        
+        player = GameObject.FindWithTag("Player");
      
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1")){ 
-            Shoot();
+        timer +=  Time.deltaTime;
+        if (Input.GetButtonDown("Fire1") && timer>= timeBetweenBullets){ 
+            player.GetComponent<Animator>().SetTrigger("Shot");
+            //Shoot();
+            
+            
+        }
+
+        if(timer >= timeBetweenBullets * effectsDisplayTime)
+        {           
+            DisableEffects ();        
         }
     }
+    private void DisableEffects() {
+        gunLine.enabled = false;
+    }
 
-    void Shoot() 
+    public void Shoot() 
     {
-       
-      
-        //raymouse = cam.ScreenPointToRay(mousePos);
-       // gunParticles.Play();
-        //gunLine.enabled = true;
-        //gunLine.SetPosition (0, transform.position);
-         Debug.DrawRay(transform.position, transform.forward*10, Color.green);
-        RaycastHit hit; 
-        if (Physics.Raycast(transform.position,transform.forward, out hit, range)) {
-            Debug.Log(hit.transform.name);
-            
-            //Instantiate(impactEffect.Play(), hit.point, Quaternion.LookRotation(hit.normal));
+        isShooting = true;
+        gunParticles.Stop ();
+        timer = 0f;
+        raymouse = cam.ScreenPointToRay(Input.mousePosition);
+        shot = false;
+        
+        //gunLine.SetWidth(0.5f, 0.5f);   
+        gunLine.SetPosition (0, transform.position);
+        //Debug.DrawRay(player.transform.position, player.transform.forward*10, Color.green);
+        if (Physics.Raycast(player.transform.position, player.transform.forward, out hit, range, shootableMask)) { //layer del enemigo
+           
+            DebugEnemyBehaviour enemy = hit.transform.gameObject.GetComponent<DebugEnemyBehaviour>();
+            if (enemy != null) 
+            {
+                   enemy.Attacked (damage, transform.forward/3);
+            }
+            shot = true;
+            //gunLine.SetPosition (1, hit.point);
+            //shot = true;
            
         }
+        /*else {
+            gunLine.SetPosition (1, transform.position + transform.forward * 8);
+        }*/
+        //Debug.Log("dispara");
+        
         //Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+        
+        //gunLine.enabled = false;
+       
+        isShooting = false;
+    }
+
+    public void shootingEffects() { //activa las particulas, habilita la gunline 
+    
+        gunParticles.Play();
+        gunLine.enabled = true;
+        if (shot == true)  gunLine.SetPosition (1, hit.point);
+        else gunLine.SetPosition (1, player.transform.position + player.transform.forward * 8);
     }
 }
