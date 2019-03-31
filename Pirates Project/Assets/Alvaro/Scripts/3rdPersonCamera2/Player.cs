@@ -6,6 +6,7 @@ namespace DefinitiveScript
 {
     [RequireComponent(typeof(MoveController))] //Es necesario que el GameObject que tiene asociado este script, también tenga el script MoveController
     [RequireComponent(typeof(CharacterAnimationController))]
+    [RequireComponent(typeof(CloseCombat))]
     public class Player : MonoBehaviour
     {
         [System.Serializable]
@@ -38,6 +39,18 @@ namespace DefinitiveScript
                     m_CharacterAnimationController = GetComponent<CharacterAnimationController>();
                 }
                 return m_CharacterAnimationController;
+            }
+        }
+
+        private CloseCombat m_CloseCombat;
+        public CloseCombat CloseCombat
+        {
+            get {
+                if(m_CloseCombat == null)
+                {
+                    m_CloseCombat = GetComponent<CloseCombat>();
+                }
+                return m_CloseCombat;
             }
         }
 
@@ -81,7 +94,7 @@ namespace DefinitiveScript
         void Start()
         {
             movementMode = cameraScript.movementMode = false; //Se inicializa el modo de movimiento en modo sable
-            stopMovement = false;
+            stopMovement = true;
         }     
 
         void Update()
@@ -115,6 +128,10 @@ namespace DefinitiveScript
 
                 MoveController.Rotate(mouseInput.x, MouseControl.Sensitivity.x, targetDirection, movementMode); //Pasa el input del ratón, la sensibilidad para calcular el giro, la dirección objetivo y el modo de movimiento
                 //Si está en modo pistola, girará en función del input (gira el personaje y la cámara le sigue). Si está en modo sable, girará en función de la dirección objetivo (gira la cámara y el personaje le sigue si se está moviendo)
+
+                running = running && (playerInput.Vertical != 0f || playerInput.Horizontal != 0f);
+
+                CharacterAnimationController.MovingAnimation(playerInput.Vertical, playerInput.Horizontal, playerInput.MouseInput.x, movementMode, running);
             }
         }
     }

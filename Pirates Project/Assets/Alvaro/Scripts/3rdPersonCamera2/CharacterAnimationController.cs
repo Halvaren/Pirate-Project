@@ -14,9 +14,14 @@ namespace DefinitiveScript
             anim = GetComponent<Animator>();
         }
 
-        public void Walk(bool value)
+        public void VerticalAxisWalk(float verticalInput)
         {
-            anim.SetBool("IsWalking", value);
+            anim.SetFloat("VerticalInput", verticalInput);
+        }
+
+        public void HorizontalAxisWalk(float horizontalInput)
+        {
+            anim.SetFloat("HorizontalInput", horizontalInput);
         }
 
         public void Run(bool value)
@@ -24,28 +29,23 @@ namespace DefinitiveScript
             anim.SetBool("IsRunning", value);
         }
 
-        public void SideMoving(bool value)
+        public void Turn(float mouseInput)
         {
-            anim.SetBool("IsSideMoving", value);
+            anim.SetFloat("MouseInputX", mouseInput);
         }
 
-        public void BackwardMoving(bool value)
-        {
-            anim.SetBool("IsBackwardMoving", value);
-        }
-
-        public void MovingAnimation(float verticalInput, float horizontalInput, bool movementMode, bool running)
+        public void MovingAnimation(float verticalInput, float horizontalInput, float mouseInput, bool movementMode, bool running)
         {
             if(movementMode)
             {
-                bool frontWalking = verticalInput < 0f;
+                VerticalAxisWalk(verticalInput);
+                HorizontalAxisWalk(horizontalInput);
+                Turn(mouseInput);
             }
             else
             {
-                bool walking = verticalInput != 0f || horizontalInput != 0f;
-                
-                if(running) Run(walking);
-                else Walk(walking);
+                VerticalAxisWalk(Mathf.Abs(verticalInput) + Mathf.Abs(horizontalInput));
+                Run(running);
             }
         }
     }
