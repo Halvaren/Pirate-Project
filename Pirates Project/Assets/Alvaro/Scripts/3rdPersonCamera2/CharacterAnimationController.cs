@@ -85,9 +85,9 @@ namespace DefinitiveScript
         {
             Aim(aiming);
             AnimatorStateInfo currentState = anim.GetCurrentAnimatorStateInfo(0);
-            if(aiming && currentState.IsName("AimingIdle") && shoot)
+            if(aiming && currentState.IsName("AimingIdle"))
             {
-                Shoot();
+                if(shoot) Shoot();
                 return true;
             }
             return false;

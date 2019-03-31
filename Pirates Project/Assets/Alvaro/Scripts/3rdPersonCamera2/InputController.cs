@@ -23,8 +23,6 @@ namespace DefinitiveScript
             RunningInput = Input.GetButton("Running");
             ShootingInput = Input.GetButtonDown("MouseLeftClick");
             AttackInput = Input.GetButtonDown("MouseLeftClick");
-
-            print("hola " +  ShootingInput);
         } 
     }
 }

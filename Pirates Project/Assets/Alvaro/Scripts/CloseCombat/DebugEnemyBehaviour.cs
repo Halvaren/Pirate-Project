@@ -7,7 +7,7 @@ public class DebugEnemyBehaviour : MonoBehaviour
     public Material InitialMaterial;
     public Material KnockbackMaterial;
     public float KnockbackTime = 0.5f;
-    public float knockbackForce = 10f;
+    //public float knockbackForce = 10f;
     private bool knockback;
 
     public float InitialHealth = 100f;
@@ -42,18 +42,18 @@ public class DebugEnemyBehaviour : MonoBehaviour
             }
             else
             {
-                StartCoroutine(Knockback(KnockbackTime, direction));
+                StartCoroutine(Knockback(KnockbackTime, direction, damage/4));
             }
         }
         
     }
 
-    IEnumerator Knockback(float time, Vector3 direction)
+    IEnumerator Knockback(float time, Vector3 direction, float knockbackForce)
     {
         meshRenderer.material = KnockbackMaterial;
         knockback = true;
 
-        rigidbody.AddForce(direction * knockbackForce, ForceMode.Impulse);
+        rigidbody.AddForce(direction.normalized * knockbackForce, ForceMode.Impulse);
 
         yield return new WaitForSeconds(time);
 

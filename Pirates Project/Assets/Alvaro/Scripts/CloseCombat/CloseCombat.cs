@@ -6,6 +6,7 @@ namespace DefinitiveScript {
     public class CloseCombat : MonoBehaviour
     {
         private Animator anim;
+        private CharacterController controller;
         public Transform swordTransform;
         private MeshCollider swordCollider;
         private SwordCollisionDetector swordScript;
@@ -34,6 +35,7 @@ namespace DefinitiveScript {
         void Awake()
         {
             anim = GetComponent<Animator>();
+            controller = GetComponent<CharacterController>();
             swordCollider = swordTransform.GetComponentInChildren<MeshCollider>();
             swordCollider.enabled = false;
 
@@ -79,7 +81,7 @@ namespace DefinitiveScript {
             while(elapsedTime < time)
             {
                 elapsedTime += Time.deltaTime;
-                transform.Translate(transform.InverseTransformDirection(transform.forward) * speedCurve.Evaluate(elapsedTime / time) * Time.deltaTime);
+                controller.Move(transform.forward * speedCurve.Evaluate(elapsedTime / time) * Time.deltaTime);
                 yield return null;
             }
 

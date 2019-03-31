@@ -54,6 +54,8 @@ namespace DefinitiveScript
 
         public void InitializeCamera() //Método que inicializa lo necesario de la cámara y que será llamado desde el GameManager
         {
+            Cursor.lockState = CursorLockMode.Locked;
+
             localPlayer = GameManager.Instance.LocalPlayer;
 
             localPlayer.CameraTransform = transform; //El jugador necesita las propiedades físicas de la cámara para conocer su orientación en el modo sable
@@ -150,6 +152,11 @@ namespace DefinitiveScript
                 targetPosition = cameraLookTarget.position; //Se guarda como posición objetivo la posición del objetivo
 
                 cameraBase.position = Vector3.Lerp(cameraBase.position, targetPosition, damping * Time.deltaTime);  //La base de la cámara se mueve hacia esa posición
+
+                if (Input.GetKeyDown (KeyCode.End))
+                {
+                    Cursor.lockState = (Cursor.lockState != CursorLockMode.Locked) ? CursorLockMode.Confined : CursorLockMode.Locked;
+                }
             }
         }
     }
