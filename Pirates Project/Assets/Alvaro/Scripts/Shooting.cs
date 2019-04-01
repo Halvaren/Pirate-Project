@@ -17,8 +17,10 @@ namespace DefinitiveScript
         private LineRenderer gunLine;
         private Light faceLight;
 
-        public GameObject scopeMark;
-        private Image scopeMarkRenderer;
+        public GameObject scopeMarkCamera;
+        public GameObject scopeMarkOverlay;
+        private Image scopeMarkCameraRenderer;
+        private Image scopeMarkOverlayRenderer;
 
         private float elapsedTime;
         private bool ableToShoot;
@@ -54,7 +56,8 @@ namespace DefinitiveScript
             gunLine = effectObject.GetComponent<LineRenderer>();
             faceLight = effectObject.GetComponentInChildren<Light>();
 
-            scopeMarkRenderer = scopeMark.GetComponent<Image>();
+            scopeMarkCameraRenderer = scopeMarkCamera.GetComponent<Image>();
+            scopeMarkOverlayRenderer = scopeMarkOverlay.GetComponent<Image>();
         }
 
         void Start()
@@ -64,27 +67,31 @@ namespace DefinitiveScript
             gunParticles.Stop();
             gunLine.enabled = false;
             faceLight.enabled = false;
-            scopeMarkRenderer.enabled = false;
+            scopeMarkCameraRenderer.enabled = false;
+            scopeMarkOverlayRenderer.enabled = false;
         }
 
         void Update()
         {
-            Debug.DrawLine(scopeMark.transform.position, scopeMark.transform.position + scopeMark.transform.forward * range, Color.red);
+            Debug.DrawLine(scopeMarkCamera.transform.position, scopeMarkCamera.transform.position + scopeMarkCamera.transform.forward * range, Color.red);
             if(gunPrepared)
             {
                 if(elapsedTime < timeBetweenBullets)
                 {
                     elapsedTime += Time.deltaTime;
-                    scopeMarkRenderer.enabled = false;
+                    scopeMarkCameraRenderer.enabled = false;
+                    scopeMarkOverlayRenderer.enabled = false;
                 }
                 else {
                     ableToShoot = true;
-                    scopeMarkRenderer.enabled = true;
+                    scopeMarkCameraRenderer.enabled = true;
+                    scopeMarkOverlayRenderer.enabled = true;
                 }
             }
             else
             {
-                scopeMarkRenderer.enabled = false;
+                scopeMarkCameraRenderer.enabled = false;
+                scopeMarkOverlayRenderer.enabled = false;
             }
         }
 
@@ -110,7 +117,7 @@ namespace DefinitiveScript
         {
             RaycastHit hit;
 
-            if(Physics.Raycast(scopeMark.transform.position, scopeMark.transform.forward, out hit, range, shootableMask))
+            if(Physics.Raycast(scopeMarkCamera.transform.position, scopeMarkCamera.transform.forward, out hit, range, shootableMask))
             {
                 shootingPoint = hit.point;
                 hitDirection = -hit.normal;
@@ -120,7 +127,7 @@ namespace DefinitiveScript
                     return enemy;
                 }
             }
-            shootingPoint = scopeMark.transform.position + scopeMark.transform.forward * range;
+            shootingPoint = scopeMarkCamera.transform.position + scopeMarkCamera.transform.forward * range;
             hitDirection = Vector3.zero;
             return null;   
         }
