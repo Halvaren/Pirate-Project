@@ -56,10 +56,14 @@
      <Compile Include="Assets\Alvaro\Scripts\3rdPersonCamera\CameraCollision.cs" />
      <Compile Include="Assets\Alvaro\Scripts\3rdPersonCamera\ThirdPersonCamera.cs" />
      <Compile Include="Assets\Alvaro\Scripts\3rdPersonCamera2\CharacterAnimationController.cs" />
+     <Compile Include="Assets\Alvaro\Scripts\3rdPersonCamera2\CloseCombat\CloseCombat.cs" />
+     <Compile Include="Assets\Alvaro\Scripts\3rdPersonCamera2\CloseCombat\DebugEnemyBehaviour.cs" />
+     <Compile Include="Assets\Alvaro\Scripts\3rdPersonCamera2\CloseCombat\SwordCollisionDetector.cs" />
      <Compile Include="Assets\Alvaro\Scripts\3rdPersonCamera2\GameManager.cs" />
      <Compile Include="Assets\Alvaro\Scripts\3rdPersonCamera2\InputController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\3rdPersonCamera2\MoveController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\3rdPersonCamera2\Player.cs" />
+     <Compile Include="Assets\Alvaro\Scripts\3rdPersonCamera2\Shooting.cs" />
      <Compile Include="Assets\Alvaro\Scripts\3rdPersonCamera2\ThirdPersonCamera.cs" />
      <Compile Include="Assets\Alvaro\Scripts\BoatPhysics\BoatManaging\BoatController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\BoatPhysics\BoatManaging\BoatEngine.cs" />
@@ -77,10 +81,6 @@
      <Compile Include="Assets\Alvaro\Scripts\BoatPhysics\WavesAndSea\EndlessWaterSquare.cs" />
      <Compile Include="Assets\Alvaro\Scripts\BoatPhysics\WavesAndSea\WaterSquare.cs" />
      <Compile Include="Assets\Alvaro\Scripts\BoatPhysics\WavesAndSea\WaveTypes.cs" />
-     <Compile Include="Assets\Alvaro\Scripts\CloseCombat\CloseCombat.cs" />
-     <Compile Include="Assets\Alvaro\Scripts\CloseCombat\DebugEnemyBehaviour.cs" />
-     <Compile Include="Assets\Alvaro\Scripts\CloseCombat\SwordCollisionDetector.cs" />
-     <Compile Include="Assets\Alvaro\Scripts\Shooting.cs" />
      <Compile Include="Assets\Alvaro\ToonWater\Scripts\CameraDepthTextureMode.cs" />
      <Compile Include="Assets\Alvaro\ToonWater\Scripts\NormalsReplacementShader.cs" />
      <Compile Include="Assets\Alvaro\ToonWater\Scripts\WaterBob.cs" />
