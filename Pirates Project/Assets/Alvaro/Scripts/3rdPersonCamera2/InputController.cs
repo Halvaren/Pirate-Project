@@ -11,6 +11,8 @@ namespace DefinitiveScript
         public Vector2 MouseInput; //Guarda la información del movimiento del ratón en X y en Y
         public bool ChangeMoveModeInput; //Guarda el valor respecto a la pulsación (inicial) del botón de cambio de modo de movimiento
         public bool RunningInput; //Guarda el valor respecto a la pulsación (manteniendo) del botón de correr
+        public bool ShootingInput;
+        public bool AttackInput;
 
         void Update()
         {
@@ -19,6 +21,8 @@ namespace DefinitiveScript
             MouseInput = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
             ChangeMoveModeInput = Input.GetButtonDown("ChangeMoveMode");
             RunningInput = Input.GetButton("Running");
+            ShootingInput = Input.GetButtonDown("MouseLeftClick");
+            AttackInput = Input.GetButtonDown("MouseLeftClick");
         } 
     }
 }
