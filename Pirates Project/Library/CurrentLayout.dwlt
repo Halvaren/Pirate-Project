@@ -21,7 +21,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 950, y: 672}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -45,7 +45,7 @@ MonoBehaviour:
     y: 0
     width: 1366
     height: 685
-  m_MinSize: {x: 950, y: 672}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &3
 MonoBehaviour:
@@ -114,7 +114,7 @@ MonoBehaviour:
   m_MinSize: {x: 713, y: 622}
   m_MaxSize: {x: 18008, y: 18072}
   vertical: 1
-  controlID: 10726
+  controlID: 82
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_MinSize: {x: 713, y: 498}
   m_MaxSize: {x: 18008, y: 14048}
   vertical: 0
-  controlID: 10727
+  controlID: 83
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_MinSize: {x: 202, y: 448}
   m_MaxSize: {x: 4002, y: 8048}
   vertical: 1
-  controlID: 10890
+  controlID: 129
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -242,7 +242,7 @@ MonoBehaviour:
   m_MinSize: {x: 234, y: 498}
   m_MaxSize: {x: 10004, y: 14048}
   vertical: 1
-  controlID: 10678
+  controlID: 34
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -262,8 +262,8 @@ MonoBehaviour:
     y: 0
     width: 336
     height: 224
-  m_MinSize: {x: 202, y: 224}
-  m_MaxSize: {x: 4002, y: 4024}
+  m_MinSize: {x: 204, y: 224}
+  m_MaxSize: {x: 4004, y: 4024}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -537,9 +537,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 3ed3ffff
-      m_LastClickedID: -11458
-      m_ExpandedIDs: d4fbffff6a2a0000
+      m_SelectedIDs: bc340000
+      m_LastClickedID: 0
+      m_ExpandedIDs: eef9ffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -601,20 +601,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Alvaro/Scripts/3rdPersonCamera2
+    - Assets/Miguel/Assets
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Alvaro/Scripts/3rdPersonCamera2
+  - Assets/Miguel/Assets
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\halva\Documents\GitHub\Pirate-Project\Pirates Project
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 246}
-    m_SelectedIDs: ac250000
-    m_LastClickedID: 9644
-    m_ExpandedIDs: 000000003a0c0000a40c0000481000006c100000101100002a110000a6110000ba11000034120000d01200004213000052140000ae150000ba150000ca150000ae160000f4160000fa1600000c17000010170000681700006e170000a8170000c21800000e1a00005c1a0000aa1c0000cc1c00005e210000a0210000c0210000d4210000f6210000482200004e2200004424000084250000ac250000102600006a2600007a26000094260000fe28000060470000624700006447000000ca9a3b
+    scrollPos: {x: 0, y: 1071}
+    m_SelectedIDs: bc340000
+    m_LastClickedID: 13500
+    m_ExpandedIDs: 000000009e290000082a0000a82d0000cc2d0000682e0000802e0000fc2e0000102f00008a2f00002630000094300000a4310000003300000c3300001c33000000340000443400004a3400005c34000060340000b6340000bc340000f63400000e3600005a370000a6370000f4390000163a00009c3e0000dc3e0000fa3e00000e3f00002c3f00007e3f0000843f00007a410000b8420000e0420000424300009c430000ac430000c643000030460000fc470000fe4700000048000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -642,7 +642,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000003a0c0000a40c0000481000006c100000101100002a110000a6110000ba11000034120000d01200004213000052140000ae150000ba150000ca150000ae160000f4160000fa1600000c17000010170000681700006e170000a8170000c21800000e1a00005c1a0000aa1c0000cc1c00005e210000a0210000c0210000d4210000f6210000482200004e2200004424000084250000ac250000102600006a2600007a26000094260000fe28000060470000624700006447000000ca9a3b
+    m_ExpandedIDs: 000000009e290000082a0000a82d0000cc2d0000682e0000802e0000fc2e0000102f00008a2f00002630000094300000a4310000003300000c3300001c33000000340000443400004a3400005c34000060340000b6340000bc340000f63400000e3600005a370000a6370000f4390000163a00009c3e0000dc3e0000fa3e00000e3f00002c3f00007e3f0000843f00007a410000b8420000e0420000424300009c430000ac430000c643000030460000fc470000fe47000000480000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -669,7 +669,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: 
     m_RenameOverlay:
       m_UserAcceptedRename: 0
