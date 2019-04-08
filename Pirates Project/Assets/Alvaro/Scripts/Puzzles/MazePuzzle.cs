@@ -6,10 +6,9 @@ namespace DefinitiveScript
 {
     public class MazePuzzle : MonoBehaviour
     {
-        public GameObject ball;
-        private CharacterController ballController;
-        private Transform ballTransform;
-        //private Material ballMaterial;
+        private CharacterController controller;
+
+        public Transform startPoint;
 
         private InputController m_BallInputController;
         public InputController ballInputController
@@ -20,30 +19,50 @@ namespace DefinitiveScript
             }
         }
 
-        public float ballTranslationSpeed = 5f;
-        public float ballRotationSpeed = 100f;
+        public float ballSpeed = 5f;
         public float ballAcceleration = 2f;
         private Vector2 direction;
         private Vector2 rotation;
 
+        public float finishDistance = 0.5f;
+
+        private bool onPuzle = false;
+
         // Start is called before the first frame update
         void Awake()
         {
-            ballController = ball.GetComponent<CharacterController>();
-            ballTransform = ball.GetComponent<Transform>();
-            //ballMaterial = ball.GetComponent<MeshRenderer>().material;
+            controller = GetComponent<CharacterController>();
+        }
+
+        void Start()
+        {
+            StartPuzle();
+        }
+
+        public void StartPuzle()
+        {
+            transform.position = new Vector3(startPoint.position.x, startPoint.position.y, transform.position.z);
+            onPuzle = true;
+        }
+
+        public void FinishPuzle()
+        {
+            onPuzle = false;
+            direction = Vector2.zero;
+            rotation = Vector2.zero;
         }
 
         // Update is called once per frame
         void Update()
         {
-            direction.x = Mathf.Lerp(direction.x, ballInputController.Horizontal, 1f / ballAcceleration);
-            direction.y = Mathf.Lerp(direction.y, ballInputController.Vertical, 1f / ballAcceleration);
+            if(onPuzle)
+            {
+                direction.x = Mathf.Lerp(direction.x, ballInputController.Horizontal, 1f / ballAcceleration);
+                direction.y = Mathf.Lerp(direction.y, ballInputController.Vertical, 1f / ballAcceleration);
 
-            rotation.x = Mathf.Lerp(rotation.x, ballInputController.Vertical, 1f / ballAcceleration);
-            rotation.y = Mathf.Lerp(rotation.y, -ballInputController.Horizontal, 1f / ballAcceleration);
-
-            print(rotation.y + " " + rotation.x);
+                rotation.x = Mathf.Lerp(rotation.x, ballInputController.Vertical, 1f / ballAcceleration);
+                rotation.y = Mathf.Lerp(rotation.y, -ballInputController.Horizontal, 1f / ballAcceleration);
+            }
         }
 
         void FixedUpdate()
@@ -51,9 +70,19 @@ namespace DefinitiveScript
             direction = Camera.main.transform.TransformDirection(direction);
             rotation = Camera.main.transform.TransformDirection(rotation);
 
-            ballController.Move(direction * ballTranslationSpeed * Time.deltaTime);
-            ballTransform.Rotate(rotation * ballTranslationSpeed * Time.deltaTime * (2 * Mathf.PI * transform.localScale.magnitude) * 10, Space.World);
-            //ballMaterial.SetTextureOffset("_MainTex", ballInput * ballSpeed);
+            controller.Move(direction * ballSpeed * Time.deltaTime);
+            transform.Rotate(rotation * ballSpeed * Time.deltaTime * (2 * Mathf.PI * transform.localScale.magnitude) * 10, Space.World);
+        }
+
+        void OnTriggerStay(Collider other)
+        {
+            if(other.gameObject.tag == "EndPoint")
+            {
+                float distance = (other.gameObject.transform.position - transform.position).magnitude;
+                print(distance);
+                if(distance < finishDistance)
+                    FinishPuzle();
+            }
         }
     }
 }
