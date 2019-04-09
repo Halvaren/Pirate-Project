@@ -13,6 +13,7 @@ namespace DefinitiveScript
         public bool RunningInput; //Guarda el valor respecto a la pulsación (manteniendo) del botón de correr
         public bool ShootingInput;
         public bool AttackInput;
+        public bool GrabInput;
 
         void Update()
         {
@@ -23,6 +24,7 @@ namespace DefinitiveScript
             RunningInput = Input.GetButton("Running");
             ShootingInput = Input.GetButtonDown("MouseLeftClick");
             AttackInput = Input.GetButtonDown("MouseLeftClick");
+            GrabInput = Input.GetButton("MouseLeftClick");
         } 
     }
 }
