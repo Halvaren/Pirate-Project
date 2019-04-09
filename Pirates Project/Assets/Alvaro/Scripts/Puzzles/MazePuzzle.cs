@@ -6,7 +6,7 @@ namespace DefinitiveScript
 {
     public class MazePuzzle : MonoBehaviour
     {
-        private CharacterController controller;
+        private Rigidbody rigidbody;
 
         public Transform startPoint;
 
@@ -31,11 +31,14 @@ namespace DefinitiveScript
         // Start is called before the first frame update
         void Awake()
         {
-            controller = GetComponent<CharacterController>();
+            rigidbody = GetComponent<Rigidbody>();
         }
 
         void Start()
         {
+            ballSpeed *= transform.parent.localScale.x;
+            ballAcceleration *= transform.parent.localScale.x;
+            finishDistance *= transform.parent.localScale.x;
             StartPuzle();
         }
 
@@ -70,8 +73,10 @@ namespace DefinitiveScript
             direction = Camera.main.transform.TransformDirection(direction);
             rotation = Camera.main.transform.TransformDirection(rotation);
 
-            controller.Move(direction * ballSpeed * Time.deltaTime);
-            transform.Rotate(rotation * ballSpeed * Time.deltaTime * (2 * Mathf.PI * transform.localScale.magnitude) * 10, Space.World);
+            Vector2 newPositionV2 = direction * ballSpeed * Time.deltaTime;
+            Vector3 newPositionV3 = new Vector3(newPositionV2.x, newPositionV2.y, 0f);
+            rigidbody.MovePosition(rigidbody.position + newPositionV3);
+            transform.Rotate(rotation * ballSpeed * Time.deltaTime * (2 * Mathf.PI * transform.localScale.magnitude) * 20, Space.World);
         }
 
         void OnTriggerStay(Collider other)
