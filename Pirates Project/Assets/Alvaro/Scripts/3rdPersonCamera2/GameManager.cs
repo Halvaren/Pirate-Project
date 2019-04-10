@@ -15,8 +15,6 @@ namespace DefinitiveScript
                 {
                     m_Instance = new GameManager();
                     m_Instance.gameObject = new GameObject("_gameManager");
-                    m_Instance.gameObject.AddComponent<InputController>();
-                    m_Instance.gameObject.AddComponent<AudioController>();
                 }
 
                 return m_Instance;
@@ -28,7 +26,7 @@ namespace DefinitiveScript
             get{
                 if(m_InputController == null)
                 {
-                    m_InputController = gameObject.GetComponent<InputController>();
+                    m_InputController = m_Instance.gameObject.AddComponent<InputController>();
                 }
                 return m_InputController;
             }
@@ -39,11 +37,23 @@ namespace DefinitiveScript
             get {
                 if(m_AudioController == null)
                 {
-                    m_AudioController = gameObject.GetComponent<AudioController>();
+                    m_AudioController = m_Instance.gameObject.AddComponent<AudioController>();
                     m_AudioController.BackgroundMusicSource = m_Instance.gameObject.AddComponent<AudioSource>();
                     m_AudioController.SoundEffectSource = m_Instance.gameObject.AddComponent<AudioSource>();
                 }
                 return m_AudioController;
+            }
+        }
+
+        private BundleController m_BundleController;
+        public BundleController BundleController
+        {
+            get {
+                if(m_BundleController == null)
+                {
+                    m_BundleController = m_Instance.gameObject.AddComponent<BundleController>();
+                }
+                return m_BundleController;
             }
         }
 

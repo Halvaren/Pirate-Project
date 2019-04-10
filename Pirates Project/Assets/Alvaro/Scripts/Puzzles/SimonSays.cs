@@ -23,23 +23,30 @@ namespace DefinitiveScript
         [SerializeField] LayerMask portionMask;
 
         private InputController m_InputController;
-        public InputController inputController {
+        public InputController InputController {
             get {
                 if(m_InputController == null) m_InputController = GameManager.Instance.InputController;
                 return m_InputController;
             }
         }
 
-        public AudioClip[] colorSounds;
-        public AudioClip errorSound;
-        private AudioSource audioSource;
+        private AudioController m_AudioController;
+        public AudioController AudioController {
+            get {
+                if(m_AudioController == null) m_AudioController = GameManager.Instance.AudioController;
+                return m_AudioController;
+            }
+        }
+
+        public string[] colorSoundsNames;
+        public string errorSoundName;
+        public string simonSoundsBundleName;
+        public string successSoundsBundleName;
 
         private bool onPuzle;
 
         void Awake()
         {
-            audioSource = GetComponent<AudioSource>();
-
             portionMaterials = new Material[portions.Length];
             for(int i = 0; i < portions.Length; i++)
             {
@@ -50,6 +57,16 @@ namespace DefinitiveScript
         // Start is called before the first frame update
         void Start()
         {
+            StartCoroutine(LoadAssets());
+        }
+
+        IEnumerator LoadAssets()
+        {
+            AudioController.LoadAudioAssetBundle(simonSoundsBundleName);
+            AudioController.LoadAudioAssetBundle(successSoundsBundleName);
+
+            while(AudioController.GetOnRequest()) yield return null;
+
             StartPuzle();
         }
 
@@ -91,7 +108,7 @@ namespace DefinitiveScript
                             }
                         }
 
-                        if(inputController.ShootingInput && pointedPortion != null)
+                        if(InputController.ShootingInput && pointedPortion != null)
                         {
                             int i = GetPortionID(pointedPortion);
                             if(i != -1) StartCoroutine(CheckSelectedPortion(i));
@@ -124,8 +141,7 @@ namespace DefinitiveScript
 
                 Material portionMaterial = portionMaterials[j];
                 
-                audioSource.clip = colorSounds[j];
-                audioSource.Play();
+                AudioController.PlaySoundEffect(simonSoundsBundleName, colorSoundsNames[j]);
 
                 yield return StartCoroutine(BrightPortionForTime(portionMaterial, timeBetweenLights));
             }
@@ -152,13 +168,8 @@ namespace DefinitiveScript
 
             bool correct = int.Parse(colorSequences[currentSequence][currentWaitingColor].ToString()) == i;
 
-            if(correct) 
-            {
-                audioSource.clip = colorSounds[i];
-            }
-            else audioSource.clip = errorSound;
-            
-            audioSource.Play();
+            if(correct) AudioController.PlaySoundEffect(simonSoundsBundleName, colorSoundsNames[i]);
+            else AudioController.PlaySoundEffect(simonSoundsBundleName, errorSoundName);
 
             yield return StartCoroutine(BrightPortionForTime(portionMaterials[i], timeBetweenLights));
             if(correct)
@@ -174,7 +185,7 @@ namespace DefinitiveScript
             else
             {
                 playerTurn = false;
-                audioSource.Stop();
+                AudioController.StopSoundEffect();
             }
 
             onSequence = false;
@@ -182,6 +193,7 @@ namespace DefinitiveScript
 
         void FinishPuzle()
         {
+            AudioController.PlayRandomSoundEffectFromGenre(successSoundsBundleName);
             onPuzle = false;
         }
     }
