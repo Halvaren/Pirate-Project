@@ -38,7 +38,7 @@ namespace DefinitiveScript
             }
         }
 
-        public string[] colorSoundsNames;
+        public string[] colorSoundNames;
         public string errorSoundName;
         public string simonSoundsBundleName;
         public string successSoundsBundleName;
@@ -141,7 +141,7 @@ namespace DefinitiveScript
 
                 Material portionMaterial = portionMaterials[j];
                 
-                AudioController.PlaySoundEffect(simonSoundsBundleName, colorSoundsNames[j]);
+                AudioController.PlaySoundEffect(simonSoundsBundleName, colorSoundNames[j]);
 
                 yield return StartCoroutine(BrightPortionForTime(portionMaterial, timeBetweenLights));
             }
@@ -168,7 +168,7 @@ namespace DefinitiveScript
 
             bool correct = int.Parse(colorSequences[currentSequence][currentWaitingColor].ToString()) == i;
 
-            if(correct) AudioController.PlaySoundEffect(simonSoundsBundleName, colorSoundsNames[i]);
+            if(correct) AudioController.PlaySoundEffect(simonSoundsBundleName, colorSoundNames[i]);
             else AudioController.PlaySoundEffect(simonSoundsBundleName, errorSoundName);
 
             yield return StartCoroutine(BrightPortionForTime(portionMaterials[i], timeBetweenLights));
