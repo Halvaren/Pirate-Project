@@ -11,17 +11,18 @@ namespace DefinitiveScript
         public TextMeshProUGUI[] numberTexts;
         private int[] currentNumbers;
 
+        private bool buttonBeingPressed;
         private bool onPuzle;
 
         [SerializeField] LayerMask arrowLayer;
 
         private InputController m_InputController;
-            public InputController InputController {
-                get {
-                    if(m_InputController == null) m_InputController = GameManager.Instance.InputController;
-                    return m_InputController;
-                }
+        public InputController InputController {
+            get {
+                if(m_InputController == null) m_InputController = GameManager.Instance.InputController;
+                return m_InputController;
             }
+        }
 
         // Start is called before the first frame update
         void Start()
@@ -37,6 +38,7 @@ namespace DefinitiveScript
                 numberTexts[i].text = currentNumbers[i].ToString();
             }
             
+            buttonBeingPressed = false;
             onPuzle = true;
         }
 
@@ -45,7 +47,7 @@ namespace DefinitiveScript
         {
             if(onPuzle)
             {
-                if(InputController.ShootingInput)
+                if(!buttonBeingPressed && InputController.ShootingInput)
                 {
                     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                     RaycastHit hit;
@@ -57,6 +59,9 @@ namespace DefinitiveScript
                         string[] nameParts = realArrow.name.Split('_');
 
                         ChangeNumber(int.Parse(nameParts[2]), nameParts[1] == "Up" ? 1 : -1);
+
+                        realArrow.GetComponent<Animator>().SetTrigger("PressedButton");
+                        buttonBeingPressed = true;
                     }
                 }
             }
@@ -88,6 +93,11 @@ namespace DefinitiveScript
             }
 
             return result;
+        }
+
+        public void SetButtonBeingPressed(bool param)
+        {
+            buttonBeingPressed = param;
         }
 
         void FinishPuzle()

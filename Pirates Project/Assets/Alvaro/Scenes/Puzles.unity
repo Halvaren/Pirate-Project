@@ -4707,6 +4707,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 559827667}
+  - component: {fileID: 559827668}
+  - component: {fileID: 559827669}
   m_Layer: 11
   m_Name: Arrow_Down_1
   m_TagString: Untagged
@@ -4729,6 +4731,38 @@ Transform:
   m_Father: {fileID: 321700236}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: -90}
+--- !u!95 &559827668
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559827666}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1d203358db068a6448b60eb4fbfc6388, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &559827669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559827666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15479b4bc9c918a4f96ba69e8b92b1c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visualPuzzle: {fileID: 940530451}
 --- !u!1 &561464939
 GameObject:
   m_ObjectHideFlags: 0
@@ -9427,6 +9461,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1058068325}
+  - component: {fileID: 1058068326}
+  - component: {fileID: 1058068327}
   m_Layer: 11
   m_Name: Arrow_Down_3
   m_TagString: Untagged
@@ -9449,6 +9485,38 @@ Transform:
   m_Father: {fileID: 321700236}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: -90}
+--- !u!95 &1058068326
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058068324}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1d203358db068a6448b60eb4fbfc6388, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1058068327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058068324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15479b4bc9c918a4f96ba69e8b92b1c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visualPuzzle: {fileID: 940530451}
 --- !u!1 &1081878344
 GameObject:
   m_ObjectHideFlags: 0
@@ -9860,6 +9928,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1140194638}
+  - component: {fileID: 1140194639}
+  - component: {fileID: 1140194640}
   m_Layer: 11
   m_Name: Arrow_Down_2
   m_TagString: Untagged
@@ -9882,6 +9952,38 @@ Transform:
   m_Father: {fileID: 321700236}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: -90}
+--- !u!95 &1140194639
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1140194637}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1d203358db068a6448b60eb4fbfc6388, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1140194640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1140194637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15479b4bc9c918a4f96ba69e8b92b1c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visualPuzzle: {fileID: 940530451}
 --- !u!1 &1156794414
 GameObject:
   m_ObjectHideFlags: 0
@@ -15341,6 +15443,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1725460202}
+  - component: {fileID: 1725460203}
+  - component: {fileID: 1725460204}
   m_Layer: 11
   m_Name: Arrow_Up_2
   m_TagString: Untagged
@@ -15363,6 +15467,38 @@ Transform:
   m_Father: {fileID: 321700236}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: -90}
+--- !u!95 &1725460203
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1725460201}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1d203358db068a6448b60eb4fbfc6388, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1725460204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1725460201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15479b4bc9c918a4f96ba69e8b92b1c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visualPuzzle: {fileID: 940530451}
 --- !u!1 &1742762000
 GameObject:
   m_ObjectHideFlags: 0
@@ -16229,6 +16365,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1820898329}
+  - component: {fileID: 1820898330}
+  - component: {fileID: 1820898331}
   m_Layer: 11
   m_Name: Arrow_Up_3
   m_TagString: Untagged
@@ -16251,6 +16389,38 @@ Transform:
   m_Father: {fileID: 321700236}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: -90}
+--- !u!95 &1820898330
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1820898328}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1d203358db068a6448b60eb4fbfc6388, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1820898331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1820898328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15479b4bc9c918a4f96ba69e8b92b1c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visualPuzzle: {fileID: 940530451}
 --- !u!1 &1835455366
 GameObject:
   m_ObjectHideFlags: 0
@@ -18496,6 +18666,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5082385567591443989}
+  - component: {fileID: 5082385567591412278}
+  - component: {fileID: 5082385567591412279}
   m_Layer: 11
   m_Name: Arrow_Up_1
   m_TagString: Untagged
@@ -18503,6 +18675,38 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &5082385567591412278
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5082385567591412277}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1d203358db068a6448b60eb4fbfc6388, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5082385567591412279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5082385567591412277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15479b4bc9c918a4f96ba69e8b92b1c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visualPuzzle: {fileID: 940530451}
 --- !u!4 &5082385567591443985
 Transform:
   m_ObjectHideFlags: 0
