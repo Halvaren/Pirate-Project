@@ -15,11 +15,13 @@ public class DebugEnemyBehaviour : MonoBehaviour
 
     private MeshRenderer meshRenderer;
     private Rigidbody rigidbody;
+    private ParticleSystem hitParticles;
 
     // Start is called before the first frame update
     void Awake()
     {
         meshRenderer = GetComponent<MeshRenderer>();
+        hitParticles = GetComponentInChildren<ParticleSystem>();
         InitialMaterial = meshRenderer.material;
 
         rigidbody = GetComponent<Rigidbody>();
@@ -31,10 +33,31 @@ public class DebugEnemyBehaviour : MonoBehaviour
         knockback = false;
     }
 
-    public void Attacked(float damage, Vector3 direction)
+    public void AttackedBySword(float damage, Vector3 direction)
     {
         if(!knockback)
         {
+            health -= damage;
+            if(health <= 0)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                StartCoroutine(Knockback(KnockbackTime, direction, damage/4));
+            }
+        }
+        
+    }
+
+    public void AttackedByGun(float damage, Vector3 direction, Vector3 hitPoint)
+    {
+        if(!knockback)
+        {
+            hitParticles.transform.position = hitPoint;
+
+            hitParticles.Play();
+
             health -= damage;
             if(health <= 0)
             {

@@ -72,7 +72,7 @@ public class Gun : MonoBehaviour
             DebugEnemyBehaviour enemy = hit.transform.gameObject.GetComponent<DebugEnemyBehaviour>();
             if (enemy != null) 
             {
-                   enemy.Attacked (damage, transform.forward/3);
+                   //enemy.Attacked (damage, transform.forward/3);
             }
             shot = true;
             //gunLine.SetPosition (1, hit.point);

@@ -25,7 +25,7 @@ public class SwordCollisionDetector : MonoBehaviour
         {
             if(TargetTag == "Enemy")
             {
-                other.GetComponent<DebugEnemyBehaviour>().Attacked(damage, transform.forward);
+                other.GetComponent<DebugEnemyBehaviour>().AttackedBySword(damage, transform.forward);
             }
         }
     }
