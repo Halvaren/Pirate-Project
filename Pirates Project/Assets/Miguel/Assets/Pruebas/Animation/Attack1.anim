@@ -36620,28 +36620,28 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
-    functionName: StartAttack
+    functionName: StartAttackEvent
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 2
+    intParameter: 1
     messageOptions: 0
   - time: 0.73333335
-    functionName: EnableSwordCollider
+    functionName: EnableSwordColliderEvent
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 1.0666667
-    functionName: FinishAttack
+    functionName: FinishAttackEvent
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 1
     messageOptions: 0
   - time: 1.0666667
-    functionName: DisableSwordCollider
+    functionName: DisableSwordColliderEvent
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
