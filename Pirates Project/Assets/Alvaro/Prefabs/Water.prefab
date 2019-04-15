@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 6904860709501107143}
   - component: {fileID: 6904860709501107142}
   - component: {fileID: 6904860709501107137}
-  - component: {fileID: 5423117613423665460}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +57,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cf75bbe88de8a7e4db86bccf7258ec20, type: 2}
+  - {fileID: 2100000, guid: 9b9b851aa801b224185a00b86715926c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -78,17 +77,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &5423117613423665460
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6904860709501107136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36800f88498e9e34fac0d49330d44a77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  width: 0
-  resolution: 0
