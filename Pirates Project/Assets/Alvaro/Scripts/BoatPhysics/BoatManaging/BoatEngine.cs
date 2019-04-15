@@ -28,12 +28,18 @@ public class BoatEngine : MonoBehaviour
 
     BoatController boatController;
 
+    private Vector3 originalPosition;
+    private Vector3 originalRotation;
+
     // Start is called before the first frame update
     void Start()
     {
         boatRB = GetComponent<Rigidbody>();
 
         boatController = GetComponent<BoatController>();
+
+        originalPosition = transform.position;
+        originalRotation = transform.localEulerAngles;
     }
 
     // Update is called once per frame
@@ -102,6 +108,25 @@ public class BoatEngine : MonoBehaviour
 
             waterJetTransform.localEulerAngles = new Vector3(0f, WaterJetRotation_Y, 0f);
         }
+
+        if(Input.GetKey(KeyCode.R))
+        {
+            RestartBoat();
+        }
+    }
+
+    void RestartBoat()
+    {
+        transform.position = originalPosition;
+        transform.localEulerAngles = originalRotation;
+
+        WaterJetRotation_Y = 180f;
+
+        steerSlider.value = 0f;
+
+        waterJetTransform.localEulerAngles = new Vector3(0f, WaterJetRotation_Y, 0f);
+
+        currentJetPower = 0f;
     }
 
     void UpdateWaterJet()

@@ -24,9 +24,15 @@ namespace DefinitiveScript
             }
         }
 
+        public GameObject baseObj;
+        private Transform baseTrans;
+
+        public Puzle nextPuzle;
+
         // Start is called before the first frame update
         void Start()
         {
+            baseTrans = baseObj.transform;
             StartPuzle();
         }
 
@@ -103,6 +109,27 @@ namespace DefinitiveScript
         void FinishPuzle()
         {
             onPuzle = false;
+            StartCoroutine(OpenPuzle(1.0f));
+        }
+
+        IEnumerator OpenPuzle(float time)
+        {
+            Quaternion initialRotation = baseTrans.rotation;
+            Vector3 eulerAngles = initialRotation.eulerAngles;
+            Quaternion finalRotation = Quaternion.Euler(eulerAngles.x, eulerAngles.y + 90f, eulerAngles.z);
+
+            float elapsedTime = 0.0f;
+
+            while(elapsedTime < time)
+            {
+                elapsedTime += Time.deltaTime;
+                baseTrans.rotation = Quaternion.Slerp(initialRotation, finalRotation, elapsedTime / time);
+                yield return null;
+            }
+
+            baseTrans.rotation = finalRotation;
+
+            nextPuzle.StartPuzle();
         }
     }
 }

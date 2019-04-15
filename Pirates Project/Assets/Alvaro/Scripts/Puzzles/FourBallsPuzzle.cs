@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DefinitiveScript
 {
-    public class FourBallsPuzzle : MonoBehaviour
+    public class FourBallsPuzzle : Puzle
     {
         public float distanceToMove;
         public float minMouseDistanceToMove;
@@ -36,10 +36,10 @@ namespace DefinitiveScript
         void Start()
         {
             distanceToMove *= transform.localScale.x;
-            StartPuzzle();
+            InitializePuzle();
         }
 
-        void StartPuzzle()
+        private void InitializePuzle()
         {
             for(int i = 0; i < balls.Length; i++)
             {
@@ -49,6 +49,10 @@ namespace DefinitiveScript
             }
 
             ballsInCorrectPlace = new bool[4] {false, false, false, false};
+        }
+
+        public override void StartPuzle()
+        {
             onPuzle = true;
         }
 
