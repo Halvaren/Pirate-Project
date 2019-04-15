@@ -46,11 +46,6 @@ namespace DefinitiveScript
             }
         }
 
-        private Vector3 dollyDir;
-        public float minSableCameraOffsetZ;
-        [SerializeField] LayerMask cameraCollisionMask;
-
-
         void Awake()
         {
             GameManager.Instance.Camera = this; //Se le indica al GameManager la instancia de la cámara
@@ -59,10 +54,6 @@ namespace DefinitiveScript
 
         public void InitializeCamera() //Método que inicializa lo necesario de la cámara y que será llamado desde el GameManager
         {
-            Cursor.lockState = CursorLockMode.Locked;
-
-            dollyDir = transform.localPosition.normalized;
-
             localPlayer = GameManager.Instance.LocalPlayer;
 
             localPlayer.CameraTransform = transform; //El jugador necesita las propiedades físicas de la cámara para conocer su orientación en el modo sable
@@ -148,9 +139,8 @@ namespace DefinitiveScript
                 }
                 else //Modo sable
                 {
-                    float zDistance = CalculateCameraCollision();
                     //Se calcula la posición objetivo en función de la posición de la base de la cámara, la orientación de la misma y la separación de la cámara con respecto a esta base
-                    targetPosition = cameraBase.position + cameraBase.forward * zDistance +
+                    targetPosition = cameraBase.position + cameraBase.forward * sableCameraOffset.z +
                                         cameraBase.up * sableCameraOffset.y +
                                         cameraBase.right * sableCameraOffset.x;
 
@@ -160,31 +150,7 @@ namespace DefinitiveScript
                 targetPosition = cameraLookTarget.position; //Se guarda como posición objetivo la posición del objetivo
 
                 cameraBase.position = Vector3.Lerp(cameraBase.position, targetPosition, damping * Time.deltaTime);  //La base de la cámara se mueve hacia esa posición
-
-                if (Input.GetKeyDown (KeyCode.End))
-                {
-                    Cursor.lockState = (Cursor.lockState != CursorLockMode.Locked) ? CursorLockMode.Confined : CursorLockMode.Locked;
-                }
             }
-        }
-
-        float CalculateCameraCollision()
-        {
-            Vector3 desiredCameraPos = transform.parent.TransformPoint(dollyDir * Mathf.Abs(sableCameraOffset.z));
-            float distance;
-
-            RaycastHit hit;
-
-            if(Physics.Linecast(transform.parent.position, desiredCameraPos, out hit, cameraCollisionMask))
-            {
-                distance = - Mathf.Clamp (hit.distance * 0.8f, Mathf.Abs(minSableCameraOffsetZ), Mathf.Abs(sableCameraOffset.z));
-            }
-            else
-            {
-                distance = sableCameraOffset.z;
-            }
-
-            return distance;
         }
     }
 }

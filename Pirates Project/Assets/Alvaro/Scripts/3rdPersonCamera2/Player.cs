@@ -7,7 +7,6 @@ namespace DefinitiveScript
     [RequireComponent(typeof(MoveController))] //Es necesario que el GameObject que tiene asociado este script, también tenga el script MoveController
     [RequireComponent(typeof(CharacterAnimationController))]
     [RequireComponent(typeof(CloseCombat))]
-    [RequireComponent(typeof(Shooting))]
     public class Player : MonoBehaviour
     {
         [System.Serializable]
@@ -55,18 +54,6 @@ namespace DefinitiveScript
             }
         }
 
-        private Shooting m_Shooting;
-        public Shooting Shooting
-        {
-            get {
-                if(m_Shooting == null)
-                {
-                    m_Shooting = GetComponent<Shooting>();
-                }
-                return m_Shooting;
-            }
-        }
-
         InputController playerInput; //Instancia del InputController
         Vector2 mouseInput; //Atributo donde se guardará los valores graduales del input del ratón hasta alcanzar el valor final
 
@@ -83,12 +70,7 @@ namespace DefinitiveScript
             }
         }
 
-        private bool m_MovementMode; //Sable mode = false, Gun mode = true
-        public bool movementMode
-        {
-            get { return m_MovementMode; }
-            set { m_MovementMode = value; }
-        }
+        private bool movementMode; //Sable mode = false, Gun mode = true
 
         private bool m_StopMovement; //Permitirá para el movimiento en los casos necesarios (inutiliza el Update)
         public bool stopMovement
@@ -103,9 +85,6 @@ namespace DefinitiveScript
             }
         }
 
-        public GameObject gunObject;
-        public GameObject sableObject;
-
         void Awake()
         {
             GameManager.Instance.LocalPlayer = this;
@@ -116,8 +95,6 @@ namespace DefinitiveScript
         {
             movementMode = cameraScript.movementMode = false; //Se inicializa el modo de movimiento en modo sable
             stopMovement = true;
-
-            ChangeWeapon();
         }     
 
         void Update()
@@ -127,7 +104,6 @@ namespace DefinitiveScript
                 if(playerInput.ChangeMoveModeInput)
                 {
                     movementMode = cameraScript.movementMode = !movementMode; //Si se detecta la pulsación del botón de cambio de modo de movimiento, este será cambiado al otro modo
-                    ChangeWeapon();
                 }
 
                 bool running = playerInput.RunningInput;
@@ -157,17 +133,6 @@ namespace DefinitiveScript
 
                 CharacterAnimationController.MovingAnimation(playerInput.Vertical, playerInput.Horizontal, playerInput.MouseInput.x, movementMode, running);
             }
-
-            if(!movementMode && playerInput.AttackInput) CloseCombat.ComboAttack();
-            
-            bool shot = playerInput.ShootingInput && Shooting.Shoot();
-            Shooting.gunPrepared = CharacterAnimationController.GunAnimation(movementMode, shot);
-        }
-
-        void ChangeWeapon()
-        {
-            sableObject.SetActive(!movementMode);
-            gunObject.SetActive(movementMode);
         }
     }
 }
