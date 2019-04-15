@@ -33,10 +33,12 @@ namespace DefinitiveScript
         //private Vector3 position;
         //private Vector3 size;
 
+        public float scaleFactor;
+
         // Start is called before the first frame update
         void Start()
         {
-            distanceToMove *= transform.localScale.x;
+            distanceToMove *= scaleFactor;
             InitializePuzle();
         }
 

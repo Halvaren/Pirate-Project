@@ -191,5 +191,49 @@ namespace DefinitiveScript
 
             return distance;
         }
+
+        public IEnumerator MoveCameraTo(float time, Vector3 finalPosition, Quaternion finalRotation)
+        {
+            initialized = false;
+
+            transform.parent = null;
+
+            Vector3 initialPosition = transform.position;
+            Quaternion initialRotation = transform.rotation;
+
+            float elapsedTime = 0.0f;
+
+            while(elapsedTime < time)
+            {
+                elapsedTime += Time.deltaTime;
+                transform.position = Vector3.Lerp(initialPosition, finalPosition, elapsedTime / time);
+                transform.rotation = Quaternion.Slerp(initialRotation, finalRotation, elapsedTime / time);
+                yield return null;
+            }
+            transform.position = finalPosition;
+            transform.rotation = finalRotation;
+        }
+
+        public IEnumerator ReturnCameraToLastPosition(float time, Vector3 finalPosition, Quaternion finalRotation, bool movementMode)
+        {
+            transform.parent = movementMode ? null : cameraBase;
+            
+            Vector3 initialPosition = transform.localPosition;
+            Quaternion initialRotation = transform.localRotation;
+
+            float elapsedTime = 0.0f;
+
+            while(elapsedTime < time)
+            {
+                elapsedTime += Time.deltaTime;
+                transform.localPosition = Vector3.Lerp(initialPosition, finalPosition, elapsedTime / time);
+                transform.localRotation = Quaternion.Slerp(initialRotation, finalRotation, elapsedTime / time);
+                yield return null;
+            }
+            transform.localPosition = finalPosition;
+            transform.localRotation = finalRotation;
+
+            initialized = true;
+        }
     }
 }

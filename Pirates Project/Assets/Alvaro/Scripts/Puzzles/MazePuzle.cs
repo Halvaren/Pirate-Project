@@ -6,6 +6,8 @@ namespace DefinitiveScript
 {
     public class MazePuzle : Puzle
     {
+        public Transform referenceTransform;
+
         private Rigidbody rigidbody;
 
         public Transform startPoint;
@@ -83,21 +85,22 @@ namespace DefinitiveScript
 
         void FixedUpdate()
         {
-            direction = Camera.main.transform.TransformDirection(direction);
-            rotation = Camera.main.transform.TransformDirection(rotation);
+            if(onPuzle)
+            {
+                direction = Camera.main.transform.TransformDirection(direction);
+                rotation = Camera.main.transform.TransformDirection(rotation);
 
-            Vector2 newPositionV2 = direction * ballSpeed * Time.deltaTime;
-            Vector3 newPositionV3 = new Vector3(newPositionV2.x, newPositionV2.y, 0f);
-            rigidbody.MovePosition(rigidbody.position + newPositionV3);
-            transform.Rotate(rotation * ballSpeed * Time.deltaTime * (2 * Mathf.PI * transform.localScale.magnitude) * 100, Space.World);
+                Vector3 newPositionV3 = direction * ballSpeed * Time.deltaTime;
+                rigidbody.MovePosition(rigidbody.position + newPositionV3);
+                transform.Rotate(rotation * ballSpeed * Time.deltaTime * (2 * Mathf.PI * transform.localScale.magnitude) * 100, Space.World);
+            }
         }
 
         void OnTriggerStay(Collider other)
         {
-            if(other.gameObject.tag == "EndPoint")
+            if(other.gameObject.tag == "EndPoint" && onPuzle)
             {
                 float distance = (other.gameObject.transform.position - transform.position).magnitude;
-                print(distance);
                 if(distance < finishDistance)
                 {
                     endedPuzle = true;

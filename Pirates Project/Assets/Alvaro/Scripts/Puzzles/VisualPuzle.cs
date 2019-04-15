@@ -65,7 +65,16 @@ namespace DefinitiveScript
                     {
                         GameObject arrow = hit.collider.gameObject;
 
-                        GameObject realArrow = arrow.transform.parent.gameObject.name[0] == 'A' ? arrow.transform.parent.gameObject : arrow.transform.parent.parent.gameObject;
+                        GameObject realArrow;
+                        if(arrow.transform.parent.gameObject.name.Substring(0, 5) == "Arrow")
+                        {
+                            realArrow = arrow.transform.parent.gameObject;
+                        }
+                        else if (arrow.transform.parent.parent.gameObject.name.Substring(0, 5) == "Arrow")
+                        {
+                            realArrow = arrow.transform.parent.parent.gameObject;
+                        }
+                        else return;
                         string[] nameParts = realArrow.name.Split('_');
 
                         ChangeNumber(int.Parse(nameParts[2]), nameParts[1] == "Up" ? 1 : -1);
@@ -128,7 +137,7 @@ namespace DefinitiveScript
         {
             onPuzle = false;
 
-            Quaternion initialRotation = baseTrans.rotation;
+            Quaternion initialRotation = baseTrans.localRotation;
             Vector3 eulerAngles = initialRotation.eulerAngles;
             Quaternion finalRotation = Quaternion.Euler(eulerAngles.x, eulerAngles.y + 90f, eulerAngles.z);
 
@@ -137,15 +146,15 @@ namespace DefinitiveScript
             while(elapsedTime < time)
             {
                 elapsedTime += Time.deltaTime;
-                baseTrans.rotation = Quaternion.Slerp(initialRotation, finalRotation, elapsedTime / time);
+                baseTrans.localRotation = Quaternion.Slerp(initialRotation, finalRotation, elapsedTime / time);
                 yield return null;
             }
 
-            baseTrans.rotation = finalRotation;
+            baseTrans.localRotation = finalRotation;
 
             endedPuzle = true;
 
-            nextPuzle.SetPlayer(player);
+            nextPuzle.SendInfo(player, originalCameraLocalPosition, originalCameraLocalRotation);
             nextPuzle.StartPuzle();
         }
     }

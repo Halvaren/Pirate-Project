@@ -8,8 +8,10 @@ namespace DefinitiveScript
     {
         protected bool onPuzle;
         protected bool endedPuzle = false;
-        public Transform puzleCameraPos;
-        protected Transform originalCameraPos;
+
+        public Transform puzleCameraTrans;
+        protected Vector3 originalCameraLocalPosition;
+        protected Quaternion originalCameraLocalRotation;
 
         protected Player player;
 
@@ -28,9 +30,11 @@ namespace DefinitiveScript
 
         }
 
-        public void SetPlayer(Player param)
+        public void SendInfo(Player param0, Vector3 param1, Quaternion param2)
         {
-            player = param;
+            player = param0;
+            originalCameraLocalPosition = param1;
+            originalCameraLocalRotation = param2;
         }
 
         public void IntroducePuzle(Player player)
@@ -39,46 +43,32 @@ namespace DefinitiveScript
             this.player.stopInput = true;
             this.player.MakeVisible(false);
 
-            originalCameraPos = Camera.main.transform;
-            StartCoroutine(IntroductionCamera(1.0f, Camera.main.transform, puzleCameraPos));
+            originalCameraLocalPosition = Camera.main.transform.localPosition;
+            originalCameraLocalRotation = Camera.main.transform.localRotation;
+            StartCoroutine(MoveCameraIntoPuzle(0.5f));
         }
 
-        protected IEnumerator IntroductionCamera(float time, Transform originCameraTrans, Transform destinyCameraTrans)
+        protected IEnumerator MoveCameraIntoPuzle(float time)
         {
-            yield return StartCoroutine(MoveCamera(time, originCameraTrans, destinyCameraTrans));
+            yield return StartCoroutine(Camera.main.GetComponent<ThirdPersonCamera>().MoveCameraTo(time, puzleCameraTrans.position, puzleCameraTrans.rotation));
+
             StartPuzle();
         }
 
         protected void ExitFromPuzle()
         {
+            StartCoroutine(MoveCameraOutOfPuzle(0.5f));
+        }
+
+        protected IEnumerator MoveCameraOutOfPuzle(float time)
+        {
+            yield return StartCoroutine(Camera.main.GetComponent<ThirdPersonCamera>().ReturnCameraToLastPosition(time, originalCameraLocalPosition, originalCameraLocalRotation, false));
+
             InitializePuzle();
 
             player.stopInput = false;
             player.MakeVisible(true);
             player = null;
-        }
-
-        protected IEnumerator MoveCamera(float time, Transform originCameraTrans, Transform destinyCameraTrans)
-        {
-            Vector3 initialPos = originCameraTrans.position;
-            Quaternion initialRot = originCameraTrans.rotation;
-
-            Vector3 finalPos = destinyCameraTrans.position;
-            Quaternion finalRot = destinyCameraTrans.rotation;
-
-            float elapsedTime = 0.0f;
-
-            while(elapsedTime < time)
-            {
-                elapsedTime += Time.deltaTime;
-                
-                originCameraTrans.position = Vector3.Lerp(initialPos, finalPos, elapsedTime / time);
-                originCameraTrans.rotation = Quaternion.Slerp(initialRot, finalRot, elapsedTime / time);
-
-                yield return null;
-            }
-            originCameraTrans.position = finalPos;
-            originCameraTrans.rotation = finalRot;
         }
 
         public bool GetEndedPuzle()

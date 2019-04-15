@@ -112,7 +112,6 @@ namespace DefinitiveScript
             }
             set
             {
-                Camera.main.GetComponent<ThirdPersonCamera>().SetInitialized(!value);
                 m_StopInput = value;
             }
         }
