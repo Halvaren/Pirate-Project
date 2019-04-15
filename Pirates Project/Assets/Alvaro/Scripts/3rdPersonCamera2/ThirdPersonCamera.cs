@@ -59,7 +59,7 @@ namespace DefinitiveScript
 
         public void InitializeCamera() //Método que inicializa lo necesario de la cámara y que será llamado desde el GameManager
         {
-            Cursor.lockState = CursorLockMode.Locked;
+            //Cursor.lockState = CursorLockMode.Locked;
 
             dollyDir = transform.localPosition.normalized;
 
@@ -85,6 +85,11 @@ namespace DefinitiveScript
             localPlayer.stopMovement = false;
 
             StartCoroutine(ModeTransition(0.0f)); //Se realiza una primera transción para colocar la cámara en el lugar correcto inicialmente
+        }
+
+        public void SetInitialized(bool param)
+        {
+            initialized = param;
         }
 
         private IEnumerator ModeTransition(float time) //Corutina que permite transicionar la posición de la cámara de un modo de movimiento al otro
@@ -163,7 +168,7 @@ namespace DefinitiveScript
 
                 if (Input.GetKeyDown (KeyCode.End))
                 {
-                    Cursor.lockState = (Cursor.lockState != CursorLockMode.Locked) ? CursorLockMode.Confined : CursorLockMode.Locked;
+                    //Cursor.lockState = (Cursor.lockState != CursorLockMode.Locked) ? CursorLockMode.Confined : CursorLockMode.Locked;
                 }
             }
         }

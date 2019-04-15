@@ -103,6 +103,21 @@ namespace DefinitiveScript
             }
         }
 
+        private bool m_StopInput; //Permitirá para el movimiento en los casos necesarios (inutiliza el Update)
+        public bool stopInput
+        {
+            get
+            {
+                return m_StopInput;
+            }
+            set
+            {
+                Camera.main.GetComponent<ThirdPersonCamera>().SetInitialized(!value);
+                m_StopInput = value;
+            }
+        }
+
+        public GameObject model;
         public GameObject gunObject;
         public GameObject sableObject;
 
@@ -122,52 +137,66 @@ namespace DefinitiveScript
 
         void Update()
         {
-            if(!stopMovement)
+            if(!stopInput)
             {
-                if(playerInput.ChangeMoveModeInput)
+                if(!stopMovement)
                 {
-                    movementMode = cameraScript.movementMode = !movementMode; //Si se detecta la pulsación del botón de cambio de modo de movimiento, este será cambiado al otro modo
-                    ChangeWeapon();
+                    if(playerInput.ChangeMoveModeInput)
+                    {
+                        movementMode = cameraScript.movementMode = !movementMode; //Si se detecta la pulsación del botón de cambio de modo de movimiento, este será cambiado al otro modo
+                        ChangeWeapon();
+                    }
+
+                    bool running = playerInput.RunningInput;
+
+                    Vector3 verDir, horDir;
+                    if(movementMode) //Si es modo pistola, las direcciones de movimiento serán las del personaje
+                    {
+                        verDir = transform.forward;
+                        horDir = transform.right;
+                    }
+                    else //Si es modo sable las direcciones de movimiento corresponderán a la orientación de la cámara
+                    {
+                        verDir = CameraTransform.forward;
+                        horDir = CameraTransform.right;
+                    }
+                            
+                    MoveController.Move(playerInput.Vertical, playerInput.Horizontal, verDir, horDir, running && !movementMode); //Pasa el input, las direcciones de movimiento y si es correr o no
+
+                    mouseInput.x = Mathf.Lerp(mouseInput.x, playerInput.MouseInput.x, 1f / MouseControl.Damping.x); //Calcula el valor gradual del movimiento de ratón en x para hacer un giro más natural
+
+                    Vector3 targetDirection = playerInput.Vertical * verDir + playerInput.Horizontal * horDir; //Calcula la dirección objetivo a la que orientarse en Y que será util en el sable mode. Si no se está moviendo, será 0.
+
+                    MoveController.Rotate(mouseInput.x, MouseControl.Sensitivity.x, targetDirection, movementMode); //Pasa el input del ratón, la sensibilidad para calcular el giro, la dirección objetivo y el modo de movimiento
+                    //Si está en modo pistola, girará en función del input (gira el personaje y la cámara le sigue). Si está en modo sable, girará en función de la dirección objetivo (gira la cámara y el personaje le sigue si se está moviendo)
+
+                    running = running && (playerInput.Vertical != 0f || playerInput.Horizontal != 0f);
+
+                    CharacterAnimationController.MovingAnimation(playerInput.Vertical, playerInput.Horizontal, playerInput.MouseInput.x, movementMode, running);
                 }
 
-                bool running = playerInput.RunningInput;
-
-                Vector3 verDir, horDir;
-                if(movementMode) //Si es modo pistola, las direcciones de movimiento serán las del personaje
-                {
-                    verDir = transform.forward;
-                    horDir = transform.right;
-                }
-                else //Si es modo sable las direcciones de movimiento corresponderán a la orientación de la cámara
-                {
-                    verDir = CameraTransform.forward;
-                    horDir = CameraTransform.right;
-                }
-                        
-                MoveController.Move(playerInput.Vertical, playerInput.Horizontal, verDir, horDir, running && !movementMode); //Pasa el input, las direcciones de movimiento y si es correr o no
-
-                mouseInput.x = Mathf.Lerp(mouseInput.x, playerInput.MouseInput.x, 1f / MouseControl.Damping.x); //Calcula el valor gradual del movimiento de ratón en x para hacer un giro más natural
-
-                Vector3 targetDirection = playerInput.Vertical * verDir + playerInput.Horizontal * horDir; //Calcula la dirección objetivo a la que orientarse en Y que será util en el sable mode. Si no se está moviendo, será 0.
-
-                MoveController.Rotate(mouseInput.x, MouseControl.Sensitivity.x, targetDirection, movementMode); //Pasa el input del ratón, la sensibilidad para calcular el giro, la dirección objetivo y el modo de movimiento
-                //Si está en modo pistola, girará en función del input (gira el personaje y la cámara le sigue). Si está en modo sable, girará en función de la dirección objetivo (gira la cámara y el personaje le sigue si se está moviendo)
-
-                running = running && (playerInput.Vertical != 0f || playerInput.Horizontal != 0f);
-
-                CharacterAnimationController.MovingAnimation(playerInput.Vertical, playerInput.Horizontal, playerInput.MouseInput.x, movementMode, running);
+                if(!movementMode && playerInput.AttackInput) CloseCombat.ComboAttack();
+                
+                bool shot = playerInput.ShootingInput && Shooting.Shoot();
+                Shooting.gunPrepared = CharacterAnimationController.GunAnimation(movementMode, shot);
             }
-
-            if(!movementMode && playerInput.AttackInput) CloseCombat.ComboAttack();
-            
-            bool shot = playerInput.ShootingInput && Shooting.Shoot();
-            Shooting.gunPrepared = CharacterAnimationController.GunAnimation(movementMode, shot);
+            else
+            {
+                CharacterAnimationController.BackToIdle();
+            }
         }
 
         void ChangeWeapon()
         {
             sableObject.SetActive(!movementMode);
             gunObject.SetActive(movementMode);
+        }
+
+        public void MakeVisible(bool param)
+        {
+            model.GetComponent<SkinnedMeshRenderer>().enabled = param;
+            gunObject.GetComponentInChildren<MeshRenderer>().enabled = param;
+            sableObject.GetComponentInChildren<MeshRenderer>().enabled = param;
         }
     }
 }

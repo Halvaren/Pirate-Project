@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DefinitiveScript
 {
-    public class SimonSays : MonoBehaviour
+    public class SimonSays : Puzle
     {
         public GameObject[] portions; //0: Red; 1: Blue; 2: Green; 3: Yellow
 
@@ -43,7 +43,7 @@ namespace DefinitiveScript
         public string simonSoundsBundleName;
         public string successSoundsBundleName;
 
-        private bool onPuzle;
+        //Heredado: protected bool onPuzle;
 
         void Awake()
         {
@@ -58,6 +58,16 @@ namespace DefinitiveScript
         void Start()
         {
             StartCoroutine(LoadAssets());
+            InitializePuzle();
+        }
+
+        protected override void InitializePuzle()
+        {
+            playerTurn = false;
+            onSequence = false;
+            pointedPortion = null;
+            currentSequence = 0;
+            currentWaitingColor = 0;
         }
 
         IEnumerator LoadAssets()
@@ -66,16 +76,10 @@ namespace DefinitiveScript
             AudioController.LoadAudioAssetBundle(successSoundsBundleName);
 
             while(AudioController.GetOnRequest()) yield return null;
-
-            StartPuzle();
         }
 
-        public void StartPuzle()
+        public override void StartPuzle()
         {
-            playerTurn = false;
-            onSequence = false;
-            currentSequence = 0;
-
             onPuzle = true;
         }
 
@@ -120,6 +124,11 @@ namespace DefinitiveScript
                         StartCoroutine(ReproduceSequence(colorSequences[currentSequence]));
                         onSequence = true;
                     }
+                }
+
+                if(Input.GetKeyDown(KeyCode.Z))
+                {
+                    FinishPuzle();
                 }
             }
         }
@@ -179,7 +188,11 @@ namespace DefinitiveScript
                 {
                     currentSequence++;
                     playerTurn = false;
-                    if(currentSequence == colorSequences.Length) FinishPuzle();
+                    if(currentSequence == colorSequences.Length) 
+                    {
+                        endedPuzle = true;
+                        FinishPuzle();
+                    }
                 }
             }
             else
@@ -191,10 +204,13 @@ namespace DefinitiveScript
             onSequence = false;
         }
 
-        void FinishPuzle()
+        protected override void FinishPuzle()
         {
             AudioController.PlayRandomSoundEffectFromGenre(successSoundsBundleName);
-            onPuzle = false;
+
+            base.FinishPuzle();
+
+            ExitFromPuzle();
         }
     }
 }

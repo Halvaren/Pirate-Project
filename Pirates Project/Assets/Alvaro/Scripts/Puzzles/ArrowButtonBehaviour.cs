@@ -5,16 +5,16 @@ using UnityEngine;
 namespace DefinitiveScript {
     public class ArrowButtonBehaviour : MonoBehaviour
     {
-        public VisualPuzzle visualPuzzle;
+        public VisualPuzle visualPuzle;
 
         public void ButtonBeingPressed()
         {
-            visualPuzzle.SetButtonBeingPressed(true);
+            visualPuzle.SetButtonBeingPressed(true);
         }
 
         public void ButtonBeingUnpressed()
         {
-            visualPuzzle.SetButtonBeingPressed(false);
+            visualPuzle.SetButtonBeingPressed(false);
         }
     }
 }

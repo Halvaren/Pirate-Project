@@ -64,6 +64,11 @@ namespace DefinitiveScript
             anim.SetTrigger("StopAttack");
         }
 
+        public void BackToIdle()
+        {
+            anim.Play("Idle");
+        }
+
         //Métodos que son llamados desde fuera
 
         public void MovingAnimation(float verticalInput, float horizontalInput, float mouseInput, bool movementMode, bool running)
