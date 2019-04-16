@@ -583,6 +583,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SimonSays
       objectReference: {fileID: 0}
+    - target: {fileID: 1081541529335960952, guid: 59da0a7bcc3cf634ab79420c6b519d38,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2137038253006288033, guid: 59da0a7bcc3cf634ab79420c6b519d38,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -697,11 +702,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_isInputParsingRequired
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1081541529335960952, guid: 59da0a7bcc3cf634ab79420c6b519d38,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1477677088518742938, guid: 59da0a7bcc3cf634ab79420c6b519d38,
         type: 3}
@@ -6842,7 +6842,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6083078715416262858}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!114 &6083078715416262856
 MonoBehaviour:
   m_ObjectHideFlags: 0
