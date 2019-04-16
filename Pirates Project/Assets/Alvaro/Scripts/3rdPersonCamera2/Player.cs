@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace DefinitiveScript
 {
+    //Para que el objeto no se destruya al cambiar de escena
     [RequireComponent(typeof(MoveController))] //Es necesario que el GameObject que tiene asociado este script, también tenga el script MoveController
     [RequireComponent(typeof(CharacterAnimationController))]
     [RequireComponent(typeof(CloseCombat))]
