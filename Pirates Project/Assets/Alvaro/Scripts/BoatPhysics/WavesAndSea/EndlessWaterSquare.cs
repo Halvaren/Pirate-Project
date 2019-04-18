@@ -9,6 +9,7 @@ public class EndlessWaterSquare : MonoBehaviour
     public GameObject boatObj;
     //One water square
     public GameObject waterSqrObj;
+    public GameObject bottomSqrObj;
 
     //Water square data
     private float squareWidth = 800f;
@@ -17,6 +18,7 @@ public class EndlessWaterSquare : MonoBehaviour
 
     //The list with all water mesh squares == the entire ocean we can see
     List<WaterSquare> waterSquares = new List<WaterSquare>();
+    List<WaterSquare> seaBottoms = new List<WaterSquare>();
 
     //Stuff needed for the thread
     //The timer that keeps track of seconds since start to update the water because we cant use Time.time in a thread
@@ -36,15 +38,15 @@ public class EndlessWaterSquare : MonoBehaviour
 
         secondsSinceStart = Time.time;
 
-        ThreadPool.QueueUserWorkItem(new WaitCallback(UpdateWaterWithThreadPooling));
+        //ThreadPool.QueueUserWorkItem(new WaitCallback(UpdateWaterWithThreadPooling));
 
-        StartCoroutine(UpdateWater());
+        //StartCoroutine(UpdateWater());
     }
 
     // Update is called once per frame
     void Update()
     {
-        //UpdateWaterNoThread();
+        UpdateWaterNoThread();
 
         //Update these as often as possible because we don't know when the thread will run because of pooling
         //and we always need the lastest version
@@ -91,8 +93,10 @@ public class EndlessWaterSquare : MonoBehaviour
                 for(int i = 0; i < waterSquares.Count; i++)
                 {
                     waterSquares[i].terrainMeshFilter.mesh.vertices = waterSquares[i].vertices;
+                    seaBottoms[i].terrainMeshFilter.mesh.vertices = seaBottoms[i].vertices;
 
                     waterSquares[i].terrainMeshFilter.mesh.RecalculateNormals();
+                    ///seaBottoms[i].terrainMeshFilter.mesh.RecalculateNormals();
                 }
 
                 //Stop looping until we have updated the water in the thread
@@ -117,25 +121,25 @@ public class EndlessWaterSquare : MonoBehaviour
         for(int i = 0; i < waterSquares.Count; i++)
         {
             //The local center pos of this square
-            Vector3 centerPos = waterSquares[i].centerPos;
+            Vector3 waterCenterPos = waterSquares[i].centerPos;
             //All the vertices this square consists of
-            Vector3[] vertices = waterSquares[i].vertices;
+            Vector3[] waterVertices = waterSquares[i].vertices;
 
             //Update the vertices in this square
-            for(int j = 0; j < vertices.Length; j++)
+            for(int j = 0; j < waterVertices.Length; j++)
             {
                 //The local position of the vertex
-                Vector3 vertexPos = vertices[j];
+                Vector3 waterVertexPos = waterVertices[j];
 
                 //Can't use transformpoint in a thread, so to find the global position of the vertex
                 //we just add the position of the ocean and the square because rotation and and scale is always 0 and 1
-                Vector3 vertexPosGlobal = vertexPos + centerPos + oceanPos;
+                Vector3 waterVertexPosGlobal = waterVertexPos + waterCenterPos + oceanPos;
 
                 //Get the water height
-                vertexPos.y = WaterController.current.GetWaveYPos(vertexPosGlobal, secondsSinceStart);
+                waterVertexPos.y = WaterController.current.GetWaveYPos(waterVertexPosGlobal, secondsSinceStart);
 
                 //Save the new y coordinate, but x and z are still in local position
-                vertices[j] = vertexPos;
+                waterVertices[j] = waterVertexPos;
             }
         }
 
@@ -164,7 +168,7 @@ public class EndlessWaterSquare : MonoBehaviour
     void CreateEndlessSea()
     {
         //The center piece
-        AddWaterPlane(0f, 0f, 0f, squareWidth, innerSquareResolution);
+        AddWaterPlane(0f, 0f, 0f, squareWidth, innerSquareResolution, innerSquareResolution);
 
         //The 8 squares around the center square
         for(int x = -1; x <= 1; x += 1)
@@ -176,15 +180,16 @@ public class EndlessWaterSquare : MonoBehaviour
 
                 //The y-Pos should be lower than the square with high resolution to avoid an ugly seam
                 float yPos = -0.5f;
-                AddWaterPlane(x * squareWidth, z * squareWidth, yPos, squareWidth, outerSuqareResolution);
+                AddWaterPlane(x * squareWidth, z * squareWidth, yPos, squareWidth, outerSuqareResolution, outerSuqareResolution);
             }
         }
     }
 
     //Add one water plane
-    void AddWaterPlane(float xCoord, float zCoord, float yPos, float squareWidth, float spacing)
+    void AddWaterPlane(float xCoord, float zCoord, float yPos, float squareWidth, float waterSpacing, float bottomSpacing)
     {
         GameObject waterPlane = Instantiate(waterSqrObj, transform.position, transform.rotation) as GameObject;
+        GameObject seaBottom = Instantiate(bottomSqrObj, transform.position, transform.rotation) as GameObject;
 
         waterPlane.SetActive(true);
 
@@ -197,11 +202,20 @@ public class EndlessWaterSquare : MonoBehaviour
 
         waterPlane.transform.position = centerPos;
 
+        centerPos.x = xCoord;
+        centerPos.y = seaBottom.transform.position.y - 2f;
+        centerPos.z = zCoord;
+
+        seaBottom.transform.localPosition = centerPos;
+
         //Parent it
         waterPlane.transform.parent = transform;
+        seaBottom.transform.parent = transform;
         //Give it moving water properties and set its width and resolution to generate the water mesh
-        WaterSquare newWaterSquare = new WaterSquare(waterPlane, squareWidth, spacing);
+        WaterSquare newWaterSquare = new WaterSquare(waterPlane, squareWidth, waterSpacing);
+        WaterSquare newSeaBottom = new WaterSquare(seaBottom, squareWidth, bottomSpacing);
 
         waterSquares.Add(newWaterSquare);
+        seaBottoms.Add(newSeaBottom);
     }
 }

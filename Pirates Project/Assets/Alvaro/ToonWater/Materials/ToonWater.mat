@@ -75,11 +75,11 @@ Material:
     - _Amp: 0.5
     - _BumpScale: 1
     - _Cutoff: 0.5
-    - _DepthMaxDistance: 1
+    - _DepthMaxDistance: 8.49
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _FadeLimit: 0.3
-    - _FoamMaxDistance: 2
+    - _FoamMaxDistance: 0.4
     - _FoamMinDistance: 0.5
     - _Freq: 0
     - _GlossMapScale: 1
@@ -98,16 +98,16 @@ Material:
     - _SpecularHighlights: 1
     - _Speed: 0
     - _SrcBlend: 1
-    - _SurfaceDistortionAmount: 0
-    - _SurfaceNoiseCutoff: 0.772
+    - _SurfaceDistortionAmount: 0.319
+    - _SurfaceNoiseCutoff: 0.73
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
     - _BlendColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 0.07075471, g: 0.77535826, b: 1, a: 1}
-    - _DepthGradientDeep: {r: 0.086274505, g: 0.40704754, b: 1, a: 1}
-    - _DepthGradientShallow: {r: 0.3254272, g: 0.8078549, b: 0.9716981, a: 1}
+    - _DepthGradientDeep: {r: 0.086274505, g: 0.40704754, b: 1, a: 0.6862745}
+    - _DepthGradientShallow: {r: 0.3254272, g: 0.8078549, b: 0.9716981, a: 0.7254902}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FoamColor: {r: 1, g: 1, b: 1, a: 1}
     - _ShorelineColor: {r: 1, g: 1, b: 1, a: 1}
-    - _SurfaceNoiseScroll: {r: 0.03, g: 0.03, b: 0, a: 0}
+    - _SurfaceNoiseScroll: {r: 0.083, g: 0.08, b: 0, a: 0}
