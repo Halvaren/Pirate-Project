@@ -10,6 +10,7 @@ namespace DefinitiveScript
         public float runningSpeed = 10.0f; //Velocidad de movimiento corriendo
         public float rotationSpeed = 20.0f; //Velocidad de giro
         public float gravity = 20.0f; //Gravedad que afecta al personaje
+        public float limitXAngle;
 
         private CharacterController controller; //Instancia del CharacterController
 
@@ -30,11 +31,11 @@ namespace DefinitiveScript
             controller.Move(newPosition);
         }
 
-        public void Rotate(float mouseInput, float mouseSensitivity, Vector3 targetDirection, bool movementMode)
+        public void YRotate(float mouseInput, float mouseSensitivity, Vector3 targetDirection, bool movementMode)
         {
             if(movementMode) //Gun mode
             {
-                transform.Rotate(Vector3.up * mouseInput * mouseSensitivity); //Si se está en modo pistola, gira sobre el eje Y en función del input recibido
+                transform.Rotate(Vector3.up * mouseInput * mouseSensitivity, Space.World); //Si se está en modo pistola, gira sobre el eje Y en función del input recibido
             }
             else //Sable mode
             {
@@ -48,6 +49,30 @@ namespace DefinitiveScript
                     Vector3 euler = new Vector3(transform.eulerAngles.x, eulerY, transform.eulerAngles.z);
                     transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(euler), rotationSpeed * Time.deltaTime); //Se realiza un giro interpolado
                 }
+            }
+        }
+
+        public void XRotate(float mouseInput, float mouseSensitivity, bool movementMode)
+        {
+            if(movementMode)
+            {
+                transform.Rotate(Vector3.right * -mouseInput * mouseSensitivity);
+
+                Vector3 eulerAngles = transform.localEulerAngles;
+                eulerAngles.z = 0f;
+
+                eulerAngles.x = (eulerAngles.x > 180) ? eulerAngles.x - 360 : eulerAngles.x;
+
+                if(eulerAngles.x > limitXAngle)
+                {
+                    eulerAngles.x = limitXAngle;
+                } 
+                else if(eulerAngles.x < -limitXAngle)
+                {
+                    eulerAngles.x = -limitXAngle;
+                }
+
+                transform.localEulerAngles = eulerAngles;
             }
         }
     }

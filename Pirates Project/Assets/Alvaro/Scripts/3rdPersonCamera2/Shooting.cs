@@ -40,15 +40,6 @@ namespace DefinitiveScript
             }
         }
 
-        /* private CharacterAnimationController m_CharacterAnimationController;
-        public CharacterAnimationController CharacterAnimationController
-        {
-            get {
-                if (m_CharacterAnimationController == null) m_CharacterAnimationController = GetComponent<CharacterAnimationController>();
-                return m_CharacterAnimationController;
-            }
-        }*/
-
         // Start is called before the first frame update
         void Awake()
         {

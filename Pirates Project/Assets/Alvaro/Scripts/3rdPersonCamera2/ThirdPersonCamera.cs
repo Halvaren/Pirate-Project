@@ -82,8 +82,6 @@ namespace DefinitiveScript
 
             initialized = true;
 
-            localPlayer.stopMovement = false;
-
             StartCoroutine(ModeTransition(0.0f)); //Se realiza una primera transción para colocar la cámara en el lugar correcto inicialmente
         }
 

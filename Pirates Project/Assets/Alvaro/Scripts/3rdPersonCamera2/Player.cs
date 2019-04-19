@@ -164,11 +164,14 @@ namespace DefinitiveScript
                     MoveController.Move(playerInput.Vertical, playerInput.Horizontal, verDir, horDir, running && !movementMode); //Pasa el input, las direcciones de movimiento y si es correr o no
 
                     mouseInput.x = Mathf.Lerp(mouseInput.x, playerInput.MouseInput.x, 1f / MouseControl.Damping.x); //Calcula el valor gradual del movimiento de ratón en x para hacer un giro más natural
+                    mouseInput.y = Mathf.Lerp(mouseInput.y, playerInput.MouseInput.y, 1f / MouseControl.Damping.y);
 
                     Vector3 targetDirection = playerInput.Vertical * verDir + playerInput.Horizontal * horDir; //Calcula la dirección objetivo a la que orientarse en Y que será util en el sable mode. Si no se está moviendo, será 0.
 
-                    MoveController.Rotate(mouseInput.x, MouseControl.Sensitivity.x, targetDirection, movementMode); //Pasa el input del ratón, la sensibilidad para calcular el giro, la dirección objetivo y el modo de movimiento
+                    MoveController.YRotate(mouseInput.x, MouseControl.Sensitivity.x, targetDirection, movementMode); //Pasa el input del ratón, la sensibilidad para calcular el giro, la dirección objetivo y el modo de movimiento
                     //Si está en modo pistola, girará en función del input (gira el personaje y la cámara le sigue). Si está en modo sable, girará en función de la dirección objetivo (gira la cámara y el personaje le sigue si se está moviendo)
+
+                    MoveController.XRotate(mouseInput.y, MouseControl.Sensitivity.y, movementMode);
 
                     running = running && (playerInput.Vertical != 0f || playerInput.Horizontal != 0f);
 
