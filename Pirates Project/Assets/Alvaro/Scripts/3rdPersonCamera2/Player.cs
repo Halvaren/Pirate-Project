@@ -143,6 +143,7 @@ namespace DefinitiveScript
                 {
                     if(playerInput.ChangeMoveModeInput)
                     {
+                        MoveController.ResetXRotation();
                         movementMode = cameraScript.movementMode = !movementMode; //Si se detecta la pulsación del botón de cambio de modo de movimiento, este será cambiado al otro modo
                         ChangeWeapon();
                     }

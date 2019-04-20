@@ -75,5 +75,12 @@ namespace DefinitiveScript
                 transform.localEulerAngles = eulerAngles;
             }
         }
+
+        public void ResetXRotation()
+        {
+            Vector3 eulerAngles = transform.localEulerAngles;
+            eulerAngles.x = 0f;
+            transform.localEulerAngles = eulerAngles;
+        }
     }
 }

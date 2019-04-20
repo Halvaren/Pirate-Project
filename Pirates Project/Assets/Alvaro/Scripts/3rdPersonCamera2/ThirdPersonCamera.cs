@@ -59,7 +59,7 @@ namespace DefinitiveScript
 
         public void InitializeCamera() //Método que inicializa lo necesario de la cámara y que será llamado desde el GameManager
         {
-            //Cursor.lockState = CursorLockMode.Locked;
+            Cursor.lockState = CursorLockMode.Locked;
 
             dollyDir = transform.localPosition.normalized;
 
@@ -135,7 +135,7 @@ namespace DefinitiveScript
         {
             if(initialized) //Mientras esta variable esté en false, este método queda inutilizado
             {
-                Vector3 targetPosition;
+                /*Vector3 targetPosition;
                 if(movementMode) //Modo pistola
                 {
                     //Se calcula la posición objetivo en función de la posición del objetivo, la orientación del jugador y la separación de la cámara con respecto al objetivo
@@ -163,10 +163,10 @@ namespace DefinitiveScript
                 targetPosition = cameraLookTarget.position; //Se guarda como posición objetivo la posición del objetivo
 
                 cameraBase.position = Vector3.Lerp(cameraBase.position, targetPosition, damping * Time.deltaTime);  //La base de la cámara se mueve hacia esa posición
-
+*/
                 if (Input.GetKeyDown (KeyCode.End))
                 {
-                    //Cursor.lockState = (Cursor.lockState != CursorLockMode.Locked) ? CursorLockMode.Confined : CursorLockMode.Locked;
+                    Cursor.lockState = (Cursor.lockState != CursorLockMode.Locked) ? CursorLockMode.Confined : CursorLockMode.Locked;
                 }
             }
         }
