@@ -60,27 +60,20 @@ namespace DefinitiveScript
                 if(!buttonBeingPressed && InputController.ShootingInput)
                 {
                     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
                     RaycastHit hit;
                     if(Physics.Raycast(ray, out hit, Mathf.Infinity, arrowLayer))
                     {
-                        GameObject arrow = hit.collider.gameObject;
-
-                        GameObject realArrow;
-                        if(arrow.transform.parent.gameObject.name.Substring(0, 5) == "Arrow")
+                        if(hit.collider.gameObject.tag == "Arrow")
                         {
-                            realArrow = arrow.transform.parent.gameObject;
-                        }
-                        else if (arrow.transform.parent.parent.gameObject.name.Substring(0, 5) == "Arrow")
-                        {
-                            realArrow = arrow.transform.parent.parent.gameObject;
-                        }
-                        else return;
-                        string[] nameParts = realArrow.name.Split('_');
+                            GameObject arrow = hit.collider.gameObject;
+                            ArrowButtonBehaviour realArrow = arrow.GetComponentInParent<ArrowButtonBehaviour>();
 
-                        ChangeNumber(int.Parse(nameParts[2]), nameParts[1] == "Up" ? 1 : -1);
+                            ChangeNumber(realArrow.number, realArrow.increase);
 
-                        realArrow.GetComponent<Animator>().SetTrigger("PressedButton");
-                        buttonBeingPressed = true;
+                            realArrow.GetComponent<Animator>().SetTrigger("PressedButton");
+                            buttonBeingPressed = true;
+                        }
                     }
                 }
                 

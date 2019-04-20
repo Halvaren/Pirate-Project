@@ -7,6 +7,9 @@ namespace DefinitiveScript {
     {
         public VisualPuzle visualPuzle;
 
+        public int number;
+        public int increase;
+
         public void ButtonBeingPressed()
         {
             visualPuzle.SetButtonBeingPressed(true);

@@ -53,14 +53,12 @@ namespace DefinitiveScript
 
         void Awake()
         {
-            GameManager.Instance.Camera = this; //Se le indica al GameManager la instancia de la cámara
+            //GameManager.Instance.Camera = this; //Se le indica al GameManager la instancia de la cámara
             cameraInput = GameManager.Instance.InputController; //Se guarda la instancia del InputController necesaria para la cámara
         }
 
         public void InitializeCamera() //Método que inicializa lo necesario de la cámara y que será llamado desde el GameManager
         {
-            Cursor.lockState = CursorLockMode.Locked;
-
             dollyDir = transform.localPosition.normalized;
 
             localPlayer = GameManager.Instance.LocalPlayer;

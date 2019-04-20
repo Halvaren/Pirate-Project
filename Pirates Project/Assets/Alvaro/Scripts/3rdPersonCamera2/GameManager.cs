@@ -15,6 +15,11 @@ namespace DefinitiveScript
                 {
                     m_Instance = new GameManager();
                     m_Instance.gameObject = new GameObject("_gameManager");
+
+                    m_Instance.gameObject.AddComponent<CursorController>();
+                    m_Instance.gameObject.AddComponent<InputController>();
+                    m_Instance.gameObject.AddComponent<AudioController>();
+                    m_Instance.gameObject.AddComponent<BundleController>();
                 }
 
                 return m_Instance;
@@ -26,7 +31,7 @@ namespace DefinitiveScript
             get{
                 if(m_InputController == null)
                 {
-                    m_InputController = m_Instance.gameObject.AddComponent<InputController>();
+                    m_InputController = m_Instance.gameObject.GetComponent<InputController>();
                 }
                 return m_InputController;
             }
@@ -37,7 +42,7 @@ namespace DefinitiveScript
             get {
                 if(m_AudioController == null)
                 {
-                    m_AudioController = m_Instance.gameObject.AddComponent<AudioController>();
+                    m_AudioController = m_Instance.gameObject.GetComponent<AudioController>();
                     m_AudioController.BackgroundMusicSource = m_Instance.gameObject.AddComponent<AudioSource>();
                     m_AudioController.SoundEffectSource = m_Instance.gameObject.AddComponent<AudioSource>();
                 }
@@ -51,7 +56,7 @@ namespace DefinitiveScript
             get {
                 if(m_BundleController == null)
                 {
-                    m_BundleController = m_Instance.gameObject.AddComponent<BundleController>();
+                    m_BundleController = m_Instance.gameObject.GetComponent<BundleController>();
                 }
                 return m_BundleController;
             }
@@ -64,18 +69,15 @@ namespace DefinitiveScript
             }
             set {
                 m_LocalPlayer = value;
-                if(m_Camera != null) m_Camera.InitializeCamera();
             }
         }
 
-        private ThirdPersonCamera m_Camera; //Instancia de la Camera
-        public ThirdPersonCamera Camera {
+        private CursorController m_CursorController;
+        public CursorController CursorController
+        {
             get {
-                return m_Camera;
-            }
-            set {
-                m_Camera = value;
-                if(m_LocalPlayer != null) m_Camera.InitializeCamera();
+                if(m_CursorController == null) m_CursorController = m_Instance.gameObject.GetComponent<CursorController>();
+                return m_CursorController;
             }
         }
     }

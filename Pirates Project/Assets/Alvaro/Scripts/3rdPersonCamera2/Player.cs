@@ -72,15 +72,14 @@ namespace DefinitiveScript
         Vector2 mouseInput; //Atributo donde se guardará los valores graduales del input del ratón hasta alcanzar el valor final
 
         private Transform m_CameraTransform; //Transform de la cámara
-        private ThirdPersonCamera cameraScript; //Instancia del script que controla la cámara
         public Transform CameraTransform
         {
             get{
+                if(m_CameraTransform == null) m_CameraTransform = Camera.main.transform;
                 return m_CameraTransform;
             }
             set {
                 m_CameraTransform = value;
-                cameraScript = m_CameraTransform.GetComponent<ThirdPersonCamera>();
             }
         }
 
@@ -125,12 +124,14 @@ namespace DefinitiveScript
         {
             GameManager.Instance.LocalPlayer = this;
             playerInput = GameManager.Instance.InputController;
+
+            GameManager.Instance.CursorController.LockCursor();
         }  
 
         void Start()
         {
-            movementMode = cameraScript.movementMode = false; //Se inicializa el modo de movimiento en modo sable
-            stopMovement = true;
+            movementMode = false; //Se inicializa el modo de movimiento en modo sable
+            stopMovement = false;
 
             ChangeWeapon();
         }     
@@ -144,7 +145,7 @@ namespace DefinitiveScript
                     if(playerInput.ChangeMoveModeInput)
                     {
                         MoveController.ResetXRotation();
-                        movementMode = cameraScript.movementMode = !movementMode; //Si se detecta la pulsación del botón de cambio de modo de movimiento, este será cambiado al otro modo
+                        movementMode = !movementMode; //Si se detecta la pulsación del botón de cambio de modo de movimiento, este será cambiado al otro modo
                         ChangeWeapon();
                     }
 

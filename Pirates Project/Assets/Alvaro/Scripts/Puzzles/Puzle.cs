@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 namespace DefinitiveScript
 {
@@ -9,7 +10,7 @@ namespace DefinitiveScript
         protected bool onPuzle;
         protected bool endedPuzle = false;
 
-        public Transform puzleCameraTrans;
+        public CinemachineVirtualCamera puzleCamera;
         protected Vector3 originalCameraLocalPosition;
         protected Quaternion originalCameraLocalRotation;
 
@@ -43,33 +44,43 @@ namespace DefinitiveScript
             this.player.stopInput = true;
             this.player.MakeVisible(false);
 
-            originalCameraLocalPosition = Camera.main.transform.localPosition;
+            GameManager.Instance.CursorController.UnlockCursor();            
+            
+            puzleCamera.m_Priority = 12;
+
+            StartPuzle();
+
+            /* originalCameraLocalPosition = Camera.main.transform.localPosition;
             originalCameraLocalRotation = Camera.main.transform.localRotation;
-            StartCoroutine(MoveCameraIntoPuzle(0.5f));
+            StartCoroutine(MoveCameraIntoPuzle(0.5f));*/
         }
 
-        protected IEnumerator MoveCameraIntoPuzle(float time)
+        /* protected IEnumerator MoveCameraIntoPuzle(float time)
         {
             yield return StartCoroutine(Camera.main.GetComponent<ThirdPersonCamera>().MoveCameraTo(time, puzleCameraTrans.position, puzleCameraTrans.rotation));
 
-            StartPuzle();
-        }
+            
+        }*/
 
         protected void ExitFromPuzle()
         {
-            StartCoroutine(MoveCameraOutOfPuzle(0.5f));
-        }
-
-        protected IEnumerator MoveCameraOutOfPuzle(float time)
-        {
-            yield return StartCoroutine(Camera.main.GetComponent<ThirdPersonCamera>().ReturnCameraToLastPosition(time, originalCameraLocalPosition, originalCameraLocalRotation, false));
+            puzleCamera.Priority = 0;
 
             InitializePuzle();
+
+            GameManager.Instance.CursorController.LockCursor();  
 
             player.stopInput = false;
             player.MakeVisible(true);
             player = null;
         }
+
+        /* protected IEnumerator MoveCameraOutOfPuzle(float time)
+        {
+            yield return StartCoroutine(Camera.main.GetComponent<ThirdPersonCamera>().ReturnCameraToLastPosition(time, originalCameraLocalPosition, originalCameraLocalRotation, false));
+
+            
+        }*/
 
         public bool GetEndedPuzle()
         {
