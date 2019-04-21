@@ -69,8 +69,8 @@ public class Gun : MonoBehaviour
         //Debug.DrawRay(player.transform.position, player.transform.forward*10, Color.green);
         if (Physics.Raycast(player.transform.position, player.transform.forward, out hit, range, shootableMask)) { //layer del enemigo
            
-            DebugEnemyBehaviour enemy = hit.transform.gameObject.GetComponent<DebugEnemyBehaviour>();
-            if (enemy != null) 
+            //DebugEnemyBehaviour enemy = hit.transform.gameObject.GetComponent<DebugEnemyBehaviour>();
+//            if (enemy != null) 
             {
                    //enemy.Attacked (damage, transform.forward/3);
             }
