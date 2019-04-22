@@ -32,6 +32,15 @@ namespace DefinitiveScript {
             }
         }
 
+        private HealthController m_HealthController;
+        public HealthController HealthController
+        {
+            get {
+                if(m_HealthController == null) m_HealthController = GetComponent<HealthController>();
+                return m_HealthController;
+            }
+        }
+
         private List<SableController> collidedEnemies;
 
         public LayerMask enemyLayerMask;
@@ -84,6 +93,7 @@ namespace DefinitiveScript {
             if(!attacking)
             {
                 blocking = input;
+                CharacterAnimationController.Block(blocking);
             }
         }
 
@@ -131,7 +141,7 @@ namespace DefinitiveScript {
             else
             {
                 comboCount = 0;
-                if(attackId < 3) CharacterAnimationController.StopAttack();
+                if(attackId < 3 && attacking) CharacterAnimationController.StopAttack();
 
                 attacking = false;
             }
@@ -147,21 +157,61 @@ namespace DefinitiveScript {
             return attacking;
         }
 
-        public void HitOnSword()
+        public void HitOnSword(Vector3 hitDirection)
         {
+            if(blocking)
+            { 
+                if(HealthController.ReduceStamina(10f))
+                {
+                    CharacterAnimationController.Disarm();
+                    HealthController.Knockback(10f, hitDirection);
+                    blocking = false;
+                }
+                else
+                {
+                    CharacterAnimationController.HitOnSword();
+                    HealthController.Knockback(5f, hitDirection);
+                }
+            }
+            else if(attacking)
+            {
+                CharacterAnimationController.Disarm();
+                HealthController.Knockback(10f, hitDirection);
 
+                comboCount = 0;
+                attacking = false;
+                chaining = true;
+                nextAttack = false;
+            }
         }
 
-        public void HitOnBody()
+        public void HitOnBody(Vector3 hitDirection)
         {
+            attacking = blocking = false;
+            comboCount = 0;
+            chaining = true;
+            nextAttack = false;
 
+            if(HealthController.TakeDamage(Damage))
+            {
+                print("Sa morío");
+            }
+            else 
+            {
+                CharacterAnimationController.Hit();
+            }
         }
 
         public void AddCollidedObject(GameObject other)
         {
+
             if(((1 << other.layer) | enemyLayerMask) == enemyLayerMask) //Lo detectado es un enemigo
             {
                 SableController enemy = other.GetComponent<SableController>(); //Un enemigo tiene el componente SableController
+
+                //Se calculan las direcciones de los contrincantes en el momento de la colisión
+                Vector3 characterForward = transform.TransformDirection(Vector3.forward);
+                Vector3 enemyForward = enemy.transform.TransformDirection(Vector3.forward);
 
                 bool onList = false;
                 for(int i = 0; i < collidedEnemies.Count; i++) //Se comprueba si ya ha sido detectado con anterioridad (en principio, habrá sido detectada su espada)
@@ -177,7 +227,7 @@ namespace DefinitiveScript {
                 {
                     if(!enemy.GetBlocking() && !enemy.GetAttacking()) //Y además no está bloqueando o atacando
                     {
-                        enemy.HitOnBody(); //Debe recibir un golpe
+                        enemy.HitOnBody(characterForward); //Debe recibir un golpe
                     }
                     //En cualquier otro caso, cuando se detectó la espada antes que el cuerpo, se habrá golpeado la espada
                 }
@@ -185,29 +235,22 @@ namespace DefinitiveScript {
                 {
                     if(enemy.GetBlocking()) //Si está bloqueando
                     {
-                        print("No está en la lista y está bloqueando");
-                        //Se va a comprobar las direcciones de los contrincantes
-                        Vector3 characterForward = transform.TransformDirection(Vector3.forward);
-                        Vector3 enemyForward = enemy.transform.TransformDirection(Vector3.forward);
-
-                        //Se calcula su ángulo entre ellos
+                        //Se calcula su ángulo entre las direcciones
                         float angle = Vector3.Angle(characterForward, enemyForward);
 
-                        print(characterForward + " " + enemyForward + " " + angle);
-                        if(angle > 120f) //Si el ángulo es mayor de 120 quiere decir que están bastante encarados el uno al otro, por lo que se puede considerar bloqueado el golpe
+                        if(angle > 110f) //Si el ángulo es mayor de 120 quiere decir que están bastante encarados el uno al otro, por lo que se puede considerar bloqueado el golpe
                         {
-                            enemy.HitOnSword();
-                            HitOnSword();
+                            enemy.HitOnSword(characterForward);
+                            HitOnSword(enemyForward);
                         }
                         else //Está atacando al enemigo por un flanco por el cual no se está protegiendo
                         {
-                            print("Pero es igual porque ataco por detrás");
-                            enemy.HitOnBody();
+                            enemy.HitOnBody(characterForward);
                         }
                     }
                     else //Si en general no se está protegiendo y atacado en el cuerpo antes de golpear en la espada
                     {
-                        enemy.HitOnBody();
+                        enemy.HitOnBody(characterForward);
                     }
 
                     //Ahora, como no está en la lista, hay que meterlo
@@ -217,6 +260,10 @@ namespace DefinitiveScript {
             else //El objeto con el que se ha colisionado es una espada
             {
                 SableController enemy = other.GetComponent<SwordCollisionDetector>().SableController; //Se puede acceder igualmente a su SableController
+
+                //Se calculan las direcciones de los contrincantes en el momento de la colisión
+                Vector3 characterForward = transform.TransformDirection(Vector3.forward);
+                Vector3 enemyForward = enemy.transform.TransformDirection(Vector3.forward);
                 
                 bool onList = false;
                 for(int i = 0; i < collidedEnemies.Count; i++) //Se comprueba si ya ha sido detectado con anterioridad (en principio, habrá sido detectado su cuerpo)
@@ -232,8 +279,8 @@ namespace DefinitiveScript {
                 {
                     if(enemy.GetBlocking() || enemy.GetAttacking()) //Si se choca con la espada estando el enemigo bloqueando o atacando, deberá retroceder
                     {
-                        enemy.HitOnSword();
-                        HitOnSword();
+                        enemy.HitOnSword(characterForward);
+                        HitOnSword(enemyForward);
                     }
                     //En cualquier otro caso, no se debe hacer nada si no se colisiona con el cuerpo
 

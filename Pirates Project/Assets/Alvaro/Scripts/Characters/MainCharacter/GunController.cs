@@ -135,7 +135,7 @@ namespace DefinitiveScript
 
             yield return new WaitForSeconds(time);
 
-            if(enemy != null) enemy.AttackedByGun(damage, hitDirection, shootingPoint);
+            //if(enemy != null) enemy.AttackedByGun(damage, hitDirection, shootingPoint);
             
             gunLine.enabled = false;
             faceLight.enabled = false;

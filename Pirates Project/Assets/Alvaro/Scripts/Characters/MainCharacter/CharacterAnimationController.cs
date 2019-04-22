@@ -69,6 +69,26 @@ namespace DefinitiveScript
             anim.Play("Idle");
         }
 
+        public void Hit()
+        {
+            anim.SetTrigger("Hit");
+        }
+
+        public void Block(bool value)
+        {
+            anim.SetBool("Block", value);
+        }
+
+        public void HitOnSword()
+        {
+            anim.SetTrigger("HitOnSword");
+        }
+
+        public void Disarm()
+        {
+            anim.SetTrigger("Disarmed");
+        }
+
         //Métodos que son llamados desde fuera
 
         public void MovingAnimation(float verticalInput, float horizontalInput, float mouseInput, bool movementMode, bool running)
