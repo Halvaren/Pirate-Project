@@ -25,6 +25,7 @@ namespace DefinitiveScript
 
         void OnTriggerEnter(Collider other)
         {
+            //print(other.gameObject.name);
             SableController.AddCollidedObject(other.gameObject);
         }
     }
