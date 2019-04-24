@@ -38,6 +38,7 @@ namespace DefinitiveScript
             
             characterAnimationController = GetComponent<CharacterAnimationController>();
 
+            sphereCollider = GetComponentInChildren<SphereCollider>();
         }
 
         void Start() {

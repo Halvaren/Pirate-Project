@@ -5,8 +5,6 @@ using UnityEngine;
 namespace DefinitiveScript {
     public class SableController : MonoBehaviour
     {
-        protected Animator anim;
-        //private CharacterController controller;
         public Transform swordTransform;
         protected MeshCollider swordCollider;
         protected SwordCollisionDetector swordScript;
@@ -45,11 +43,11 @@ namespace DefinitiveScript {
 
         public LayerMask enemyLayerMask;
 
+        protected Coroutine displacementCoroutine;
+
         // Start is called before the first frame update
         protected void Awake()
         {
-            anim = GetComponent<Animator>();
-            //controller = GetComponent<CharacterController>();
             swordCollider = swordTransform.GetComponentInChildren<MeshCollider>();
             swordCollider.enabled = false;
 
@@ -116,7 +114,7 @@ namespace DefinitiveScript {
             chaining = true;
             nextAttack = false;
 
-            StartCoroutine(Displacement(attackMovementSpeed[attackId - 1], time));  
+            displacementCoroutine = StartCoroutine(Displacement(attackMovementSpeed[attackId - 1], time));  
         }
 
         protected virtual IEnumerator Displacement(AnimationCurve speedCurve, float time) { yield return null; }
@@ -169,18 +167,21 @@ namespace DefinitiveScript {
                 if(HealthController.ReduceStamina(10f))
                 {
                     CharacterAnimationController.Disarm();
+                    //if(displacementCoroutine) StopCoroutine(displacementCoroutine);
                     HealthController.Knockback(5f, hitDirection);
                     blocking = false;
                 }
                 else
                 {
                     CharacterAnimationController.HitOnSword();
+                    //StopCoroutine(displacementCoroutine);
                     HealthController.Knockback(5f, hitDirection);
                 }
             }
             else if(attacking)
             {
                 CharacterAnimationController.Disarm();
+                //StopCoroutine(displacementCoroutine);
                 HealthController.Knockback(5f, hitDirection);
 
                 CancelAttack();
@@ -192,6 +193,7 @@ namespace DefinitiveScript {
             blocking = false;
             CancelAttack();
 
+            //StopCoroutine(displacementCoroutine);
             HealthController.Knockback(2.5f, hitDirection);
             if(HealthController.TakeDamage(Damage))
             {
