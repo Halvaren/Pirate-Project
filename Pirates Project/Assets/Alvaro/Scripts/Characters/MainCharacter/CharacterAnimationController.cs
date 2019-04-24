@@ -8,11 +8,12 @@ namespace DefinitiveScript
     {
         private Animator anim;
 
-        private Player m_LocalPlayer;
-        public Player LocalPlayer {
+        private SableController m_SableController;
+        public SableController SableController
+        {
             get {
-                if(m_LocalPlayer == null) m_LocalPlayer = GameManager.Instance.LocalPlayer;
-                return m_LocalPlayer;
+                if(m_SableController == null) m_SableController = GetComponent<SableController>();
+                return m_SableController;
             }
         }
 
@@ -122,22 +123,22 @@ namespace DefinitiveScript
 
         public void StartAttackEvent(int attackId)
         {
-            LocalPlayer.SableController.StartAttack(attackId, anim.GetNextAnimatorClipInfo(0)[0].clip.length);
+            SableController.StartAttack(attackId, anim.GetNextAnimatorClipInfo(0)[0].clip.length);
         }
 
         public void EnableSwordColliderEvent()
         {
-            LocalPlayer.SableController.EnableSwordCollider();
+            SableController.EnableSwordCollider();
         }
 
         public void DisableSwordColliderEvent()
         {
-            LocalPlayer.SableController.DisableSwordCollider();
+            SableController.DisableSwordCollider();
         }
 
         public void FinishAttackEvent(int attackId)
         {
-            LocalPlayer.SableController.FinishAttack(attackId);
+            SableController.FinishAttack(attackId);
         }
     }
 }

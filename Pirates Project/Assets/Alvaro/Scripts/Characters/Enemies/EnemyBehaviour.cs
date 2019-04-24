@@ -15,8 +15,11 @@ namespace DefinitiveScript
 
         void Update()
         {
-            SableController.Block(true);
+            //SableController.Block(true);
+            if(Input.GetKeyDown(KeyCode.E)) SableController.ComboAttack();
         }
+
+        public void caca() {}
 
         /*public Material InitialMaterial;
         public Material KnockbackMaterial;
