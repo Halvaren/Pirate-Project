@@ -92,7 +92,7 @@ namespace DefinitiveScript
 
         //Métodos que son llamados desde fuera
 
-        public void MovingAnimation(float verticalInput, float horizontalInput, float mouseInput, bool movementMode, bool running)
+        public void MovingAnimation(float verticalInput, float horizontalInput, float mouseInput, bool movementMode, bool running = false)
         {
             if(movementMode)
             {
@@ -105,6 +105,11 @@ namespace DefinitiveScript
                 VerticalAxisWalk(Mathf.Abs(verticalInput) + Mathf.Abs(horizontalInput));
                 Run(running);
             }
+        }
+
+        public void MovingAnimation(bool move, bool running)
+        {
+            MovingAnimation(move ? 1f : 0f, move ? 1f : 0f, 0f, false, running);
         }
 
         public bool GunAnimation(bool aiming, bool shoot)

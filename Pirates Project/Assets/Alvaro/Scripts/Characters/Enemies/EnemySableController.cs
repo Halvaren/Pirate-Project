@@ -14,6 +14,18 @@ namespace DefinitiveScript
                 return m_NavMeshAgent;
             }
         }
+
+        protected override IEnumerator Displacement(AnimationCurve speedCurve, float time)
+        {
+            float elapsedTime = 0.0f;
+
+            while(elapsedTime < time)
+            {
+                elapsedTime += Time.deltaTime;
+                NavMeshAgent.Move(transform.forward * speedCurve.Evaluate(elapsedTime / time) * Time.deltaTime);
+                yield return null;
+            }
+        }
     }
 }
 

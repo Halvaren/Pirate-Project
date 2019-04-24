@@ -30,5 +30,12 @@ namespace DefinitiveScript
 
             GameManager.Instance.LocalPlayer.stopMovement = false;
         }
+
+        public override void Block(bool input)
+        {
+            base.Block(input);
+
+            GameManager.Instance.LocalPlayer.stopMovement = input;
+        }
     }
 }

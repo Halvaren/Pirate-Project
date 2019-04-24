@@ -10,11 +10,25 @@ namespace DefinitiveScript
     {
         private SableController SableController;
         private NavMeshAgent nav;
-        //private CharacterAnimationController characterAnimationController;
+        private CharacterAnimationController characterAnimationController;
+        private SphereCollider sphereCollider;
+
+        private Transform[] patrolPoints;
+        private float detectionAngle;
+
+        private bool characterDetect;
+        private bool inPath;
         
-        public Transform[] patrolpoints; 
+        public Transform PatrolPathObj; 
         public float movingSpeed;
         public float runningSpeed;
+        public float patrolMinWaitingTime;
+        public float patrolMaxWaitingTime;
+
+        public float patrolDetectionRadius;
+        public float patrolDetectionAngle;
+        public float seekingDetectionRadius;
+        public float seekingDetectionAngle;
 
         void Awake()
         {
@@ -22,22 +36,49 @@ namespace DefinitiveScript
             
             nav = GetComponent<NavMeshAgent>();
             
-           // characterAnimationController = GetComponent<CharacterAnimationController>();
+            characterAnimationController = GetComponent<CharacterAnimationController>();
 
         }
 
         void Start() {
-            StartCoroutine(PatrolPath(patrolpoints, false));
 
+            //sphereCollider.radius = patrolDetectionRadius;
+            detectionAngle = patrolDetectionAngle;
+
+            characterDetect = false;
+            inPath = false;
+
+            //CreatePatrolPoints();
+        }
+
+        void CreatePatrolPoints()
+        {
+            patrolPoints = new Transform[PatrolPathObj.childCount];
+
+            for(int i = 0; i < PatrolPathObj.childCount; i++)
+            {
+                patrolPoints[i] = PatrolPathObj.GetChild(i);
+            }
         }
 
         void Update()
         {
-            //SableController.Block(true);
+            if(characterDetect)
+            {
+                if(!inPath)
+                {
+                    inPath = true;
+
+                    float randomTime = Random.Range(patrolMinWaitingTime, patrolMaxWaitingTime);
+                    StartCoroutine(PatrolPath(patrolPoints, randomTime));
+                }
+            }
+
             if(Input.GetKeyDown(KeyCode.E)) SableController.ComboAttack();
+            SableController.Block(Input.GetKey(KeyCode.F));
         }
 
-        IEnumerator PatrolPath(Transform[] waypoints, bool patrol) { //recorrido en busqueda y patrulla
+        IEnumerator PatrolPath(Transform[] waypoints, float waitingTime) { //recorrido en busqueda y patrulla
             //encuentro el punto mas cercano
             
             int destinationPointIndex =  0;
@@ -54,16 +95,20 @@ namespace DefinitiveScript
 
             //recorrer el path
             while (true) {
-                //characterAnimationController.MovingAnimation(1, 1, 0, false, !patrol);
+                characterAnimationController.MovingAnimation(true, !characterDetect);
                 if (nav.remainingDistance == 0) {
+                    characterAnimationController.MovingAnimation(false, !characterDetect);
                     if (destinationPointIndex != waypoints.Length - 1) {
                         destinationPointIndex += 1;
                     }
                     else {
                         destinationPointIndex = 0;
                     }
+
+                    yield return new WaitForSeconds(waitingTime);
+
                     nav.SetDestination(waypoints[destinationPointIndex].position);
-                    if (patrol) nav.speed = movingSpeed;
+                    if (!characterDetect) nav.speed = movingSpeed;
                     else nav.speed = runningSpeed;
                     
                 }

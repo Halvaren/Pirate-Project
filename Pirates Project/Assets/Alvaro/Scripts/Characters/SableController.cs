@@ -102,7 +102,7 @@ namespace DefinitiveScript {
             }
         }
 
-        public void Block(bool input)
+        public virtual void Block(bool input)
         {
             if(!attacking)
             {
