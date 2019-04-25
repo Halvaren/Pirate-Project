@@ -62,8 +62,8 @@ namespace DefinitiveScript
             }
         }
 
-        private PlayerBehaviour m_LocalPlayer; //Instancia del Player
-        public PlayerBehaviour LocalPlayer {
+        private Player m_LocalPlayer; //Instancia del Player
+        public Player LocalPlayer {
             get {
                 return m_LocalPlayer;
             }

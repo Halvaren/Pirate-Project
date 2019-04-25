@@ -32,10 +32,10 @@ namespace DefinitiveScript
 
         [SerializeField] LayerMask shootableMask;
 
-        private PlayerBehaviour m_LocalPlayer;
-        public PlayerBehaviour LocalPlayer {
+        private Player m_LocalPlayer;
+        public Player LocalPlayer {
             get {
-                if(m_LocalPlayer == null) m_LocalPlayer = GetComponent<PlayerBehaviour>();
+                if(m_LocalPlayer == null) m_LocalPlayer = GetComponent<Player>();
                 return m_LocalPlayer;
             }
         }

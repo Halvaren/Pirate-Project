@@ -7,9 +7,9 @@ namespace DefinitiveScript
     //Para que el objeto no se destruya al cambiar de escena
     [RequireComponent(typeof(MoveController))] //Es necesario que el GameObject que tiene asociado este script, también tenga el script MoveController
     [RequireComponent(typeof(CharacterAnimationController))]
-    [RequireComponent(typeof(CharacterSableController))]
+    [RequireComponent(typeof(SableController))]
     [RequireComponent(typeof(GunController))]
-    public class PlayerBehaviour : CharacterBehaviour
+    public class Player : MonoBehaviour
     {
         [System.Serializable]
         public class MouseInput
@@ -178,9 +178,9 @@ namespace DefinitiveScript
                     running = running && (playerInput.Vertical != 0f || playerInput.Horizontal != 0f);
 
                     CharacterAnimationController.MovingAnimation(playerInput.Vertical, playerInput.Horizontal, playerInput.MouseInput.x, movementMode, running);
-                }
 
-                SableController.Block(playerInput.BlockInput);
+                    SableController.Block(playerInput.BlockInput);
+                }
 
                 if(!movementMode)
                 {

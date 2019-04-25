@@ -21,7 +21,7 @@ namespace DefinitiveScript
         Transform cameraLookTarget;                 //Objetivo al que apunta la cámara
         Transform sableCameraPosition;              //Posición del objetivo en el modo sable
         Transform gunCameraPosition;                //Posición del objetivo en el modo pistola
-        PlayerBehaviour localPlayer;                         //Instancia del jugador
+        Player localPlayer;                         //Instancia del jugador
         
         public Transform cameraBase;                //Base localizada sobre el jugador alrededor de la cual orbitará la cámara en el modo sable
 

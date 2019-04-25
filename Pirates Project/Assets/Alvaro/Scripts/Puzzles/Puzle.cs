@@ -14,7 +14,7 @@ namespace DefinitiveScript
         protected Vector3 originalCameraLocalPosition;
         protected Quaternion originalCameraLocalRotation;
 
-        protected PlayerBehaviour player;
+        protected Player player;
 
         public virtual void StartPuzle()
         {
@@ -31,14 +31,14 @@ namespace DefinitiveScript
 
         }
 
-        public void SendInfo(PlayerBehaviour param0, Vector3 param1, Quaternion param2)
+        public void SendInfo(Player param0, Vector3 param1, Quaternion param2)
         {
             player = param0;
             originalCameraLocalPosition = param1;
             originalCameraLocalRotation = param2;
         }
 
-        public void IntroducePuzle(PlayerBehaviour player)
+        public void IntroducePuzle(Player player)
         {
             this.player = player;
             this.player.stopInput = true;
