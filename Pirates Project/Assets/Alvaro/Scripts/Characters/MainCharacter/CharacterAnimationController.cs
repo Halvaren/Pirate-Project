@@ -8,11 +8,12 @@ namespace DefinitiveScript
     {
         private Animator anim;
 
-        private Player m_LocalPlayer;
-        public Player LocalPlayer {
+        private SableController m_SableController;
+        public SableController SableController
+        {
             get {
-                if(m_LocalPlayer == null) m_LocalPlayer = GameManager.Instance.LocalPlayer;
-                return m_LocalPlayer;
+                if(m_SableController == null) m_SableController = GetComponent<SableController>();
+                return m_SableController;
             }
         }
 
@@ -91,7 +92,7 @@ namespace DefinitiveScript
 
         //Métodos que son llamados desde fuera
 
-        public void MovingAnimation(float verticalInput, float horizontalInput, float mouseInput, bool movementMode, bool running)
+        public void MovingAnimation(float verticalInput, float horizontalInput, float mouseInput, bool movementMode, bool running = false)
         {
             if(movementMode)
             {
@@ -104,6 +105,11 @@ namespace DefinitiveScript
                 VerticalAxisWalk(Mathf.Abs(verticalInput) + Mathf.Abs(horizontalInput));
                 Run(running);
             }
+        }
+
+        public void MovingAnimation(bool move, bool running)
+        {
+            MovingAnimation(move ? 1f : 0f, move ? 1f : 0f, 0f, false, running);
         }
 
         public bool GunAnimation(bool aiming, bool shoot)
@@ -122,22 +128,22 @@ namespace DefinitiveScript
 
         public void StartAttackEvent(int attackId)
         {
-            LocalPlayer.SableController.StartAttack(attackId, anim.GetNextAnimatorClipInfo(0)[0].clip.length);
+            SableController.StartAttack(attackId, anim.GetNextAnimatorClipInfo(0)[0].clip.length);
         }
 
         public void EnableSwordColliderEvent()
         {
-            LocalPlayer.SableController.EnableSwordCollider();
+            SableController.EnableSwordCollider();
         }
 
         public void DisableSwordColliderEvent()
         {
-            LocalPlayer.SableController.DisableSwordCollider();
+            SableController.DisableSwordCollider();
         }
 
         public void FinishAttackEvent(int attackId)
         {
-            LocalPlayer.SableController.FinishAttack(attackId);
+            SableController.FinishAttack(attackId);
         }
     }
 }
