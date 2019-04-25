@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1723140044}
   - component: {fileID: 1723140045}
+  - component: {fileID: 1663309270}
   m_Layer: 0
   m_Name: SphereCollider
   m_TagString: Untagged
@@ -44,6 +45,49 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 6
   m_Center: {x: 0, y: 0.08, z: 0}
+--- !u!114 &1663309270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723140043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf4d374e83be8764788f855109fd9bf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyScript: {fileID: 0}
+--- !u!1 &7060767278133257310
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1849211419858622076}
+  m_Layer: 0
+  m_Name: CharacterCenter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1849211419858622076
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7060767278133257310}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.14, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7460918056816371426}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7460918055069117808
 GameObject:
   m_ObjectHideFlags: 0
@@ -6059,6 +6103,7 @@ Transform:
   - {fileID: 7460918055527882918}
   - {fileID: 7460918056164574859}
   - {fileID: 1723140044}
+  - {fileID: 1849211419858622076}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -169.757, z: 0}
@@ -6110,15 +6155,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4e111b81c7951d44808d1e9c05693de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterCenter: {fileID: 1849211419858622076}
+  visionObstacles:
+    serializedVersion: 2
+    m_Bits: 256
   PatrolPathObj: {fileID: 0}
   movingSpeed: 5
   runningSpeed: 10
   patrolMinWaitingTime: 0.2
   patrolMaxWaitingTime: 1
-  patrolDetectionRadius: 0
-  patrolDetectionAngle: 0
-  seekingDetectionRadius: 0
-  seekingDetectionAngle: 0
+  patrolDetectionRadius: 6
+  patrolDetectionAngle: 12
+  seekingDetectionRadius: 30
+  seekingDetectionAngle: 45
+  minDistanceFromPlayer: 3
+  maxDistanceFromPlayer: 4
+  timeSeeking: 2
 --- !u!114 &7460918056816371439
 MonoBehaviour:
   m_ObjectHideFlags: 0

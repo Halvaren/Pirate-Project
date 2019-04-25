@@ -167,21 +167,18 @@ namespace DefinitiveScript {
                 if(HealthController.ReduceStamina(10f))
                 {
                     CharacterAnimationController.Disarm();
-                    //if(displacementCoroutine) StopCoroutine(displacementCoroutine);
                     HealthController.Knockback(5f, hitDirection);
                     blocking = false;
                 }
                 else
                 {
                     CharacterAnimationController.HitOnSword();
-                    //StopCoroutine(displacementCoroutine);
                     HealthController.Knockback(5f, hitDirection);
                 }
             }
             else if(attacking)
             {
                 CharacterAnimationController.Disarm();
-                //StopCoroutine(displacementCoroutine);
                 HealthController.Knockback(5f, hitDirection);
 
                 CancelAttack();
@@ -193,7 +190,6 @@ namespace DefinitiveScript {
             blocking = false;
             CancelAttack();
 
-            //StopCoroutine(displacementCoroutine);
             HealthController.Knockback(2.5f, hitDirection);
             if(HealthController.TakeDamage(Damage))
             {
