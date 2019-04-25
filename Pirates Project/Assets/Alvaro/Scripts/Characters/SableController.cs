@@ -5,25 +5,23 @@ using UnityEngine;
 namespace DefinitiveScript {
     public class SableController : MonoBehaviour
     {
-        private Animator anim;
-        private CharacterController controller;
         public Transform swordTransform;
-        private MeshCollider swordCollider;
-        private SwordCollisionDetector swordScript;
+        protected MeshCollider swordCollider;
+        protected SwordCollisionDetector swordScript;
 
         [SerializeField] AnimationCurve[] attackMovementSpeed;
 
-        private int comboCount;
+        protected int comboCount;
 
-        private bool chaining;
-        private bool nextAttack;
+        protected bool chaining;
+        protected bool nextAttack;
 
         public float Damage = 10f;
 
-        public bool attacking = false;
-        public bool blocking = false;
+        protected bool attacking;
+        protected bool blocking;
 
-        private CharacterAnimationController m_CharacterAnimationController;
+        protected CharacterAnimationController m_CharacterAnimationController;
         public CharacterAnimationController CharacterAnimationController
         {
             get {
@@ -32,7 +30,7 @@ namespace DefinitiveScript {
             }
         }
 
-        private HealthController m_HealthController;
+        protected HealthController m_HealthController;
         public HealthController HealthController
         {
             get {
@@ -41,15 +39,15 @@ namespace DefinitiveScript {
             }
         }
 
-        private List<SableController> collidedEnemies;
+        protected List<SableController> collidedEnemies;
 
         public LayerMask enemyLayerMask;
 
+        protected Coroutine displacementCoroutine;
+
         // Start is called before the first frame update
-        void Awake()
+        protected void Awake()
         {
-            anim = GetComponent<Animator>();
-            controller = GetComponent<CharacterController>();
             swordCollider = swordTransform.GetComponentInChildren<MeshCollider>();
             swordCollider.enabled = false;
 
@@ -57,10 +55,11 @@ namespace DefinitiveScript {
             swordScript.SableController = this;
         }
 
-        void Start()
+        protected void Start()
         {
             chaining = true;
             nextAttack = false;
+            attacking = false;
             comboCount = 0;
              
             collidedEnemies = new List<SableController>();
@@ -68,14 +67,27 @@ namespace DefinitiveScript {
             swordScript.SetDamage(Damage);
         }
 
-        void Update()
+        protected void Update()
         {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 5000000, Color.blue);
+            if(Input.GetKeyDown(KeyCode.R))
+            {
+                CancelAttack();
+                CharacterAnimationController.StopAttack();
+            }
         }
 
-        // Update is called once per frame
+        protected void CancelAttack()
+        {
+            chaining = true;
+            nextAttack = false;
+            attacking = false;
+            DisableSwordCollider();
+            comboCount = 0;
+        }
+
         public void ComboAttack()
         {
+            print(gameObject.name);
             if(chaining && comboCount < 3)
             {
                 chaining = false;
@@ -88,7 +100,7 @@ namespace DefinitiveScript {
             }
         }
 
-        public void Block(bool input)
+        public virtual void Block(bool input)
         {
             if(!attacking)
             {
@@ -102,24 +114,10 @@ namespace DefinitiveScript {
             chaining = true;
             nextAttack = false;
 
-            StartCoroutine(Displacement(attackMovementSpeed[attackId - 1], time));  
+            displacementCoroutine = StartCoroutine(Displacement(attackMovementSpeed[attackId - 1], time));  
         }
 
-        IEnumerator Displacement(AnimationCurve speedCurve, float time)
-        {
-            GameManager.Instance.LocalPlayer.stopMovement = true;
-
-            float elapsedTime = 0.0f;
-
-            while(elapsedTime < time)
-            {
-                elapsedTime += Time.deltaTime;
-                controller.Move(transform.forward * speedCurve.Evaluate(elapsedTime / time) * Time.deltaTime);
-                yield return null;
-            }
-
-            GameManager.Instance.LocalPlayer.stopMovement = false;
-        }
+        protected virtual IEnumerator Displacement(AnimationCurve speedCurve, float time) { yield return null; }
 
         public void EnableSwordCollider()
         {
@@ -130,6 +128,11 @@ namespace DefinitiveScript {
         {
             swordCollider.enabled = false;
             collidedEnemies.Clear();
+        }
+
+        public bool SwordColliderEnable()
+        {
+            return swordCollider.enabled;
         }
 
         public void FinishAttack(int attackId)
@@ -164,7 +167,7 @@ namespace DefinitiveScript {
                 if(HealthController.ReduceStamina(10f))
                 {
                     CharacterAnimationController.Disarm();
-                    HealthController.Knockback(10f, hitDirection);
+                    HealthController.Knockback(5f, hitDirection);
                     blocking = false;
                 }
                 else
@@ -176,22 +179,18 @@ namespace DefinitiveScript {
             else if(attacking)
             {
                 CharacterAnimationController.Disarm();
-                HealthController.Knockback(10f, hitDirection);
+                HealthController.Knockback(5f, hitDirection);
 
-                comboCount = 0;
-                attacking = false;
-                chaining = true;
-                nextAttack = false;
+                CancelAttack();
             }
         }
 
         public void HitOnBody(Vector3 hitDirection)
         {
-            attacking = blocking = false;
-            comboCount = 0;
-            chaining = true;
-            nextAttack = false;
+            blocking = false;
+            CancelAttack();
 
+            HealthController.Knockback(2.5f, hitDirection);
             if(HealthController.TakeDamage(Damage))
             {
                 print("Sa morío");
@@ -204,7 +203,6 @@ namespace DefinitiveScript {
 
         public void AddCollidedObject(GameObject other)
         {
-
             if(((1 << other.layer) | enemyLayerMask) == enemyLayerMask) //Lo detectado es un enemigo
             {
                 SableController enemy = other.GetComponent<SableController>(); //Un enemigo tiene el componente SableController
@@ -233,7 +231,7 @@ namespace DefinitiveScript {
                 }
                 else //Si no está en la lista
                 {
-                    if(enemy.GetBlocking()) //Si está bloqueando
+                    if(enemy.GetBlocking() || (enemy.GetAttacking() && enemy.SwordColliderEnable())) //Si está bloqueando o está atacando
                     {
                         //Se calcula su ángulo entre las direcciones
                         float angle = Vector3.Angle(characterForward, enemyForward);
@@ -248,7 +246,7 @@ namespace DefinitiveScript {
                             enemy.HitOnBody(characterForward);
                         }
                     }
-                    else //Si en general no se está protegiendo y atacado en el cuerpo antes de golpear en la espada
+                    else //Si en general no se está protegiendo o atacando y ha atacado en el cuerpo antes de golpear en la espada
                     {
                         enemy.HitOnBody(characterForward);
                     }
