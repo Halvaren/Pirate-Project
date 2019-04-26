@@ -109,7 +109,7 @@ namespace DefinitiveScript
 
         public void MovingAnimation(bool move, bool running)
         {
-            MovingAnimation(move ? 1f : 0f, move ? 1f : 0f, 0f, false, running);
+            MovingAnimation(move ? 1f : 0f, move ? 1f : 0f, 0f, false, move ? running : move);
         }
 
         public bool GunAnimation(bool aiming, bool shoot)
