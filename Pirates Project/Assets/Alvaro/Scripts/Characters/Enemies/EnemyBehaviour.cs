@@ -20,7 +20,6 @@ namespace DefinitiveScript
         public LayerMask visionObstacles;
 
         private bool characterDetect;
-        private bool characterInRange;
         private bool inPath;
 
         private Coroutine enemyCoroutine;
@@ -80,11 +79,6 @@ namespace DefinitiveScript
             }
         }
 
-        void Update()
-        {
-
-        }
-
         public void CharacterDetection(bool param)
         {
             bool result = false;
@@ -106,14 +100,9 @@ namespace DefinitiveScript
                 }
             }
 
-            //print(result);
-            if(result && !characterInRange) StartFollowPlayer();
-            else if(!result && characterInRange) StartTimerUntilSeek();
-            else if(!result && !characterInRange && characterDetect)
-            {
-                lastPlayerPosition = playerTransform.position;
-                StartSeekPlayer();
-            }
+            //print("result: " + result + " characterDetect: " + characterDetect);
+            if(result && !characterDetect) StartFollowPlayer();
+            else if(!result && characterDetect) StartTimerUntilSeek();
 
             ChangeVisionField(result);
         }
@@ -205,13 +194,13 @@ namespace DefinitiveScript
         {
             yield return new WaitForSeconds(time);
 
-            characterInRange = false;
-            //print("hola");
+            lastPlayerPosition = playerTransform.position;
+            StartSeekPlayer();
         }
 
         private void StartFollowPlayer()
         {
-            characterInRange = characterDetect = true;
+            characterDetect = true;
 
             if(enemyCoroutine != null) StopCoroutine(enemyCoroutine);
             enemyCoroutine = StartCoroutine(FollowPlayer());
@@ -262,6 +251,8 @@ namespace DefinitiveScript
 
         private void StartSeekPlayer()
         {
+            characterDetect = false;
+
             if(enemyCoroutine != null) StopCoroutine(enemyCoroutine);
             enemyCoroutine = StartCoroutine(SeekPlayer());
         }
