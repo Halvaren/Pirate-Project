@@ -42,7 +42,7 @@ namespace DefinitiveScript
         private Transform playerTransform;
         private Vector3 lastPlayerPosition;
 
-        public float timeUntilSeek = 3f;
+        public float timeUntilSeek = 0f;
         public float timeSeeking;
 
         void Awake()
@@ -106,7 +106,7 @@ namespace DefinitiveScript
                 }
             }
 
-            print(result);
+            //print(result);
             if(result && !characterInRange) StartFollowPlayer();
             else if(!result && characterInRange) StartTimerUntilSeek();
             else if(!result && !characterInRange && characterDetect)
@@ -126,6 +126,7 @@ namespace DefinitiveScript
 
         private void StartPath(bool seeking)
         {
+            print("En recorrido");
             float randomTime = Random.Range(patrolMinWaitingTime, patrolMaxWaitingTime);
 
             if(enemyCoroutine != null) StopCoroutine(enemyCoroutine);
@@ -205,6 +206,7 @@ namespace DefinitiveScript
             yield return new WaitForSeconds(time);
 
             characterInRange = false;
+            //print("hola");
         }
 
         private void StartFollowPlayer()
@@ -221,15 +223,19 @@ namespace DefinitiveScript
 
             while(true)
             {
-                if(NavMeshAgent.remainingDistance < maxDistanceFromPlayer && NavMeshAgent.remainingDistance > minDistanceFromPlayer)
+                Vector3 enemyToPlayer = playerTransform.position - transform.position;
+                enemyToPlayer.y = 0;
+                float distanceFromPlayer = enemyToPlayer.magnitude;
+
+                if(distanceFromPlayer < maxDistanceFromPlayer && distanceFromPlayer > minDistanceFromPlayer * 0.9f)
                 {
                     CharacterAnimationController.MovingAnimation(false, false);
                     NavMeshAgent.isStopped = true;
                     NavMeshAgent.ResetPath();
                     
-                    print("Atacar!");
+                    //print("Atacar!");
                 }
-                else if(NavMeshAgent.remainingDistance < minDistanceFromPlayer)
+                else if(distanceFromPlayer < minDistanceFromPlayer)
                 {
                     CharacterAnimationController.MovingAnimation(false, false);
                     NavMeshAgent.isStopped = true;
@@ -238,10 +244,10 @@ namespace DefinitiveScript
                     Vector3 lookPos = playerTransform.position - transform.position;
                     lookPos.y = 0;
                     Quaternion rotation = Quaternion.LookRotation(lookPos);
-                    transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime);/*
+                    transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime);
 
-                    NavMeshAgent.Move(-Vector3.forward*movingSpeed*Time.deltaTime);*/
-                    print("Problema");
+                    NavMeshAgent.Move(-transform.forward * movingSpeed * Time.deltaTime);
+                    //print("Problema");
                 }
                 else {
                     
@@ -265,14 +271,14 @@ namespace DefinitiveScript
             print("Buscando al player");
             NavMeshAgent.SetDestination(lastPlayerPosition);
 
-            /*while(true)
+            while(true)
             {
                 if(NavMeshAgent.remainingDistance == 0f)
                 {
                     StartPath(true);
                 }
                 yield return null;
-            }*/
+            }
 
             yield return null;
         }
