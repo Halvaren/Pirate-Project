@@ -112,6 +112,11 @@ namespace DefinitiveScript
             MovingAnimation(move ? 1f : 0f, move ? 1f : 0f, 0f, false, move ? running : move);
         }
 
+        public void MovingAnimation(float velocity, bool running)
+        {
+            MovingAnimation(velocity, velocity, 0f, false, velocity > 0f ? running : false);
+        }
+
         public bool GunAnimation(bool aiming, bool shoot)
         {
             Aim(aiming);

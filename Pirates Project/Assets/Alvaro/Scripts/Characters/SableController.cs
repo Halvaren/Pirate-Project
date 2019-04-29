@@ -87,7 +87,6 @@ namespace DefinitiveScript {
 
         public void ComboAttack()
         {
-            print(gameObject.name);
             if(chaining && comboCount < 3)
             {
                 chaining = false;
