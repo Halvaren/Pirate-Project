@@ -27,6 +27,7 @@ namespace DefinitiveScript
         private bool nextPointPath;
         private bool firstPoint;
         private bool characterDetect;
+        private bool toLastPlayerPosition;
 
         private bool prepareToAttack;
 
@@ -49,6 +50,9 @@ namespace DefinitiveScript
         public float runningSpeed;
         public float patrolMinWaitingTime;
         public float patrolMaxWaitingTime;
+
+        public float rotationSpeed = 25f;
+        public float blockingRotationSpeed = 1f;
 
         public float patrolDetectionRadius;
         public float patrolDetectionAngle; //Mitad del ángulo que forma el campo de visión del enemigo mientras patrullea
@@ -95,6 +99,7 @@ namespace DefinitiveScript
             waitInPoint = false;
             nextPointPath = false;
             firstPoint = true;
+            toLastPlayerPosition = false;
 
             stopAI = false;
 
@@ -136,9 +141,13 @@ namespace DefinitiveScript
                         }
                         if(!firstPoint && seeking) SeekingTimer();
                     }
-                    else if(following)
+                    else if(following && !SableController.GetBlocking())
                     {
                         FollowingPlayer();
+                    }
+                    else if(SableController.GetBlocking())
+                    {
+                        TurnEnemyWhileBlocking();
                     }
 
                     if(prepareToAttack)
@@ -150,8 +159,12 @@ namespace DefinitiveScript
 
                 if(characterNotInRange)
                 {
-                    ToLastPositionPlayer();
                     UntilSeekingTimer();
+                }
+
+                if(toLastPlayerPosition)
+                {
+                    ToLastPositionPlayer();
                 }
 
                 ChangeVisionField(following || seeking);
@@ -174,6 +187,18 @@ namespace DefinitiveScript
             SetRunning(true);
         }
 
+        public float DistanceFromPlayer()
+        {
+            Vector3 enemyToPlayer = playerTransform.position - transform.position;
+            enemyToPlayer.y = 0f;
+            return enemyToPlayer.magnitude;
+        }
+
+        public float GetDetectionRadius()
+        {
+            return detectionRadius;
+        }
+
         private Vector3 CalculateNextPointPath()
         {
             Transform[] wayPoints;
@@ -186,7 +211,8 @@ namespace DefinitiveScript
                 wayPoints = patrolPoints;
             }
 
-            if(firstPoint) {
+            if(firstPoint) 
+            {
                 destinationPointIndex = 0;
                 float minMagnitude = (wayPoints[destinationPointIndex].position - transform.position).magnitude;
 
@@ -236,9 +262,21 @@ namespace DefinitiveScript
 
         private void ToLastPositionPlayer()
         {
+            print("hol");
             NavMeshAgent.SetDestination(lastPlayerPosition);
 
             SetRunning(true);
+
+            if(NavMeshAgent.remainingDistance == 0f)
+            {
+                following = false;
+                inPath = true;
+                seeking = true;
+
+                toLastPlayerPosition = false;
+
+                SetFirstPointPath();
+            }
         }
 
         private void UntilSeekingTimer()
@@ -247,12 +285,9 @@ namespace DefinitiveScript
 
             if(untilSeekingTimer >= timeUntilSeek && !SableController.GetAttacking())
             {
-                following = false;
-                inPath = true;
-                seeking = true;
+                toLastPlayerPosition = true;
+                lastPlayerPosition = playerTransform.position;
                 characterNotInRange = false;
-
-                SetFirstPointPath();
 
                 untilSeekingTimer = 0f;
             }
@@ -272,9 +307,7 @@ namespace DefinitiveScript
 
         private void FollowingPlayer()
         {
-            Vector3 enemyToPlayer = playerTransform.position - transform.position;
-            enemyToPlayer.y = 0f;
-            float distanceFromPlayer = enemyToPlayer.magnitude;
+            float distanceFromPlayer = DistanceFromPlayer();
 
             if(distanceFromPlayer < maxDistanceFromPlayer)
             {
@@ -286,9 +319,9 @@ namespace DefinitiveScript
                 Vector3 lookPos = playerTransform.position - transform.position;
                 lookPos.y = 0;
                 Quaternion rotation = Quaternion.LookRotation(lookPos);
-                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 25f * Time.deltaTime);
+                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
 
-                if(distanceFromPlayer < minDistanceFromPlayer)
+                if(distanceFromPlayer < minDistanceFromPlayer && !playerTransform.GetComponent<CharacterSableController>().GetAttacking())
                 {
                     prepareToAttack = false;
 
@@ -307,6 +340,14 @@ namespace DefinitiveScript
 
                 NavMeshAgent.SetDestination(playerTransform.position);
             }
+        }
+
+        public void TurnEnemyWhileBlocking()
+        {
+            Vector3 lookPos = playerTransform.position - transform.position;
+            lookPos.y = 0;
+            Quaternion rotation = Quaternion.LookRotation(lookPos);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, blockingRotationSpeed * Time.deltaTime);
         }
 
         public void CharacterDetection(bool collidingSphere, bool collidingEnemy)

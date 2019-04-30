@@ -45,6 +45,26 @@ namespace DefinitiveScript
             stamina -= amount;
             return stamina <= 0f; //Devuelve true si el personaje ha muerto
         }
+
+        public float GetCurrentHealth()
+        {
+            return health;
+        }
+
+        public float GetCurrentStamina()
+        {
+            return stamina;
+        }
+
+        public float GetTotalHealth()
+        {
+            return initialHealth;
+        }
+
+        public float GetTotalStamina()
+        {
+            return initialStamina;
+        }
     }
 }
 

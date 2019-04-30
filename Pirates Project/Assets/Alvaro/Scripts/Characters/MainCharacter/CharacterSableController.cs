@@ -35,7 +35,8 @@ namespace DefinitiveScript
         {
             base.Block(input);
 
-            GameManager.Instance.LocalPlayer.stopMovement = input;
+            if(input) GameManager.Instance.LocalPlayer.stopMovement = true;
+            if(blocking && !input) GameManager.Instance.LocalPlayer.stopMovement = false;
         }
     }
 }
