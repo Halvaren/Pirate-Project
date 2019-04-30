@@ -108,7 +108,7 @@ namespace DefinitiveScript {
             }
         }
 
-        public void StartAttack(int attackId, float time)
+        public virtual void StartAttack(int attackId, float time)
         {
             chaining = true;
             nextAttack = false;
@@ -121,11 +121,15 @@ namespace DefinitiveScript {
         public void EnableSwordCollider()
         {
             swordCollider.enabled = true;
+            swordScript.expectingHit = true;
+            swordScript.hit = false;
         }
         
         public void DisableSwordCollider()
         {
             swordCollider.enabled = false;
+            swordScript.expectingHit = false;
+
             collidedEnemies.Clear();
         }
 

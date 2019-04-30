@@ -8,7 +8,7 @@ namespace DefinitiveScript
 {
     public class EnemyBehaviour : CharacterBehaviour
     {
-        private SableController SableController;
+        private EnemySableController SableController;
         private NavMeshAgent NavMeshAgent;
         private CharacterAnimationController CharacterAnimationController;
         private SphereCollider SphereCollider;
@@ -27,6 +27,8 @@ namespace DefinitiveScript
         private bool nextPointPath;
         private bool firstPoint;
         private bool characterDetect;
+
+        private bool prepareToAttack;
 
         private bool running;
 
@@ -66,7 +68,7 @@ namespace DefinitiveScript
 
         void Awake()
         {
-            SableController = GetComponent<SableController>();
+            SableController = GetComponent<EnemySableController>();
             
             NavMeshAgent = GetComponent<NavMeshAgent>();
             
@@ -105,58 +107,45 @@ namespace DefinitiveScript
             if(!stopAI) SetFirstPointPath();
         }
 
-        /*void Update()
-        {
-            Vector3 direction1 = playerTransform.position - transform.position;
-            direction1.y = 0;
-            Quaternion rotation = Quaternion.LookRotation(direction1);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 25.0f * 2f);
-
-            Vector3 direction2 = playerTransform.forward;
-
-            Debug.DrawRay(characterCenter.position, direction1 * 10000f, Color.blue);
-            Debug.DrawRay(characterCenter.position, direction2 * 10000f, Color.red);
-
-            float signedAngle = Vector3.SignedAngle(direction1, direction2, Vector3.up);
-
-            print(signedAngle);
-            if(Mathf.Abs(signedAngle) > 110f)
-            {
-                NavMeshAgent.Move(-Mathf.Sign(signedAngle) * transform.right * 25.0f * Time.deltaTime);
-            }
-            
-        }*/
-
         void Update() 
         {
             if(!stopAI)
             {
-                if(inPath)
+                if(!SableController.GetAttacking())
                 {
-                    if(!waitInPoint)
+                    if(inPath && !prepareToAttack)
                     {
-                        if(nextPointPath)
+                        if(!waitInPoint)
                         {
-                            SetNextPointPath();
-                        }
-                        if(!nextPointPath && NavMeshAgent.remainingDistance == 0f)
-                        {
-                            firstPoint = false;
+                            if(nextPointPath)
+                            {
+                                SetNextPointPath();
+                            }
+                            if(!nextPointPath && NavMeshAgent.remainingDistance == 0f)
+                            {
+                                firstPoint = false;
 
-                            waitingTime = Random.Range(patrolMinWaitingTime, patrolMaxWaitingTime);
-                            waitInPoint = true;
+                                waitingTime = Random.Range(patrolMinWaitingTime, patrolMaxWaitingTime);
+                                waitInPoint = true;
+                            }
+                            nextPointPath = false;
                         }
-                        nextPointPath = false;
+                        else
+                        {
+                            WaitInPointPath();
+                        }
+                        if(!firstPoint && seeking) SeekingTimer();
                     }
-                    else
+                    else if(following)
                     {
-                        WaitInPointPath();
+                        FollowingPlayer();
                     }
-                    if(!firstPoint && seeking) SeekingTimer();
-                }
-                else if(following)
-                {
-                    FollowingPlayer();
+
+                    if(prepareToAttack)
+                    {
+                        prepareToAttack = SableController.AIAttack();
+                    }
+                    else if(!SableController.GetAttacking()) SableController.ResetAIAttack();
                 }
 
                 if(characterNotInRange)
@@ -168,7 +157,7 @@ namespace DefinitiveScript
                 ChangeVisionField(following || seeking);
             }
             
-            CharacterAnimationController.MovingAnimation(NavMeshAgent.velocity.magnitude, running);
+            if(!SableController.GetAttacking()) CharacterAnimationController.MovingAnimation(NavMeshAgent.velocity.magnitude, running);
         }
 
         private void SetRunning(bool param)
@@ -256,14 +245,12 @@ namespace DefinitiveScript
         {
             untilSeekingTimer += Time.deltaTime;
 
-            if(untilSeekingTimer >= timeUntilSeek)
+            if(untilSeekingTimer >= timeUntilSeek && !SableController.GetAttacking())
             {
                 following = false;
                 inPath = true;
                 seeking = true;
                 characterNotInRange = false;
-
-                //ChangeVisionField(false);
 
                 SetFirstPointPath();
 
@@ -303,11 +290,19 @@ namespace DefinitiveScript
 
                 if(distanceFromPlayer < minDistanceFromPlayer)
                 {
+                    prepareToAttack = false;
+
                     NavMeshAgent.Move(-transform.forward * movingSpeed * Time.deltaTime);
+                }
+                else
+                {
+                    prepareToAttack = true;
                 }
             }
             else 
             {
+                prepareToAttack = false;
+
                 SetRunning(true);
 
                 NavMeshAgent.SetDestination(playerTransform.position);
@@ -322,11 +317,8 @@ namespace DefinitiveScript
                 Vector3 relativePositionToPlayer = playerTransform.position - transform.position; //Posición relativa del jugador con respecto al enemigo
                 Vector3 globalForwardFromEnemy = transform.TransformDirection(Vector3.forward); //Vector dirección del frente del enemigo
 
-                //print(relativePositionToPlayer + " " + globalForwardFromEnemy);
-
                 float angleBetweenVectors = Vector3.Angle(relativePositionToPlayer, globalForwardFromEnemy);
 
-                //print(angleBetweenVectors);
                 if(angleBetweenVectors < detectionAngle || following) //El personaje está dentro del campo de visión del enemigo
                 {                    
                     Transform playerCenter = playerTransform.GetComponent<PlayerBehaviour>().characterCenter;
@@ -340,22 +332,17 @@ namespace DefinitiveScript
 
             if(collidingEnemy) result = true;
 
-            //print(result);
             if(result && inPath) 
             {
-                //print("Siguiendo al jugador");
                 inPath = false;
                 following = true;
-                
-                //ChangeVisionField(true);
             }
-            else if(!result && following) {
-                //print("Puede que empiece a buscar al jugador");
+            else if(!result && following) 
+            {
                 characterNotInRange = true;
             }
             else if(result && characterNotInRange)
             {
-                //print("Buscando al jugador");
                 characterNotInRange = false;
             }
         }
