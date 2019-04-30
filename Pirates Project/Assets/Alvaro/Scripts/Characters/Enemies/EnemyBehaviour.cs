@@ -8,7 +8,7 @@ namespace DefinitiveScript
 {
     public class EnemyBehaviour : CharacterBehaviour
     {
-        private SableController SableController;
+        private EnemySableController SableController;
         private NavMeshAgent NavMeshAgent;
         private CharacterAnimationController CharacterAnimationController;
         private SphereCollider SphereCollider;
@@ -19,8 +19,28 @@ namespace DefinitiveScript
 
         public LayerMask visionObstacles;
 
-        private bool characterDetect;
         private bool inPath;
+        private bool seeking;
+        private bool following;
+        private bool characterNotInRange;
+        private bool waitInPoint;
+        private bool nextPointPath;
+        private bool firstPoint;
+        private bool characterDetect;
+
+        private bool prepareToAttack;
+
+        private bool running;
+
+        private bool stopAI;
+
+        private float waitingTime;
+
+        private float waitingTimer;
+        private float untilSeekingTimer;
+        private float seekingTimer;
+
+        private int destinationPointIndex;
 
         private Coroutine enemyCoroutine;
         
@@ -41,32 +61,290 @@ namespace DefinitiveScript
         private Transform playerTransform;
         private Vector3 lastPlayerPosition;
 
-        public float timeUntilSeek = 0f;
+        public float timeUntilSeek;
         public float timeSeeking;
+
+        public bool sableEnemy;
 
         void Awake()
         {
-            SableController = GetComponent<SableController>();
+            SableController = GetComponent<EnemySableController>();
             
             NavMeshAgent = GetComponent<NavMeshAgent>();
             
             CharacterAnimationController = GetComponent<CharacterAnimationController>();
 
-            GetComponentInChildren<EnemyCharacterDetection>().enemyScript = this;
-            SphereCollider = GetComponentInChildren<EnemyCharacterDetection>().GetComponent<SphereCollider>();
+            EnemyCharacterDetection[] enemyCharacterDetectors = GetComponentsInChildren<EnemyCharacterDetection>();
+            for(int i = 0; i < enemyCharacterDetectors.Length; i++) 
+            {
+                enemyCharacterDetectors[i].enemyScript = this;
+                
+                if(enemyCharacterDetectors[i].sphereCollider) {
+                    SphereCollider = enemyCharacterDetectors[i].GetComponent<SphereCollider>();
+                }
+            }
 
             playerTransform = GameManager.Instance.LocalPlayer.transform;
         }
 
         void Start()  {
-            characterDetect = false;
-            inPath = false;
+            inPath = true;
+            seeking = false;
+            following = false;
+            characterNotInRange = false;
+            waitInPoint = false;
+            nextPointPath = false;
+            firstPoint = true;
 
-            ChangeVisionField(characterDetect);
+            stopAI = false;
+
+            waitingTimer = untilSeekingTimer = seekingTimer = 0.0f;
+
+            ChangeVisionField(following);
 
             CreatePathPoints();
 
-            StartPath(false);
+            if(!stopAI) SetFirstPointPath();
+        }
+
+        void Update() 
+        {
+            if(!stopAI)
+            {
+                if(!SableController.GetAttacking())
+                {
+                    if(inPath && !prepareToAttack)
+                    {
+                        if(!waitInPoint)
+                        {
+                            if(nextPointPath)
+                            {
+                                SetNextPointPath();
+                            }
+                            if(!nextPointPath && NavMeshAgent.remainingDistance == 0f)
+                            {
+                                firstPoint = false;
+
+                                waitingTime = Random.Range(patrolMinWaitingTime, patrolMaxWaitingTime);
+                                waitInPoint = true;
+                            }
+                            nextPointPath = false;
+                        }
+                        else
+                        {
+                            WaitInPointPath();
+                        }
+                        if(!firstPoint && seeking) SeekingTimer();
+                    }
+                    else if(following)
+                    {
+                        FollowingPlayer();
+                    }
+
+                    if(prepareToAttack)
+                    {
+                        prepareToAttack = SableController.AIAttack();
+                    }
+                    else if(!SableController.GetAttacking()) SableController.ResetAIAttack();
+                }
+
+                if(characterNotInRange)
+                {
+                    ToLastPositionPlayer();
+                    UntilSeekingTimer();
+                }
+
+                ChangeVisionField(following || seeking);
+            }
+            
+            if(!SableController.GetAttacking()) CharacterAnimationController.MovingAnimation(NavMeshAgent.velocity.magnitude, running);
+        }
+
+        private void SetRunning(bool param)
+        {
+            running = param;
+            NavMeshAgent.speed = param ? runningSpeed : movingSpeed;
+        }
+
+        private void SetFirstPointPath()
+        {
+            firstPoint = true;
+            NavMeshAgent.SetDestination(CalculateNextPointPath());
+
+            SetRunning(true);
+        }
+
+        private Vector3 CalculateNextPointPath()
+        {
+            Transform[] wayPoints;
+            if(seeking)
+            {
+                wayPoints = patrolPoints; //Debería ser seekingPoints
+            }
+            else 
+            {
+                wayPoints = patrolPoints;
+            }
+
+            if(firstPoint) {
+                destinationPointIndex = 0;
+                float minMagnitude = (wayPoints[destinationPointIndex].position - transform.position).magnitude;
+
+                for (int i = 1; i < wayPoints.Length; i++) 
+                {
+                    if ((wayPoints[i].position - transform.position).magnitude < minMagnitude) 
+                    {
+                        minMagnitude = (wayPoints[i].position - transform.position).magnitude;
+                        destinationPointIndex = i;
+                    }
+                }
+
+                return wayPoints[destinationPointIndex].position;
+            }
+            else
+            {
+                destinationPointIndex++;
+                if(destinationPointIndex == wayPoints.Length)
+                {
+                    destinationPointIndex = 0;
+                }
+
+                return wayPoints[destinationPointIndex].position;
+            }
+        }
+
+        private void SetNextPointPath()
+        {
+            Vector3 nextDestination = CalculateNextPointPath();
+            NavMeshAgent.SetDestination(nextDestination);
+
+            SetRunning(seeking);
+        }
+
+        private void WaitInPointPath()
+        {
+
+            waitingTimer += Time.deltaTime;
+            if(waitingTimer >= waitingTime) 
+            {
+                waitInPoint = false;
+                nextPointPath = true;
+
+                waitingTimer = 0f;
+            }
+        }
+
+        private void ToLastPositionPlayer()
+        {
+            NavMeshAgent.SetDestination(lastPlayerPosition);
+
+            SetRunning(true);
+        }
+
+        private void UntilSeekingTimer()
+        {
+            untilSeekingTimer += Time.deltaTime;
+
+            if(untilSeekingTimer >= timeUntilSeek && !SableController.GetAttacking())
+            {
+                following = false;
+                inPath = true;
+                seeking = true;
+                characterNotInRange = false;
+
+                SetFirstPointPath();
+
+                untilSeekingTimer = 0f;
+            }
+        }
+
+        private void SeekingTimer()
+        {
+            seekingTimer += Time.deltaTime;
+
+            if(seekingTimer >= timeSeeking)
+            {
+                seeking = false;
+
+                seekingTimer = 0.0f;
+            }
+        }
+
+        private void FollowingPlayer()
+        {
+            Vector3 enemyToPlayer = playerTransform.position - transform.position;
+            enemyToPlayer.y = 0f;
+            float distanceFromPlayer = enemyToPlayer.magnitude;
+
+            if(distanceFromPlayer < maxDistanceFromPlayer)
+            {
+                SetRunning(false);
+
+                NavMeshAgent.isStopped = true;
+                NavMeshAgent.ResetPath();
+
+                Vector3 lookPos = playerTransform.position - transform.position;
+                lookPos.y = 0;
+                Quaternion rotation = Quaternion.LookRotation(lookPos);
+                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 25f * Time.deltaTime);
+
+                if(distanceFromPlayer < minDistanceFromPlayer)
+                {
+                    prepareToAttack = false;
+
+                    NavMeshAgent.Move(-transform.forward * movingSpeed * Time.deltaTime);
+                }
+                else
+                {
+                    prepareToAttack = true;
+                }
+            }
+            else 
+            {
+                prepareToAttack = false;
+
+                SetRunning(true);
+
+                NavMeshAgent.SetDestination(playerTransform.position);
+            }
+        }
+
+        public void CharacterDetection(bool collidingSphere, bool collidingEnemy)
+        {
+            bool result = false;
+            if(collidingSphere) //El personaje está dentro de la esfera de colisión
+            {
+                Vector3 relativePositionToPlayer = playerTransform.position - transform.position; //Posición relativa del jugador con respecto al enemigo
+                Vector3 globalForwardFromEnemy = transform.TransformDirection(Vector3.forward); //Vector dirección del frente del enemigo
+
+                float angleBetweenVectors = Vector3.Angle(relativePositionToPlayer, globalForwardFromEnemy);
+
+                if(angleBetweenVectors < detectionAngle || following) //El personaje está dentro del campo de visión del enemigo
+                {                    
+                    Transform playerCenter = playerTransform.GetComponent<PlayerBehaviour>().characterCenter;
+                    Vector3 vectorBetweenCharacters = playerCenter.position - characterCenter.position;
+                    if(!Physics.Raycast(characterCenter.position, vectorBetweenCharacters, vectorBetweenCharacters.magnitude, visionObstacles)) //No existen obstáculos para la visión del enemigo
+                    {
+                        result = true;
+                    }
+                }
+            }
+
+            if(collidingEnemy) result = true;
+
+            if(result && inPath) 
+            {
+                inPath = false;
+                following = true;
+            }
+            else if(!result && following) 
+            {
+                characterNotInRange = true;
+            }
+            else if(result && characterNotInRange)
+            {
+                characterNotInRange = false;
+            }
         }
 
         void CreatePathPoints()
@@ -79,7 +357,20 @@ namespace DefinitiveScript
             }
         }
 
-        public void CharacterDetection(bool param)
+        private void ChangeVisionField(bool param)
+        {
+            SphereCollider.radius = detectionRadius = param ? seekingDetectionRadius : patrolDetectionRadius;
+            detectionAngle = param ? seekingDetectionAngle : patrolDetectionAngle;
+        }
+
+        /*private IEnumerator TimerUntilSeek(float time)
+        {
+            yield return new WaitForSeconds(time);
+
+            lastPlayerPosition = playerTransform.position;
+        }*/
+
+        /*public void CharacterDetection(bool param)
         {
             bool result = false;
             if(param) //El personaje está dentro de la esfera de colisión
@@ -88,7 +379,6 @@ namespace DefinitiveScript
                 Vector3 globalForwardFromEnemy = transform.TransformDirection(Vector3.forward); //Vector dirección del frente del enemigo
 
                 float angleBetweenVectors = Vector3.Angle(relativePositionToPlayer, globalForwardFromEnemy);
-                //Debug.Log(angleBetweenVectors);
                 if(angleBetweenVectors < detectionAngle) //El personaje está dentro del campo de visión del enemigo
                 {                    
                     Transform playerCenter = playerTransform.GetComponent<PlayerBehaviour>().characterCenter;
@@ -105,23 +395,15 @@ namespace DefinitiveScript
             else if(!result && characterDetect) StartTimerUntilSeek();
 
             ChangeVisionField(result);
-        }
+        }*/
 
-        private void ChangeVisionField(bool param)
+        /* private void StartPath(bool seeking)
         {
-            SphereCollider.radius = detectionRadius = param ? seekingDetectionRadius : patrolDetectionRadius;
-            detectionAngle = param ? seekingDetectionAngle : patrolDetectionAngle;
-        }
-
-        private void StartPath(bool seeking)
-        {
-            print("En recorrido");
+            //print("En recorrido");
             float randomTime = Random.Range(patrolMinWaitingTime, patrolMaxWaitingTime);
 
             if(enemyCoroutine != null) StopCoroutine(enemyCoroutine);
             enemyCoroutine = StartCoroutine(FollowPath(patrolPoints, randomTime, seeking));
-
-            if(seeking) StartCoroutine(SeekingTimer(timeSeeking));
         }
 
         IEnumerator FollowPath(Transform[] waypoints, float waitingTime, bool seeking) { //recorrido en busqueda y patrulla
@@ -143,12 +425,17 @@ namespace DefinitiveScript
             NavMeshAgent.SetDestination(waypoints[destinationPointIndex].position);
             NavMeshAgent.speed = runningSpeed;
             CharacterAnimationController.MovingAnimation(true, true);
-
+            bool firstPoint = true;
 
             //recorrer el path
             while (true) 
             {
-                
+                print("En recorrido");
+                if(firstPoint && seeking) {
+                    StartCoroutine(SeekingTimer(timeSeeking));
+                    firstPoint = false;
+                }
+
                 if (NavMeshAgent.remainingDistance == 0) {
 
                     CharacterAnimationController.MovingAnimation(false, seeking);
@@ -186,12 +473,12 @@ namespace DefinitiveScript
 
         public void StartTimerUntilSeek()
         {
-            print("Puede que empiece a buscar el player");
             StartCoroutine(TimerUntilSeek(timeUntilSeek));
         }
 
         IEnumerator TimerUntilSeek(float time)
         {
+            print("Puede que empiece a buscar el player");
             yield return new WaitForSeconds(time);
 
             lastPlayerPosition = playerTransform.position;
@@ -208,10 +495,11 @@ namespace DefinitiveScript
 
         IEnumerator FollowPlayer()
         {
-            print("Siguiendo al player");
+            //print("Siguiendo al player");
 
             while(true)
             {
+                print("Siguiendo al player");
                 Vector3 enemyToPlayer = playerTransform.position - transform.position;
                 enemyToPlayer.y = 0;
                 float distanceFromPlayer = enemyToPlayer.magnitude;
@@ -221,6 +509,8 @@ namespace DefinitiveScript
                     CharacterAnimationController.MovingAnimation(false, false);
                     NavMeshAgent.isStopped = true;
                     NavMeshAgent.ResetPath();
+                    
+                    //yield return new WaitForSeconds(5f);
                     
                     //print("Atacar!");
                 }
@@ -236,7 +526,6 @@ namespace DefinitiveScript
                     transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime);
 
                     NavMeshAgent.Move(-transform.forward * movingSpeed * Time.deltaTime);
-                    //print("Problema");
                 }
                 else {
                     
@@ -245,8 +534,6 @@ namespace DefinitiveScript
                 }
                 yield return null;
             }
-
-            //yield return null;
         }
 
         private void StartSeekPlayer()
@@ -259,11 +546,12 @@ namespace DefinitiveScript
 
         IEnumerator SeekPlayer()
         {
-            print("Buscando al player");
+            //print("Buscando al player");
             NavMeshAgent.SetDestination(lastPlayerPosition);
 
             while(true)
             {
+                print("Buscando al player");
                 if(NavMeshAgent.remainingDistance == 0f)
                 {
                     StartPath(true);
@@ -272,7 +560,7 @@ namespace DefinitiveScript
             }
 
             yield return null;
-        }
+        }*/
 
         /*public Material InitialMaterial; 1
         public Material KnockbackMaterial; 2

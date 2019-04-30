@@ -6,6 +6,9 @@ namespace DefinitiveScript
 {
     public class SwordCollisionDetector : MonoBehaviour
     {
+        public bool expectingHit;
+        public bool hit;
+
         public string TargetTag;
 
         private float damage;
@@ -25,8 +28,8 @@ namespace DefinitiveScript
 
         void OnTriggerEnter(Collider other)
         {
-            //print(other.gameObject.name);
             SableController.AddCollidedObject(other.gameObject);
+            if(expectingHit) hit = true;
         }
     }
 }
