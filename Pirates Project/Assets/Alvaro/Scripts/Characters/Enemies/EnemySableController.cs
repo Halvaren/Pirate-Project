@@ -45,20 +45,36 @@ namespace DefinitiveScript
 
         public bool AIAttack()
         {
+            if(blocking)
+            {
+                Block(Random.Range(HealthController.GetCurrentStamina(), HealthController.GetTotalStamina()) > 50f);
+                if(EnemyBehaviour.DistanceFromPlayer() > EnemyBehaviour.GetDetectionRadius() / 2) Block(false);
+            }
+
             if(timerBetweenAttacks == 0f)
             {
-                timeBetweenAttacks = Random.Range(minTimeBetweenAttacks, maxTimeBetweenAttacks);
+                if(Random.Range(0, HealthController.GetCurrentHealth()) < 25f)
+                {
+                    Block(true);
+                }
+                else
+                {
+                    timeBetweenAttacks = Random.Range(minTimeBetweenAttacks, maxTimeBetweenAttacks);
+                }
             }
-
-            timerBetweenAttacks += Time.deltaTime;
-
-            if(timerBetweenAttacks >= timeBetweenAttacks)
+            if(!blocking)
             {
-                ComboAttack();
-                timerBetweenAttacks = 0f;
-            }
+                timerBetweenAttacks += Time.deltaTime;
 
-            return timerBetweenAttacks < timeBetweenAttacks;
+                if(timerBetweenAttacks >= timeBetweenAttacks)
+                {
+                    ComboAttack();
+                    timerBetweenAttacks = 0f;
+                }
+
+                return timerBetweenAttacks < timeBetweenAttacks;
+            }
+            return blocking;
         }
 
         public void ResetAIAttack()
@@ -73,7 +89,6 @@ namespace DefinitiveScript
             if(swordScript.hit) ComboAttack();
             else
             {
-                //if(Physics.CheckBox(EnemyBehaviour.characterCenter.position + transform.forward * distanceToAttack, new Vector3(distanceToAttack / 2, EnemyBehaviour.characterCenter.localPosition.y * 2, distanceToAttack / 2), Quaternion.identity, enemyLayerMask))
                 if(Physics.Raycast(EnemyBehaviour.characterCenter.position, transform.forward, distanceToAttack, enemyLayerMask))
                     ComboAttack();
             }

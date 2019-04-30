@@ -101,11 +101,20 @@ namespace DefinitiveScript {
 
         public virtual void Block(bool input)
         {
-            if(!attacking)
-            {
+            if(!attacking) {
                 blocking = input;
                 CharacterAnimationController.Block(blocking);
             }
+        }
+
+        public bool GetBlocking()
+        {
+            return blocking;
+        }
+
+        public void SetBlocking(bool param)
+        {
+            blocking = param;
         }
 
         public virtual void StartAttack(int attackId, float time)
@@ -151,11 +160,6 @@ namespace DefinitiveScript {
 
                 attacking = false;
             }
-        }
-
-        public bool GetBlocking()
-        {
-            return blocking;
         }
 
         public bool GetAttacking()
