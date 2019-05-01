@@ -120,13 +120,10 @@ namespace DefinitiveScript
         public GameObject gunObject;
         public GameObject sableObject;
 
-        void Awake()
+        void OnEnable()
         {
-            GameManager.Instance.LocalPlayer = this;
             playerInput = GameManager.Instance.InputController;
-
-            GameManager.Instance.CursorController.LockCursor();
-        }  
+        } 
 
         void Start()
         {

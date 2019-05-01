@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DefinitiveScript;
 
 public class Transitions : MonoBehaviour
 {
@@ -14,19 +15,19 @@ public class Transitions : MonoBehaviour
     {
         if (myCollision.gameObject.tag == "Player" && currentScene.name == "Island1" && this.gameObject.tag == "cavernEntrance")
         {
-            SceneManager.LoadScene("caverna", LoadSceneMode.Single);
+            GameManager.Instance.SceneController.ChangeToScene("caverna");
         }
         else if (myCollision.gameObject.tag == "Player" && currentScene.name == "Island1" && this.gameObject.tag == "boatStation" )
         {
-            SceneManager.LoadScene("BoatPhysics", LoadSceneMode.Single);
+            GameManager.Instance.SceneController.ChangeToScene("BoatPhysics");
         }
         else if (myCollision.gameObject.tag == "Player" && currentScene.name == "caverna")
         {
-            SceneManager.LoadScene("Island1", LoadSceneMode.Single);
+            GameManager.Instance.SceneController.ChangeToScene("Island1");
         }
         else if (myCollision.gameObject.tag == "Boat" && currentScene.name == "BoatPhysics")
         {
-            SceneManager.LoadScene("Island1", LoadSceneMode.Single);
+            GameManager.Instance.SceneController.ChangeToScene("Island1");
         }
     }
 }

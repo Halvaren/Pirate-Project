@@ -87,11 +87,11 @@ namespace DefinitiveScript
                     SphereCollider = enemyCharacterDetectors[i].GetComponent<SphereCollider>();
                 }
             }
-
-            playerTransform = GameManager.Instance.LocalPlayer.transform;
         }
 
         void Start()  {
+            playerTransform = GameManager.Instance.LocalPlayer.transform;
+
             inPath = true;
             seeking = false;
             following = false;

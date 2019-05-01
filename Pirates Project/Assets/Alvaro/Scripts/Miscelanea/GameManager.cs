@@ -7,6 +7,12 @@ namespace DefinitiveScript
     public class GameManager
     {
         private GameObject gameObject;
+        public GameObject GameObject
+        {
+            get {
+                return gameObject;
+            }
+        }
 
         private static GameManager m_Instance; //Instancia estática del GameManager. Es singleton
         public static GameManager Instance {
@@ -78,6 +84,17 @@ namespace DefinitiveScript
             get {
                 if(m_CursorController == null) m_CursorController = m_Instance.gameObject.GetComponent<CursorController>();
                 return m_CursorController;
+            }
+        }
+
+        private SceneController m_SceneController;
+        public SceneController SceneController {
+            get {
+                return m_SceneController;
+            }
+
+            set {
+                m_SceneController = value;
             }
         }
     }
