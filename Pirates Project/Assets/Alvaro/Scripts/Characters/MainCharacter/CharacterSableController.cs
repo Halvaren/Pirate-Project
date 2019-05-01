@@ -33,10 +33,13 @@ namespace DefinitiveScript
 
         public override void Block(bool input)
         {
+            if(blocking && !input) { GameManager.Instance.LocalPlayer.stopMovement = false;
+                print("hola");
+            }
+
             base.Block(input);
 
             if(input) GameManager.Instance.LocalPlayer.stopMovement = true;
-            if(blocking && !input) GameManager.Instance.LocalPlayer.stopMovement = false;
         }
     }
 }

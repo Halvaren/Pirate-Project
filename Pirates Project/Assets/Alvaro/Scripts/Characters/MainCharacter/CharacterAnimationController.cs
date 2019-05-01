@@ -90,6 +90,34 @@ namespace DefinitiveScript
             anim.SetTrigger("Disarmed");
         }
 
+        public void Die()
+        {
+            anim.SetTrigger("Die");
+        }
+
+        public void Disappear()
+        {
+            StartCoroutine(FadeOut(1.0f));
+        }
+
+        private IEnumerator FadeOut(float time)
+        {
+            float elapsedTime = 0.0f;
+            Vector3 newPosition = transform.position;
+
+            while(elapsedTime < time)
+            {
+                elapsedTime += Time.deltaTime;
+
+                newPosition.y -= Time.deltaTime;
+                transform.position = newPosition;
+
+                yield return null;
+            }
+
+            Destroy(gameObject); //?
+        }
+
         //Métodos que son llamados desde fuera
 
         public void MovingAnimation(float verticalInput, float horizontalInput, float mouseInput, bool movementMode, bool running = false)

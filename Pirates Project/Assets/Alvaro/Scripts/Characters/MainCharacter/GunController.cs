@@ -135,7 +135,19 @@ namespace DefinitiveScript
 
             yield return new WaitForSeconds(time);
 
-            //if(enemy != null) enemy.AttackedByGun(damage, hitDirection, shootingPoint);
+            if(enemy != null) {
+                HealthController enemyHC = enemy.GetComponent<HealthController>();
+
+                enemyHC.Knockback(5f, hitDirection, true);
+                enemyHC.AttackedByGunParticles(shootingPoint);
+                if(enemyHC.TakeDamage(damage))
+                {
+                    print("Sa morío");
+                }
+                else {
+                    enemy.GetComponent<CharacterAnimationController>().Hit();
+                }
+            }
             
             gunLine.enabled = false;
             faceLight.enabled = false;

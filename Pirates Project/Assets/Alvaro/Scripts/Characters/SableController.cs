@@ -174,19 +174,19 @@ namespace DefinitiveScript {
                 if(HealthController.ReduceStamina(10f))
                 {
                     CharacterAnimationController.Disarm();
-                    HealthController.Knockback(5f, hitDirection);
+                    HealthController.Knockback(5f, hitDirection, false);
                     blocking = false;
                 }
                 else
                 {
                     CharacterAnimationController.HitOnSword();
-                    HealthController.Knockback(5f, hitDirection);
+                    HealthController.Knockback(5f, hitDirection, false);
                 }
             }
             else if(attacking)
             {
                 CharacterAnimationController.Disarm();
-                HealthController.Knockback(5f, hitDirection);
+                HealthController.Knockback(5f, hitDirection, false);
 
                 CancelAttack();
             }
@@ -197,7 +197,7 @@ namespace DefinitiveScript {
             blocking = false;
             CancelAttack();
 
-            HealthController.Knockback(2.5f, hitDirection);
+            HealthController.Knockback(2.5f, hitDirection, false);
             if(HealthController.TakeDamage(Damage))
             {
                 print("Sa morío");

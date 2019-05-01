@@ -34,8 +34,11 @@ namespace DefinitiveScript
         private bool running;
 
         private bool stopAI;
+        private bool stopBlocking;
 
         private float waitingTime;
+        public float stopBlockingTime = 1f;
+        public float backToPathTime = 0.5f;
 
         private float waitingTimer;
         private float untilSeekingTimer;
@@ -70,6 +73,14 @@ namespace DefinitiveScript
 
         public bool sableEnemy;
 
+        private AIEnemyController m_AIEnemyController;
+        public AIEnemyController AIEnemyController {
+            get {
+                if(m_AIEnemyController == null) m_AIEnemyController = GameManager.Instance.AIEnemyController;
+                return m_AIEnemyController;
+            }
+        }
+
         void Awake()
         {
             SableController = GetComponent<EnemySableController>();
@@ -90,7 +101,8 @@ namespace DefinitiveScript
         }
 
         void Start()  {
-            playerTransform = GameManager.Instance.LocalPlayer.transform;
+
+            StartCoroutine(GetPlayerTransform());
 
             inPath = true;
             seeking = false;
@@ -112,65 +124,77 @@ namespace DefinitiveScript
             if(!stopAI) SetFirstPointPath();
         }
 
+        IEnumerator GetPlayerTransform()
+        {
+            while(AIEnemyController.GetPlayerTransform() == null)
+            {
+                yield return null;
+            }
+            playerTransform = AIEnemyController.GetPlayerTransform();
+        }
+
         void Update() 
         {
-            if(!stopAI)
+            if(alive)
             {
-                if(!SableController.GetAttacking())
+                if(!stopAI)
                 {
-                    if(inPath && !prepareToAttack)
+                    if(!SableController.GetAttacking())
                     {
-                        if(!waitInPoint)
+                        if(inPath && !prepareToAttack)
                         {
-                            if(nextPointPath)
+                            if(!waitInPoint)
                             {
-                                SetNextPointPath();
-                            }
-                            if(!nextPointPath && NavMeshAgent.remainingDistance == 0f)
-                            {
-                                firstPoint = false;
+                                if(nextPointPath)
+                                {
+                                    SetNextPointPath();
+                                }
+                                if(!nextPointPath && NavMeshAgent.remainingDistance == 0f)
+                                {
+                                    firstPoint = false;
 
-                                waitingTime = Random.Range(patrolMinWaitingTime, patrolMaxWaitingTime);
-                                waitInPoint = true;
+                                    waitingTime = Random.Range(patrolMinWaitingTime, patrolMaxWaitingTime);
+                                    waitInPoint = true;
+                                }
+                                nextPointPath = false;
                             }
-                            nextPointPath = false;
+                            else
+                            {
+                                WaitInPointPath();
+                            }
+                            if(!firstPoint && seeking) SeekingTimer();
                         }
-                        else
+                        else if(following && !SableController.GetBlocking())
                         {
-                            WaitInPointPath();
+                            FollowingPlayer();
                         }
-                        if(!firstPoint && seeking) SeekingTimer();
+                        else if(SableController.GetBlocking())
+                        {
+                            TurnEnemyWhileBlocking();
+                        }
+
+                        if(prepareToAttack)
+                        {
+                            prepareToAttack = SableController.AIAttack(stopBlocking);
+                        }
+                        else if(!SableController.GetAttacking()) SableController.ResetAIAttack();
                     }
-                    else if(following && !SableController.GetBlocking())
+
+                    if(characterNotInRange)
                     {
-                        FollowingPlayer();
+                        UntilSeekingTimer();
                     }
-                    else if(SableController.GetBlocking())
+
+                    if(toLastPlayerPosition)
                     {
-                        TurnEnemyWhileBlocking();
+                        ToLastPositionPlayer();
                     }
 
-                    if(prepareToAttack)
-                    {
-                        prepareToAttack = SableController.AIAttack();
-                    }
-                    else if(!SableController.GetAttacking()) SableController.ResetAIAttack();
+                    ChangeVisionField(following || seeking || toLastPlayerPosition);
                 }
-
-                if(characterNotInRange)
-                {
-                    UntilSeekingTimer();
-                }
-
-                if(toLastPlayerPosition)
-                {
-                    ToLastPositionPlayer();
-                }
-
-                ChangeVisionField(following || seeking);
+                
+                if(!SableController.GetAttacking()) CharacterAnimationController.MovingAnimation(NavMeshAgent.velocity.magnitude, running);
             }
-            
-            if(!SableController.GetAttacking()) CharacterAnimationController.MovingAnimation(NavMeshAgent.velocity.magnitude, running);
         }
 
         private void SetRunning(bool param)
@@ -249,7 +273,6 @@ namespace DefinitiveScript
 
         private void WaitInPointPath()
         {
-
             waitingTimer += Time.deltaTime;
             if(waitingTimer >= waitingTime) 
             {
@@ -262,7 +285,6 @@ namespace DefinitiveScript
 
         private void ToLastPositionPlayer()
         {
-            print("hol");
             NavMeshAgent.SetDestination(lastPlayerPosition);
 
             SetRunning(true);
@@ -340,6 +362,50 @@ namespace DefinitiveScript
 
                 NavMeshAgent.SetDestination(playerTransform.position);
             }
+        }
+
+        public void ReactToAttack(bool shot)
+        {
+            if(inPath || toLastPlayerPosition)
+            {
+                StartCoroutine(ReactToAttackCoroutine(inPath));
+                inPath = toLastPlayerPosition = false;
+            }
+
+            if(shot)
+            {
+                stopBlocking = true;
+                StartCoroutine(BlockingTimer());
+            }
+        }
+
+        IEnumerator ReactToAttackCoroutine(bool previouslyInPath)
+        {
+            seeking = true;
+
+            float elapsedTime = 0.0f;
+
+            Vector3 lookPos = playerTransform.position - transform.position;
+            lookPos.y = 0;
+            Quaternion rotation = Quaternion.LookRotation(lookPos);
+
+            while(elapsedTime < backToPathTime)
+            {
+                elapsedTime += Time.deltaTime;
+                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, elapsedTime / backToPathTime);
+                yield return null;
+            }
+            
+            seeking = false;
+
+            if(previouslyInPath) inPath = true;
+            else toLastPlayerPosition = true;
+        }
+
+        IEnumerator BlockingTimer()
+        {
+            yield return new WaitForSeconds(stopBlockingTime);
+            stopBlocking = false;
         }
 
         public void TurnEnemyWhileBlocking()

@@ -26,6 +26,7 @@ namespace DefinitiveScript
                     m_Instance.gameObject.AddComponent<InputController>();
                     m_Instance.gameObject.AddComponent<AudioController>();
                     m_Instance.gameObject.AddComponent<BundleController>();
+                    m_Instance.gameObject.AddComponent<AIEnemyController>();
                 }
 
                 return m_Instance;
@@ -75,6 +76,7 @@ namespace DefinitiveScript
             }
             set {
                 m_LocalPlayer = value;
+                AIEnemyController.SetPlayerTransform(m_LocalPlayer.transform);
             }
         }
 
@@ -95,6 +97,14 @@ namespace DefinitiveScript
 
             set {
                 m_SceneController = value;
+            }
+        }
+
+        private AIEnemyController m_AIEnemyController;
+        public AIEnemyController AIEnemyController {
+            get {
+                if(m_AIEnemyController == null) m_AIEnemyController = m_Instance.gameObject.GetComponent<AIEnemyController>();
+                return m_AIEnemyController;
             }
         }
     }

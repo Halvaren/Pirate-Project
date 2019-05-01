@@ -28,5 +28,12 @@ namespace DefinitiveScript
                 yield return null;
             }
         }
+
+        public override void Knockback(float force, Vector3 direction, bool shot)
+        {
+            base.Knockback(force, direction, shot);
+
+            GetComponent<EnemyBehaviour>().ReactToAttack(shot);
+        }
     }
 }

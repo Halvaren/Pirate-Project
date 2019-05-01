@@ -43,19 +43,19 @@ namespace DefinitiveScript
             }
         }
 
-        public bool AIAttack()
+        public bool AIAttack(bool stopBlock)
         {
             if(blocking)
             {
                 Block(Random.Range(HealthController.GetCurrentStamina(), HealthController.GetTotalStamina()) > 50f);
-                if(EnemyBehaviour.DistanceFromPlayer() > EnemyBehaviour.GetDetectionRadius() / 2) Block(false);
+                if(EnemyBehaviour.DistanceFromPlayer() > EnemyBehaviour.GetDetectionRadius() / 2 || stopBlock) Block(false);
             }
 
             if(timerBetweenAttacks == 0f)
             {
                 if(Random.Range(0, HealthController.GetCurrentHealth()) < 25f)
                 {
-                    Block(true);
+                    Block(!stopBlock);
                 }
                 else
                 {
