@@ -9,14 +9,13 @@ public class EnemyLock : MonoBehaviour
     public GameObject enemigo;
     private Transform myTransform;
     public Camera cam;
-    private Plane[] planes;
+    public float maxZPos = 20;
     // Start is called before the first frame update
     void Start()
     {
         targets = new List<GameObject>();
         selectedTarget = null;
         myTransform = transform;
-        planes = GeometryUtility.CalculateFrustumPlanes(cam);
         AddAllEnemies();
     }
 
@@ -43,30 +42,19 @@ public class EnemyLock : MonoBehaviour
     }
     private void TargetEnemy()
     {
-        SortTargetsByDistance();
-        selectedTarget = targets[0];
-        if (!IsSelected()) //Si no ha sido seleccionado y está dentro de la visión de la cámara
+        if (selectedTarget == null) //Si no ha sido seleccionado y está dentro de la visión de la cámara
         {
-            SelectTarget();
+            SortTargetsByDistance();
+            selectedTarget = targets[0];
+            if (EnemyOnCameraView(selectedTarget.GetComponent<Transform>()))
+            {
+                SelectTarget();
+            }
         }
         else
         {
             DeselectTarget();
         }
-        /*else
-        {
-            int index = targets.IndexOf(selectedTarget);
-            if (index < targets.Count - 1) //Si es menor que el total de enmigos
-            {
-                index++;
-            }
-            else
-            {
-                index = 0;
-            }
-            DeselectTarget();
-            selectedTarget = targets[index];
-        }*/
     }
     private void SelectTarget()
     {
@@ -89,17 +77,57 @@ public class EnemyLock : MonoBehaviour
             return false;
         }
     }
-    private bool EnemyOnCameraView()
+    private bool EnemyOnCameraView(Transform selectedEnemy) //Devuelve true si el enemigo seleccionado está dentro de la cámara
     {
-        if (GeometryUtility.TestPlanesAABB(planes, enemigo.GetComponent<Collider>().bounds))
+        Vector3 screenPos = cam.WorldToScreenPoint(selectedEnemy.position);
+        if (0 < screenPos.x && screenPos.x < Screen.width && 0 < screenPos.y && screenPos.y < Screen.height && screenPos.z < maxZPos)
         {
-            Debug.Log("lo veo");
             return true;
         }
         else
         {
-            Debug.Log("no lo veo");
             return false;
+        }
+    }
+    private void changeSelectedTarget(GameObject selectedEnemy, float direction)
+    {
+        int index = targets.IndexOf(selectedEnemy);
+        GameObject newSelectedEnemy;
+        if (direction > 0)
+        {
+            if (index < targets.Count - 1)
+            {
+                index++;
+            }
+            else
+            {
+                index = 0;
+            }
+            newSelectedEnemy = targets[index];
+            if (selectedEnemy != null && EnemyOnCameraView(newSelectedEnemy.GetComponent<Transform>()))
+            {
+                DeselectTarget();
+                selectedTarget = newSelectedEnemy;
+                SelectTarget();
+            }
+        }
+        else if (direction < 0)
+        {
+            if (index > 0)
+            {
+                index--;
+            }
+            else
+            {
+                index = targets.Count - 1;
+            }
+            newSelectedEnemy = targets[index];
+            if (selectedEnemy != null && EnemyOnCameraView(newSelectedEnemy.GetComponent<Transform>()))
+            {
+                DeselectTarget();
+                selectedTarget = newSelectedEnemy;
+                SelectTarget();
+            }
         }
     }
     // Update is called once per frame
@@ -109,7 +137,11 @@ public class EnemyLock : MonoBehaviour
         {
             TargetEnemy();
         }
-        EnemyOnCameraView();
-        //transform.LookAt(selectedTarget);
+        else if (Input.mouseScrollDelta.y > 0 || Input.mouseScrollDelta.y < 0)
+        {
+            Debug.Log("se cumple");
+            changeSelectedTarget(selectedTarget, Input.mouseScrollDelta.y);
+        }
+        //changeSelectedTarget();
     }
 }
