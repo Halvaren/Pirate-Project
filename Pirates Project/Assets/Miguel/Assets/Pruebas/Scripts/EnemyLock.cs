@@ -80,7 +80,21 @@ public class EnemyLock : MonoBehaviour
     private bool EnemyOnCameraView(Transform selectedEnemy) //Devuelve true si el enemigo seleccionado está dentro de la cámara
     {
         Vector3 screenPos = cam.WorldToScreenPoint(selectedEnemy.position);
-        if (0 < screenPos.x && screenPos.x < Screen.width && 0 < screenPos.y && screenPos.y < Screen.height && screenPos.z < maxZPos)
+        if (0 < screenPos.x && screenPos.x < Screen.width && 0 < screenPos.y && screenPos.y < Screen.height && screenPos.z < maxZPos && !EnemyBehindObstacle())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public bool EnemyBehindObstacle()
+    {
+        Vector3 fwd = transform.TransformDirection(Vector3.forward);
+        int layerMask = 1<<8;
+        layerMask = ~layerMask;
+        if (Physics.Raycast(transform.position, fwd, maxZPos, layerMask))
         {
             return true;
         }
@@ -142,6 +156,5 @@ public class EnemyLock : MonoBehaviour
             Debug.Log("se cumple");
             changeSelectedTarget(selectedTarget, Input.mouseScrollDelta.y);
         }
-        //changeSelectedTarget();
     }
 }
