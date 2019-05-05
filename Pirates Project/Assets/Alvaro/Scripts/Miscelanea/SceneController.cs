@@ -19,7 +19,6 @@ namespace DefinitiveScript
                 DontDestroyOnLoad(this.gameObject);
                 created = true;
             }
-            
             else
             {
                 Destroy(this.gameObject);
@@ -44,9 +43,8 @@ namespace DefinitiveScript
 
         public void ChangeToScene(string name)
         {
-            SceneManager.LoadScene(name);
+            PantallaDeCarga.Instancia.CargarEscena(name);
         }
-
         public void ChangeToScene(int id)
         {
             SceneManager.LoadScene(id);
