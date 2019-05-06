@@ -120,9 +120,34 @@ namespace DefinitiveScript
         public GameObject gunObject;
         public GameObject sableObject;
 
+        public int nEnemyPositions = 8;
+        private float angleBetweenEnemyPositions;
+        private bool[] enemyPositions;
+        private Vector3[] enemyPositionDirections;
+
         void OnEnable()
         {
             playerInput = GameManager.Instance.InputController;
+
+            enemyPositions = new bool[nEnemyPositions];
+            angleBetweenEnemyPositions = 360f / nEnemyPositions;
+
+            enemyPositionDirections = new Vector3[nEnemyPositions];
+            float angle;
+            int j = 0;
+            int sign = 0;
+
+            for(int i = 0; i < nEnemyPositions; i++)
+            {
+                angle = Mathf.Pow(-1, sign) * i * angleBetweenEnemyPositions;
+
+                if(sign % 2 == 0) i++;
+                sign++;
+
+                enemyPositions[i] = false;
+                enemyPositionDirections[i] = new Vector3(Mathf.Sin(angle), 0, Mathf.Cos(angle));
+            }
+            
         } 
 
         void Start()
@@ -207,6 +232,31 @@ namespace DefinitiveScript
             model.GetComponent<SkinnedMeshRenderer>().enabled = param;
             gunObject.GetComponentInChildren<MeshRenderer>().enabled = param;
             sableObject.GetComponentInChildren<MeshRenderer>().enabled = param;
+        }
+
+        public int GetNEnemyPositions()
+        {
+            return nEnemyPositions;
+        }
+
+        public float GetAngleBetweenEnemyPositions()
+        {
+            return angleBetweenEnemyPositions;
+        }
+
+        public bool GetEnemyPosition(int i)
+        {
+            return enemyPositions[i];
+        }
+
+        public void SetEnemyPosition(int i, bool value)
+        {
+            enemyPositions[i] = value;
+        }
+
+        public Vector3 GetEnemyPositionDirection(int i)
+        {
+            return enemyPositionDirections[i];
         }
     }
 }

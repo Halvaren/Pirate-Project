@@ -9,8 +9,12 @@ namespace DefinitiveScript
         protected float health;
         protected float stamina;
 
+        protected bool runOutOfStamina;
+
         public float initialHealth;
         public float initialStamina;
+
+        public float recoveringStaminaSpeed = 0.5f;
 
         private ParticleSystem hitParticles;
 
@@ -20,13 +24,15 @@ namespace DefinitiveScript
             health = initialHealth;
             stamina = initialStamina;
 
+            runOutOfStamina = false;
+
             hitParticles = GetComponentInChildren<ParticleSystem>();
         }
 
         // Update is called once per frame
         protected void Update()
         {
-            
+            if(runOutOfStamina) RecoverStamina();
         }
 
         public bool TakeDamage(float damage)
@@ -61,7 +67,23 @@ namespace DefinitiveScript
         public bool ReduceStamina(float amount)
         {
             stamina -= amount;
+
+            if(stamina <= 0f) 
+            {
+                stamina = 0f;
+                runOutOfStamina = true;
+            }
             return stamina <= 0f; //Devuelve true si el personaje ha muerto
+        }
+
+        protected void RecoverStamina()
+        {
+            if(stamina < initialStamina)
+            {
+                stamina += recoveringStaminaSpeed * Time.deltaTime;
+            }
+            stamina = initialStamina;
+            runOutOfStamina = false;
         }
 
         public float GetCurrentHealth()
@@ -82,6 +104,11 @@ namespace DefinitiveScript
         public float GetTotalStamina()
         {
             return initialStamina;
+        }
+
+        public bool GetRunOutOfStamina()
+        {
+            return runOutOfStamina;
         }
     }
 }

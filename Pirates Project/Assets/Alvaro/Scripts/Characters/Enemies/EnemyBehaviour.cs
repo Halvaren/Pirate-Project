@@ -67,6 +67,7 @@ namespace DefinitiveScript
 
         private Transform playerTransform;
         private Vector3 lastPlayerPosition;
+        private Vector3 followingDistanceFromPlayer;
 
         public float timeUntilSeek;
         public float timeSeeking;
@@ -94,7 +95,7 @@ namespace DefinitiveScript
             {
                 enemyCharacterDetectors[i].enemyScript = this;
                 
-                if(enemyCharacterDetectors[i].sphereCollider) {
+                if(enemyCharacterDetectors[i].GetComponent<SphereCollider>() != null) {
                     SphereCollider = enemyCharacterDetectors[i].GetComponent<SphereCollider>();
                 }
             }
@@ -327,8 +328,49 @@ namespace DefinitiveScript
             }
         }
 
+        private int MoveAroundPlayer()
+        {
+            print(gameObject.name);
+
+            PlayerBehaviour playerBehaviour = playerTransform.GetComponent<PlayerBehaviour>();
+
+            int nEnemyPositions = playerBehaviour.GetNEnemyPositions();
+
+            int iAngleDestination = -1;
+            for(int i = 0; i < nEnemyPositions; i++)
+            {
+                if(!playerBehaviour.GetEnemyPosition(i))
+                {
+                    iAngleDestination = i;
+                    playerBehaviour.SetEnemyPosition(i, true);
+
+                    break;
+                }
+            }
+
+            if(iAngleDestination != -1)
+            {
+                float distanceFromPlayer = minDistanceFromPlayer;
+                Vector3 relativePosition = playerBehaviour.GetEnemyPositionDirection(iAngleDestination) * distanceFromPlayer;
+                NavMeshAgent.SetDestination(playerTransform.position + relativePosition);
+
+                if(NavMeshAgent.remainingDistance == 0f)
+                {
+
+                    NavMeshAgent.isStopped = true;
+                    NavMeshAgent.ResetPath();
+
+                    prepareToAttack = true;
+                }
+            }
+
+            return iAngleDestination;
+        }
+
         private void FollowingPlayer()
         {
+
+
             float distanceFromPlayer = DistanceFromPlayer();
 
             if(distanceFromPlayer < maxDistanceFromPlayer)
@@ -343,7 +385,9 @@ namespace DefinitiveScript
                 Quaternion rotation = Quaternion.LookRotation(lookPos);
                 transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
 
-                if(distanceFromPlayer < minDistanceFromPlayer && !playerTransform.GetComponent<CharacterSableController>().GetAttacking())
+                MoveAroundPlayer();
+
+                /*if(distanceFromPlayer < minDistanceFromPlayer && !playerTransform.GetComponent<CharacterSableController>().GetAttacking())
                 {
                     prepareToAttack = false;
 
@@ -351,8 +395,8 @@ namespace DefinitiveScript
                 }
                 else
                 {
-                    prepareToAttack = true;
-                }
+                    MoveAroundPlayer();
+                }*/
             }
             else 
             {

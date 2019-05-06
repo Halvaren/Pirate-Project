@@ -21,6 +21,8 @@ namespace DefinitiveScript {
         protected bool attacking;
         protected bool blocking;
 
+        public float reducingStaminaSpeed = 1f;
+
         protected CharacterAnimationController m_CharacterAnimationController;
         public CharacterAnimationController CharacterAnimationController
         {
@@ -69,10 +71,15 @@ namespace DefinitiveScript {
 
         protected void Update()
         {
-            if(Input.GetKeyDown(KeyCode.R))
+            /* if(Input.GetKeyDown(KeyCode.R))
             {
                 CancelAttack();
                 CharacterAnimationController.StopAttack();
+            }*/
+
+            if(blocking)
+            {
+                blocking = HealthController.ReduceStamina(reducingStaminaSpeed * Time.deltaTime);
             }
         }
 
@@ -101,10 +108,8 @@ namespace DefinitiveScript {
 
         public virtual void Block(bool input)
         {
-            if(!attacking) {
-                blocking = input;
-                CharacterAnimationController.Block(blocking);
-            }
+            blocking = input && !attacking && !HealthController.GetRunOutOfStamina();
+            CharacterAnimationController.Block(blocking);
         }
 
         public bool GetBlocking()

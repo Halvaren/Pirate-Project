@@ -12,8 +12,10 @@ namespace DefinitiveScript
         private float timeBetweenAttacks;
 
         public float distanceToAttack = 1f;
+        public float maxTimeBlocking = 3f;
 
         private float timerBetweenAttacks = 0f;
+        private float timerBlocking = 0f;
 
         protected NavMeshAgent m_NavMeshAgent;
         public NavMeshAgent NavMeshAgent {
@@ -47,15 +49,23 @@ namespace DefinitiveScript
         {
             if(blocking)
             {
-                Block(Random.Range(HealthController.GetCurrentStamina(), HealthController.GetTotalStamina()) > 50f);
-                if(EnemyBehaviour.DistanceFromPlayer() > EnemyBehaviour.GetDetectionRadius() / 2 || stopBlock) Block(false);
+                timerBlocking += Time.deltaTime;
+
+                bool condition = Random.Range(HealthController.GetCurrentStamina(), HealthController.GetTotalStamina()) > 50f;
+                condition = condition && timerBlocking < maxTimeBlocking;
+                condition = condition && EnemyBehaviour.DistanceFromPlayer() <= EnemyBehaviour.GetDetectionRadius() / 2;
+                condition = condition && !stopBlock;
+                
+                Block(condition);
+                if(!condition) timerBlocking = 0;
             }
 
             if(timerBetweenAttacks == 0f)
             {
-                if(Random.Range(0, HealthController.GetCurrentHealth()) < 25f)
+                float r = Random.Range(0, HealthController.GetCurrentHealth());
+                if(r < 25f)
                 {
-                    Block(!stopBlock);
+                    if(!stopBlock) Block(true);
                 }
                 else
                 {
