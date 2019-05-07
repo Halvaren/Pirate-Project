@@ -7,29 +7,19 @@ namespace DefinitiveScript
 {
     public class EnemySableController : SableController
     {
-        public float minTimeBetweenAttacks;
-        public float maxTimeBetweenAttacks;
-        private float timeBetweenAttacks;
-
-        public float distanceToAttack = 1f;
-        public float maxTimeBlocking = 3f;
-
-        private float timerBetweenAttacks = 0f;
-        private float timerBlocking = 0f;
-
-        protected NavMeshAgent m_NavMeshAgent;
-        public NavMeshAgent NavMeshAgent {
-            get { 
-                if(m_NavMeshAgent == null) m_NavMeshAgent = GetComponent<NavMeshAgent>();
-                return m_NavMeshAgent;
-            }
-        }
-
         private EnemyBehaviour m_EnemyBehaviour;
         public EnemyBehaviour EnemyBehaviour {
             get {
                 if(m_EnemyBehaviour == null) m_EnemyBehaviour = GetComponent<EnemyBehaviour>();
                 return m_EnemyBehaviour;
+            }
+        }
+
+        private NavMeshAgent m_NavMeshAgent;
+        public NavMeshAgent NavMeshAgent {
+            get {
+                if(m_NavMeshAgent == null) m_NavMeshAgent = GetComponent<NavMeshAgent>();
+                return m_NavMeshAgent;
             }
         }
 
@@ -45,68 +35,108 @@ namespace DefinitiveScript
             }
         }
 
-        public bool AIAttack(bool stopBlock)
+        public void SetAttacking(bool value)
+        {
+            attacking = value;
+        }
+
+        public void SetBlocking(bool value)
+        {
+            blocking = value;
+        }
+
+        public override void HitOnSword(Vector3 hitDirection)
         {
             if(blocking)
             {
-                timerBlocking += Time.deltaTime;
-
-                bool condition = Random.Range(HealthController.GetCurrentStamina(), HealthController.GetTotalStamina()) > 50f;
-                condition = condition && timerBlocking < maxTimeBlocking;
-                condition = condition && EnemyBehaviour.DistanceFromPlayer() <= EnemyBehaviour.GetDetectionRadius() / 2;
-                condition = condition && !stopBlock;
-                
-                Block(condition);
-                if(!condition) timerBlocking = 0;
-            }
-
-            if(timerBetweenAttacks == 0f)
-            {
-                float r = Random.Range(0, HealthController.GetCurrentHealth());
-                if(r < 25f)
+                if(HealthController.ReduceStamina(10f))
                 {
-                    if(!stopBlock) Block(true);
+                    EnemyBehaviour.Disarm();
+                    HealthController.Knockback(5f, hitDirection, false);
+                    blocking = false;
+                    EnemyBehaviour.SetBlocking(false);
+                    EnemyBehaviour.SetStaring(true);
                 }
                 else
                 {
-                    timeBetweenAttacks = Random.Range(minTimeBetweenAttacks, maxTimeBetweenAttacks);
+                    EnemyBehaviour.HitOnSword();
+                    HealthController.Knockback(5f, hitDirection, false);
                 }
             }
-            if(!blocking)
+            else if(attacking)
             {
-                timerBetweenAttacks += Time.deltaTime;
+                HealthController.ReduceStamina(10f);
+                EnemyBehaviour.Disarm();
+                HealthController.Knockback(5f, hitDirection, false);
 
-                if(timerBetweenAttacks >= timeBetweenAttacks)
-                {
-                    ComboAttack();
-                    timerBetweenAttacks = 0f;
-                }
-
-                return timerBetweenAttacks < timeBetweenAttacks;
+                CancelAttack();
             }
-            return blocking;
         }
 
-        public void ResetAIAttack()
+        public override void HitOnBody(Vector3 hitDirection)
         {
-            timeBetweenAttacks = timerBetweenAttacks = 0f;
-        }
+            CancelAttack();
 
-        public override void StartAttack(int attackId, float time)
-        {
-            base.StartAttack(attackId, time);
+            HealthController.Knockback(2.5f, hitDirection, false);
 
-            if(swordScript.hit) ComboAttack();
+            if(HealthController.TakeDamage(Damage))
+            {
+                print("sa morío");
+            }
             else
             {
-                if(Physics.Raycast(EnemyBehaviour.characterCenter.position, transform.forward, distanceToAttack, enemyLayerMask))
-                    ComboAttack();
+                EnemyBehaviour.HitOnBody();
             }
         }
 
-        public bool GetAttacking()
+        public override void ComboAttack()
         {
-            return attacking;
+            if(chaining && comboCount < 3)
+            {
+                chaining = false;
+                nextAttack = true;
+
+                attacking = true;
+                EnemyBehaviour.SetAttacking(true);
+
+                if(comboCount == 0) EnemyBehaviour.Attack();
+                comboCount++;
+            }
+        }
+
+        public override void FinishAttack(int attackId)
+        {
+            if(nextAttack)
+            {
+                EnemyBehaviour.Attack();
+            }
+            else
+            {
+                CancelAttack();
+            }
+        }
+
+        protected override void CancelAttack()
+        {
+            chaining = true;
+            nextAttack = false;
+
+            DisableSwordCollider();
+            comboCount = 0;
+
+            attacking = false;
+            EnemyBehaviour.SetAttacking(false);
+            EnemyBehaviour.SetStaring(true);
+        }
+
+        public bool GetChaining()
+        {
+            return chaining && comboCount != 0;
+        }
+
+        public bool GetHit()
+        {
+            return swordScript.hit;
         }
     }
 }
