@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace DefinitiveScript 
 {
@@ -16,7 +17,12 @@ namespace DefinitiveScript
 
         public float recoveringStaminaSpeed = 0.5f;
 
+        public Scrollbar HealthBar;
+
+        public Scrollbar StaminaBar;
+
         private ParticleSystem hitParticles;
+
 
         // Start is called before the first frame update
         protected void Start()
@@ -38,6 +44,9 @@ namespace DefinitiveScript
         public bool TakeDamage(float damage)
         {
             health -= damage;
+            //Scrollbar Health
+
+            //HealthBar.size = health/100f;
 
             if(health <= 0f)
             {    
@@ -67,6 +76,7 @@ namespace DefinitiveScript
         public bool ReduceStamina(float amount)
         {
             stamina -= amount;
+            //StaminaBar.size = stamina/100f;
 
             if(stamina <= 0f) 
             {

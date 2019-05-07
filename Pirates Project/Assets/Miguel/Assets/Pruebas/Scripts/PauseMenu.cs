@@ -27,12 +27,14 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
+        GameManager.Instance.CursorController.LockCursor();
     }
     private void Pause()
     {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
+        GameManager.Instance.CursorController.UnlockCursor();
     }
     public void LoadMenu(string sceneName)
     {
