@@ -33,7 +33,7 @@ namespace DefinitiveScript
         {
             base.Knockback(force, direction, shot);
 
-            GetComponent<EnemyBehaviour>().ReactToAttack(shot);
+            //GetComponent<EnemyBehaviour>().ReactToAttack(shot);
         }
     }
 }

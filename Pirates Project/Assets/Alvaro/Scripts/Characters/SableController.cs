@@ -83,7 +83,7 @@ namespace DefinitiveScript {
             }
         }
 
-        protected void CancelAttack()
+        protected virtual void CancelAttack()
         {
             chaining = true;
             nextAttack = false;
@@ -92,7 +92,7 @@ namespace DefinitiveScript {
             comboCount = 0;
         }
 
-        public void ComboAttack()
+        public virtual void ComboAttack()
         {
             if(chaining && comboCount < 3)
             {
@@ -152,7 +152,7 @@ namespace DefinitiveScript {
             return swordCollider.enabled;
         }
 
-        public void FinishAttack(int attackId)
+        public virtual void FinishAttack(int attackId)
         {
             if(nextAttack)
             {
@@ -172,7 +172,7 @@ namespace DefinitiveScript {
             return attacking;
         }
 
-        public void HitOnSword(Vector3 hitDirection)
+        public virtual void HitOnSword(Vector3 hitDirection)
         {
             if(blocking)
             { 
@@ -190,6 +190,7 @@ namespace DefinitiveScript {
             }
             else if(attacking)
             {
+                HealthController.ReduceStamina(10f);
                 CharacterAnimationController.Disarm();
                 HealthController.Knockback(5f, hitDirection, false);
 
@@ -197,7 +198,7 @@ namespace DefinitiveScript {
             }
         }
 
-        public void HitOnBody(Vector3 hitDirection)
+        public virtual void HitOnBody(Vector3 hitDirection)
         {
             blocking = false;
             CancelAttack();
