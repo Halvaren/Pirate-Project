@@ -35,7 +35,7 @@ namespace DefinitiveScript
             if(runOutOfStamina) RecoverStamina();
         }
 
-        public bool TakeDamage(float damage)
+        public virtual bool TakeDamage(float damage)
         {
             health -= damage;
 

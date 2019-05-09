@@ -35,5 +35,18 @@ namespace DefinitiveScript
 
             //GetComponent<EnemyBehaviour>().ReactToAttack(shot);
         }
+
+        public override bool TakeDamage(float damage)
+        {
+            health -= damage;
+
+            if(health <= 0f)
+            {    
+                GetComponent<CharacterBehaviour>().SetAlive(false);
+                GetComponent<EnemyBehaviour>().Die();
+            }
+
+            return health <= 0f; //Devuelve true si el personaje ha muerto
+        }
     }
 }

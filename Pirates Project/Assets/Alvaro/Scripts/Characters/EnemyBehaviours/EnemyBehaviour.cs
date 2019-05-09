@@ -232,6 +232,34 @@ public class EnemyBehaviour : CharacterBehaviour
         Animator.SetTrigger("Attack");
     }
 
+    public void Die()
+    {
+        Animator.SetTrigger("Die");
+    }
+
+    public void Disappear()
+    {
+        StartCoroutine(FadeOut(1.0f));
+    }
+
+    private IEnumerator FadeOut(float time)
+    {
+        float elapsedTime = 0.0f;
+        Vector3 newPosition = transform.position;
+
+        while(elapsedTime < time)
+        {
+            elapsedTime += Time.deltaTime;
+
+            newPosition.y -= Time.deltaTime;
+            transform.position = newPosition;
+
+            yield return null;
+        }
+
+        Destroy(gameObject); //?
+    }
+
     public void StartAttackEvent(int attackId)
     {
         EnemySableController.StartAttack(attackId, Animator.GetNextAnimatorClipInfo(0)[0].clip.length);
