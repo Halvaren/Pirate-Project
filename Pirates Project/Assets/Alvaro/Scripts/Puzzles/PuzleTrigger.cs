@@ -12,7 +12,7 @@ namespace DefinitiveScript
         void OnTriggerStay(Collider other)
         {
             PlayerBehaviour player = other.GetComponent<PlayerBehaviour>();
-            if(other.gameObject.tag == "Player" && Input.GetKeyDown(KeyCode.Space) && !player.movementMode)
+            if(other.gameObject.tag == "Player" && Input.GetKeyDown(KeyCode.Space) && player.sableMode)
             {
                 if(!visualPuzle.GetEndedPuzle())
                 {  

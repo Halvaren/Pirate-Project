@@ -24,7 +24,7 @@ namespace DefinitiveScript
             ChangeMoveModeInput = Input.GetButtonDown("ChangeMoveMode");
             RunningInput = Input.GetButton("Running");
             ShootingInput = Input.GetButtonDown("MouseLeftClick");
-            AttackInput = Input.GetButtonDown("MouseLeftClick");
+            AttackInput = Input.GetButtonDown("MouseLeftClick") || Input.GetKeyDown(KeyCode.F);
             BlockInput = Input.GetButton("MouseRightClick");
             GrabInput = Input.GetButton("MouseLeftClick");
         } 

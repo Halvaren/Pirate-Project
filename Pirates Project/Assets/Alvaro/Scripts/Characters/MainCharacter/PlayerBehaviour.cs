@@ -1,14 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 namespace DefinitiveScript
 {
-    //Para que el objeto no se destruya al cambiar de escena
-    [RequireComponent(typeof(MoveController))] //Es necesario que el GameObject que tiene asociado este script, también tenga el script MoveController
-    [RequireComponent(typeof(CharacterAnimationController))]
-    [RequireComponent(typeof(CharacterSableController))]
-    [RequireComponent(typeof(GunController))]
     public class PlayerBehaviour : CharacterBehaviour
     {
         [System.Serializable]
@@ -18,100 +14,124 @@ namespace DefinitiveScript
             public Vector2 Sensitivity; //Valor que indica el nivel de sensibilidad del movimiento del ratón, es decir, como de grande será el movimiento de cámara en función del movimiento de ratón realizado
         }
 
-        [SerializeField] MouseInput MouseControl;
-
-        private MoveController m_MoveController; //Instancia del MoveController
-        public MoveController MoveController
+        [SerializeField] private MouseInput m_MouseControl;
+        public MouseInput MouseControl
         {
-            get{
-                if(m_MoveController == null)
-                {
-                    m_MoveController = GetComponent<MoveController>();
-                }
+            get {
+                return m_MouseControl;
+            }
+        }
+
+        private InputController m_InputController; //Instancia del InputController
+        public InputController InputController {
+            get {
+                if(m_InputController == null) m_InputController = GameManager.Instance.InputController;
+                return m_InputController;
+            }
+        }
+
+        private PlayerAnimatorController m_PlayerAnimatorController;
+        public PlayerAnimatorController PlayerAnimatorController {
+            get {
+                if(m_PlayerAnimatorController == null) m_PlayerAnimatorController = GetComponent<PlayerAnimatorController>();
+                return m_PlayerAnimatorController;
+            }
+        }
+
+        private MoveController m_MoveController;
+        public MoveController MoveController {
+            get { 
+                if(m_MoveController == null) m_MoveController = GetComponent<MoveController>();
                 return m_MoveController;
             }
         }
 
-        private CharacterAnimationController m_CharacterAnimationController;
-        public CharacterAnimationController CharacterAnimationController
-        {
+        private Vector2 m_MouseInput; //Atributo donde se guardará los valores graduales del input del ratón hasta alcanzar el valor final
+        public Vector2 mouseInput {
             get {
-                if(m_CharacterAnimationController == null)
-                {
-                    m_CharacterAnimationController = GetComponent<CharacterAnimationController>();
-                }
-                return m_CharacterAnimationController;
-            }
-        }
-
-        private SableController m_SableController;
-        public SableController SableController
-        {
-            get {
-                if(m_SableController == null)
-                {
-                    m_SableController = GetComponent<SableController>();
-                }
-                return m_SableController;
-            }
-        }
-
-        private GunController m_GunController;
-        public GunController GunController
-        {
-            get {
-                if(m_GunController == null)
-                {
-                    m_GunController = GetComponent<GunController>();
-                }
-                return m_GunController;
-            }
-        }
-
-        InputController playerInput; //Instancia del InputController
-        Vector2 mouseInput; //Atributo donde se guardará los valores graduales del input del ratón hasta alcanzar el valor final
-
-        private Transform m_CameraTransform; //Transform de la cámara
-        public Transform CameraTransform
-        {
-            get{
-                if(m_CameraTransform == null) m_CameraTransform = Camera.main.transform;
-                return m_CameraTransform;
+                return m_MouseInput;
             }
             set {
-                m_CameraTransform = value;
+                m_MouseInput = value;
             }
         }
 
-        private bool m_MovementMode; //Sable mode = false, Gun mode = true
-        public bool movementMode
-        {
-            get { return m_MovementMode; }
-            set { m_MovementMode = value; }
+        private Vector2 m_MovementInput;
+        public Vector2 movementInput {
+            get {
+                return m_MovementInput;
+            }
+            set {
+                m_MovementInput = value;
+            }
+        }
+
+        private bool m_RunningInput;
+        public bool runningInput {
+            get {
+                return m_RunningInput;
+            }
+            set {
+                m_RunningInput = value;
+            }
+        }
+
+        private bool m_AttackInput;
+        public bool attackInput {
+            get {
+                return m_AttackInput;
+            }
+            set {
+                m_AttackInput = value;
+            }
+        }
+
+        private bool m_ShootInput;
+        public bool shootInput {
+            get {
+                return m_ShootInput;
+            }
+            set {
+                m_ShootInput = value;
+            }
+        }
+
+        private bool m_BlockInput;
+        public bool blockInput {
+            get {
+                return m_BlockInput;
+            }
+            set {
+                m_BlockInput = value;
+            }
+        }
+
+        private bool m_SableMode; //Sable mode = true, Gun mode = false
+        public bool sableMode {
+            get {
+                return m_SableMode;
+            }
+            set {
+                m_SableMode = value;
+            }
         }
 
         private bool m_StopMovement; //Permitirá para el movimiento en los casos necesarios (inutiliza el Update)
-        public bool stopMovement
-        {
-            get
-            {
+        public bool stopMovement {
+            get {
                 return m_StopMovement;
             }
-            set
-            {
+            set {
                 m_StopMovement = value;
             }
         }
 
         private bool m_StopInput; //Permitirá para el movimiento en los casos necesarios (inutiliza el Update)
-        public bool stopInput
-        {
-            get
-            {
+        public bool stopInput {
+            get {
                 return m_StopInput;
             }
-            set
-            {
+            set {
                 m_StopInput = value;
             }
         }
@@ -120,46 +140,74 @@ namespace DefinitiveScript
         public GameObject gunObject;
         public GameObject sableObject;
 
-        public int nEnemyPositions = 8;
-        private float angleBetweenEnemyPositions;
-        private bool[] enemyPositions;
-        private Vector3[] enemyPositionDirections;
-
-        void OnEnable()
-        {
-            playerInput = GameManager.Instance.InputController;
-
-            enemyPositions = new bool[nEnemyPositions];
-            angleBetweenEnemyPositions = 360f / nEnemyPositions;
-
-            enemyPositionDirections = new Vector3[nEnemyPositions];
-            float angle;
-            int j = 0;
-            int sign = 0;
-
-            for(int i = 0; i < nEnemyPositions; i++)
-            {
-                angle = Mathf.Pow(-1, sign) * i * angleBetweenEnemyPositions;
-
-                if(sign % 2 == 0) i++;
-                sign++;
-
-                enemyPositions[i] = false;
-                enemyPositionDirections[i] = new Vector3(Mathf.Sin(angle), 0, Mathf.Cos(angle));
-            }
-            
-        } 
+        public CinemachineVirtualCameraBase firstPersonCamera;
+        public CinemachineVirtualCameraBase thirdPersonUnlockedTargetCamera;
+        public CinemachineVirtualCameraBase thirdPersonLockedTargetCamera;
 
         void Start()
         {
-            movementMode = false; //Se inicializa el modo de movimiento en modo sable
+            sableMode = true; //Se inicializa el modo de movimiento en modo sable
+            PlayerAnimatorController.SetSableMode(sableMode);
             stopMovement = false;
+            stopInput = false;
 
             ChangeWeapon();
         }     
 
         void Update()
         {
+            if(alive)
+            {
+                if(!stopInput)
+                {
+                    if(InputController.ChangeMoveModeInput)
+                    {
+                        stopInput = true;
+                        sableMode = !sableMode;
+
+                        PlayerAnimatorController.ExitMode();
+                        
+                        MoveController.ResetXRotation();
+                        ChangeWeapon();
+                    }
+
+                    if(!stopMovement)
+                    {
+                        runningInput = InputController.RunningInput;
+
+                        movementInput = new Vector2(InputController.Horizontal, InputController.Vertical);
+
+                        float mouseInputX = Mathf.Lerp(mouseInput.x, InputController.MouseInput.x, 1f / MouseControl.Damping.x); //Calcula el valor gradual del movimiento de ratón en x para hacer un giro más natural
+                        float mouseInputY = Mathf.Lerp(mouseInput.y, InputController.MouseInput.y, 1f / MouseControl.Damping.y);
+
+                        mouseInput = new Vector2(mouseInputX, mouseInputY);
+                    }
+                    else
+                    {
+                        movementInput = Vector2.zero;
+                        mouseInput = Vector2.zero;
+                        runningInput = false;
+        
+                    }
+
+                    attackInput = InputController.AttackInput;
+                    shootInput = InputController.ShootingInput;
+                    blockInput = InputController.BlockInput;
+                }
+                else
+                {   
+                    movementInput = Vector2.zero;
+                    mouseInput = Vector2.zero;
+                    runningInput = attackInput = shootInput = blockInput = false;
+                }
+            }
+            else
+            {
+                movementInput = Vector2.zero;
+                mouseInput = Vector2.zero;
+                runningInput = attackInput = shootInput = blockInput = false;
+            }
+            /* 
             if(alive)
             {
                 if(!stopInput)
@@ -218,13 +266,13 @@ namespace DefinitiveScript
                 {
                     CharacterAnimationController.BackToIdle();
                 }
-            }
+            }*/
         }
 
         void ChangeWeapon()
         {
-            sableObject.SetActive(!movementMode);
-            gunObject.SetActive(movementMode);
+            sableObject.SetActive(sableMode);
+            gunObject.SetActive(!sableMode);
         }
 
         public void MakeVisible(bool param)
@@ -234,29 +282,25 @@ namespace DefinitiveScript
             sableObject.GetComponentInChildren<MeshRenderer>().enabled = param;
         }
 
-        public int GetNEnemyPositions()
+        public void ChangeToCamera(string code)
         {
-            return nEnemyPositions;
-        }
+            print(code);
+            firstPersonCamera.m_Priority = 10;
+            //thirdPersonLockedTargetCamera.m_Priority = 10;
+            thirdPersonUnlockedTargetCamera.m_Priority = 10;
 
-        public float GetAngleBetweenEnemyPositions()
-        {
-            return angleBetweenEnemyPositions;
-        }
-
-        public bool GetEnemyPosition(int i)
-        {
-            return enemyPositions[i];
-        }
-
-        public void SetEnemyPosition(int i, bool value)
-        {
-            enemyPositions[i] = value;
-        }
-
-        public Vector3 GetEnemyPositionDirection(int i)
-        {
-            return enemyPositionDirections[i];
+            switch(code)
+            {
+                case "first":
+                    firstPersonCamera.m_Priority = 12;
+                    break;
+                case "thirdLocked":
+                    //thirdPersonLockedTargetCamera.m_Priority = 12;
+                    break;
+                case "thirdUnlocked":
+                    thirdPersonUnlockedTargetCamera.m_Priority = 12;
+                    break;
+            }
         }
     }
 }

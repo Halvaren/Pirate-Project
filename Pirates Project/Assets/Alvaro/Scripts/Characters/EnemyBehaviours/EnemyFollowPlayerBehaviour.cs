@@ -38,8 +38,8 @@ public class EnemyFollowPlayerBehaviour : StateMachineBehaviour
             agent.isStopped = true;
             agent.ResetPath();
             
-            enemy.SetFollowing(false);
-            enemy.SetStaring(true);
+            //enemy.SetFollowing(false);
+            enemy.SetStaring();
         }
     }
 

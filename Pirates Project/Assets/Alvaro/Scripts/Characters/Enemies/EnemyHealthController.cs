@@ -16,6 +16,15 @@ namespace DefinitiveScript
             }
         }
 
+        private EnemyUIController m_EnemyUIController;
+        public EnemyUIController EnemyUIController
+        {
+            get {
+                if(m_EnemyUIController == null) m_EnemyUIController = GetComponent<EnemyUIController>();
+                return m_EnemyUIController;
+            }
+        }
+
         protected override IEnumerator PlayKnockback(Vector3 impact, float time)
         {
             float elapsedTime = 0.0f;
@@ -38,15 +47,19 @@ namespace DefinitiveScript
 
         public override bool TakeDamage(float damage)
         {
-            health -= damage;
+            if(CharacterBehaviour.GetAlive()) {
+                health -= damage;
+                EnemyUIController.ChangeHealthBarValue(-damage);
 
-            if(health <= 0f)
-            {    
-                GetComponent<CharacterBehaviour>().SetAlive(false);
-                GetComponent<EnemyBehaviour>().Die();
+                if(health <= 0f)
+                {    
+                    EnemyUIController.EnableUI(false);
+                    GetComponent<CharacterBehaviour>().SetAlive(false);
+                    GetComponent<EnemyBehaviour>().Die();
+                }
+                return health <= 0f;
             }
-
-            return health <= 0f; //Devuelve true si el personaje ha muerto
+            return false;
         }
     }
 }

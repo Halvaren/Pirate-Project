@@ -5,11 +5,13 @@ using DefinitiveScript;
 
 public class EnemyBlockBehaviour : StateMachineBehaviour
 {
+    public float minTimeBlocking = 1f;
     public float maxTimeBlocking = 3f;
 
     private float blockingTimer;
 
     private EnemyBehaviour enemy;
+    private EnemySableController sableController;
     private HealthController health;
 
     private Vector3 playerPosition;
@@ -25,6 +27,9 @@ public class EnemyBlockBehaviour : StateMachineBehaviour
     {
         enemy = animator.GetComponent<EnemyBehaviour>();
         health = animator.GetComponent<HealthController>();
+        sableController = animator.GetComponent<EnemySableController>();
+        
+        sableController.SetBlocking(true);
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -36,16 +41,21 @@ public class EnemyBlockBehaviour : StateMachineBehaviour
 
         blockingTimer += Time.deltaTime;
 
-        bool condition = Random.Range(health.GetCurrentStamina(), health.GetTotalStamina()) > 0.5f * health.GetTotalStamina();
+        bool condition = (blockingTimer < minTimeBlocking || Random.Range(health.GetCurrentStamina(), health.GetTotalStamina()) > 0.5f * health.GetTotalStamina() && blockingTimer > minTimeBlocking);
         condition = condition && blockingTimer < maxTimeBlocking;
 
-        enemy.SetStaring(!condition);
-        enemy.SetBlocking(condition);
+
+        if(!condition) enemy.SetStaring(); //enemy.SetStaring(!condition);
+        if(!enemy.IsStaring() && condition) enemy.SetBlocking(); //enemy.SetBlocking(condition);
+        sableController.SetBlocking(!enemy.IsStaring() && condition);
+
+        if(blockingTimer >= maxTimeBlocking) blockingTimer = 0f;
 
         if(distanceFromPlayer > enemy.maxDistanceFromPlayer)
         {
-            enemy.SetFollowing(true);
-            enemy.SetBlocking(false);
+            enemy.SetFollowing();
+            //enemy.SetBlocking(false);
+            sableController.SetBlocking(false);
         }
     }
 

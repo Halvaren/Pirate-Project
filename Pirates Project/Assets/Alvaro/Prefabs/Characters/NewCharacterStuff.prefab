@@ -120,8 +120,8 @@ MonoBehaviour:
   initialHealth: 0
   initialStamina: 0
   recoveringStaminaSpeed: 0.5
-  HealthBar: {fileID: 6963281683625916883}
-  StaminaBar: {fileID: 2038919231}
+  HealthBar: {fileID: 0}
+  StaminaBar: {fileID: 0}
 --- !u!1 &834837887
 GameObject:
   m_ObjectHideFlags: 0
@@ -577,13 +577,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterCenter: {fileID: 5532190794368745081}
-  MouseControl:
-    Damping: {x: 5, y: 3}
-    Sensitivity: {x: 1, y: 3}
+  m_MouseControl:
+    Damping: {x: 0, y: 0}
+    Sensitivity: {x: 0, y: 0}
   model: {fileID: 1431004684835218948}
   gunObject: {fileID: 3428312147217364023}
   sableObject: {fileID: 4081055270780470581}
-  nEnemyPositions: 8
 --- !u!114 &745291272293239844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8007,7 +8006,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8354612610683510309}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.69000006, z: -9.29}
+  m_LocalPosition: {x: 0, y: 0.69, z: -9.29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8354612610305228876}
@@ -8507,7 +8506,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8354612611432192913}
-  m_LocalRotation: {x: -0.09835139, y: 0.0000005809762, z: 0.00000025114213, w: 0.99515176}
+  m_LocalRotation: {x: -0.0983513, y: 0.0000005809762, z: 0.00000025114213, w: 0.99515176}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -8799,8 +8798,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8354612612135037955}
-  m_LocalRotation: {x: -0.09835113, y: -0, z: -0, w: 0.9951518}
-  m_LocalPosition: {x: 0, y: 0.69000006, z: -9.29}
+  m_LocalRotation: {x: -0.098351136, y: -0, z: -0, w: 0.9951518}
+  m_LocalPosition: {x: 0, y: 0.69, z: -9.29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 800827330538688292}

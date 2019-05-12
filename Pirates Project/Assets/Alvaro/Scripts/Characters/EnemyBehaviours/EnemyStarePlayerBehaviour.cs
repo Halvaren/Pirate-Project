@@ -47,7 +47,8 @@ public class EnemyStarePlayerBehaviour : StateMachineBehaviour
         animator.transform.rotation = Quaternion.Slerp(animator.transform.rotation, rotation, rotationSpeed * Time.deltaTime);
 
         Vector3 characterCenterOffset = enemy.characterCenter.TransformDirection(Vector3.right * characterCenterOffsetMagnitude);
-        if(Physics.Raycast(enemy.characterCenter.position + characterCenterOffset, enemyToPlayer, distanceFromPlayer, enemyLayer))
+        if(Physics.Raycast(enemy.characterCenter.position + characterCenterOffset, enemyToPlayer, distanceFromPlayer, enemyLayer) ||
+            Physics.Raycast(enemy.characterCenter.position, enemyToPlayer, distanceFromPlayer, enemyLayer))
         {
             if(Physics.Raycast(enemy.characterCenter.position - characterCenterOffset, enemyToPlayer, distanceFromPlayer, enemyLayer))
             {
@@ -73,8 +74,8 @@ public class EnemyStarePlayerBehaviour : StateMachineBehaviour
 
         if(distanceFromPlayer > enemy.maxDistanceFromPlayer)
         {
-            enemy.SetFollowing(true);
-            enemy.SetStaring(false);
+            enemy.SetFollowing();
+            //enemy.SetStaring(false);
         }
 
         if(timerToAttack >= timeToAttack)
@@ -84,12 +85,12 @@ public class EnemyStarePlayerBehaviour : StateMachineBehaviour
                 timerToAttack = 0f;
                 if(!health.GetRunOutOfStamina() && Random.Range(0, health.GetCurrentStamina()) > 0.7 * health.GetTotalStamina())
                 {
-                    enemy.SetBlocking(true);
-                    enemy.SetStaring(false);
+                    enemy.SetBlocking();
+                    //enemy.SetStaring(false);
                 }
                 else if(enemy.CanAttack())
                 {
-                    enemy.SetStaring(false);
+                    //enemy.SetStaring(false);
                     enemy.ComboAttack();
                 }
             }

@@ -30,9 +30,9 @@ public class EnemySearchPlayerBehaviour : StateMachineBehaviour
     {
         if(agent.remainingDistance == 0f)
         {
-            enemy.SetSearching(false);
+            //enemy.SetSearching(false);
             enemy.StartRunningPatrol();
-            enemy.SetPatrolling(true);
+            enemy.SetPatrolling();
         }
     }
 

@@ -4,6 +4,15 @@ using UnityEngine;
 using UnityEngine.AI;
 using DefinitiveScript;
 
+enum EnemyState {
+    Patrolling,
+    Searching,
+    Following,
+    Staring,
+    Attacking,
+    Blocking
+}
+
 public class EnemyBehaviour : CharacterBehaviour
 {
     public Transform PatrolPathObj;
@@ -32,6 +41,8 @@ public class EnemyBehaviour : CharacterBehaviour
     private bool blocking;
     private bool attacking;
     private bool aroundPlayer;
+
+    private EnemyState enemyState;
 
     private float detectionRadius;
     private float detectionAngle;
@@ -62,6 +73,8 @@ public class EnemyBehaviour : CharacterBehaviour
         }
     }
 
+    public bool sableEnemy; //true = lleva sable; false = lleva gun
+
     void Awake()
     {
         NavMeshAgent = GetComponent<NavMeshAgent>();
@@ -83,7 +96,7 @@ public class EnemyBehaviour : CharacterBehaviour
         StartCoroutine(ObtainPlayerTransform());
 
         CreatePathPoints();
-        patrolling = true;
+        SetPatrolling();
     }
 
     IEnumerator ObtainPlayerTransform()
@@ -97,15 +110,16 @@ public class EnemyBehaviour : CharacterBehaviour
 
     void Update()
     {
-        Animator.SetBool("Patrolling", patrolling);
-        Animator.SetBool("Following", following);
-        Animator.SetBool("Searching", searching);
-        Animator.SetBool("Staring", staring);
-        Animator.SetBool("Blocking", blocking);
-        Animator.SetBool("Attacking", attacking);
+        Animator.SetBool("Patrolling", IsPatrolling());
+        Animator.SetBool("Following", IsFollowing());
+        Animator.SetBool("Searching", IsSearching());
+        Animator.SetBool("Staring", IsStaring());
+        Animator.SetBool("Blocking", IsBlocking());
+        Animator.SetBool("Attacking", IsAttacking());
         Animator.SetBool("AroundPlayer", aroundPlayer);
 
-        ChangeVisionField(following || searching || (patrolling && running));
+        ChangeVisionField(IsFollowing() || IsSearching() || (IsPatrolling() && running));
+        ImAttacking(IsAttacking());
     }
 
     void CreatePathPoints()
@@ -190,9 +204,8 @@ public class EnemyBehaviour : CharacterBehaviour
 
         if(collidingEnemy) result = true;
 
-        if(patrolling) patrolling = !result;
-        if(following) searching = !result;
-        if(!staring && !attacking && !blocking) following = result;
+        if(IsFollowing() && !result) SetSearching();
+        if(!IsStaring() && !IsAttacking() && !IsBlocking() && result) SetFollowing();
     }
 
     public void Disarm()
@@ -209,16 +222,13 @@ public class EnemyBehaviour : CharacterBehaviour
     {
         Animator.SetTrigger("HitOnBody");
 
-        if(patrolling || searching)
+        if(IsPatrolling())
         {
-            patrolling = searching = false;
-            following = true;
+            SetSearching();
         }
-        else if(blocking || attacking)
+        else if(IsBlocking() || IsAttacking())
         {
-            blocking = false;
-            attacking = false;
-            staring = true;
+            SetStaring();
         }
     }
 
@@ -259,27 +269,6 @@ public class EnemyBehaviour : CharacterBehaviour
 
         Destroy(gameObject); //?
     }
-
-    public void StartAttackEvent(int attackId)
-    {
-        EnemySableController.StartAttack(attackId, Animator.GetNextAnimatorClipInfo(0)[0].clip.length);
-    }
-
-    public void EnableSwordColliderEvent()
-    {
-        EnemySableController.EnableSwordCollider();
-    }
-
-    public void DisableSwordColliderEvent()
-    {
-        EnemySableController.DisableSwordCollider();
-    }
-
-    public void FinishAttackEvent(int attackId)
-    {
-        EnemySableController.FinishAttack(attackId);
-    }
-
     
     public bool IsRunning()
     {
@@ -288,32 +277,32 @@ public class EnemyBehaviour : CharacterBehaviour
 
     public bool IsPatrolling()
     {
-        return patrolling;
+        return enemyState == EnemyState.Patrolling;
     }
 
     public bool IsFollowing()
     {
-        return following;
+        return enemyState == EnemyState.Following;
     }
 
     public bool IsSearching()
     {
-        return searching;
+        return enemyState == EnemyState.Searching;
     }
 
     public bool IsStaring()
     {
-        return staring;
+        return enemyState == EnemyState.Staring;
     }
 
     public bool IsBlocking()
     {
-        return blocking;
+        return enemyState == EnemyState.Blocking;
     }
 
     public bool IsAttacking()
     {
-        return attacking;
+        return enemyState == EnemyState.Attacking;
     }
 
     public bool IsMovingAroundPlayer()
@@ -355,35 +344,34 @@ public class EnemyBehaviour : CharacterBehaviour
         running = false;
     }
 
-    public void SetPatrolling(bool value)
+    public void SetPatrolling()
     {
-        patrolling = value;
+        enemyState = EnemyState.Patrolling;
     }
 
-    public void SetFollowing(bool value)
+    public void SetFollowing()
     {
-        following = value;
+        enemyState = EnemyState.Following;
     }
 
-    public void SetSearching(bool value)
+    public void SetSearching()
     {
-        searching = value;
+        enemyState = EnemyState.Searching;
     }
 
-    public void SetStaring(bool value)
+    public void SetStaring()
     {
-        staring = value;
+        enemyState = EnemyState.Staring;
     }
 
-    public void SetBlocking(bool value)
+    public void SetBlocking()
     {
-        blocking = value;
+        enemyState = EnemyState.Blocking;
     }
 
-    public void SetAttacking(bool value)
+    public void SetAttacking()
     {
-        attacking = value;
-        ImAttacking(value);
+        enemyState = EnemyState.Attacking;
     }
 
     public void SetMovingAroundPlayer(bool value)

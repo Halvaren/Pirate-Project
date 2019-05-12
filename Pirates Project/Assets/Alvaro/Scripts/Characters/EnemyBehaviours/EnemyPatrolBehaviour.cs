@@ -20,6 +20,9 @@ public class EnemyPatrolBehaviour : StateMachineBehaviour
 
     override public void OnStateMachineEnter(Animator animator, int stateMachinePathHash)
     {
+        enemy = animator.GetComponent<EnemyBehaviour>();
+        agent = enemy.GetNavMeshAgent();
+
         waitingTimer = 0f;
 
         firstPoint = true;

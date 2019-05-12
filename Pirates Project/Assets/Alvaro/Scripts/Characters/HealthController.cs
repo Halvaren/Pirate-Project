@@ -23,6 +23,8 @@ namespace DefinitiveScript
 
         private ParticleSystem hitParticles;
 
+        protected CharacterBehaviour CharacterBehaviour;
+
 
         // Start is called before the first frame update
         protected void Start()
@@ -33,6 +35,8 @@ namespace DefinitiveScript
             runOutOfStamina = false;
 
             hitParticles = GetComponentInChildren<ParticleSystem>();
+
+            CharacterBehaviour = GetComponent<CharacterBehaviour>();
         }
 
         // Update is called once per frame
@@ -43,18 +47,21 @@ namespace DefinitiveScript
 
         public virtual bool TakeDamage(float damage)
         {
-            health -= damage;
-            //Scrollbar Health
+            if(CharacterBehaviour.GetAlive())
+            {
+                health -= damage;
+                //Scrollbar Health
 
-            //HealthBar.size = health/100f;
+                //HealthBar.size = health/100f;
 
-            if(health <= 0f)
-            {    
-                GetComponent<CharacterBehaviour>().SetAlive(false);
-                GetComponent<CharacterAnimationController>().Die();
+                if(health <= 0f)
+                {    
+                    CharacterBehaviour.SetAlive(false);
+                    GetComponent<PlayerAnimatorController>().Die();
+                }
+                return health <= 0f;
             }
-
-            return health <= 0f; //Devuelve true si el personaje ha muerto
+            return false;
         }
 
         public virtual void Knockback(float force, Vector3 direction, bool shot)
@@ -83,7 +90,7 @@ namespace DefinitiveScript
                 stamina = 0f;
                 runOutOfStamina = true;
             }
-            return stamina <= 0f; //Devuelve true si el personaje ha muerto
+            return stamina <= 0f; //Devuelve true si el personaje ha perdido toda su stamina
         }
 
         protected void RecoverStamina()

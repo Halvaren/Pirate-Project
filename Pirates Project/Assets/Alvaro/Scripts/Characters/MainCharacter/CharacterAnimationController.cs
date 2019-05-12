@@ -161,7 +161,7 @@ namespace DefinitiveScript
 
         public void StartAttackEvent(int attackId)
         {
-            SableController.StartAttack(attackId, anim.GetNextAnimatorClipInfo(0)[0].clip.length);
+            //SableController.StartAttack(attackId, anim.GetNextAnimatorClipInfo(0)[0].clip.length);
         }
 
         public void EnableSwordColliderEvent()

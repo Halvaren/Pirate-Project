@@ -63,7 +63,7 @@ namespace DefinitiveScript
 
             localPlayer = GameManager.Instance.LocalPlayer;
 
-            localPlayer.CameraTransform = transform; //El jugador necesita las propiedades físicas de la cámara para conocer su orientación en el modo sable
+            //localPlayer.CameraTransform = transform; //El jugador necesita las propiedades físicas de la cámara para conocer su orientación en el modo sable
 
             cameraLookTarget = localPlayer.transform.Find("cameraLookTarget");
             sableCameraPosition = localPlayer.transform.Find("sableCameraPosition");
