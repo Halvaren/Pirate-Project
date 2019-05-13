@@ -43,11 +43,11 @@ LODGroup:
   m_LocalReferencePoint: {x: -0.35852838, y: 1.9694402, z: 0.27245522}
   m_Size: 6.3704515
   m_FadeMode: 2
-  m_AnimateCrossFading: 1
+  m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.1989798
-    fadeTransitionWidth: 0
+  - screenRelativeHeight: 0.07192888
+    fadeTransitionWidth: 0.5
     renderers:
     - renderer: {fileID: 6828675157490671417}
   m_Enabled: 1
@@ -58,11 +58,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8110535595881491224}
     m_Modifications:
-    - target: {fileID: 2177578945014207398, guid: 0e12bb7a27f63ca46b80bd8214b79a32,
-        type: 3}
-      propertyPath: m_Name
-      value: Palm_Tree
-      objectReference: {fileID: 0}
     - target: {fileID: 2177578945014555562, guid: 0e12bb7a27f63ca46b80bd8214b79a32,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -117,6 +112,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2177578945014207398, guid: 0e12bb7a27f63ca46b80bd8214b79a32,
+        type: 3}
+      propertyPath: m_Name
+      value: Palm_Tree
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e12bb7a27f63ca46b80bd8214b79a32, type: 3}

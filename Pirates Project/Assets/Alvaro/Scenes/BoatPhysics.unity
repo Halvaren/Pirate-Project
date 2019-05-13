@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.3996344, g: 0.45101154, b: 0.5033586, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2171,9 +2171,9 @@ MonoBehaviour:
   isMoving: 1
   scale: 1
   speed: 1
-  waveDistance: 20
-  noiseStrength: 0
-  noiseWalk: 0
+  waveDistance: 10
+  noiseStrength: 0.2
+  noiseWalk: 0.2
 --- !u!4 &1939601212
 Transform:
   m_ObjectHideFlags: 0
@@ -2577,7 +2577,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &2133117347
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2824,7 +2824,8 @@ MonoBehaviour:
   steerSlider: {fileID: 2029214034}
   powerFactor: 1000
   maxPower: 80000
-  steerVelocity: 2
+  steerVelocity: 0.5
+  waterJetMaxAngle: 5
   currentJetPower: 0
 --- !u!1 &5943602383925255828
 GameObject:

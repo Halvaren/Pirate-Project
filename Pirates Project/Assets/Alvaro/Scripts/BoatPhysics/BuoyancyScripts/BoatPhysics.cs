@@ -44,8 +44,6 @@ public class BoatPhysics : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        modifyBoatMesh.GenerateUnderwaterMesh();
-
         //modifyBoatMesh.DisplayMesh(underWaterMesh, "UnderWater Mesh", modifyBoatMesh.underWaterTriangleData);
 
         //modifyBoatMesh.Display(aboveWaterMsh, "AboveWater Mesh", modifyBoatMsh.aboveWaterTriangleData);
@@ -53,6 +51,8 @@ public class BoatPhysics : MonoBehaviour
 
     void FixedUpdate()
     {
+        modifyBoatMesh.GenerateUnderwaterMesh();
+
         boatRB.centerOfMass = centerOfMass;
 
         if(modifyBoatMesh.underWaterTriangleData.Count > 0)
