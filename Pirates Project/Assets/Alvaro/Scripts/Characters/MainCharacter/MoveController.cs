@@ -31,7 +31,7 @@ namespace DefinitiveScript
             controller.Move(newPosition);
         }
 
-        public void YRotate(float mouseInput, float mouseSensitivity, Vector3 targetDirection, bool movementMode)
+        /*public void YRotate(float mouseInput, float mouseSensitivity, Vector3 targetDirection, bool movementMode)
         {
             if(movementMode) //Gun mode
             {
@@ -50,29 +50,42 @@ namespace DefinitiveScript
                     transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(euler), rotationSpeed * Time.deltaTime); //Se realiza un giro interpolado
                 }
             }
+        }*/
+
+        public void GunRotate(Vector2 mouseInput, Vector2 mouseSensitivity)
+        {
+            transform.Rotate(Vector3.up * mouseInput.x * mouseSensitivity.x, Space.World);        
+
+            transform.Rotate(Vector3.right * -mouseInput.y * mouseSensitivity.y);
+
+            Vector3 eulerAngles = transform.localEulerAngles;
+            eulerAngles.z = 0f;
+
+            eulerAngles.x = (eulerAngles.x > 180) ? eulerAngles.x - 360 : eulerAngles.x;
+
+            if(eulerAngles.x > limitXAngle)
+            {
+                eulerAngles.x = limitXAngle;
+            } 
+            else if(eulerAngles.x < -limitXAngle)
+            {
+                eulerAngles.x = -limitXAngle;
+            }
+
+            transform.localEulerAngles = eulerAngles;
         }
 
-        public void XRotate(float mouseInput, float mouseSensitivity, bool movementMode)
+        public void SableRotate(Vector3 targetDirection)
         {
-            if(movementMode)
+            Vector3 lookDirection = targetDirection.normalized; //Si se está en modo sable, se utiliza la dirección objetivo para girar al personaje hacia esa dirección
+            if(lookDirection != Vector3.zero)
             {
-                transform.Rotate(Vector3.right * -mouseInput * mouseSensitivity);
-
-                Vector3 eulerAngles = transform.localEulerAngles;
-                eulerAngles.z = 0f;
-
-                eulerAngles.x = (eulerAngles.x > 180) ? eulerAngles.x - 360 : eulerAngles.x;
-
-                if(eulerAngles.x > limitXAngle)
-                {
-                    eulerAngles.x = limitXAngle;
-                } 
-                else if(eulerAngles.x < -limitXAngle)
-                {
-                    eulerAngles.x = -limitXAngle;
-                }
-
-                transform.localEulerAngles = eulerAngles;
+                Quaternion newRotation = Quaternion.LookRotation(lookDirection, transform.up);
+                float differenceRotation = newRotation.eulerAngles.y - transform.eulerAngles.y;
+                float eulerY = newRotation.eulerAngles.y;
+                
+                Vector3 euler = new Vector3(transform.eulerAngles.x, eulerY, transform.eulerAngles.z);
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(euler), rotationSpeed * Time.deltaTime); //Se realiza un giro interpolado
             }
         }
 

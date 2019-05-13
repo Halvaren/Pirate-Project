@@ -16,6 +16,7 @@ public class BoatEngine : MonoBehaviour
     public float maxPower;
 
     public float steerVelocity = 2f;
+    public float waterJetMaxAngle = 15f;
 
     //The boat's current engine power is public for debugging
     public float currentJetPower;
@@ -73,9 +74,9 @@ public class BoatEngine : MonoBehaviour
         {
             WaterJetRotation_Y = waterJetTransform.localEulerAngles.y + steerVelocity;
 
-            if(WaterJetRotation_Y > 210f)
+            if(WaterJetRotation_Y > 180f + waterJetMaxAngle)
             {
-                WaterJetRotation_Y = 210f;
+                WaterJetRotation_Y = 180f + waterJetMaxAngle;
             }
 
             steerSlider.value = WaterJetRotation_Y - 180f;
@@ -89,9 +90,9 @@ public class BoatEngine : MonoBehaviour
         {
             WaterJetRotation_Y = waterJetTransform.localEulerAngles.y - steerVelocity;
 
-            if(WaterJetRotation_Y < 150f)
+            if(WaterJetRotation_Y < 180f - waterJetMaxAngle)
             {
-                WaterJetRotation_Y = 150f;
+                WaterJetRotation_Y = 180f - waterJetMaxAngle;
             }
 
             steerSlider.value = WaterJetRotation_Y - 180f;

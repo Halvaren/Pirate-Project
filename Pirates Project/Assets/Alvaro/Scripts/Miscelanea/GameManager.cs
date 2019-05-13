@@ -7,6 +7,12 @@ namespace DefinitiveScript
     public class GameManager
     {
         private GameObject gameObject;
+        public GameObject GameObject
+        {
+            get {
+                return gameObject;
+            }
+        }
 
         private static GameManager m_Instance; //Instancia estática del GameManager. Es singleton
         public static GameManager Instance {
@@ -20,6 +26,7 @@ namespace DefinitiveScript
                     m_Instance.gameObject.AddComponent<InputController>();
                     m_Instance.gameObject.AddComponent<AudioController>();
                     m_Instance.gameObject.AddComponent<BundleController>();
+                    m_Instance.gameObject.AddComponent<AIEnemyController>();
                 }
 
                 return m_Instance;
@@ -69,6 +76,7 @@ namespace DefinitiveScript
             }
             set {
                 m_LocalPlayer = value;
+                AIEnemyController.SetPlayerTransform(m_LocalPlayer.transform);
             }
         }
 
@@ -78,6 +86,25 @@ namespace DefinitiveScript
             get {
                 if(m_CursorController == null) m_CursorController = m_Instance.gameObject.GetComponent<CursorController>();
                 return m_CursorController;
+            }
+        }
+
+        private SceneController m_SceneController;
+        public SceneController SceneController {
+            get {
+                return m_SceneController;
+            }
+
+            set {
+                m_SceneController = value;
+            }
+        }
+
+        private AIEnemyController m_AIEnemyController;
+        public AIEnemyController AIEnemyController {
+            get {
+                if(m_AIEnemyController == null) m_AIEnemyController = m_Instance.gameObject.GetComponent<AIEnemyController>();
+                return m_AIEnemyController;
             }
         }
     }

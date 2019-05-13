@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DefinitiveScript;
 
 public class Transitions : MonoBehaviour
 {
@@ -12,55 +13,21 @@ public class Transitions : MonoBehaviour
     }
     private void OnTriggerEnter(Collider myCollision)
     {
-        if (myCollision.gameObject.tag == "Player" && currentScene.name == "Island1" && this.gameObject.name == "cavernEntrance")
+        if (myCollision.gameObject.tag == "Player" && currentScene.name == "Island1" && this.gameObject.tag == "cavernEntrance")
         {
-            StartCoroutine(LoadCavern());
+            GameManager.Instance.SceneController.ChangeToScene("caverna");
         }
-        else if (myCollision.gameObject.tag == "Player" && currentScene.name == "Island1" && this.gameObject.name == "boatStation" )
+        else if (myCollision.gameObject.tag == "Player" && currentScene.name == "Island1" && this.gameObject.tag == "boatStation" )
         {
-            StartCoroutine(LoadBoat());
+            GameManager.Instance.SceneController.ChangeToScene("BoatPhysics");
         }
         else if (myCollision.gameObject.tag == "Player" && currentScene.name == "caverna")
         {
-            StartCoroutine(LoadIsland());
+            GameManager.Instance.SceneController.ChangeToScene("Island1");
         }
         else if (myCollision.gameObject.tag == "Boat" && currentScene.name == "BoatPhysics")
         {
-            StartCoroutine(LoadIsland());
+            GameManager.Instance.SceneController.ChangeToScene("Island1");
         }
-    }
-
-    IEnumerator LoadCavern()
-    {
-        AsyncOperation load = SceneManager.LoadSceneAsync("caverna", LoadSceneMode.Additive);
-
-        while (!load.isDone)
-        {
-            yield return null;
-        }
-
-        SceneManager.UnloadSceneAsync(currentScene);
-    }
-    IEnumerator LoadBoat()
-    {
-        AsyncOperation load = SceneManager.LoadSceneAsync("BoatPhysics", LoadSceneMode.Additive);
-
-        while (!load.isDone)
-        {
-            yield return null;
-        }
-
-        SceneManager.UnloadSceneAsync(currentScene);
-    }
-    IEnumerator LoadIsland()
-    {
-        AsyncOperation load = SceneManager.LoadSceneAsync("Island1", LoadSceneMode.Additive);
-
-        while (!load.isDone)
-        {
-            yield return null;
-        }
-
-        SceneManager.UnloadSceneAsync(currentScene);
     }
 }

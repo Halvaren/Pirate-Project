@@ -9,7 +9,7 @@ namespace DefinitiveScript
     {
         public float damage = 50f;
         public float range = 1000f;
-        public float timeBetweenBullets = 1f;
+        public float timeBetweenShots = 1f;
         public float effectsDisplayTime = 0.1f;
 
         public GameObject effectObject;
@@ -19,7 +19,6 @@ namespace DefinitiveScript
 
         public GameObject scopeMarkCamera;
         public GameObject scopeMarkOverlay;
-        private Image scopeMarkCameraRenderer;
         private Image scopeMarkOverlayRenderer;
 
         private float elapsedTime;
@@ -47,7 +46,6 @@ namespace DefinitiveScript
             gunLine = effectObject.GetComponent<LineRenderer>();
             faceLight = effectObject.GetComponentInChildren<Light>();
 
-            scopeMarkCameraRenderer = scopeMarkCamera.GetComponent<Image>();
             scopeMarkOverlayRenderer = scopeMarkOverlay.GetComponent<Image>();
         }
 
@@ -58,38 +56,34 @@ namespace DefinitiveScript
             gunParticles.Stop();
             gunLine.enabled = false;
             faceLight.enabled = false;
-            scopeMarkCameraRenderer.enabled = false;
             scopeMarkOverlayRenderer.enabled = false;
         }
 
         void Update()
         {
-            Debug.DrawLine(scopeMarkCamera.transform.position, scopeMarkCamera.transform.position + scopeMarkCamera.transform.forward * range, Color.red);
             if(gunPrepared)
             {
-                if(elapsedTime < timeBetweenBullets)
+                elapsedTime += Time.deltaTime;
+
+                if(elapsedTime > timeBetweenShots)
                 {
-                    elapsedTime += Time.deltaTime;
-                    scopeMarkCameraRenderer.enabled = false;
-                    scopeMarkOverlayRenderer.enabled = false;
-                }
-                else {
+                    elapsedTime = 0f;
+                    EnableScopeMarkRenderer(true);
+
                     ableToShoot = true;
-                    scopeMarkCameraRenderer.enabled = true;
-                    scopeMarkOverlayRenderer.enabled = true;
                 }
             }
             else
             {
-                scopeMarkCameraRenderer.enabled = false;
-                scopeMarkOverlayRenderer.enabled = false;
+                EnableScopeMarkRenderer(false);
             }
+            Debug.DrawLine(scopeMarkCamera.transform.position, scopeMarkCamera.transform.position + scopeMarkCamera.transform.forward * range, Color.red);
         }
 
         // Update is called once per frame
         public bool Shoot()
         {
-            if(ableToShoot)
+            if(gunPrepared && ableToShoot)
             {
                 Vector3 shootingPoint;
                 Vector3 hitDirection;
@@ -98,10 +92,16 @@ namespace DefinitiveScript
 
                 elapsedTime = 0.0f;
                 ableToShoot = false;
+                EnableScopeMarkRenderer(false);
 
                 return true;
             }
             return false;
+        }
+
+        public void EnableScopeMarkRenderer(bool value)
+        {
+            scopeMarkOverlayRenderer.enabled = value;
         }
 
         private EnemyBehaviour CalculateShootingPoint(out Vector3 shootingPoint, out Vector3 hitDirection)
@@ -135,7 +135,14 @@ namespace DefinitiveScript
 
             yield return new WaitForSeconds(time);
 
-            //if(enemy != null) enemy.AttackedByGun(damage, hitDirection, shootingPoint);
+            if(enemy != null) {
+                EnemyHealthController enemyHC = enemy.GetComponent<EnemyHealthController>();
+
+                enemyHC.Knockback(5f, hitDirection, true);
+                enemyHC.AttackedByGunParticles(shootingPoint);
+                if(!enemyHC.TakeDamage(damage))
+                    enemy.GetComponent<EnemyBehaviour>().HitOnBody();
+            }
             
             gunLine.enabled = false;
             faceLight.enabled = false;
