@@ -15,7 +15,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &8265318179575141488
 Transform:
@@ -40,9 +40,9 @@ LODGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1495654183252495582}
   serializedVersion: 2
-  m_LocalReferencePoint: {x: -0.029400826, y: 0.32355577, z: 0.04777068}
+  m_LocalReferencePoint: {x: -0.029400826, y: 0.4235558, z: 0.04777068}
   m_Size: 0.9360837
-  m_FadeMode: 2
+  m_FadeMode: 0
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
@@ -63,12 +63,13 @@ GameObject:
   - component: {fileID: 1691720641919864349}
   - component: {fileID: 7928862855914999429}
   - component: {fileID: 7615934526074069908}
+  - component: {fileID: 771302308677076033}
   m_Layer: 0
   m_Name: bush_5_summer_mat Variant(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &2794202840082422396
 Transform:
@@ -144,3 +145,16 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300000, guid: 061db1971cc4b734381514b013a2834d, type: 3}
+--- !u!135 &771302308677076033
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2272405371919316784}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.46804184
+  m_Center: {x: -0.029400826, y: 0.4235558, z: 0.04777068}
