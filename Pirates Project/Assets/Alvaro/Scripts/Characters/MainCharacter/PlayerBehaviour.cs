@@ -38,10 +38,10 @@ namespace DefinitiveScript
             }
         }
 
-        private MoveController m_MoveController;
-        public MoveController MoveController {
+        private PlayerMoveController m_MoveController;
+        public PlayerMoveController MoveController {
             get { 
-                if(m_MoveController == null) m_MoveController = GetComponent<MoveController>();
+                if(m_MoveController == null) m_MoveController = GetComponent<PlayerMoveController>();
                 return m_MoveController;
             }
         }
