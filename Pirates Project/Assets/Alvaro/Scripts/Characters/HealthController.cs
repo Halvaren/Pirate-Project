@@ -11,20 +11,17 @@ namespace DefinitiveScript
         protected float stamina;
 
         protected bool runOutOfStamina;
+        protected bool usingStamina;
 
         public float initialHealth;
         public float initialStamina;
 
-        public float recoveringStaminaSpeed = 0.5f;
-
-        public Scrollbar HealthBar;
-
-        public Scrollbar StaminaBar;
+        public float recoveringStaminaSpeed = 1f;
 
         private ParticleSystem hitParticles;
 
         protected CharacterBehaviour CharacterBehaviour;
-
+        protected SableController SableController;
 
         // Start is called before the first frame update
         protected void Start()
@@ -33,6 +30,7 @@ namespace DefinitiveScript
             stamina = initialStamina;
 
             runOutOfStamina = false;
+            usingStamina = false;
 
             hitParticles = GetComponentInChildren<ParticleSystem>();
 
@@ -40,9 +38,9 @@ namespace DefinitiveScript
         }
 
         // Update is called once per frame
-        protected void Update()
+        protected virtual void Update()
         {
-            if(runOutOfStamina) RecoverStamina();
+            if(stamina < initialStamina && !usingStamina) RecoverStamina();
         }
 
         public virtual bool TakeDamage(float damage)
@@ -50,9 +48,6 @@ namespace DefinitiveScript
             if(CharacterBehaviour.GetAlive())
             {
                 health -= damage;
-                //Scrollbar Health
-
-                //HealthBar.size = health/100f;
 
                 if(health <= 0f)
                 {    
@@ -80,10 +75,9 @@ namespace DefinitiveScript
 
         protected virtual IEnumerator PlayKnockback(Vector3 impact, float time) { yield return null; }
 
-        public bool ReduceStamina(float amount)
+        public virtual bool ReduceStamina(float amount)
         {
             stamina -= amount;
-            //StaminaBar.size = stamina/100f;
 
             if(stamina <= 0f) 
             {
@@ -93,14 +87,17 @@ namespace DefinitiveScript
             return stamina <= 0f; //Devuelve true si el personaje ha perdido toda su stamina
         }
 
-        protected void RecoverStamina()
+        protected virtual void RecoverStamina()
         {
             if(stamina < initialStamina)
             {
                 stamina += recoveringStaminaSpeed * Time.deltaTime;
             }
-            stamina = initialStamina;
-            runOutOfStamina = false;
+            else
+            {
+                stamina = initialStamina;
+                runOutOfStamina = false;
+            }
         }
 
         public float GetCurrentHealth()
@@ -126,6 +123,11 @@ namespace DefinitiveScript
         public bool GetRunOutOfStamina()
         {
             return runOutOfStamina;
+        }
+
+        public void SetUsingStamina(bool value)
+        {
+            usingStamina = value;
         }
     }
 }

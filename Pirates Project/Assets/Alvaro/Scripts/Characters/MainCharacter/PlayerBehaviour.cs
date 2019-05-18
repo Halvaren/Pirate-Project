@@ -38,11 +38,19 @@ namespace DefinitiveScript
             }
         }
 
-        private MoveController m_MoveController;
-        public MoveController MoveController {
+        private PlayerMoveController m_MoveController;
+        public PlayerMoveController MoveController {
             get { 
-                if(m_MoveController == null) m_MoveController = GetComponent<MoveController>();
+                if(m_MoveController == null) m_MoveController = GetComponent<PlayerMoveController>();
                 return m_MoveController;
+            }
+        }
+
+        private HealthController m_HealthController;
+        public HealthController HealthController {
+            get {
+                if(m_HealthController == null) m_HealthController = GetComponent<HealthController>();
+                return m_HealthController;
             }
         }
 
@@ -173,7 +181,7 @@ namespace DefinitiveScript
 
                     if(!stopMovement)
                     {
-                        runningInput = InputController.RunningInput;
+                        runningInput = !HealthController.GetRunOutOfStamina() && InputController.RunningInput;
 
                         movementInput = new Vector2(InputController.Horizontal, InputController.Vertical);
 
@@ -187,12 +195,11 @@ namespace DefinitiveScript
                         movementInput = Vector2.zero;
                         mouseInput = Vector2.zero;
                         runningInput = false;
-        
                     }
 
                     attackInput = InputController.AttackInput;
                     shootInput = InputController.ShootingInput;
-                    blockInput = InputController.BlockInput;
+                    blockInput = InputController.BlockInput && !HealthController.GetRunOutOfStamina();
                 }
                 else
                 {   
