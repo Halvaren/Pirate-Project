@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerUIController : MonoBehaviour
 {
     public RectTransform healthBarFill;
     public RectTransform staminaBarFill;
     public RectTransform reloadGunBarFill;
+    public Text moneyText;
+    public Image keyImage;
 
     private float barMaxWidth;
     private float barHeight;
@@ -19,11 +22,39 @@ public class PlayerUIController : MonoBehaviour
     private Coroutine updateStaminaBarCoroutine;
     private Coroutine updateReloadGunBarCoroutine;
 
+    private float moneyTimer = 0.0f;
+    private float timeBetweenMoneyUnitIncrease = 0.01f;
+    private int currentMoney;
+    private int newMoney;
+
+    public Color keyEnabledColor;
+    public Color keyDisabledColor;
+
+    private bool aux = true;
+
     // Start is called before the first frame update
     void Start()
     {
         barMaxWidth = healthBarFill.sizeDelta.x;
         barHeight = healthBarFill.sizeDelta.y;
+
+        currentMoney = 0;
+        newMoney = currentMoney;
+        moneyText.text = currentMoney.ToString();
+    }
+
+    void Update() 
+    {
+        if(currentMoney != newMoney)
+        {
+            moneyTimer += Time.deltaTime;
+            if(moneyTimer >= timeBetweenMoneyUnitIncrease)
+            {
+                moneyTimer = 0f;
+                currentMoney = currentMoney < newMoney ? currentMoney + 1 : currentMoney - 1;
+                moneyText.text = currentMoney.ToString();
+            }
+        }
     }
 
     public void UpdateHealthBar(float currentValue)
@@ -129,5 +160,17 @@ public class PlayerUIController : MonoBehaviour
         reloadGunBarFill.sizeDelta = new Vector2(newReloadGunBarWidht, barHeight);
 
         updateReloadGunBarCoroutine = null;
+    }
+
+    public void IncreaseMoney(int amount)
+    {
+        newMoney += amount;
+        if(newMoney < 0) newMoney = 0;
+    }
+
+    public void EnableKey(bool value)
+    {
+        if(value) keyImage.color = keyEnabledColor;
+        else keyImage.color = keyDisabledColor;
     }
 }
