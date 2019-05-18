@@ -32,6 +32,7 @@ namespace DefinitiveScript {
             {
                 blocking = !HealthController.ReduceStamina(reducingStaminaSpeed * Time.deltaTime); //Devolverá un true y detendrá el bloqueo si la stamina se acaba
             }
+
             PlayerAnimatorController.SetBlocking(blocking); //Se notifica al AnimatorController de los posibles cambios
         }
 

@@ -17,8 +17,16 @@ namespace DefinitiveScript
         private PlayerSableController m_PlayerSableController;
         public PlayerSableController PlayerSableController {
             get {
-                if(m_PlayerSableController) m_PlayerSableController = GetComponent<PlayerSableController>();
+                if(m_PlayerSableController == null) m_PlayerSableController = GetComponent<PlayerSableController>();
                 return m_PlayerSableController;
+            }
+        }
+
+        private HealthController m_HealthController;
+        public HealthController HealthController {
+            get {
+                if(m_HealthController == null) m_HealthController = GetComponent<HealthController>();
+                return m_HealthController;
             }
         }
 
@@ -48,6 +56,8 @@ namespace DefinitiveScript
             Animator.SetBool("TurnLeft", turningLeft);
             Animator.SetBool("TurnRight", turningRight);
             Animator.SetBool("LockedTarget", lockedTarget);
+
+            HealthController.SetUsingStamina((movement && running) || ((verticalMovement != 0f || horizontalMovement != 0f) && running) || blocking);
         }
 
         public void Shoot()
@@ -58,6 +68,29 @@ namespace DefinitiveScript
         public void Die()
         {
             Animator.SetTrigger("Die");
+        }
+
+        public void Disappear()
+        {
+            StartCoroutine(FadeOut(1.0f));
+        }
+
+        private IEnumerator FadeOut(float time)
+        {
+            float elapsedTime = 0.0f;
+            Vector3 newPosition = transform.position;
+
+            while(elapsedTime < time)
+            {
+                elapsedTime += Time.deltaTime;
+
+                newPosition.y -= Time.deltaTime;
+                transform.position = newPosition;
+
+                yield return null;
+            }
+
+            //Destroy(gameObject); //?
         }
 
         public void HitOnBody()

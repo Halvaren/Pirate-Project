@@ -46,6 +46,14 @@ namespace DefinitiveScript
             }
         }
 
+        private HealthController m_HealthController;
+        public HealthController HealthController {
+            get {
+                if(m_HealthController == null) m_HealthController = GetComponent<HealthController>();
+                return m_HealthController;
+            }
+        }
+
         private Vector2 m_MouseInput; //Atributo donde se guardará los valores graduales del input del ratón hasta alcanzar el valor final
         public Vector2 mouseInput {
             get {
@@ -173,7 +181,7 @@ namespace DefinitiveScript
 
                     if(!stopMovement)
                     {
-                        runningInput = InputController.RunningInput;
+                        runningInput = !HealthController.GetRunOutOfStamina() && InputController.RunningInput;
 
                         movementInput = new Vector2(InputController.Horizontal, InputController.Vertical);
 
@@ -187,12 +195,11 @@ namespace DefinitiveScript
                         movementInput = Vector2.zero;
                         mouseInput = Vector2.zero;
                         runningInput = false;
-        
                     }
 
                     attackInput = InputController.AttackInput;
                     shootInput = InputController.ShootingInput;
-                    blockInput = InputController.BlockInput;
+                    blockInput = InputController.BlockInput && !HealthController.GetRunOutOfStamina();
                 }
                 else
                 {   

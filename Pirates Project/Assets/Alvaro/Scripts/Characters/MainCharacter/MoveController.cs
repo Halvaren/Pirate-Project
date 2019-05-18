@@ -12,15 +12,24 @@ namespace DefinitiveScript
         public float gravity = 20.0f; //Gravedad que afecta al personaje
         public float limitXAngle;
 
+        public float reducingStaminaSpeed = 5f;
+
         private CharacterController controller; //Instancia del CharacterController
+        private HealthController health;
 
         void Awake()
         {
             controller = GetComponent<CharacterController>();
+            health = GetComponent<HealthController>();
         }
 
         public void Move(float verInput, float horInput, Vector3 verDir, Vector3 horDir, bool running)
         {
+            if(running)
+            {
+                running = !health.ReduceStamina(reducingStaminaSpeed * Time.deltaTime);
+            }
+
             float speed = running ? runningSpeed : movingSpeed; //Se decide que velocidad emplear
             Vector2 movement = new Vector2 (verInput * speed, horInput * speed); //Se calcula la cantidad de movimiento
             Vector3 newPosition = verDir * movement.x * Time.deltaTime 

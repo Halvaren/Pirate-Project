@@ -30,8 +30,8 @@ namespace DefinitiveScript
             if(blocking) //Si se está bloqueando, el HealthController deberá reducir la stamina progresivamente
             {
                 blocking = !HealthController.ReduceStamina(reducingStaminaSpeed * Time.deltaTime); //Devolverá un true y detendrá el bloqueo si la stamina se acaba
-                //EnemyBehaviour.SetBlocking(blocking); //Se notifica al AnimatorController de los posibles cambios
             }
+            HealthController.SetUsingStamina(blocking);
         }
 
         //Este método es el que inicia el siguiente ataque del combo si es llamado desde fuera y se puede encadenar otro ataque

@@ -41,7 +41,8 @@ public class EnemyBlockBehaviour : StateMachineBehaviour
 
         blockingTimer += Time.deltaTime;
 
-        bool condition = (blockingTimer < minTimeBlocking || Random.Range(health.GetCurrentStamina(), health.GetTotalStamina()) > 0.5f * health.GetTotalStamina() && blockingTimer > minTimeBlocking);
+        bool condition = !health.GetRunOutOfStamina();
+        condition = condition && (blockingTimer < minTimeBlocking || Random.Range(health.GetCurrentStamina(), health.GetTotalStamina()) > 0.5f * health.GetTotalStamina() && blockingTimer > minTimeBlocking);
         condition = condition && blockingTimer < maxTimeBlocking;
 
 
