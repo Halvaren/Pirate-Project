@@ -27,7 +27,6 @@ namespace DefinitiveScript
         {
             if(running)
             {
-                print("hola");
                 running = !health.ReduceStamina(reducingStaminaSpeed * Time.deltaTime);
             }
 
@@ -85,7 +84,15 @@ namespace DefinitiveScript
             transform.localEulerAngles = eulerAngles;
         }
 
-        public void SableRotate(Vector3 targetDirection)
+        public void LockedTargetRotate(Transform target)
+        {
+            Vector3 lookDirection = target.position - transform.position;
+            lookDirection.y = 0;
+            Quaternion rotation = Quaternion.LookRotation(lookDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed);
+        }
+
+        public void UnlockedTargetRotate(Vector3 targetDirection)
         {
             Vector3 lookDirection = targetDirection.normalized; //Si se está en modo sable, se utiliza la dirección objetivo para girar al personaje hacia esa dirección
             if(lookDirection != Vector3.zero)

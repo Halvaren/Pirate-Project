@@ -118,10 +118,20 @@ namespace DefinitiveScript
             Animator.SetTrigger("ChangeMode");
         }
 
+        public void LockUnlockTarget()
+        {
+            Animator.SetTrigger("LockUnlockTarget");
+        }
+
         public void ChangeMode()
         {
             if(!sableMode) ActiveSableMode();
             else ActiveGunMode();
+        }
+
+        public void SetLockedTarget()
+        {
+            SetLockedTarget(!lockedTarget);
         }
         
 

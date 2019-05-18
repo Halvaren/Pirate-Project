@@ -10,10 +10,13 @@ namespace DefinitiveScript
         private PlayerBehaviour PlayerBehaviour;
         private PlayerMoveController MoveController;
         private PlayerSableController SableController;
+        private PlayerLockTargetController LockTargetController;
         private Transform CameraTransform;
 
         private Vector3 verticalDirection;
         private Vector3 horizontalDirection;
+
+        private Transform enemyTransform;
 
         override public void OnStateMachineEnter(Animator animator, int stateMachinePathHash)
         {
@@ -27,10 +30,13 @@ namespace DefinitiveScript
             PlayerAnimatorController = animator.GetComponent<PlayerAnimatorController>();
             MoveController = animator.GetComponent<PlayerMoveController>();
             SableController = animator.GetComponent<PlayerSableController>();
+            LockTargetController = animator.GetComponent<PlayerLockTargetController>();
 
             CameraTransform = Camera.main.transform;
 
-            PlayerBehaviour.stopInput = stateInfo.IsName("ExitingSableMode");
+            PlayerBehaviour.stopInput = stateInfo.IsName("ExitingSableMode") || stateInfo.IsName("LockingTarget");
+
+            enemyTransform = LockTargetController.enemyTransform;
         }
 
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -40,8 +46,16 @@ namespace DefinitiveScript
 
             if(!PlayerAnimatorController.IsBlocking() && !PlayerAnimatorController.IsAttacking())
             {
-                verticalDirection = CameraTransform.forward;
-                horizontalDirection = CameraTransform.right;
+                if(PlayerAnimatorController.IsTargetLocked())
+                {
+                    verticalDirection = animator.transform.forward;
+                    horizontalDirection = animator.transform.right;
+                }
+                else
+                {  
+                    verticalDirection = CameraTransform.forward;
+                    horizontalDirection = CameraTransform.right;
+                }
 
                 Vector2 movementInput = PlayerBehaviour.movementInput;
                 movementInput = movementInput.normalized;
@@ -52,7 +66,8 @@ namespace DefinitiveScript
                 Vector3 targetDirection = movementInput.y * verticalDirection + movementInput.x * horizontalDirection;
                 Vector2 mouseInput = PlayerBehaviour.mouseInput;
 
-                MoveController.SableRotate(targetDirection);
+                if(PlayerAnimatorController.IsTargetLocked()) MoveController.LockedTargetRotate(enemyTransform);
+                else MoveController.UnlockedTargetRotate(targetDirection);
 
                 PlayerAnimatorController.SetVerticalMovement(movementInput.y);
                 PlayerAnimatorController.SetHorizontalMovement(movementInput.x);

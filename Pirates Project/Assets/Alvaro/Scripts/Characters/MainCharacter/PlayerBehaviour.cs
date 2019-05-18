@@ -124,6 +124,16 @@ namespace DefinitiveScript
             }
         }
 
+        private bool m_LockedTarget;
+        public bool lockedTarget {
+            get {
+                return m_LockedTarget;
+            }
+            set {
+                m_LockedTarget = value;
+            }
+        }
+
         private bool m_StopMovement; //Permitirá para el movimiento en los casos necesarios (inutiliza el Update)
         public bool stopMovement {
             get {
@@ -148,16 +158,13 @@ namespace DefinitiveScript
         public GameObject gunObject;
         public GameObject sableObject;
 
-        public CinemachineVirtualCameraBase firstPersonCamera;
-        public CinemachineVirtualCameraBase thirdPersonUnlockedTargetCamera;
-        public CinemachineVirtualCameraBase thirdPersonLockedTargetCamera;
-
         void Start()
         {
             sableMode = true; //Se inicializa el modo de movimiento en modo sable
             PlayerAnimatorController.SetSableMode(sableMode);
             stopMovement = false;
             stopInput = false;
+            lockedTarget = false;
 
             ChangeWeapon();
         }     
@@ -177,6 +184,14 @@ namespace DefinitiveScript
                         
                         MoveController.ResetXRotation();
                         ChangeWeapon();
+                    }
+
+                    if(sableMode && InputController.LockTargetInput)
+                    {
+                        stopInput = true;
+                        lockedTarget = !lockedTarget;
+
+                        PlayerAnimatorController.LockUnlockTarget();
                     }
 
                     if(!stopMovement)
@@ -287,27 +302,6 @@ namespace DefinitiveScript
             model.GetComponent<SkinnedMeshRenderer>().enabled = param;
             gunObject.GetComponentInChildren<MeshRenderer>().enabled = param;
             sableObject.GetComponentInChildren<MeshRenderer>().enabled = param;
-        }
-
-        public void ChangeToCamera(string code)
-        {
-            print(code);
-            firstPersonCamera.m_Priority = 10;
-            //thirdPersonLockedTargetCamera.m_Priority = 10;
-            thirdPersonUnlockedTargetCamera.m_Priority = 10;
-
-            switch(code)
-            {
-                case "first":
-                    firstPersonCamera.m_Priority = 12;
-                    break;
-                case "thirdLocked":
-                    //thirdPersonLockedTargetCamera.m_Priority = 12;
-                    break;
-                case "thirdUnlocked":
-                    thirdPersonUnlockedTargetCamera.m_Priority = 12;
-                    break;
-            }
         }
     }
 }
