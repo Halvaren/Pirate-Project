@@ -10,6 +10,7 @@ namespace DefinitiveScript
         public float Horizontal; //Guarda la información del eje Horizontal
         public Vector2 MouseInput; //Guarda la información del movimiento del ratón en X y en Y
         public bool ChangeMoveModeInput; //Guarda el valor respecto a la pulsación (inicial) del botón de cambio de modo de movimiento
+        public bool LockTargetInput;
         public bool RunningInput; //Guarda el valor respecto a la pulsación (manteniendo) del botón de correr
         public bool ShootingInput;
         public bool AttackInput;
@@ -22,6 +23,7 @@ namespace DefinitiveScript
             Horizontal = Input.GetAxis("Horizontal");
             MouseInput = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
             ChangeMoveModeInput = Input.GetButtonDown("ChangeMoveMode");
+            LockTargetInput = Input.GetButtonDown("MouseMiddleClick");
             RunningInput = Input.GetButton("Running");
             ShootingInput = Input.GetButtonDown("MouseLeftClick");
             AttackInput = Input.GetButtonDown("MouseLeftClick") || Input.GetKeyDown(KeyCode.F);

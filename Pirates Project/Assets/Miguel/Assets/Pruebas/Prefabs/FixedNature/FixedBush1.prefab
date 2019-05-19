@@ -15,7 +15,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 18
   m_IsActive: 1
 --- !u!4 &8370434492613359213
 Transform:
@@ -40,9 +40,9 @@ LODGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3754113929103049985}
   serializedVersion: 2
-  m_LocalReferencePoint: {x: 0.09541917, y: 0.9706434, z: -0.035087466}
+  m_LocalReferencePoint: {x: 0.09541917, y: 1.0706433, z: -0.035087466}
   m_Size: 2.1412866
-  m_FadeMode: 2
+  m_FadeMode: 0
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
@@ -63,12 +63,13 @@ GameObject:
   - component: {fileID: 6667457972203223692}
   - component: {fileID: 4272570250384809930}
   - component: {fileID: 1512245145238489723}
+  - component: {fileID: 2625718732293395139}
   m_Layer: 0
   m_Name: Bush_1 Variant(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 18
   m_IsActive: 1
 --- !u!4 &981868324575388288
 Transform:
@@ -143,4 +144,17 @@ CapsuleCollider:
   m_Radius: 0.9636606
   m_Height: 2.1412866
   m_Direction: 1
+  m_Center: {x: 0.09541914, y: 1.0706433, z: -0.035087436}
+--- !u!135 &2625718732293395139
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7302850044489022388}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.0706433
   m_Center: {x: 0.09541914, y: 1.0706433, z: -0.035087436}

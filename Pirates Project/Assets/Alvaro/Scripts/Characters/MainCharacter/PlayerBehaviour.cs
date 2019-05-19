@@ -38,11 +38,19 @@ namespace DefinitiveScript
             }
         }
 
-        private MoveController m_MoveController;
-        public MoveController MoveController {
+        private PlayerMoveController m_MoveController;
+        public PlayerMoveController MoveController {
             get { 
-                if(m_MoveController == null) m_MoveController = GetComponent<MoveController>();
+                if(m_MoveController == null) m_MoveController = GetComponent<PlayerMoveController>();
                 return m_MoveController;
+            }
+        }
+
+        private HealthController m_HealthController;
+        public HealthController HealthController {
+            get {
+                if(m_HealthController == null) m_HealthController = GetComponent<HealthController>();
+                return m_HealthController;
             }
         }
 
@@ -116,6 +124,16 @@ namespace DefinitiveScript
             }
         }
 
+        private bool m_LockedTarget;
+        public bool lockedTarget {
+            get {
+                return m_LockedTarget;
+            }
+            set {
+                m_LockedTarget = value;
+            }
+        }
+
         private bool m_StopMovement; //Permitirá para el movimiento en los casos necesarios (inutiliza el Update)
         public bool stopMovement {
             get {
@@ -140,16 +158,13 @@ namespace DefinitiveScript
         public GameObject gunObject;
         public GameObject sableObject;
 
-        public CinemachineVirtualCameraBase firstPersonCamera;
-        public CinemachineVirtualCameraBase thirdPersonUnlockedTargetCamera;
-        public CinemachineVirtualCameraBase thirdPersonLockedTargetCamera;
-
         void Start()
         {
             sableMode = true; //Se inicializa el modo de movimiento en modo sable
             PlayerAnimatorController.SetSableMode(sableMode);
             stopMovement = false;
             stopInput = false;
+            lockedTarget = false;
 
             ChangeWeapon();
         }     
@@ -171,9 +186,17 @@ namespace DefinitiveScript
                         ChangeWeapon();
                     }
 
+                    if(sableMode && InputController.LockTargetInput)
+                    {
+                        stopInput = true;
+                        lockedTarget = !lockedTarget;
+
+                        PlayerAnimatorController.LockUnlockTarget();
+                    }
+
                     if(!stopMovement)
                     {
-                        runningInput = InputController.RunningInput;
+                        runningInput = !HealthController.GetRunOutOfStamina() && InputController.RunningInput;
 
                         movementInput = new Vector2(InputController.Horizontal, InputController.Vertical);
 
@@ -187,12 +210,11 @@ namespace DefinitiveScript
                         movementInput = Vector2.zero;
                         mouseInput = Vector2.zero;
                         runningInput = false;
-        
                     }
 
                     attackInput = InputController.AttackInput;
                     shootInput = InputController.ShootingInput;
-                    blockInput = InputController.BlockInput;
+                    blockInput = InputController.BlockInput && !HealthController.GetRunOutOfStamina();
                 }
                 else
                 {   
@@ -280,27 +302,6 @@ namespace DefinitiveScript
             model.GetComponent<SkinnedMeshRenderer>().enabled = param;
             gunObject.GetComponentInChildren<MeshRenderer>().enabled = param;
             sableObject.GetComponentInChildren<MeshRenderer>().enabled = param;
-        }
-
-        public void ChangeToCamera(string code)
-        {
-            print(code);
-            firstPersonCamera.m_Priority = 10;
-            //thirdPersonLockedTargetCamera.m_Priority = 10;
-            thirdPersonUnlockedTargetCamera.m_Priority = 10;
-
-            switch(code)
-            {
-                case "first":
-                    firstPersonCamera.m_Priority = 12;
-                    break;
-                case "thirdLocked":
-                    //thirdPersonLockedTargetCamera.m_Priority = 12;
-                    break;
-                case "thirdUnlocked":
-                    thirdPersonUnlockedTargetCamera.m_Priority = 12;
-                    break;
-            }
         }
     }
 }

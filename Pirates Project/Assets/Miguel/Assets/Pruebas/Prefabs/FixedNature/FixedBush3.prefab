@@ -15,7 +15,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 18
   m_IsActive: 1
 --- !u!4 &407276994153758990
 Transform:
@@ -40,9 +40,9 @@ LODGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1948257160213484845}
   serializedVersion: 2
-  m_LocalReferencePoint: {x: 0.0013122559, y: 0.41736078, z: 0.0003516674}
+  m_LocalReferencePoint: {x: 0.0013122559, y: 0.5173608, z: 0.0003516674}
   m_Size: 1.1049743
-  m_FadeMode: 2
+  m_FadeMode: 0
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
@@ -63,12 +63,13 @@ GameObject:
   - component: {fileID: 1973001576650952104}
   - component: {fileID: 4773047878346130048}
   - component: {fileID: 2568736484779333736}
+  - component: {fileID: 5421683840080169266}
   m_Layer: 0
   m_Name: bush_2_autumn_mat Variant(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 18
   m_IsActive: 1
 --- !u!4 &2178381269781152786
 Transform:
@@ -144,3 +145,16 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300000, guid: d5245bb1061c9b349a0300defa628d95, type: 3}
+--- !u!135 &5421683840080169266
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6862879746275361564}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.55248713
+  m_Center: {x: 0.0013122559, y: 0.5173608, z: 0.0003516823}
