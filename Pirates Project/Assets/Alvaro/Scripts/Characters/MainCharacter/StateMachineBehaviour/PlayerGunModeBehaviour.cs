@@ -66,12 +66,12 @@ namespace DefinitiveScript
 
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            
+            GunController.gunPrepared = !stateInfo.IsName("ExitingGunMode");
         }
 
         override public void OnStateMachineExit(Animator animator, int stateMachinePathHash)
         {
-            GunController.gunPrepared = false;
+            
         }
     }
 }

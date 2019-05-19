@@ -36,7 +36,7 @@ namespace DefinitiveScript
 
             PlayerBehaviour.stopInput = stateInfo.IsName("ExitingSableMode") || stateInfo.IsName("LockingTarget");
 
-            enemyTransform = LockTargetController.enemyTransform;
+            enemyTransform = LockTargetController.GetCurrentTargetTransform();
         }
 
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
