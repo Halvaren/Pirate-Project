@@ -80,13 +80,13 @@ public class EnemyBehaviour : CharacterBehaviour
         NavMeshAgent = GetComponent<NavMeshAgent>();
         Animator = GetComponent<Animator>();
 
-        EnemyCharacterDetection[] enemyCharacterDetectors = GetComponentsInChildren<EnemyCharacterDetection>();
-        for(int i = 0; i < enemyCharacterDetectors.Length; i++) 
+        EnemyPlayerDetection[] enemyPlayerDetectors = GetComponentsInChildren<EnemyPlayerDetection>();
+        for(int i = 0; i < enemyPlayerDetectors.Length; i++) 
         {
-            enemyCharacterDetectors[i].enemyScript = this;
+            enemyPlayerDetectors[i].enemyScript = this;
             
-            if(enemyCharacterDetectors[i].GetComponent<SphereCollider>() != null) {
-                SphereCollider = enemyCharacterDetectors[i].GetComponent<SphereCollider>();
+            if(enemyPlayerDetectors[i].GetComponent<SphereCollider>() != null) {
+                SphereCollider = enemyPlayerDetectors[i].GetComponent<SphereCollider>();
             }
         }
     }

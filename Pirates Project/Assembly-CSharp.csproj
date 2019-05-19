@@ -75,10 +75,10 @@
      <Compile Include="Assets\Alvaro\Scripts\Characters\Enemies\EnemyUIController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Characters\Enemies\StateMachineBehaviour\EnemyAttackBehaviour.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Characters\Enemies\StateMachineBehaviour\EnemyBlockBehaviour.cs" />
-     <Compile Include="Assets\Alvaro\Scripts\Characters\Enemies\StateMachineBehaviour\EnemyCharacterDetection.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Characters\Enemies\StateMachineBehaviour\EnemyDeathBehaviour.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Characters\Enemies\StateMachineBehaviour\EnemyFollowPlayerBehaviour.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Characters\Enemies\StateMachineBehaviour\EnemyPatrolBehaviour.cs" />
+     <Compile Include="Assets\Alvaro\Scripts\Characters\Enemies\StateMachineBehaviour\EnemyPlayerDetection.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Characters\Enemies\StateMachineBehaviour\EnemySearchPlayerBehaviour.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Characters\Enemies\StateMachineBehaviour\EnemyStarePlayerBehaviour.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Characters\HealthController.cs" />
@@ -89,6 +89,7 @@
      <Compile Include="Assets\Alvaro\Scripts\Characters\MainCharacter\Controllers\PlayerMoveController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Characters\MainCharacter\Controllers\PlayerSableController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Characters\MainCharacter\PlayerBehaviour.cs" />
+     <Compile Include="Assets\Alvaro\Scripts\Characters\MainCharacter\PlayerEnemyDetection.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Characters\MainCharacter\PlayerUIController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Characters\MainCharacter\StateMachineBehaviour\PlayerExitingModeBehaviour.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Characters\MainCharacter\StateMachineBehaviour\PlayerGunModeBehaviour.cs" />
