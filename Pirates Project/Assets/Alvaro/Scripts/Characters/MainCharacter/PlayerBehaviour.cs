@@ -291,6 +291,8 @@ namespace DefinitiveScript
                     CharacterAnimationController.BackToIdle();
                 }
             }*/
+
+            if(stopInput) PlayerAnimatorController.ResetMovement();
         }
 
         void ChangeWeapon()

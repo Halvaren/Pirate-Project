@@ -40,7 +40,7 @@ namespace DefinitiveScript
         // Update is called once per frame
         protected virtual void Update()
         {
-            if(stamina < initialStamina && !usingStamina) RecoverStamina();
+            if((stamina < initialStamina && !usingStamina) || runOutOfStamina) RecoverStamina();
         }
 
         public virtual bool TakeDamage(float damage)
