@@ -54,6 +54,15 @@ namespace DefinitiveScript
             }
         }
 
+        private PlayerLockTargetController m_PlayerLockTargetController;
+        public PlayerLockTargetController PlayerLockTargetController
+        {
+            get {
+                if(m_PlayerLockTargetController == null) m_PlayerLockTargetController = GetComponent<PlayerLockTargetController>();
+                return m_PlayerLockTargetController;
+            }
+        }
+
         private Vector2 m_MouseInput; //Atributo donde se guardará los valores graduales del input del ratón hasta alcanzar el valor final
         public Vector2 mouseInput {
             get {
@@ -162,6 +171,8 @@ namespace DefinitiveScript
         {
             sableMode = true; //Se inicializa el modo de movimiento en modo sable
             PlayerAnimatorController.SetSableMode(sableMode);
+            PlayerLockTargetController.SetSableMode(sableMode);
+
             stopMovement = false;
             stopInput = false;
             lockedTarget = false;
@@ -175,23 +186,14 @@ namespace DefinitiveScript
             {
                 if(!stopInput)
                 {
-                    if(InputController.ChangeMoveModeInput)
+                    if(!lockedTarget && InputController.ChangeMoveModeInput)
                     {
-                        stopInput = true;
-                        sableMode = !sableMode;
-
-                        PlayerAnimatorController.ExitMode();
-                        
-                        MoveController.ResetXRotation();
-                        ChangeWeapon();
+                        ChangeMode();
                     }
 
                     if(sableMode && InputController.LockTargetInput)
                     {
-                        stopInput = true;
-                        lockedTarget = !lockedTarget;
-
-                        PlayerAnimatorController.LockUnlockTarget();
+                        LockUnlockTarget();
                     }
 
                     if(!stopMovement)
@@ -289,6 +291,8 @@ namespace DefinitiveScript
                     CharacterAnimationController.BackToIdle();
                 }
             }*/
+
+            if(stopInput) PlayerAnimatorController.ResetMovement();
         }
 
         void ChangeWeapon()
@@ -302,6 +306,28 @@ namespace DefinitiveScript
             model.GetComponent<SkinnedMeshRenderer>().enabled = param;
             gunObject.GetComponentInChildren<MeshRenderer>().enabled = param;
             sableObject.GetComponentInChildren<MeshRenderer>().enabled = param;
+        }
+
+        public void ChangeMode()
+        {
+            stopInput = true;
+            sableMode = !sableMode;
+            //if(sableMode) PlayerGunController.gunPrepared = false;
+            PlayerLockTargetController.SetSableMode(sableMode);
+
+            PlayerAnimatorController.ExitMode();
+            
+            MoveController.ResetXRotation();
+            ChangeWeapon();
+        }
+
+        public void LockUnlockTarget()
+        {
+            stopInput = true;
+            lockedTarget = !lockedTarget;
+
+            PlayerAnimatorController.LockUnlockTarget();
+            PlayerLockTargetController.LockUnlockTarget();
         }
     }
 }

@@ -7,7 +7,7 @@ public class TransitionDepur : MonoBehaviour
 {
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
-            GameManager.Instance.SceneController.ChangeToScene(1);
+        //if(other.gameObject.tag == "Player")
+            //GameManager.Instance.SceneController.ChangeToScene(1);
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyCharacterDetection : MonoBehaviour
+public class EnemyPlayerDetection : MonoBehaviour
 {
     [HideInInspector] public EnemyBehaviour enemyScript;
     [HideInInspector] public bool sphereCollider;

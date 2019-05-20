@@ -250,6 +250,14 @@ namespace DefinitiveScript
         {
             lockedTarget = value;
         }
+
+        public void ResetMovement()
+        {
+            verticalMovement = 0.0f;
+            horizontalMovement = 0.0f;
+            movement = false;
+            running = false;
+        }
     }
 }
 

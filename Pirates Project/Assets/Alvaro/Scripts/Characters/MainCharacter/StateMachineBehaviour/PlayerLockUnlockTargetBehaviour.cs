@@ -12,6 +12,8 @@ namespace DefinitiveScript
         {
             PlayerAnimatorController = animator.GetComponent<PlayerAnimatorController>();
 
+            PlayerAnimatorController.SetAttacking(false);
+            PlayerAnimatorController.SetBlocking(false);
             PlayerAnimatorController.SetLockedTarget();
         }
 
