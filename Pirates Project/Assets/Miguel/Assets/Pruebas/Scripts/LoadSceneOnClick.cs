@@ -7,6 +7,6 @@ public class LoadSceneOnClick : MonoBehaviour
 {
     public void LoadByIndex(string sceneName)
     {
-        //GameManager.Instance.SceneController.BackT
+        //GameManager.Instance.SceneController.
     }
 }
