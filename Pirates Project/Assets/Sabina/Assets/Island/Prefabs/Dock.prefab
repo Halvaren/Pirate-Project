@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 661667994}
   - component: {fileID: 661667993}
   - component: {fileID: 661667992}
-  - component: {fileID: 661667995}
+  - component: {fileID: 3834471247728870275}
   m_Layer: 0
   m_Name: boatStation
   m_TagString: boatStation
@@ -185,7 +185,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &661667995
+--- !u!114 &3834471247728870275
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -194,6 +194,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 661667990}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a8bc5dab672a6e4d9ec2f6a206eeebe, type: 3}
+  m_Script: {fileID: 11500000, guid: 52103af96945dd34cb96e6facaa8085c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enteringIsland: 0
+  dockID: 0
+  boatSpawnPoint: {fileID: 0}
+  playerSpawnPoint: {fileID: 0}

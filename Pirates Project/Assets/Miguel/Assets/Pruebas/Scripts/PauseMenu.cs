@@ -36,9 +36,9 @@ public class PauseMenu : MonoBehaviour
         GameIsPaused = true;
         GameManager.Instance.CursorController.UnlockCursor();
     }
-    public void LoadMenu(string sceneName)
+    public void LoadMenu()
     {
         Time.timeScale = 1f;
-        GameManager.Instance.SceneController.ChangeToScene(sceneName);
+        GameManager.Instance.SceneController.BackToMenu();
     }
 }

@@ -15,19 +15,19 @@ public class Transitions : MonoBehaviour
     {
         if (myCollision.gameObject.tag == "Player" && currentScene.name == "Island1" && this.gameObject.tag == "cavernEntrance")
         {
-            GameManager.Instance.SceneController.ChangeToScene("caverna");
+            //GameManager.Instance.SceneController.ChangeToScene("caverna");
         }
         else if (myCollision.gameObject.tag == "Player" && currentScene.name == "Island1" && this.gameObject.tag == "boatStation" )
         {
-            GameManager.Instance.SceneController.ChangeToScene("BoatPhysics");
+            //GameManager.Instance.SceneController.ChangeToScene("BoatPhysics");
         }
         else if (myCollision.gameObject.tag == "Player" && currentScene.name == "caverna")
         {
-            GameManager.Instance.SceneController.ChangeToScene("Island1");
+            //GameManager.Instance.SceneController.ChangeToScene("Island1");
         }
         else if (myCollision.gameObject.tag == "Boat" && currentScene.name == "BoatPhysics")
         {
-            GameManager.Instance.SceneController.ChangeToScene("Island1");
+            //GameManager.Instance.SceneController.ChangeToScene("Island1");
         }
     }
 }
