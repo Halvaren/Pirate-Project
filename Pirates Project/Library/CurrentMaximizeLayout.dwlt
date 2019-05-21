@@ -260,10 +260,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1366
+    x: 0
     y: 73
-    width: 906
-    height: 466
+    width: 596
+    height: 330
   m_PersistentViewDataDictionary: {fileID: 0}
 --- !u!114 &7
 MonoBehaviour:
@@ -288,8 +288,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 73
-    width: 633
-    height: 306
+    width: 793
+    height: 507
   m_PersistentViewDataDictionary: {fileID: 0}
   m_ViewTransforms:
     m_KeySerializationHelper:
@@ -309,6 +309,7 @@ MonoBehaviour:
     - {fileID: 1107921300812880080, guid: 4111938cfe00fe64092f655287b9f4b6, type: 2}
     - {fileID: 1107158479565876224, guid: 49c50c733f774164c804fb81a770b441, type: 2}
     - {fileID: 1107561633984227508, guid: 6c4d28eda35d41b4ab9a384273c643c5, type: 2}
+    - {fileID: 1107389659453025852, guid: 0006c7211f3d82d4a8403ccb29d5d34d, type: 2}
     m_ValueSerializationHelper:
     - e00: 0.950192
       e01: 0
@@ -566,11 +567,27 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
+    - e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: 6c4d28eda35d41b4ab9a384273c643c5,
+  m_AnimatorController: {fileID: 9100000, guid: 0006c7211f3d82d4a8403ccb29d5d34d,
     type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: 1107561633984227508, guid: 6c4d28eda35d41b4ab9a384273c643c5,
+  - m_Target: {fileID: 1107389659453025852, guid: 0006c7211f3d82d4a8403ccb29d5d34d,
       type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
@@ -633,9 +650,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 299
-    width: 633
-    height: 389
+    y: 423
+    width: 596
+    height: 265
   m_PersistentViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
@@ -719,7 +736,7 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 0}
+      scrollPos: {x: 0, y: 96}
       m_SelectedIDs: 
       m_LastClickedID: 0
       m_ExpandedIDs: 7c55ffffbe7cffffccfbffffcefbffffd0fbffffd2fbffffd4fbfffff4ffffff6a410000cc410000d8410000faab000078f30000
@@ -839,7 +856,7 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 0}
+      m_ClientGUIView: {fileID: 13}
     m_SearchString: 
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
@@ -903,7 +920,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 0}
+    m_ScrollPosition: {x: 0, y: 83}
     m_GridSize: 16
   m_DirectoriesAreaWidth: 110
 --- !u!114 &15
