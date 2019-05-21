@@ -323,11 +323,13 @@ namespace DefinitiveScript
 
         public void LockUnlockTarget()
         {
-            stopInput = true;
-            lockedTarget = !lockedTarget;
+            if((!lockedTarget && PlayerLockTargetController.LockUnlockTarget()) || (lockedTarget && !PlayerLockTargetController.LockUnlockTarget()))
+            {  
+                stopInput = true;
+                lockedTarget = !lockedTarget;
 
-            PlayerAnimatorController.LockUnlockTarget();
-            PlayerLockTargetController.LockUnlockTarget();
+                PlayerAnimatorController.LockUnlockTarget();
+            }
         }
     }
 }

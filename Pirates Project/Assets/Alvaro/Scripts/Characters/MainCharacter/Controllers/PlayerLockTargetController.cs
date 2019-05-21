@@ -174,17 +174,19 @@ public class PlayerLockTargetController : MonoBehaviour
         targetMarkTransform.position = Vector3.MoveTowards(targetMarkTransform.position, destination, step);
     }
 
-    public void LockUnlockTarget()
+    public bool LockUnlockTarget()
     {
-        if(!lockedTarget && currentTarget)
+        if(!lockedTarget && currentTarget != null)
         {
             lockedTarget = true;
             thirdPersonLockedTargetCamera.m_LookAt = currentTarget.transform;
+            return true;
         }
         else
         {
             lockedTarget = false;
             thirdPersonLockedTargetCamera.m_LookAt = null;
+            return false;
         }
     }
 

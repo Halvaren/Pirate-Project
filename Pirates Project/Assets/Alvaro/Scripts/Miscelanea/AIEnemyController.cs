@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DefinitiveScript;
 
 public class AIEnemyController : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class AIEnemyController : MonoBehaviour
     void Start()
     {
         enemyAttacking = false;
+        playerTransform = GameManager.Instance.LocalPlayer.transform;
     }
 
     // Update is called once per frame

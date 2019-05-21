@@ -72,11 +72,12 @@ namespace DefinitiveScript
         private PlayerBehaviour m_LocalPlayer; //Instancia del Player
         public PlayerBehaviour LocalPlayer {
             get {
+                if(m_LocalPlayer == null) {
+                    GameObject aux = GameObject.Find("Player");
+
+                    if(aux != null) m_LocalPlayer = aux.GetComponent<PlayerBehaviour>();
+                }
                 return m_LocalPlayer;
-            }
-            set {
-                m_LocalPlayer = value;
-                AIEnemyController.SetPlayerTransform(m_LocalPlayer.transform);
             }
         }
 

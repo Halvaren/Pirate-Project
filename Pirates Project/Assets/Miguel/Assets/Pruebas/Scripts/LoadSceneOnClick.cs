@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 using DefinitiveScript;
 public class LoadSceneOnClick : MonoBehaviour
 {
-    public void LoadByIndex(string sceneName)
+    public void LoadScene()
     {
-        //GameManager.Instance.SceneController.
+        GameManager.Instance.SceneController.StartGame();
     }
 }

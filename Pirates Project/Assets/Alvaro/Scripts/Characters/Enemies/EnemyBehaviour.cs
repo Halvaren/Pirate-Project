@@ -93,19 +93,10 @@ public class EnemyBehaviour : CharacterBehaviour
 
     void Start()
     {
-        StartCoroutine(ObtainPlayerTransform());
+        playerTransform = AIEnemyController.GetPlayerTransform();
 
         CreatePathPoints();
         SetPatrolling();
-    }
-
-    IEnumerator ObtainPlayerTransform()
-    {
-        while(AIEnemyController.GetPlayerTransform() == null)
-        {
-            yield return null;
-        }
-        playerTransform = AIEnemyController.GetPlayerTransform();
     }
 
     void Update()
