@@ -334,7 +334,7 @@ public static class BoatPhysicsMath
         }
         else
         {
-            Debug.Log(forceName += " force is NaN");
+            //Debug.Log(forceName += " force is NaN");
 
             return Vector3.zero;
         }

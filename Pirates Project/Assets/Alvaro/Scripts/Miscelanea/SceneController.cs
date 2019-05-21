@@ -16,6 +16,11 @@ namespace DefinitiveScript
         public Image blackScreen;
         public float fadingTime = 0.5f;
 
+        private int lastScene;
+        private int dockID;
+        
+        private bool changedScene = false;
+
         private DockController[] BoatDocks;
         private DockController[] IslandDocks;
 
@@ -30,39 +35,33 @@ namespace DefinitiveScript
 
         void Awake()
         {
-            if (!created)
-            {
-                DontDestroyOnLoad(GameManager.Instance.GameObject);
-                DontDestroyOnLoad(this.gameObject);
-                created = true;
-            }
-            else
+            GameObject[] objs = GameObject.FindGameObjectsWithTag("SceneController");
+
+            if(objs.Length > 1 && !created)
             {
                 Destroy(this.gameObject);
             }
+
+            if(!created) lastScene = -1;
+
+            DontDestroyOnLoad(GameManager.Instance.GameObject);
+            DontDestroyOnLoad(this.gameObject);
+
+            created = true;
         }
 
         void Start()
         {
             GameManager.Instance.SceneController = this;
 
+            InitializeScene();
+        }
 
-            if(SceneManager.GetActiveScene().buildIndex == boatSceneID)
+        void Update() {
+            if(changedScene && lastScene != SceneManager.GetActiveScene().buildIndex)
             {
-                FindBoatInitialPoint();
-                FindBoat();
-                FindBoatDocks();
-            }
-            else if(SceneManager.GetActiveScene().buildIndex == islandSceneID)
-            {
-                FindPlayer();
-                FindIslandDocks();
-                FindExitCavernSpawnPoint();
-            }
-            else if(SceneManager.GetActiveScene().buildIndex == cavernSceneID)
-            {
-                FindPlayer();
-                FindEnterCavernSpawnPoint();
+                InitializeScene();
+                changedScene = false;
             }
         }
 
@@ -94,12 +93,36 @@ namespace DefinitiveScript
 
         private void FindBoatDocks()
         {
-            BoatDocks = FindObjectsOfType<DockController>();
+            DockController[] aux = FindObjectsOfType<DockController>();
+            
+            BoatDocks = new DockController[aux.Length/2];
+
+            int j = 0;
+            for(int i = 0; i < aux.Length; i++)
+            {
+                if(aux[i].enteringIsland) 
+                {
+                    BoatDocks[j] = aux[i];
+                    j++;
+                }
+            }
         }
 
         private void FindIslandDocks()
         {
-            IslandDocks = FindObjectsOfType<DockController>();
+            DockController[] aux = FindObjectsOfType<DockController>();
+            
+            IslandDocks = new DockController[aux.Length/2];
+
+            int j = 0;
+            for(int i = 0; i < aux.Length; i++)
+            {
+                if(!aux[i].enteringIsland) 
+                {
+                    IslandDocks[j] = aux[i];
+                    j++;
+                }
+            }
         }
 
         private void FindExitCavernSpawnPoint()
@@ -114,120 +137,113 @@ namespace DefinitiveScript
             if(aux != null) enterIntoCavernSpawnPoint = aux.transform;
         }
 
-        public void BackToMenu()
+        private void InitializeScene()
         {
-            StartCoroutine(BackToMenuCoroutine());
+            StartCoroutine(InitializeSceneCoroutine());
         }
 
-        private IEnumerator BackToMenuCoroutine()
+        private IEnumerator InitializeSceneCoroutine()
         {
+            if(lastScene != -1)
+            {
+                if(SceneManager.GetActiveScene().buildIndex == boatSceneID)
+                {
+                    FindBoatInitialPoint();
+                    FindBoat();
+                    FindBoatDocks();
+
+                    if(lastScene == mainMenuID)
+                    {
+                        BoatTransform.position = boatInitialPoint.position;
+                    }
+                    else if(lastScene == islandSceneID)
+                    {
+                        BoatTransform.position = IslandDocks[dockID].boatSpawnPoint.position;
+                    }
+                    
+                    yield return StartCoroutine(FadeIn(fadingTime));
+                }
+                else if(SceneManager.GetActiveScene().buildIndex == islandSceneID)
+                {
+                    FindPlayer();
+                    FindIslandDocks();
+                    FindExitCavernSpawnPoint();
+
+                    PlayerBehaviour.stopInput = true;
+                    if(lastScene == boatSceneID)
+                    {
+                        PlayerBehaviour.transform.position = IslandDocks[dockID].playerSpawnPoint.position;
+                    }
+                    else if(lastScene == cavernSceneID)
+                    {
+                        PlayerBehaviour.transform.position = exitFromCavernSpawnPoint.position;
+                    }
+
+                    yield return StartCoroutine(FadeIn(fadingTime));
+
+                    PlayerBehaviour.stopInput = false;
+                }
+                else if(SceneManager.GetActiveScene().buildIndex == cavernSceneID)
+                {
+                    FindPlayer();
+                    FindEnterCavernSpawnPoint();
+
+                    if(lastScene == islandSceneID)
+                    {   
+                        PlayerBehaviour.stopInput = true;
+
+                        PlayerBehaviour.transform.position = enterIntoCavernSpawnPoint.position;
+
+                        yield return StartCoroutine(FadeIn(fadingTime));
+
+                        PlayerBehaviour.stopInput = false;
+                    }
+                }
+            }
+            
+        }
+
+        private IEnumerator ChangeToScene(int sceneID)
+        {
+            lastScene = SceneManager.GetActiveScene().buildIndex;
+            changedScene = true;
             yield return StartCoroutine(FadeOut(fadingTime));
-            SceneManager.LoadScene(mainMenuID);
-            yield return StartCoroutine(FadeIn(fadingTime));
+
+            SceneManager.LoadScene(sceneID);
+        }
+
+        public void BackToMenu()
+        {
+            StartCoroutine(ChangeToScene(mainMenuID));
         }
 
         public void StartGame()
         {
-            StartCoroutine(StartGameCoroutine());
-        }
-
-        private IEnumerator StartGameCoroutine()
-        {
-            yield return StartCoroutine(FadeOut(fadingTime));
-            SceneManager.LoadScene(islandSceneID);
-
-            if(BoatTransform == null) FindBoat();
-            if(boatInitialPoint == null) FindBoatInitialPoint();
-            BoatTransform.position = boatInitialPoint.position;
-
-            if(BoatDocks == null) FindBoatDocks();
-
-            yield return StartCoroutine(FadeIn(fadingTime));
+            StartCoroutine(ChangeToScene(boatSceneID));
         }
 
         public void DockTheBoat(int dockID)
         {
-            StartCoroutine(DockTheBoatCoroutine(dockID));
-        }
+            this.dockID = dockID;
 
-        private IEnumerator DockTheBoatCoroutine(int dockID)
-        {
-            yield return StartCoroutine(FadeOut(fadingTime));
-            SceneManager.LoadScene(islandSceneID);
-
-            if(PlayerBehaviour == null) FindPlayer();
-            PlayerBehaviour.stopInput = true;
-
-            if(IslandDocks == null) FindIslandDocks();
-            PlayerBehaviour.transform.position = IslandDocks[dockID].playerSpawnPoint.position;
-
-            if(exitFromCavernSpawnPoint == null) FindExitCavernSpawnPoint();
-
-            yield return StartCoroutine(FadeIn(fadingTime));
-
-            PlayerBehaviour.stopInput = false;
+            StartCoroutine(ChangeToScene(islandSceneID));
         }
 
         public void ToSail(int dockID)
         {
-            StartCoroutine(ToSailCoroutine(dockID));
-        }
+            this.dockID = dockID;
 
-        private IEnumerator ToSailCoroutine(int dockID)
-        {
-            yield return StartCoroutine(FadeOut(fadingTime));
-            SceneManager.LoadScene(islandSceneID);
-
-            if(BoatTransform == null) FindBoat();
-
-            if(BoatDocks == null) FindBoatDocks();
-            BoatTransform.position = IslandDocks[dockID].boatSpawnPoint.position;
-
-            yield return StartCoroutine(FadeIn(fadingTime));
+            StartCoroutine(ChangeToScene(boatSceneID));
         }
 
         public void EnterIntoTheCavern()
         {
-            StartCoroutine(EnterIntoTheCavernCoroutine());
-        }
-
-        private IEnumerator EnterIntoTheCavernCoroutine()
-        {
-            yield return StartCoroutine(FadeOut(fadingTime));
-            SceneManager.LoadScene(cavernSceneID);
-
-            if(PlayerBehaviour == null) FindPlayer(); 
-            PlayerBehaviour.stopInput = true;
-
-            if(enterIntoCavernSpawnPoint == null) FindEnterCavernSpawnPoint();
-            PlayerBehaviour.transform.position = enterIntoCavernSpawnPoint.position;
-
-            yield return StartCoroutine(FadeIn(fadingTime));
-
-            PlayerBehaviour.stopInput = false;
+            StartCoroutine(ChangeToScene(cavernSceneID));
         }
 
         public void ExitFromTheCavern()
         {
-            StartCoroutine(ExitFromTheCavernCoroutine());
-        }
-
-        private IEnumerator ExitFromTheCavernCoroutine()
-        {
-            yield return StartCoroutine(FadeOut(fadingTime));
-            SceneManager.LoadScene(islandSceneID);
-
-            if(PlayerBehaviour == null) FindPlayer(); 
-            PlayerBehaviour.stopInput = true;
-
-            if(exitFromCavernSpawnPoint == null) FindExitCavernSpawnPoint();
-            PlayerBehaviour.transform.position = exitFromCavernSpawnPoint.position;
-
-            if(IslandDocks == null) FindIslandDocks();
-
-            yield return StartCoroutine(FadeIn(fadingTime));
-
-            PlayerBehaviour.stopInput = false;
+            StartCoroutine(ChangeToScene(islandSceneID));
         }
 
         /*public void ChangeToScene(string name)
@@ -264,7 +280,7 @@ namespace DefinitiveScript
             Color c = blackScreen.color;
             while(elapsedTime < time)
             {
-                elapsedTime = 0.0f;
+                elapsedTime += Time.deltaTime;
 
                 c.a = Mathf.Lerp(initialAlpha, finalAlpha, elapsedTime / time);
                 blackScreen.color = c;
@@ -285,13 +301,14 @@ namespace DefinitiveScript
             Color c = blackScreen.color;
             while(elapsedTime < time)
             {
-                elapsedTime = 0.0f;
+                elapsedTime += Time.deltaTime;
 
                 c.a = Mathf.Lerp(initialAlpha, finalAlpha, elapsedTime / time);
                 blackScreen.color = c;
 
                 yield return null;
             }
+
             c.a = finalAlpha;
             blackScreen.color = c;
         }

@@ -24,8 +24,6 @@ public class BoatUIController : MonoBehaviour
     {
         float angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
 
-        print(direction + " " + (angle - 90f));
-
         CompassRotation_Z = angle - 90f;
 
         compassPointer.localEulerAngles = new Vector3(0f, 0f, CompassRotation_Z);
