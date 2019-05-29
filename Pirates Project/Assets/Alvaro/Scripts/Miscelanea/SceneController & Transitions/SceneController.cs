@@ -21,6 +21,8 @@ namespace DefinitiveScript
         
         private bool changedScene = false;
 
+        private bool resolvedPuzles = false;
+
         private DockController[] BoatDocks;
         private DockController[] IslandDocks;
 
@@ -54,6 +56,9 @@ namespace DefinitiveScript
         {
             GameManager.Instance.SceneController = this;
 
+            if(SceneManager.GetActiveScene().buildIndex == mainMenuID) GameManager.Instance.CursorController.UnlockCursor();
+            else GameManager.Instance.CursorController.LockCursor();
+
             InitializeScene();
         }
 
@@ -73,8 +78,6 @@ namespace DefinitiveScript
                 PlayerBehaviour = aux.GetComponent<PlayerBehaviour>();
                 
                 PlayerBehaviour.enabled = true;
-
-                GameManager.Instance.CursorController.LockCursor();
             }
         }
 
@@ -149,10 +152,13 @@ namespace DefinitiveScript
             {
                 if(SceneManager.GetActiveScene().buildIndex == mainMenuID)
                 {
+                    GameManager.Instance.CursorController.UnlockCursor();
                     yield return StartCoroutine(FadeIn(fadingTime));
                 }
                 else if(SceneManager.GetActiveScene().buildIndex == boatSceneID)
                 {
+                    GameManager.Instance.CursorController.LockCursor();
+
                     FindBoatInitialPoint();
                     FindBoat();
                     FindBoatDocks();
@@ -170,6 +176,7 @@ namespace DefinitiveScript
                 }
                 else if(SceneManager.GetActiveScene().buildIndex == islandSceneID)
                 {
+                    GameManager.Instance.CursorController.LockCursor();
                     FindPlayer();
                     FindIslandDocks();
                     FindExitCavernSpawnPoint();
@@ -190,6 +197,7 @@ namespace DefinitiveScript
                 }
                 else if(SceneManager.GetActiveScene().buildIndex == cavernSceneID)
                 {
+                    GameManager.Instance.CursorController.LockCursor();
                     FindPlayer();
                     FindEnterCavernSpawnPoint();
 
@@ -316,6 +324,16 @@ namespace DefinitiveScript
 
             c.a = finalAlpha;
             blackScreen.color = c;
+        }
+
+        public bool GetResolvedPuzles()
+        {
+            return resolvedPuzles;
+        }
+        
+        public void SetResolvedPuzles(bool value)
+        {
+            resolvedPuzles = value;
         }
     }
 }

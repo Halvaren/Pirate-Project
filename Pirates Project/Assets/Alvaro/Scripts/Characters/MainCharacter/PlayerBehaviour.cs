@@ -214,6 +214,8 @@ namespace DefinitiveScript
                         runningInput = false;
                     }
 
+                    if(InputController.AttackInput) print("caca");
+
                     attackInput = InputController.AttackInput;
                     shootInput = InputController.ShootingInput;
                     blockInput = InputController.BlockInput && !HealthController.GetRunOutOfStamina();

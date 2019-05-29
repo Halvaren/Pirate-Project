@@ -64,6 +64,7 @@ namespace DefinitiveScript
                     RaycastHit hit;
                     if(Physics.Raycast(ray, out hit, Mathf.Infinity, arrowLayer))
                     {
+                        
                         if(hit.collider.gameObject.tag == "Arrow")
                         {
                             GameObject arrow = hit.collider.gameObject;

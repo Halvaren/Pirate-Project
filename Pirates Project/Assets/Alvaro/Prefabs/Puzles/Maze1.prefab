@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: 4517435687590655314}
   m_Layer: 11
   m_Name: Arrow_Up_1
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -246,6 +246,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visualPuzle: {fileID: 8663066872911469686}
+  number: 1
+  increase: 1
 --- !u!1 &4517435687590655316
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,7 +262,7 @@ GameObject:
   - component: {fileID: 4517435687590655319}
   m_Layer: 11
   m_Name: Base
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -353,7 +355,7 @@ GameObject:
   - component: {fileID: 4517435687590655313}
   m_Layer: 11
   m_Name: Frame
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2304,7 +2306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puzleCamera: {fileID: 2499708175211470877}
-  secretNumbers: 010000000000000000000000
+  secretNumbers: 030000000700000004000000
   numberTexts:
   - {fileID: 8663066874398196468}
   - {fileID: 8663066873823681061}
@@ -2878,7 +2880,7 @@ GameObject:
   - component: {fileID: 8663066872994336770}
   m_Layer: 11
   m_Name: Arrow_Down_3
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2930,6 +2932,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visualPuzle: {fileID: 8663066872911469686}
+  number: 3
+  increase: -1
 --- !u!1 &8663066873016984650
 GameObject:
   m_ObjectHideFlags: 0
@@ -3034,7 +3038,7 @@ GameObject:
   - component: {fileID: 8663066873023598000}
   m_Layer: 11
   m_Name: Arrow_Down_1
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3086,6 +3090,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visualPuzle: {fileID: 8663066872911469686}
+  number: 1
+  increase: -1
 --- !u!1 &8663066873024757929
 GameObject:
   m_ObjectHideFlags: 0
@@ -5503,7 +5509,7 @@ GameObject:
   - component: {fileID: 8663066873325754365}
   m_Layer: 11
   m_Name: Frame
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5592,7 +5598,7 @@ GameObject:
   - component: {fileID: 8663066873332762345}
   m_Layer: 0
   m_Name: Arrows
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7415,7 +7421,7 @@ GameObject:
   - component: {fileID: 8663066873587085108}
   m_Layer: 11
   m_Name: Base
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8003,7 +8009,7 @@ GameObject:
   - component: {fileID: 8663066873710317857}
   m_Layer: 11
   m_Name: Base
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9535,7 +9541,7 @@ GameObject:
   - component: {fileID: 8663066874099415931}
   m_Layer: 11
   m_Name: Frame
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9900,7 +9906,7 @@ GameObject:
   - component: {fileID: 8663066874142669430}
   m_Layer: 11
   m_Name: Base
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10529,7 +10535,7 @@ GameObject:
   - component: {fileID: 8663066874215883060}
   m_Layer: 11
   m_Name: Base
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10621,7 +10627,7 @@ GameObject:
   - component: {fileID: 8663066874222782857}
   m_Layer: 11
   m_Name: Arrow_Up_2
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10673,6 +10679,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visualPuzle: {fileID: 8663066872911469686}
+  number: 2
+  increase: 1
 --- !u!1 &8663066874241370222
 GameObject:
   m_ObjectHideFlags: 0
@@ -10720,7 +10728,7 @@ GameObject:
   - component: {fileID: 8663066874249615366}
   m_Layer: 11
   m_Name: Base
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10813,7 +10821,7 @@ GameObject:
   - component: {fileID: 8663066874252140368}
   m_Layer: 11
   m_Name: Frame
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11308,7 +11316,7 @@ GameObject:
   - component: {fileID: 8663066874328675198}
   m_Layer: 11
   m_Name: Arrow_Up_3
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11360,6 +11368,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visualPuzle: {fileID: 8663066872911469686}
+  number: 3
+  increase: 1
 --- !u!1 &8663066874336657874
 GameObject:
   m_ObjectHideFlags: 0
@@ -11646,7 +11656,7 @@ GameObject:
   - component: {fileID: 8663066874369517945}
   m_Layer: 11
   m_Name: Frame
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11816,7 +11826,7 @@ GameObject:
   - component: {fileID: 8663066874380554606}
   m_Layer: 11
   m_Name: Frame
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13755,7 +13765,7 @@ GameObject:
   - component: {fileID: 8663066874678688309}
   m_Layer: 11
   m_Name: Arrow_Down_2
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13807,6 +13817,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visualPuzle: {fileID: 8663066872911469686}
+  number: 2
+  increase: -1
 --- !u!1 &8663066874701839977
 GameObject:
   m_ObjectHideFlags: 0
