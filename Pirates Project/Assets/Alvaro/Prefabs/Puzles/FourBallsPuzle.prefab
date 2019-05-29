@@ -1283,7 +1283,6 @@ GameObject:
   - component: {fileID: 2531432140162905488}
   - component: {fileID: 2531432140162905490}
   - component: {fileID: 2531432140162905491}
-  - component: {fileID: 2531432140162905501}
   m_Layer: 11
   m_Name: Frame
   m_TagString: Arrow
@@ -1350,20 +1349,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &2531432140162905501
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531432140162905489}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300002, guid: a57e9c69ca568e541b16be09f521e19a, type: 3}
 --- !u!1 &2531432140170852281
 GameObject:
   m_ObjectHideFlags: 0
@@ -1588,7 +1573,7 @@ MonoBehaviour:
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -1613,7 +1598,6 @@ GameObject:
   - component: {fileID: 2531432140266451780}
   - component: {fileID: 2531432140266451782}
   - component: {fileID: 2531432140266451783}
-  - component: {fileID: 2531432140266451777}
   m_Layer: 11
   m_Name: Base
   m_TagString: Arrow
@@ -1681,20 +1665,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &2531432140266451777
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531432140266451781}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: a57e9c69ca568e541b16be09f521e19a, type: 3}
 --- !u!1 &2531432140291973098
 GameObject:
   m_ObjectHideFlags: 0
@@ -1770,7 +1740,6 @@ GameObject:
   - component: {fileID: 2531432140390731083}
   - component: {fileID: 2531432140390731093}
   - component: {fileID: 2531432140390731082}
-  - component: {fileID: 2531432140390731092}
   m_Layer: 11
   m_Name: Base
   m_TagString: Arrow
@@ -1838,20 +1807,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &2531432140390731092
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531432140390731080}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: a57e9c69ca568e541b16be09f521e19a, type: 3}
 --- !u!1 &2531432140462861647
 GameObject:
   m_ObjectHideFlags: 0
@@ -1939,7 +1894,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2531432140494320224}
   - component: {fileID: 2531432140494320227}
-  - component: {fileID: 2531432140494320226}
   m_Layer: 11
   m_Name: Arrow_Down_3
   m_TagString: Arrow
@@ -1981,21 +1935,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2531432140494320226
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531432140494320225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15479b4bc9c918a4f96ba69e8b92b1c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  visualPuzle: {fileID: 2531432140511657494}
-  number: 3
-  increase: -1
 --- !u!1 &2531432140511657492
 GameObject:
   m_ObjectHideFlags: 0
@@ -2042,6 +1981,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puzleCamera: {fileID: 7590406255911693322}
+  PuzleController: {fileID: 0}
   secretNumbers: 030000000200000003000000
   numberTexts:
   - {fileID: 2531432141189210260}
@@ -2052,6 +1992,13 @@ MonoBehaviour:
     m_Bits: 2048
   baseObj: {fileID: 2531432140511657492}
   nextPuzle: {fileID: 3179587040293435192}
+  arrowAnimators:
+  - {fileID: 7325446331393169203}
+  - {fileID: 2531432140934295505}
+  - {fileID: 2531432141965954030}
+  - {fileID: 2531432141511628874}
+  - {fileID: 2531432141795086623}
+  - {fileID: 2531432140494320227}
 --- !u!1 &2531432140522772646
 GameObject:
   m_ObjectHideFlags: 0
@@ -2307,7 +2254,7 @@ MonoBehaviour:
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -2439,7 +2386,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2531432140934295510}
   - component: {fileID: 2531432140934295505}
-  - component: {fileID: 2531432140934295504}
   m_Layer: 11
   m_Name: Arrow_Down_1
   m_TagString: Arrow
@@ -2481,21 +2427,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2531432140934295504
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531432140934295511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15479b4bc9c918a4f96ba69e8b92b1c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  visualPuzle: {fileID: 2531432140511657494}
-  number: 1
-  increase: -1
 --- !u!1 &2531432141001314218
 GameObject:
   m_ObjectHideFlags: 0
@@ -2835,7 +2766,7 @@ MonoBehaviour:
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -2938,7 +2869,6 @@ GameObject:
   - component: {fileID: 2531432141202131740}
   - component: {fileID: 2531432141202131742}
   - component: {fileID: 2531432141202131743}
-  - component: {fileID: 2531432141202131737}
   m_Layer: 11
   m_Name: Frame
   m_TagString: Arrow
@@ -3005,20 +2935,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &2531432141202131737
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531432141202131741}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300002, guid: a57e9c69ca568e541b16be09f521e19a, type: 3}
 --- !u!1 &2531432141205254914
 GameObject:
   m_ObjectHideFlags: 0
@@ -3030,7 +2946,6 @@ GameObject:
   - component: {fileID: 2531432141205254925}
   - component: {fileID: 2531432141205254927}
   - component: {fileID: 2531432141205254924}
-  - component: {fileID: 2531432141205254926}
   m_Layer: 11
   m_Name: Frame
   m_TagString: Arrow
@@ -3097,20 +3012,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &2531432141205254926
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531432141205254914}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300002, guid: a57e9c69ca568e541b16be09f521e19a, type: 3}
 --- !u!1 &2531432141344717043
 GameObject:
   m_ObjectHideFlags: 0
@@ -3353,7 +3254,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2531432141511628875}
   - component: {fileID: 2531432141511628874}
-  - component: {fileID: 2531432141511628885}
   m_Layer: 11
   m_Name: Arrow_Down_2
   m_TagString: Arrow
@@ -3395,21 +3295,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2531432141511628885
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531432141511628872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15479b4bc9c918a4f96ba69e8b92b1c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  visualPuzle: {fileID: 2531432140511657494}
-  number: 2
-  increase: -1
 --- !u!1 &2531432141644401967
 GameObject:
   m_ObjectHideFlags: 0
@@ -3498,7 +3383,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2531432141795086620}
   - component: {fileID: 2531432141795086623}
-  - component: {fileID: 2531432141795086622}
   m_Layer: 11
   m_Name: Arrow_Up_3
   m_TagString: Arrow
@@ -3540,21 +3424,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2531432141795086622
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531432141795086621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15479b4bc9c918a4f96ba69e8b92b1c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  visualPuzle: {fileID: 2531432140511657494}
-  number: 3
-  increase: 1
 --- !u!1 &2531432141836379058
 GameObject:
   m_ObjectHideFlags: 0
@@ -3747,7 +3616,6 @@ GameObject:
   - component: {fileID: 2531432141852720439}
   - component: {fileID: 2531432141852720433}
   - component: {fileID: 2531432141852720438}
-  - component: {fileID: 2531432141852720432}
   m_Layer: 11
   m_Name: Frame
   m_TagString: Arrow
@@ -3814,20 +3682,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &2531432141852720432
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531432141852720436}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300002, guid: a57e9c69ca568e541b16be09f521e19a, type: 3}
 --- !u!1 &2531432141858388570
 GameObject:
   m_ObjectHideFlags: 0
@@ -3839,7 +3693,6 @@ GameObject:
   - component: {fileID: 2531432141858388581}
   - component: {fileID: 2531432141858388583}
   - component: {fileID: 2531432141858388580}
-  - component: {fileID: 2531432141858388582}
   m_Layer: 11
   m_Name: Base
   m_TagString: Arrow
@@ -3907,20 +3760,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &2531432141858388582
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531432141858388570}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: a57e9c69ca568e541b16be09f521e19a, type: 3}
 --- !u!1 &2531432141883959822
 GameObject:
   m_ObjectHideFlags: 0
@@ -4042,7 +3881,6 @@ GameObject:
   - component: {fileID: 2531432141958726475}
   - component: {fileID: 2531432141958726485}
   - component: {fileID: 2531432141958726474}
-  - component: {fileID: 2531432141958726484}
   m_Layer: 11
   m_Name: Base
   m_TagString: Arrow
@@ -4110,20 +3948,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &2531432141958726484
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531432141958726472}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: a57e9c69ca568e541b16be09f521e19a, type: 3}
 --- !u!1 &2531432141965954028
 GameObject:
   m_ObjectHideFlags: 0
@@ -4134,7 +3958,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2531432141965954031}
   - component: {fileID: 2531432141965954030}
-  - component: {fileID: 2531432141965954025}
   m_Layer: 11
   m_Name: Arrow_Up_2
   m_TagString: Arrow
@@ -4176,21 +3999,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2531432141965954025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531432141965954028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15479b4bc9c918a4f96ba69e8b92b1c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  visualPuzle: {fileID: 2531432140511657494}
-  number: 2
-  increase: 1
 --- !u!1 &2531432141984742443
 GameObject:
   m_ObjectHideFlags: 0
@@ -4233,7 +4041,6 @@ GameObject:
   - component: {fileID: 2531432142005967134}
   - component: {fileID: 2531432142005967128}
   - component: {fileID: 2531432142005967129}
-  - component: {fileID: 2531432142005967131}
   m_Layer: 11
   m_Name: Frame
   m_TagString: Arrow
@@ -4300,20 +4107,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &2531432142005967131
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531432142005967135}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300002, guid: a57e9c69ca568e541b16be09f521e19a, type: 3}
 --- !u!1 &2531432142007044653
 GameObject:
   m_ObjectHideFlags: 0
@@ -4569,7 +4362,6 @@ GameObject:
   - component: {fileID: 2531432142049220629}
   - component: {fileID: 2531432142049220631}
   - component: {fileID: 2531432142049220628}
-  - component: {fileID: 2531432142049220630}
   m_Layer: 11
   m_Name: Base
   m_TagString: Arrow
@@ -4637,20 +4429,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &2531432142049220630
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531432142049220618}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: a57e9c69ca568e541b16be09f521e19a, type: 3}
 --- !u!1 &2599653084777052149
 GameObject:
   m_ObjectHideFlags: 0
@@ -5177,6 +4955,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puzleCamera: {fileID: 7590406255911693322}
+  PuzleController: {fileID: 0}
   distanceToMove: 1
   minMouseDistanceToMove: 10
   grabbingLayerMask:
@@ -6577,7 +6356,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7325446331393592080}
   - component: {fileID: 7325446331393169203}
-  - component: {fileID: 7325446331393169202}
   m_Layer: 11
   m_Name: Arrow_Up_1
   m_TagString: Arrow
@@ -6619,21 +6397,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7325446331393169202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7325446331393169200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15479b4bc9c918a4f96ba69e8b92b1c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  visualPuzle: {fileID: 2531432140511657494}
-  number: 1
-  increase: 1
 --- !u!1 &7325446331393169204
 GameObject:
   m_ObjectHideFlags: 0
@@ -6645,7 +6408,6 @@ GameObject:
   - component: {fileID: 7325446331393592084}
   - component: {fileID: 7325446331392265012}
   - component: {fileID: 7325446331391166964}
-  - component: {fileID: 7325446331393169207}
   m_Layer: 11
   m_Name: Base
   m_TagString: Arrow
@@ -6713,20 +6475,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &7325446331393169207
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7325446331393169204}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: a57e9c69ca568e541b16be09f521e19a, type: 3}
 --- !u!1 &7325446331393169206
 GameObject:
   m_ObjectHideFlags: 0
@@ -6738,7 +6486,6 @@ GameObject:
   - component: {fileID: 7325446331393592086}
   - component: {fileID: 7325446331392265014}
   - component: {fileID: 7325446331391166966}
-  - component: {fileID: 7325446331393169201}
   m_Layer: 11
   m_Name: Frame
   m_TagString: Arrow
@@ -6805,20 +6552,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &7325446331393169201
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7325446331393169206}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300002, guid: a57e9c69ca568e541b16be09f521e19a, type: 3}
 --- !u!1 &7870845390269147705
 GameObject:
   m_ObjectHideFlags: 0

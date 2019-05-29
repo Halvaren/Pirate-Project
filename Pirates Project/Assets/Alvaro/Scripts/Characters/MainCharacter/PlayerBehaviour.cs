@@ -214,7 +214,7 @@ namespace DefinitiveScript
                         runningInput = false;
                     }
 
-                    if(InputController.AttackInput) print("caca");
+                    //if(InputController.AttackInput) print("caca");
 
                     attackInput = InputController.AttackInput;
                     shootInput = InputController.ShootingInput;
