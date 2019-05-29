@@ -59,6 +59,7 @@ namespace DefinitiveScript
             if(SceneManager.GetActiveScene().buildIndex == mainMenuID) GameManager.Instance.CursorController.UnlockCursor();
             else GameManager.Instance.CursorController.LockCursor();
 
+            blackScreen.enabled = false;
             InitializeScene();
         }
 
@@ -285,6 +286,7 @@ namespace DefinitiveScript
 
         private IEnumerator FadeOut(float time)
         {
+            blackScreen.enabled = true;
             float initialAlpha = 0f;
             float finalAlpha = 1f;
 
@@ -324,6 +326,7 @@ namespace DefinitiveScript
 
             c.a = finalAlpha;
             blackScreen.color = c;
+            blackScreen.enabled = false;
         }
 
         public bool GetResolvedPuzles()
