@@ -63,6 +63,15 @@ namespace DefinitiveScript
             }
         }
 
+        private PlayerCameraController m_PlayerCameraController;
+        public PlayerCameraController PlayerCameraController
+        {
+            get {
+                if(m_PlayerCameraController == null) m_PlayerCameraController = GetComponentInChildren<PlayerCameraController>();
+                return m_PlayerCameraController;
+            }
+        }
+
         private Vector2 m_MouseInput; //Atributo donde se guardará los valores graduales del input del ratón hasta alcanzar el valor final
         public Vector2 mouseInput {
             get {
@@ -160,6 +169,7 @@ namespace DefinitiveScript
             }
             set {
                 m_StopInput = value;
+                PlayerCameraController.InputChanged(value);
             }
         }
 

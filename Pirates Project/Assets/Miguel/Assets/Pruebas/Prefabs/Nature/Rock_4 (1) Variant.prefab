@@ -1,7 +1,7 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!65 &3630507955305441821
-BoxCollider:
+--- !u!136 &5936267150369732325
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -10,8 +10,9 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.044424, y: 1.3069227, z: 1.9945221}
+  m_Radius: 1.14
+  m_Height: 1.3069227
+  m_Direction: 1
   m_Center: {x: -0.115431696, y: 0.22501472, z: -0.10834625}
 --- !u!1001 &1274051795581144996
 PrefabInstance:
@@ -68,7 +69,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 64326202081095742, guid: 836ca07fc69b4184ca14265c7d24030d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 836ca07fc69b4184ca14265c7d24030d, type: 3}
 --- !u!1 &1272901369499205554 stripped
 GameObject:
