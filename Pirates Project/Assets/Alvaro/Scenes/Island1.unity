@@ -19,7 +19,7 @@ RenderSettings:
   m_FogMode: 1
   m_FogDensity: 0.01
   m_LinearFogStart: 0
-  m_LinearFogEnd: 500
+  m_LinearFogEnd: 1000
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
@@ -1643,7 +1643,7 @@ Transform:
   - {fileID: 1261055294}
   - {fileID: 5431832596794301727}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &345705324
 PrefabInstance:
@@ -3420,7 +3420,7 @@ Transform:
   - {fileID: 1707763487210906619}
   - {fileID: 360291141}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &684294589
 GameObject:
@@ -3846,7 +3846,7 @@ Transform:
   - {fileID: 544892262229935549}
   - {fileID: 608541744783480441}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &782770342
 MonoBehaviour:
@@ -4468,7 +4468,7 @@ PrefabInstance:
     - target: {fileID: 4220885053254859210, guid: ebd0a59fa072fbc4e8bb944c7ea5a282,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4220885053254859210, guid: ebd0a59fa072fbc4e8bb944c7ea5a282,
         type: 3}
@@ -4483,11 +4483,6 @@ PrefabInstance:
     - target: {fileID: 4220885053254859210, guid: ebd0a59fa072fbc4e8bb944c7ea5a282,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7066903776823142357, guid: ebd0a59fa072fbc4e8bb944c7ea5a282,
-        type: 3}
-      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -4524,7 +4519,7 @@ Transform:
   - {fileID: 2109748982}
   - {fileID: 658531782}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &879210013
 MonoBehaviour:
@@ -7863,7 +7858,7 @@ Transform:
   - {fileID: 2122209931}
   - {fileID: 1719730760}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1564601380 stripped
 Transform:
@@ -8129,6 +8124,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: NewCharacterStuff
+      objectReference: {fileID: 0}
+    - target: {fileID: 2477661118506964161, guid: df0e6fa16c870ea4ba646472716f24f3,
+        type: 3}
+      propertyPath: m_Lens.FarClipPlane
+      value: 750
       objectReference: {fileID: 0}
     - target: {fileID: 6998961830201722911, guid: df0e6fa16c870ea4ba646472716f24f3,
         type: 3}
@@ -8397,7 +8397,7 @@ PrefabInstance:
     - target: {fileID: 8354612611957197410, guid: df0e6fa16c870ea4ba646472716f24f3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 731.73
+      value: 443.73
       objectReference: {fileID: 0}
     - target: {fileID: 8354612611957197410, guid: df0e6fa16c870ea4ba646472716f24f3,
         type: 3}
@@ -8454,6 +8454,11 @@ PrefabInstance:
       propertyPath: m_RenderingPath
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8354612612135037956, guid: df0e6fa16c870ea4ba646472716f24f3,
+        type: 3}
+      propertyPath: far clip plane
+      value: 750
+      objectReference: {fileID: 0}
     - target: {fileID: 8354612612135037954, guid: df0e6fa16c870ea4ba646472716f24f3,
         type: 3}
       propertyPath: m_CameraCutEvent.m_PersistentCalls.m_Calls.Array.size
@@ -8478,6 +8483,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_DefaultBlend.m_Style
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8354612612135037954, guid: df0e6fa16c870ea4ba646472716f24f3,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418178791101287099, guid: df0e6fa16c870ea4ba646472716f24f3,
+        type: 3}
+      propertyPath: m_Lens.FarClipPlane
+      value: 750
+      objectReference: {fileID: 0}
+    - target: {fileID: 8354612611957197411, guid: df0e6fa16c870ea4ba646472716f24f3,
+        type: 3}
+      propertyPath: m_Lens.FarClipPlane
+      value: 750
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df0e6fa16c870ea4ba646472716f24f3, type: 3}
@@ -10603,7 +10623,7 @@ PrefabInstance:
     - target: {fileID: 5840768594017367952, guid: 374cac592388d5d46ba8fa57758533b8,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5840768594017367952, guid: 374cac592388d5d46ba8fa57758533b8,
         type: 3}
@@ -10714,7 +10734,7 @@ PrefabInstance:
     - target: {fileID: 1707763486702412152, guid: 980ceb3cbfc771b4d9f0df023247f064,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.83
+      value: 0.41
       objectReference: {fileID: 0}
     - target: {fileID: 1707763487215108154, guid: 980ceb3cbfc771b4d9f0df023247f064,
         type: 3}

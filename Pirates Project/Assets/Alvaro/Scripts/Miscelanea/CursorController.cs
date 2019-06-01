@@ -17,6 +17,11 @@ namespace DefinitiveScript {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
+
+        public bool LockedCursor()
+        {
+            return Cursor.lockState == CursorLockMode.Locked;
+        }
     }
 }
 

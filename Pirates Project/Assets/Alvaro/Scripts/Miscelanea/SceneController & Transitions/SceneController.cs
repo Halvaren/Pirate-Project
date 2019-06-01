@@ -170,7 +170,16 @@ namespace DefinitiveScript
                     }
                     else if(lastScene == islandSceneID)
                     {
-                        BoatTransform.position = BoatDocks[dockID].boatSpawnPoint.position;
+                        Vector3 dockDestinationPoint = Vector3.zero;
+                        for(int i = 0; i < BoatDocks.Length; i++)
+                        {
+                            if(BoatDocks[i].dockID == dockID)
+                            {
+                                dockDestinationPoint = BoatDocks[i].boatSpawnPoint.position;
+                                break;
+                            } 
+                        }
+                        BoatTransform.position = dockDestinationPoint;
                     }
                     
                     yield return StartCoroutine(FadeIn(fadingTime));
@@ -185,7 +194,16 @@ namespace DefinitiveScript
                     PlayerBehaviour.stopInput = true;
                     if(lastScene == boatSceneID)
                     {
-                        PlayerBehaviour.transform.position = IslandDocks[dockID].playerSpawnPoint.position;
+                        Vector3 dockDestinationPoint = Vector3.zero;
+                        for(int i = 0; i < IslandDocks.Length; i++)
+                        {
+                            if(IslandDocks[i].dockID == dockID)
+                            {
+                                dockDestinationPoint = IslandDocks[i].playerSpawnPoint.position;
+                                break;
+                            } 
+                        }
+                        PlayerBehaviour.transform.position = dockDestinationPoint;
                     }
                     else if(lastScene == cavernSceneID)
                     {
