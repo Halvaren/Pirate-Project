@@ -25,6 +25,8 @@ namespace DefinitiveScript
 
         private int currentMoney = 0;
 
+        private bool hasKey = false;
+
         protected override void Update()
         {
             base.Update();
@@ -70,6 +72,14 @@ namespace DefinitiveScript
                 return health <= 0f;
             }
             return false;
+        }
+
+        public void RecoverHealth(float amount)
+        {
+            health += amount;
+            if(health > initialHealth) health = initialHealth;
+
+            PlayerUIController.UpdateHealthBar(health);
         }
 
         public override bool ReduceStamina(float amount)
@@ -128,6 +138,18 @@ namespace DefinitiveScript
             if(currentMoney < 0) currentMoney = 0;
 
             PlayerUIController.IncreaseMoney(increase);
+        }
+
+        public void ObtainKey()
+        {
+            hasKey = true;
+
+            PlayerUIController.EnableKey(true);
+        }
+
+        public bool HasKey()
+        {
+            return hasKey;
         }
     }
 }

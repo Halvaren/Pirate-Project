@@ -20,9 +20,13 @@ public class AIEnemyController : MonoBehaviour
         GameObject[] enemyObjects = GameObject.FindGameObjectsWithTag("Enemy");
         enemies = new EnemyBehaviour[enemyObjects.Length];
 
+        int enemyWithKey = 0; Random.Range(0, enemyObjects.Length);
+
         for(int i = 0; i < enemies.Length; i++)
         {
             enemies[i] = enemyObjects[i].GetComponent<EnemyBehaviour>();
+
+            if(i == enemyWithKey) enemies[i].GetComponent<EnemyLootController>().SetHasKey(true);
         }
     }
 

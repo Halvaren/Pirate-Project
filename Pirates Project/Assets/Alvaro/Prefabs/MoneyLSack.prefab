@@ -29,7 +29,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1386250782372010776}
+  - {fileID: 3099869660737529328}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -143,9 +143,6 @@ GameObject:
   - component: {fileID: 1386250782372010776}
   - component: {fileID: 8392310478245292634}
   - component: {fileID: 5887336837961226871}
-  - component: {fileID: 1501514890327879073}
-  - component: {fileID: 5703759269880177852}
-  - component: {fileID: 3588194004156440509}
   m_Layer: 18
   m_Name: Model
   m_TagString: Untagged
@@ -160,12 +157,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2592861939307542809}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.419, z: -0}
-  m_LocalScale: {x: 0.39370173, y: 0.39370164, z: 0.3937016}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.419, z: 0}
+  m_LocalScale: {x: 0.39370173, y: 0.39370188, z: 0.39370185}
   m_Children:
   - {fileID: 4267197885937254975}
-  m_Father: {fileID: 1150336235868247205}
+  m_Father: {fileID: 3099869660737529328}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &8392310478245292634
@@ -213,14 +210,48 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!95 &1501514890327879073
+--- !u!1 &2734385703558255666
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3099869660737529328}
+  - component: {fileID: 8115443484268402819}
+  - component: {fileID: 5872402431651323241}
+  - component: {fileID: 4110111713017788393}
+  m_Layer: 18
+  m_Name: ModelContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3099869660737529328
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2734385703558255666}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1386250782372010776}
+  m_Father: {fileID: 1150336235868247205}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &8115443484268402819
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2592861939307542809}
+  m_GameObject: {fileID: 2734385703558255666}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 507f367ba39a7484db679067e8b49992, type: 2}
@@ -232,27 +263,27 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!136 &5703759269880177852
+--- !u!136 &5872402431651323241
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2592861939307542809}
+  m_GameObject: {fileID: 2734385703558255666}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.66
-  m_Height: 2.16
-  m_Direction: 2
-  m_Center: {x: -0.00000020861626, y: -0.00000002980233, z: 0}
---- !u!114 &3588194004156440509
+  m_Radius: 0.25
+  m_Height: 0.87
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.44, z: 0}
+--- !u!114 &4110111713017788393
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2592861939307542809}
+  m_GameObject: {fileID: 2734385703558255666}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb86e8afebaeac643b836f2c86ad03ab, type: 3}

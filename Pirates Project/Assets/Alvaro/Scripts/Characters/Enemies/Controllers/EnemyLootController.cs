@@ -15,43 +15,73 @@ public class EnemyLootController : MonoBehaviour
     public GameObject mediumSackObj;
     public GameObject bigSackObj;
 
+    public GameObject healthPackageObj;
+    public GameObject keyObj;
+
+    public ParticleSystem hasKeyParticleSystem;
+
+    private bool hasKey;
+
     public GameObject releasePoint;
     public float releaseForce = 75f;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        hasKey = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetHasKey(bool value)
     {
-        
+        hasKey = value;
+        if(value) hasKeyParticleSystem.Play();
     }
 
     public void ReleaseLoot()
     {
         float rand = Random.value;
-        GameObject releasedSack;
+        GameObject releasedObj;
 
         if(rand < smallSackProbability)
         {
-            releasedSack = Instantiate(smallSackObj, releasePoint.transform.position, Quaternion.identity);
+            releasedObj = Instantiate(smallSackObj, releasePoint.transform.position, Quaternion.identity);
         }
         else if(rand < mediumSackProbability)
         {
-            releasedSack = Instantiate(mediumSackObj, releasePoint.transform.position, Quaternion.identity);
+            releasedObj = Instantiate(mediumSackObj, releasePoint.transform.position, Quaternion.identity);
         }
         else
         {
-            releasedSack = Instantiate(bigSackObj, releasePoint.transform.position, Quaternion.identity);
+            releasedObj = Instantiate(bigSackObj, releasePoint.transform.position, Quaternion.identity);
         }
 
-        float x = Random.value;
-        float z = Mathf.Sqrt(1 - Mathf.Pow(x, 2));
+        float x = (Random.value * 2) - 1;
+        float z = Mathf.Sqrt(1 - Mathf.Pow(x, 2)) * Mathf.Pow(-1, Random.Range(0, 1));
 
         Vector3 force = new Vector3(x, 2f, z) * releaseForce;
-        releasedSack.GetComponent<Rigidbody>().AddForce(force);
+        releasedObj.GetComponent<Rigidbody>().AddForce(force);
+
+        rand = Random.value;
+        if(rand < healthPackageProbability)
+        {
+            releasedObj = Instantiate(healthPackageObj, releasePoint.transform.position, Quaternion.identity);
+
+            x = (Random.value * 2) - 1;
+            z = Mathf.Sqrt(1 - Mathf.Pow(x, 2)) * Mathf.Pow(-1, Random.Range(0, 1));
+
+            force = new Vector3(x, 2f, z) * releaseForce;
+            releasedObj.GetComponent<Rigidbody>().AddForce(force);
+        }
+
+        if(hasKey)
+        {
+            releasedObj = Instantiate(keyObj, releasePoint.transform.position, Quaternion.identity);
+
+            x = (Random.value * 2) - 1;
+            z = Mathf.Sqrt(1 - Mathf.Pow(x, 2)) * Mathf.Pow(-1, Random.Range(0, 1));
+
+            force = new Vector3(x, 2f, z) * releaseForce;
+            releasedObj.GetComponent<Rigidbody>().AddForce(force);
+        }
     }
 }
