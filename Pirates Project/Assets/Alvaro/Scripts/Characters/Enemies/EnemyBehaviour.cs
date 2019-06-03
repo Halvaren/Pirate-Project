@@ -65,6 +65,15 @@ public class EnemyBehaviour : CharacterBehaviour
         }
     }
 
+    private EnemyLootController m_EnemyLootController;
+    public EnemyLootController EnemyLootController
+    {
+        get {
+            if(m_EnemyLootController == null) m_EnemyLootController = GetComponent<EnemyLootController>();
+            return m_EnemyLootController;
+        }
+    }
+
     public bool sableEnemy; //true = lleva sable; false = lleva gun
 
     void Awake()
@@ -237,6 +246,7 @@ public class EnemyBehaviour : CharacterBehaviour
 
     public void Disappear()
     {
+        EnemyLootController.ReleaseLoot();
         StartCoroutine(FadeOut(1.0f));
     }
 

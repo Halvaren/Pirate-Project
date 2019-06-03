@@ -115,7 +115,7 @@ MonoBehaviour:
   m_MinSize: {x: 713, y: 498}
   m_MaxSize: {x: 18008, y: 14048}
   vertical: 0
-  controlID: 2969
+  controlID: 10257
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -137,10 +137,10 @@ MonoBehaviour:
     y: 0
     width: 678
     height: 635
-  m_MinSize: {x: 202, y: 424}
-  m_MaxSize: {x: 4002, y: 8024}
+  m_MinSize: {x: 202, y: 448}
+  m_MaxSize: {x: 4002, y: 8048}
   vertical: 1
-  controlID: 3165
+  controlID: 10279
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -220,7 +220,7 @@ MonoBehaviour:
   m_MinSize: {x: 234, y: 498}
   m_MaxSize: {x: 10004, y: 14048}
   vertical: 1
-  controlID: 2970
+  controlID: 10258
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -411,13 +411,13 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_WindowGUID: 2b530a1e3409ca540b8e6f816b2883b8
   m_SceneLighting: 1
-  m_2DMode: 1
+  m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 242.79724, y: 253.66797, z: 0.125}
+    m_Target: {x: -0.6211175, y: 0.49572322, z: 0.07519531}
     speed: 2
-    m_Value: {x: 242.79724, y: 253.66797, z: 0.125}
+    m_Value: {x: -0.6211175, y: 0.49572322, z: 0.07519531}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -441,17 +441,17 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
     zGrid:
-      m_Target: 0
+      m_Target: 1
       speed: 2
-      m_Value: 0
+      m_Value: 1
   m_Rotation:
-    m_Target: {x: 0.0027385505, y: -0.0007979636, z: 0.000094517505, w: 0.99999595}
+    m_Target: {x: 0, y: 0, z: 0, w: 1}
     speed: 2
-    m_Value: {x: 0.0027385505, y: -0.0007979636, z: 0.000094517505, w: 0.99999595}
+    m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 680.00256
+    m_Target: 2.078621
     speed: 2
-    m_Value: 680.00256
+    m_Value: 2.078621
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -534,6 +534,7 @@ MonoBehaviour:
     - {fileID: 1107158479565876224, guid: 49c50c733f774164c804fb81a770b441, type: 2}
     - {fileID: 1107561633984227508, guid: 6c4d28eda35d41b4ab9a384273c643c5, type: 2}
     - {fileID: 1107046521603279552, guid: 1d203358db068a6448b60eb4fbfc6388, type: 2}
+    - {fileID: 1107645112576166176, guid: 507f367ba39a7484db679067e8b49992, type: 2}
     m_ValueSerializationHelper:
     - e00: 0.5630605
       e01: 0
@@ -807,11 +808,27 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
+    - e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: 561098fc2045f834a88657053fde6012,
+  m_AnimatorController: {fileID: 9100000, guid: 507f367ba39a7484db679067e8b49992,
     type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: 1107320695176846310, guid: 561098fc2045f834a88657053fde6012,
+  - m_Target: {fileID: 1107645112576166176, guid: 507f367ba39a7484db679067e8b49992,
       type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
@@ -848,12 +865,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 73
-    width: 790
-    height: 314
+    width: 676
+    height: 204
   m_PersistentViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -30768
+  m_LastSelectedObjectID: 73462
 --- !u!114 &18
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -883,9 +900,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: d087ffff
-      m_LastClickedID: -30768
-      m_ExpandedIDs: 44f0ffff8af3ffffc8f4ffffd4f4ffffd4fbfffff4ffffff1a430000
+      m_SelectedIDs: f61e0100
+      m_LastClickedID: 73462
+      m_ExpandedIDs: ec1e0100f61e0100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -947,20 +964,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Alvaro/Scripts/Miscelanea/SceneController & Transitions
+    - Assets/Alvaro/Prefabs
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Alvaro/Scripts/Miscelanea/SceneController & Transitions
+  - Assets/Alvaro/Prefabs
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\halva\Documents\GitHub\Pirate-Project\Pirates Project
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 463}
-    m_SelectedIDs: 0a2b0000
-    m_LastClickedID: 11018
-    m_ExpandedIDs: 0000000072110000cc110000ce1100004c12000076170000f817000032180000ba190000201a0000041b0000281c0000221d0000641d0000841d0000861d00001e1e0000621f00006c2000008e210000962200002c2300005e23000072230000f62400000c2500004a250000842600004a280000a4290000382b0000c62c0000022d0000062f00001e2f0000ec3000006233000080340000a6340000c4340000dc3400002e350000423500007c3600009c360000a23a0000ac3a0000d83a0000203b0000b83b0000e63c00000c3d0000323d0000023e00000840000064400000ca6a0000cc6a0000ce6a0000d06a0000d26a0000d46a0000d66a0000d86a0000da6a0000dc6a0000de6a0000e06a0000e26a000000ca9a3b
+    scrollPos: {x: 0, y: 111}
+    m_SelectedIDs: 0c350000
+    m_LastClickedID: 13580
+    m_ExpandedIDs: 0000000074110000ce110000d01100004e1200007a170000fc17000036180000be190000241a0000081b00002c1c0000281d00006a1d00008c1d00008e1d0000261e00006a1f000074200000962100009e22000034230000662300007a230000fe24000014250000522500008c26000052280000ac290000402b0000d02c00000c2d0000122f00002a2f0000f83000007233000090340000b6340000d4340000ec3400003e350000523500008c360000ac360000b43a0000be3a0000ea3a0000323b0000ca3b0000f83c00001e3d0000443d0000143e00001a400000784000001e6b0000206b0000226b0000246b0000266b0000286b00002a6b00002c6b00002e6b0000306b0000326b0000346b0000366b000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -988,7 +1005,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000072110000cc110000ce1100004c12000076170000f817000032180000ba190000201a0000041b0000281c0000221d0000641d0000841d0000861d00001e1e0000621f00006c2000008e210000962200002c2300005e23000072230000f62400000c2500004a250000842600004a280000a4290000382b0000c62c0000022d0000062f00001e2f0000ec3000006233000080340000a6340000c4340000dc3400002e350000423500007c3600009c360000a23a0000ac3a0000d83a0000203b0000b83b0000e63c00000c3d0000323d0000023e00000840000064400000ca6a0000cc6a0000ce6a0000d06a0000d26a0000d46a0000d66a0000d86a0000da6a0000dc6a0000de6a0000e06a0000e26a000000ca9a3b
+    m_ExpandedIDs: 0000000074110000ce110000d01100004e1200007a170000fc17000036180000be190000241a0000081b00002c1c0000281d00006a1d00008c1d00008e1d0000261e00006a1f000074200000962100009e22000034230000662300007a230000fe24000014250000522500008c26000052280000ac290000402b0000d02c00000c2d0000122f00002a2f0000f83000007233000090340000b6340000d4340000ec3400003e350000523500008c360000ac360000b43a0000be3a0000ea3a0000323b0000ca3b0000f83c00001e3d0000443d0000143e00001a400000784000001e6b0000206b0000226b0000246b0000266b0000286b00002a6b00002c6b00002e6b0000306b0000326b0000346b0000366b000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
