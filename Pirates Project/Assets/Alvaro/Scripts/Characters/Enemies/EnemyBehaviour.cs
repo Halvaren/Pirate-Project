@@ -32,14 +32,6 @@ public class EnemyBehaviour : CharacterBehaviour
     public float seekingTime = 3f;
 
     private bool running;
-
-    private bool patrolling;
-    private bool following;
-    private bool searching;
-    private bool staring;
-    
-    private bool blocking;
-    private bool attacking;
     private bool aroundPlayer;
 
     private EnemyState enemyState;
@@ -233,6 +225,11 @@ public class EnemyBehaviour : CharacterBehaviour
         Animator.SetTrigger("Attack");
     }
 
+    public void PlayerDead()
+    {
+        Animator.SetTrigger("PlayerDead");
+    }
+
     public void Die()
     {
         Animator.SetTrigger("Die");
@@ -258,7 +255,7 @@ public class EnemyBehaviour : CharacterBehaviour
             yield return null;
         }
 
-        Destroy(gameObject); //?
+        Destroy(gameObject);
     }
     
     public bool IsRunning()

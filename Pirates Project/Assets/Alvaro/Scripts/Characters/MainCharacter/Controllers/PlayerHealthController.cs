@@ -52,8 +52,15 @@ namespace DefinitiveScript
                 health -= damage;
 
                 if(health <= 0f)
-                {    
+                {   
+                    CharacterController.enabled = false;
+                    GameManager.Instance.AIEnemyController.PlayerDead();
+
+                    GameManager.Instance.SceneController.ShowDeathText();
+
+                    GetComponent<PlayerBehaviour>().stopInput = true;
                     CharacterBehaviour.SetAlive(false);
+
                     GetComponent<PlayerAnimatorController>().Die();
                 }
 

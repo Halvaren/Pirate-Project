@@ -30,6 +30,15 @@ namespace DefinitiveScript
             }
         }
 
+        private SceneController m_SceneController;
+        public SceneController SceneController
+        {
+            get {
+                if(m_SceneController == null) m_SceneController = GameManager.Instance.SceneController;
+                return m_SceneController;
+            }
+        }
+
         private float verticalMovement;
         private float horizontalMovement;
 
@@ -73,6 +82,7 @@ namespace DefinitiveScript
         public void Disappear()
         {
             StartCoroutine(FadeOut(1.0f));
+            SceneController.PlayerDead();
         }
 
         private IEnumerator FadeOut(float time)
@@ -89,8 +99,6 @@ namespace DefinitiveScript
 
                 yield return null;
             }
-
-            //Destroy(gameObject); //?
         }
 
         public void HitOnBody()
