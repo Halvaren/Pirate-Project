@@ -191,9 +191,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4517435687590750576}
   - component: {fileID: 4517435687590655315}
+  - component: {fileID: 4517435687590655314}
   m_Layer: 11
   m_Name: Arrow_Up_1
-  m_TagString: Arrow
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -232,6 +233,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4517435687590655314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4517435687590655312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15479b4bc9c918a4f96ba69e8b92b1c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visualPuzle: {fileID: 8663066872911469686}
 --- !u!1 &4517435687590655316
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,9 +257,10 @@ GameObject:
   - component: {fileID: 4517435687590750580}
   - component: {fileID: 4517435687593617748}
   - component: {fileID: 4517435687592651668}
+  - component: {fileID: 4517435687590655319}
   m_Layer: 11
   m_Name: Base
-  m_TagString: Arrow
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -310,6 +325,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &4517435687590655319
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4517435687590655316}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300000, guid: a57e9c69ca568e541b16be09f521e19a, type: 3}
 --- !u!1 &4517435687590655318
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,9 +350,10 @@ GameObject:
   - component: {fileID: 4517435687590750582}
   - component: {fileID: 4517435687593617750}
   - component: {fileID: 4517435687592651670}
+  - component: {fileID: 4517435687590655313}
   m_Layer: 11
   m_Name: Frame
-  m_TagString: Arrow
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -387,6 +417,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &4517435687590655313
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4517435687590655318}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300002, guid: a57e9c69ca568e541b16be09f521e19a, type: 3}
 --- !u!1 &4972326322816316072
 GameObject:
   m_ObjectHideFlags: 0
@@ -1431,7 +1475,7 @@ MonoBehaviour:
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -2260,8 +2304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puzleCamera: {fileID: 2499708175211470877}
-  PuzleController: {fileID: 0}
-  secretNumbers: 030000000700000004000000
+  secretNumbers: 010000000000000000000000
   numberTexts:
   - {fileID: 8663066874398196468}
   - {fileID: 8663066873823681061}
@@ -2271,13 +2314,6 @@ MonoBehaviour:
     m_Bits: 2048
   baseObj: {fileID: 8663066872911469684}
   nextPuzle: {fileID: 8663066873128323037}
-  arrowAnimators:
-  - {fileID: 4517435687590655315}
-  - {fileID: 8663066873023598001}
-  - {fileID: 8663066874222782862}
-  - {fileID: 8663066874678688298}
-  - {fileID: 8663066874328675199}
-  - {fileID: 8663066872994336771}
 --- !u!1 &8663066872918211270
 GameObject:
   m_ObjectHideFlags: 0
@@ -2839,9 +2875,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8663066872994336768}
   - component: {fileID: 8663066872994336771}
+  - component: {fileID: 8663066872994336770}
   m_Layer: 11
   m_Name: Arrow_Down_3
-  m_TagString: Arrow
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2880,6 +2917,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8663066872994336770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8663066872994336769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15479b4bc9c918a4f96ba69e8b92b1c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visualPuzle: {fileID: 8663066872911469686}
 --- !u!1 &8663066873016984650
 GameObject:
   m_ObjectHideFlags: 0
@@ -2981,9 +3031,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8663066873023598006}
   - component: {fileID: 8663066873023598001}
+  - component: {fileID: 8663066873023598000}
   m_Layer: 11
   m_Name: Arrow_Down_1
-  m_TagString: Arrow
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3022,6 +3073,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8663066873023598000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8663066873023598007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15479b4bc9c918a4f96ba69e8b92b1c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visualPuzle: {fileID: 8663066872911469686}
 --- !u!1 &8663066873024757929
 GameObject:
   m_ObjectHideFlags: 0
@@ -4049,7 +4113,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puzleCamera: {fileID: 2499708175211470877}
-  PuzleController: {fileID: 0}
   referenceTransform: {fileID: 8663066874148254434}
   startPoint: {fileID: 8663066874403000214}
   ballSpeed: 5
@@ -5437,9 +5500,10 @@ GameObject:
   - component: {fileID: 8663066873325754352}
   - component: {fileID: 8663066873325754354}
   - component: {fileID: 8663066873325754355}
+  - component: {fileID: 8663066873325754365}
   m_Layer: 11
   m_Name: Frame
-  m_TagString: Arrow
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5503,6 +5567,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &8663066873325754365
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8663066873325754353}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300002, guid: a57e9c69ca568e541b16be09f521e19a, type: 3}
 --- !u!1 &8663066873332762350
 GameObject:
   m_ObjectHideFlags: 0
@@ -5514,7 +5592,7 @@ GameObject:
   - component: {fileID: 8663066873332762345}
   m_Layer: 0
   m_Name: Arrows
-  m_TagString: Arrow
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7334,9 +7412,10 @@ GameObject:
   - component: {fileID: 8663066873587085099}
   - component: {fileID: 8663066873587085109}
   - component: {fileID: 8663066873587085098}
+  - component: {fileID: 8663066873587085108}
   m_Layer: 11
   m_Name: Base
-  m_TagString: Arrow
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7401,6 +7480,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &8663066873587085108
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8663066873587085096}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300000, guid: a57e9c69ca568e541b16be09f521e19a, type: 3}
 --- !u!1 &8663066873622191252
 GameObject:
   m_ObjectHideFlags: 0
@@ -7907,9 +8000,10 @@ GameObject:
   - component: {fileID: 8663066873710317860}
   - component: {fileID: 8663066873710317862}
   - component: {fileID: 8663066873710317863}
+  - component: {fileID: 8663066873710317857}
   m_Layer: 11
   m_Name: Base
-  m_TagString: Arrow
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7974,6 +8068,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &8663066873710317857
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8663066873710317861}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300000, guid: a57e9c69ca568e541b16be09f521e19a, type: 3}
 --- !u!1 &8663066873725973227
 GameObject:
   m_ObjectHideFlags: 0
@@ -8427,7 +8535,7 @@ MonoBehaviour:
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -9424,9 +9532,10 @@ GameObject:
   - component: {fileID: 8663066874099415934}
   - component: {fileID: 8663066874099415928}
   - component: {fileID: 8663066874099415929}
+  - component: {fileID: 8663066874099415931}
   m_Layer: 11
   m_Name: Frame
-  m_TagString: Arrow
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9490,6 +9599,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &8663066874099415931
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8663066874099415935}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300002, guid: a57e9c69ca568e541b16be09f521e19a, type: 3}
 --- !u!1 &8663066874100426829
 GameObject:
   m_ObjectHideFlags: 0
@@ -9774,9 +9897,10 @@ GameObject:
   - component: {fileID: 8663066874142669429}
   - component: {fileID: 8663066874142669431}
   - component: {fileID: 8663066874142669428}
+  - component: {fileID: 8663066874142669430}
   m_Layer: 11
   m_Name: Base
-  m_TagString: Arrow
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9841,6 +9965,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &8663066874142669430
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8663066874142669418}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300000, guid: a57e9c69ca568e541b16be09f521e19a, type: 3}
 --- !u!1 &8663066874142847522
 GameObject:
   m_ObjectHideFlags: 0
@@ -10388,9 +10526,10 @@ GameObject:
   - component: {fileID: 8663066874215883051}
   - component: {fileID: 8663066874215883061}
   - component: {fileID: 8663066874215883050}
+  - component: {fileID: 8663066874215883060}
   m_Layer: 11
   m_Name: Base
-  m_TagString: Arrow
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10455,6 +10594,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &8663066874215883060
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8663066874215883048}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300000, guid: a57e9c69ca568e541b16be09f521e19a, type: 3}
 --- !u!1 &8663066874222782860
 GameObject:
   m_ObjectHideFlags: 0
@@ -10465,9 +10618,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8663066874222782863}
   - component: {fileID: 8663066874222782862}
+  - component: {fileID: 8663066874222782857}
   m_Layer: 11
   m_Name: Arrow_Up_2
-  m_TagString: Arrow
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10506,6 +10660,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8663066874222782857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8663066874222782860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15479b4bc9c918a4f96ba69e8b92b1c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visualPuzle: {fileID: 8663066872911469686}
 --- !u!1 &8663066874241370222
 GameObject:
   m_ObjectHideFlags: 0
@@ -10550,9 +10717,10 @@ GameObject:
   - component: {fileID: 8663066874249615365}
   - component: {fileID: 8663066874249615367}
   - component: {fileID: 8663066874249615364}
+  - component: {fileID: 8663066874249615366}
   m_Layer: 11
   m_Name: Base
-  m_TagString: Arrow
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10617,6 +10785,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &8663066874249615366
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8663066874249615418}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300000, guid: a57e9c69ca568e541b16be09f521e19a, type: 3}
 --- !u!1 &8663066874252140372
 GameObject:
   m_ObjectHideFlags: 0
@@ -10628,9 +10810,10 @@ GameObject:
   - component: {fileID: 8663066874252140375}
   - component: {fileID: 8663066874252140369}
   - component: {fileID: 8663066874252140374}
+  - component: {fileID: 8663066874252140368}
   m_Layer: 11
   m_Name: Frame
-  m_TagString: Arrow
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10694,6 +10877,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &8663066874252140368
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8663066874252140372}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300002, guid: a57e9c69ca568e541b16be09f521e19a, type: 3}
 --- !u!1 &8663066874256650518
 GameObject:
   m_ObjectHideFlags: 0
@@ -11108,9 +11305,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8663066874328675196}
   - component: {fileID: 8663066874328675199}
+  - component: {fileID: 8663066874328675198}
   m_Layer: 11
   m_Name: Arrow_Up_3
-  m_TagString: Arrow
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11149,6 +11347,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8663066874328675198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8663066874328675197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15479b4bc9c918a4f96ba69e8b92b1c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visualPuzle: {fileID: 8663066872911469686}
 --- !u!1 &8663066874336657874
 GameObject:
   m_ObjectHideFlags: 0
@@ -11432,9 +11643,10 @@ GameObject:
   - component: {fileID: 8663066874369517948}
   - component: {fileID: 8663066874369517950}
   - component: {fileID: 8663066874369517951}
+  - component: {fileID: 8663066874369517945}
   m_Layer: 11
   m_Name: Frame
-  m_TagString: Arrow
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11498,6 +11710,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &8663066874369517945
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8663066874369517949}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300002, guid: a57e9c69ca568e541b16be09f521e19a, type: 3}
 --- !u!1 &8663066874373009743
 GameObject:
   m_ObjectHideFlags: 0
@@ -11587,9 +11813,10 @@ GameObject:
   - component: {fileID: 8663066874380554605}
   - component: {fileID: 8663066874380554607}
   - component: {fileID: 8663066874380554604}
+  - component: {fileID: 8663066874380554606}
   m_Layer: 11
   m_Name: Frame
-  m_TagString: Arrow
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11653,6 +11880,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &8663066874380554606
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8663066874380554594}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300002, guid: a57e9c69ca568e541b16be09f521e19a, type: 3}
 --- !u!1 &8663066874392674582
 GameObject:
   m_ObjectHideFlags: 0
@@ -11937,7 +12178,7 @@ MonoBehaviour:
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -13511,9 +13752,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8663066874678688299}
   - component: {fileID: 8663066874678688298}
+  - component: {fileID: 8663066874678688309}
   m_Layer: 11
   m_Name: Arrow_Down_2
-  m_TagString: Arrow
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13552,6 +13794,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8663066874678688309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8663066874678688296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15479b4bc9c918a4f96ba69e8b92b1c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visualPuzle: {fileID: 8663066872911469686}
 --- !u!1 &8663066874701839977
 GameObject:
   m_ObjectHideFlags: 0

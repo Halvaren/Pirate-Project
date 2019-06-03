@@ -191,7 +191,6 @@ namespace DefinitiveScript
                     if(currentSequence == colorSequences.Length) 
                     {
                         endedPuzle = true;
-                        PuzleController.PuzleResolved();
                         FinishPuzle();
                     }
                 }

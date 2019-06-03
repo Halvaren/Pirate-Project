@@ -14,6 +14,7 @@ public class AIEnemyController : MonoBehaviour
     void Start()
     {
         enemyAttacking = false;
+        playerTransform = GameManager.Instance.LocalPlayer.transform;
     }
 
     // Update is called once per frame
@@ -24,7 +25,12 @@ public class AIEnemyController : MonoBehaviour
 
     public Transform GetPlayerTransform()
     {
-        return GameManager.Instance.LocalPlayer.transform;
+        return playerTransform;
+    }
+
+    public void SetPlayerTransform(Transform param)
+    {
+        playerTransform = param;
     }
 
     public bool GetEnemyAttacking()

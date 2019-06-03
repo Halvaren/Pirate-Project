@@ -31,7 +31,6 @@ public class BoatEngine : MonoBehaviour
     private float SailRotation_Y = 0f;
 
     BoatController boatController;
-    BoatSoundController boatSoundController;
 
     private Vector3 originalPosition;
     private Vector3 originalRotation;
@@ -46,7 +45,6 @@ public class BoatEngine : MonoBehaviour
         boatRB = GetComponent<Rigidbody>();
 
         boatController = GetComponent<BoatController>();
-        boatSoundController = GetComponent<BoatSoundController>();
 
         originalPosition = transform.position;
         originalRotation = transform.localEulerAngles;
@@ -77,13 +75,8 @@ public class BoatEngine : MonoBehaviour
         }
         else
         {
-            if(currentJetPower > 0f)
-            {  
-                currentJetPower -= 1f * powerFactor;
-            }
+            currentJetPower = 0f;
         }
-
-        boatSoundController.ChangeSailingSoundVolume(currentJetPower / maxPower);
 
         //Steer left
         if(Input.GetKey(KeyCode.A))
@@ -150,9 +143,6 @@ public class BoatEngine : MonoBehaviour
             BoatUIController.RestartUI();
         }
 
-        if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D)) boatSoundController.PlayTurningSailSound();
-        if(Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D)) boatSoundController.StopTurningSailSound();
-
         BoatUIController.UpdateCompass(transform.TransformDirection(Vector3.forward));
     }
 
@@ -172,8 +162,6 @@ public class BoatEngine : MonoBehaviour
 
     IEnumerator RestartSailCoroutine(float time)
     {
-        boatSoundController.PlayTurningSailSound();
-
         float initialRotation = SailRotation_Y;
         float finalRotation = 0f;
         float newRotation = 0f;
@@ -190,8 +178,6 @@ public class BoatEngine : MonoBehaviour
             yield return null;
         }
         sailObjectTransform.localEulerAngles = new Vector3(0f, finalRotation, 0f);
-
-        boatSoundController.StopTurningSailSound();
     }
 
     void UpdateWaterJet()
