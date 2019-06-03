@@ -277,6 +277,154 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &756471640553359518
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 798601765664118607}
+  - component: {fileID: 7590406255911693322}
+  m_Layer: 0
+  m_Name: PuzleCamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &798601765664118607
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756471640553359518}
+  m_LocalRotation: {x: 0.02469389, y: 0, z: 0, w: 0.99969506}
+  m_LocalPosition: {x: 0, y: 0.87, z: -15.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1063193143822410214}
+  m_Father: {fileID: 2531432142025314434}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 2.83, y: 0, z: 0}
+--- !u!114 &7590406255911693322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756471640553359518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ExcludedPropertiesInInspector:
+  - m_Script
+  m_LockStageInInspector: 
+  m_StreamingVersion: 20170927
+  m_Priority: 0
+  m_LookAt: {fileID: 0}
+  m_Follow: {fileID: 0}
+  m_Lens:
+    FieldOfView: 60
+    OrthographicSize: 10
+    NearClipPlane: 0.1
+    FarClipPlane: 5000
+    Dutch: 0
+  m_ComponentOwner: {fileID: 1063193143822410214}
+--- !u!1 &762217356957621271
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1063193143822410214}
+  - component: {fileID: 1452885585445679368}
+  - component: {fileID: 343413216936949935}
+  - component: {fileID: 1134477850955482966}
+  m_Layer: 0
+  m_Name: cm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1063193143822410214
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762217356957621271}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 798601765664118607}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1452885585445679368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762217356957621271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &343413216936949935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762217356957621271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4044717213e31446939f7bd49c896ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TrackedObjectOffset: {x: 0, y: 0, z: 0}
+  m_LookaheadTime: 0
+  m_LookaheadSmoothing: 10
+  m_HorizontalDamping: 0.5
+  m_VerticalDamping: 0.5
+  m_ScreenX: 0.5
+  m_ScreenY: 0.5
+  m_DeadZoneWidth: 0.1
+  m_DeadZoneHeight: 0.1
+  m_SoftZoneWidth: 0.8
+  m_SoftZoneHeight: 0.8
+  m_BiasX: 0
+  m_BiasY: 0
+--- !u!114 &1134477850955482966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762217356957621271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa7155796051b734daa718462081dc5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BindingMode: 1
+  m_FollowOffset: {x: 0, y: 0, z: -10}
+  m_XDamping: 1
+  m_YDamping: 1
+  m_ZDamping: 1
+  m_PitchDamping: 0
+  m_YawDamping: 0
+  m_RollDamping: 0
 --- !u!1 &823287116055991314
 GameObject:
   m_ObjectHideFlags: 0
@@ -1135,10 +1283,9 @@ GameObject:
   - component: {fileID: 2531432140162905488}
   - component: {fileID: 2531432140162905490}
   - component: {fileID: 2531432140162905491}
-  - component: {fileID: 2531432140162905501}
   m_Layer: 11
   m_Name: Frame
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1202,20 +1349,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &2531432140162905501
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531432140162905489}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300002, guid: a57e9c69ca568e541b16be09f521e19a, type: 3}
 --- !u!1 &2531432140170852281
 GameObject:
   m_ObjectHideFlags: 0
@@ -1440,7 +1573,7 @@ MonoBehaviour:
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -1465,10 +1598,9 @@ GameObject:
   - component: {fileID: 2531432140266451780}
   - component: {fileID: 2531432140266451782}
   - component: {fileID: 2531432140266451783}
-  - component: {fileID: 2531432140266451777}
   m_Layer: 11
   m_Name: Base
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1533,20 +1665,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &2531432140266451777
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531432140266451781}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: a57e9c69ca568e541b16be09f521e19a, type: 3}
 --- !u!1 &2531432140291973098
 GameObject:
   m_ObjectHideFlags: 0
@@ -1622,10 +1740,9 @@ GameObject:
   - component: {fileID: 2531432140390731083}
   - component: {fileID: 2531432140390731093}
   - component: {fileID: 2531432140390731082}
-  - component: {fileID: 2531432140390731092}
   m_Layer: 11
   m_Name: Base
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1690,20 +1807,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &2531432140390731092
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531432140390731080}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: a57e9c69ca568e541b16be09f521e19a, type: 3}
 --- !u!1 &2531432140462861647
 GameObject:
   m_ObjectHideFlags: 0
@@ -1791,10 +1894,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2531432140494320224}
   - component: {fileID: 2531432140494320227}
-  - component: {fileID: 2531432140494320226}
   m_Layer: 11
   m_Name: Arrow_Down_3
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1833,19 +1935,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2531432140494320226
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531432140494320225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15479b4bc9c918a4f96ba69e8b92b1c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  visualPuzle: {fileID: 2531432140511657494}
 --- !u!1 &2531432140511657492
 GameObject:
   m_ObjectHideFlags: 0
@@ -1891,8 +1980,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f42697db9a0600499e52d70d34b96af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puzleCameraTrans: {fileID: 3570040190327566683}
-  secretNumbers: 010000000000000000000000
+  puzleCamera: {fileID: 7590406255911693322}
+  PuzleController: {fileID: 0}
+  secretNumbers: 030000000200000003000000
   numberTexts:
   - {fileID: 2531432141189210260}
   - {fileID: 2531432140220233797}
@@ -1901,7 +1991,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   baseObj: {fileID: 2531432140511657492}
-  nextPuzle: {fileID: 0}
+  nextPuzle: {fileID: 3179587040293435192}
+  arrowAnimators:
+  - {fileID: 7325446331393169203}
+  - {fileID: 2531432140934295505}
+  - {fileID: 2531432141965954030}
+  - {fileID: 2531432141511628874}
+  - {fileID: 2531432141795086623}
+  - {fileID: 2531432140494320227}
 --- !u!1 &2531432140522772646
 GameObject:
   m_ObjectHideFlags: 0
@@ -2157,7 +2254,7 @@ MonoBehaviour:
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -2289,10 +2386,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2531432140934295510}
   - component: {fileID: 2531432140934295505}
-  - component: {fileID: 2531432140934295504}
   m_Layer: 11
   m_Name: Arrow_Down_1
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2331,19 +2427,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2531432140934295504
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531432140934295511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15479b4bc9c918a4f96ba69e8b92b1c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  visualPuzle: {fileID: 2531432140511657494}
 --- !u!1 &2531432141001314218
 GameObject:
   m_ObjectHideFlags: 0
@@ -2683,7 +2766,7 @@ MonoBehaviour:
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -2786,10 +2869,9 @@ GameObject:
   - component: {fileID: 2531432141202131740}
   - component: {fileID: 2531432141202131742}
   - component: {fileID: 2531432141202131743}
-  - component: {fileID: 2531432141202131737}
   m_Layer: 11
   m_Name: Frame
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2853,20 +2935,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &2531432141202131737
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531432141202131741}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300002, guid: a57e9c69ca568e541b16be09f521e19a, type: 3}
 --- !u!1 &2531432141205254914
 GameObject:
   m_ObjectHideFlags: 0
@@ -2878,10 +2946,9 @@ GameObject:
   - component: {fileID: 2531432141205254925}
   - component: {fileID: 2531432141205254927}
   - component: {fileID: 2531432141205254924}
-  - component: {fileID: 2531432141205254926}
   m_Layer: 11
   m_Name: Frame
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2945,20 +3012,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &2531432141205254926
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531432141205254914}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300002, guid: a57e9c69ca568e541b16be09f521e19a, type: 3}
 --- !u!1 &2531432141344717043
 GameObject:
   m_ObjectHideFlags: 0
@@ -3201,10 +3254,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2531432141511628875}
   - component: {fileID: 2531432141511628874}
-  - component: {fileID: 2531432141511628885}
   m_Layer: 11
   m_Name: Arrow_Down_2
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3243,19 +3295,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2531432141511628885
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531432141511628872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15479b4bc9c918a4f96ba69e8b92b1c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  visualPuzle: {fileID: 2531432140511657494}
 --- !u!1 &2531432141644401967
 GameObject:
   m_ObjectHideFlags: 0
@@ -3344,10 +3383,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2531432141795086620}
   - component: {fileID: 2531432141795086623}
-  - component: {fileID: 2531432141795086622}
   m_Layer: 11
   m_Name: Arrow_Up_3
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3386,19 +3424,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2531432141795086622
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531432141795086621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15479b4bc9c918a4f96ba69e8b92b1c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  visualPuzle: {fileID: 2531432140511657494}
 --- !u!1 &2531432141836379058
 GameObject:
   m_ObjectHideFlags: 0
@@ -3591,10 +3616,9 @@ GameObject:
   - component: {fileID: 2531432141852720439}
   - component: {fileID: 2531432141852720433}
   - component: {fileID: 2531432141852720438}
-  - component: {fileID: 2531432141852720432}
   m_Layer: 11
   m_Name: Frame
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3658,20 +3682,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &2531432141852720432
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531432141852720436}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300002, guid: a57e9c69ca568e541b16be09f521e19a, type: 3}
 --- !u!1 &2531432141858388570
 GameObject:
   m_ObjectHideFlags: 0
@@ -3683,10 +3693,9 @@ GameObject:
   - component: {fileID: 2531432141858388581}
   - component: {fileID: 2531432141858388583}
   - component: {fileID: 2531432141858388580}
-  - component: {fileID: 2531432141858388582}
   m_Layer: 11
   m_Name: Base
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3751,20 +3760,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &2531432141858388582
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531432141858388570}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: a57e9c69ca568e541b16be09f521e19a, type: 3}
 --- !u!1 &2531432141883959822
 GameObject:
   m_ObjectHideFlags: 0
@@ -3886,10 +3881,9 @@ GameObject:
   - component: {fileID: 2531432141958726475}
   - component: {fileID: 2531432141958726485}
   - component: {fileID: 2531432141958726474}
-  - component: {fileID: 2531432141958726484}
   m_Layer: 11
   m_Name: Base
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3954,20 +3948,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &2531432141958726484
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531432141958726472}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: a57e9c69ca568e541b16be09f521e19a, type: 3}
 --- !u!1 &2531432141965954028
 GameObject:
   m_ObjectHideFlags: 0
@@ -3978,10 +3958,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2531432141965954031}
   - component: {fileID: 2531432141965954030}
-  - component: {fileID: 2531432141965954025}
   m_Layer: 11
   m_Name: Arrow_Up_2
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4020,19 +3999,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2531432141965954025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531432141965954028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15479b4bc9c918a4f96ba69e8b92b1c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  visualPuzle: {fileID: 2531432140511657494}
 --- !u!1 &2531432141984742443
 GameObject:
   m_ObjectHideFlags: 0
@@ -4075,10 +4041,9 @@ GameObject:
   - component: {fileID: 2531432142005967134}
   - component: {fileID: 2531432142005967128}
   - component: {fileID: 2531432142005967129}
-  - component: {fileID: 2531432142005967131}
   m_Layer: 11
   m_Name: Frame
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4142,20 +4107,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &2531432142005967131
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531432142005967135}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300002, guid: a57e9c69ca568e541b16be09f521e19a, type: 3}
 --- !u!1 &2531432142007044653
 GameObject:
   m_ObjectHideFlags: 0
@@ -4267,10 +4218,10 @@ Transform:
   - {fileID: 2531432140837387638}
   - {fileID: 2531432141001314229}
   - {fileID: 2531432140511657495}
-  - {fileID: 3570040190327566683}
   - {fileID: 1263786411777051002}
   - {fileID: 3028951754794600377}
   - {fileID: 182739036146231359}
+  - {fileID: 798601765664118607}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4312,7 +4263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visualPuzle: {fileID: 2531432140511657494}
-  nextPuzle: {fileID: 0}
+  nextPuzle: {fileID: 3179587040293435192}
 --- !u!65 &6564015641450602838
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4411,10 +4362,9 @@ GameObject:
   - component: {fileID: 2531432142049220629}
   - component: {fileID: 2531432142049220631}
   - component: {fileID: 2531432142049220628}
-  - component: {fileID: 2531432142049220630}
   m_Layer: 11
   m_Name: Base
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4479,20 +4429,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &2531432142049220630
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531432142049220618}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: a57e9c69ca568e541b16be09f521e19a, type: 3}
 --- !u!1 &2599653084777052149
 GameObject:
   m_ObjectHideFlags: 0
@@ -4614,7 +4550,7 @@ Transform:
   m_LocalScale: {x: 2, y: 1, z: 1.4}
   m_Children: []
   m_Father: {fileID: 2531432142025314434}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -90, y: 180, z: 0}
 --- !u!33 &8294905280495362130
 MeshFilter:
@@ -4994,8 +4930,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3491896039422360239}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.1}
   m_LocalScale: {x: 1.256968, y: 1.256968, z: 1.256968}
   m_Children:
   - {fileID: 1739705222560338277}
@@ -5004,7 +4940,7 @@ Transform:
   - {fileID: 3920092273570228272}
   - {fileID: 8158363951741876935}
   m_Father: {fileID: 2531432142025314434}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3179587040293435192
 MonoBehaviour:
@@ -5018,7 +4954,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e5b32a1f4b2c1a4dac658444cb74e26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puzleCameraTrans: {fileID: 3570040190327566683}
+  puzleCamera: {fileID: 7590406255911693322}
+  PuzleController: {fileID: 0}
   distanceToMove: 1
   minMouseDistanceToMove: 10
   grabbingLayerMask:
@@ -5037,7 +4974,7 @@ MonoBehaviour:
   - {fileID: 3144217892760440752}
   - {fileID: 8905820427093559418}
   - {fileID: 3509189917440837856}
-  scaleFactor: 0
+  scaleFactor: 0.1256968
 --- !u!1 &3509189917440837856
 GameObject:
   m_ObjectHideFlags: 0
@@ -5799,7 +5736,7 @@ Transform:
   m_LocalScale: {x: 2, y: 20, z: 2}
   m_Children: []
   m_Father: {fileID: 2531432142025314434}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &691141460182232980
 MeshFilter:
@@ -5859,36 +5796,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &5331357387840803773
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3570040190327566683}
-  m_Layer: 0
-  m_Name: PuzleCameraPosition
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3570040190327566683
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5331357387840803773}
-  m_LocalRotation: {x: 0.02469389, y: 0, z: 0, w: 0.99969506}
-  m_LocalPosition: {x: 0, y: 0.87, z: -15.9}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2531432142025314434}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 2.83, y: 0, z: 0}
 --- !u!1 &5526859770474001478
 GameObject:
   m_ObjectHideFlags: 0
@@ -6449,10 +6356,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7325446331393592080}
   - component: {fileID: 7325446331393169203}
-  - component: {fileID: 7325446331393169202}
   m_Layer: 11
   m_Name: Arrow_Up_1
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6491,19 +6397,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7325446331393169202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7325446331393169200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15479b4bc9c918a4f96ba69e8b92b1c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  visualPuzle: {fileID: 2531432140511657494}
 --- !u!1 &7325446331393169204
 GameObject:
   m_ObjectHideFlags: 0
@@ -6515,10 +6408,9 @@ GameObject:
   - component: {fileID: 7325446331393592084}
   - component: {fileID: 7325446331392265012}
   - component: {fileID: 7325446331391166964}
-  - component: {fileID: 7325446331393169207}
   m_Layer: 11
   m_Name: Base
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6583,20 +6475,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &7325446331393169207
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7325446331393169204}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: a57e9c69ca568e541b16be09f521e19a, type: 3}
 --- !u!1 &7325446331393169206
 GameObject:
   m_ObjectHideFlags: 0
@@ -6608,10 +6486,9 @@ GameObject:
   - component: {fileID: 7325446331393592086}
   - component: {fileID: 7325446331392265014}
   - component: {fileID: 7325446331391166966}
-  - component: {fileID: 7325446331393169201}
   m_Layer: 11
   m_Name: Frame
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6675,20 +6552,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &7325446331393169201
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7325446331393169206}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300002, guid: a57e9c69ca568e541b16be09f521e19a, type: 3}
 --- !u!1 &7870845390269147705
 GameObject:
   m_ObjectHideFlags: 0

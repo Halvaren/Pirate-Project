@@ -29,6 +29,10 @@ namespace DefinitiveScript
 
         public Puzle nextPuzle;
 
+        public Animator[] arrowAnimators;
+
+        private int numSelected;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -43,6 +47,7 @@ namespace DefinitiveScript
 
         protected override void InitializePuzle()
         {
+            ChangeSelectedNumber(0, 0);
             currentNumbers = new int[] {0, 0, 0};
             for(int i = 0; i < currentNumbers.Length; i++)
             {
@@ -57,13 +62,34 @@ namespace DefinitiveScript
         {
             if(onPuzle)
             {
+                if(InputController.IncreaseNumber && !InputController.DecreaseNumber && !InputController.ChangeSelectedNumberRight && !InputController.ChangeSelectedNumberLeft)
+                {
+                    arrowAnimators[numSelected * 2].SetTrigger("PressedButton");
+                    ChangeNumber(numSelected, 1);
+                }
+                else if(InputController.DecreaseNumber && !InputController.ChangeSelectedNumberRight && !InputController.ChangeSelectedNumberLeft)
+                {
+                    arrowAnimators[numSelected * 2 + 1].SetTrigger("PressedButton");
+                    ChangeNumber(numSelected, -1);
+                }
+                else if(InputController.ChangeSelectedNumberRight && !InputController.ChangeSelectedNumberLeft)
+                {
+                    ChangeSelectedNumber(numSelected, numSelected + 1);
+                }
+                else if(InputController.ChangeSelectedNumberLeft)
+                {
+                    ChangeSelectedNumber(numSelected, numSelected - 1);
+                }
+
+                /*
                 if(!buttonBeingPressed && InputController.ShootingInput)
                 {
-                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
                     RaycastHit hit;
                     if(Physics.Raycast(ray, out hit, Mathf.Infinity, arrowLayer))
                     {
+                        print("hola");
                         if(hit.collider.gameObject.tag == "Arrow")
                         {
                             GameObject arrow = hit.collider.gameObject;
@@ -75,28 +101,43 @@ namespace DefinitiveScript
                             buttonBeingPressed = true;
                         }
                     }
+                }*/
+
+                if(InputController.CheckNumbers)
+                {
+                    if(CheckNumbers()) 
+                    {
+                        StartCoroutine(OpenPuzle(1.0f));
+                    }
                 }
                 
-                if(Input.GetKeyDown(KeyCode.Z))
+                if(InputController.ExitFromPuzle)
                 {
                     FinishPuzle();
                 }
+
+
             }
+        }
+
+        void ChangeSelectedNumber(int lastNumber, int newNumber)
+        {
+            if(newNumber > 2) newNumber = 0;
+            else if(newNumber < 0) newNumber = 2;
+
+            numberTexts[lastNumber].color = Color.white;
+            numberTexts[newNumber].color = Color.yellow;
+
+            numSelected = newNumber;
         }
 
         void ChangeNumber(int number, int increase)
         {
-            int i = number - 1;
-            currentNumbers[i] += increase;
-            if(currentNumbers[i] > 9) currentNumbers[i] = 0;
-            else if(currentNumbers[i] < 0) currentNumbers[i] = 9;
+            currentNumbers[number] += increase;
+            if(currentNumbers[number] > 9) currentNumbers[number] = 0;
+            else if(currentNumbers[number] < 0) currentNumbers[number] = 9;
 
-            numberTexts[i].text = currentNumbers[i].ToString();
-
-            if(CheckNumbers()) 
-            {
-                StartCoroutine(OpenPuzle(1.0f));
-            }
+            numberTexts[number].text = currentNumbers[number].ToString();
         }
 
         IEnumerator PressArrow(float time)

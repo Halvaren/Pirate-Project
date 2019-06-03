@@ -1,9 +1,7 @@
 fileFormatVersion: 2
 guid: 24a759921bedc2541881a0535a7bfcc8
-timeCreated: 1504768173
-licenseType: Store
 ModelImporter:
-  serializedVersion: 21
+  serializedVersion: 23
   fileIDToRecycleName:
     100000: Leaves
     100002: Leaves_1
@@ -13,6 +11,23 @@ ModelImporter:
     100010: Leaves_5
     100012: //RootNode
     100014: Tree_2
+    100016: Leaves 1
+    100018: Leaves 2
+    100020: Leaves_1 1
+    100022: Leaves_1 2
+    100024: Leaves_2 1
+    100026: Leaves_2 2
+    100028: Leaves_3 1
+    100030: Leaves_3 2
+    100032: Leaves_4 1
+    100034: Leaves_4 2
+    100036: Leaves_5 1
+    100038: Leaves_5 2
+    100040: LOD1
+    100042: LOD2
+    100044: LOD3
+    100046: Tree_2 1
+    100048: Tree_2 2
     400000: Leaves
     400002: Leaves_1
     400004: Leaves_2
@@ -21,28 +36,93 @@ ModelImporter:
     400010: Leaves_5
     400012: //RootNode
     400014: Tree_2
+    400016: Leaves 1
+    400018: Leaves 2
+    400020: Leaves_1 1
+    400022: Leaves_1 2
+    400024: Leaves_2 1
+    400026: Leaves_2 2
+    400028: Leaves_3 1
+    400030: Leaves_3 2
+    400032: Leaves_4 1
+    400034: Leaves_4 2
+    400036: Leaves_5 1
+    400038: Leaves_5 2
+    400040: LOD1
+    400042: LOD2
+    400044: LOD3
+    400046: Tree_2 1
+    400048: Tree_2 2
     2300000: Leaves_1
     2300002: Leaves_2
     2300004: Leaves_3
     2300006: Leaves_4
     2300008: Leaves_5
     2300010: Tree_2
+    2300012: Leaves_1 1
+    2300014: Leaves_1 2
+    2300016: Leaves_2 1
+    2300018: Leaves_2 2
+    2300020: Leaves_3 1
+    2300022: Leaves_3 2
+    2300024: Leaves_4 1
+    2300026: Leaves_4 2
+    2300028: Leaves_5 1
+    2300030: Leaves_5 2
+    2300032: Tree_2 1
+    2300034: Tree_2 2
     3300000: Leaves_1
     3300002: Leaves_2
     3300004: Leaves_3
     3300006: Leaves_4
     3300008: Leaves_5
     3300010: Tree_2
+    3300012: Leaves_1 1
+    3300014: Leaves_1 2
+    3300016: Leaves_2 1
+    3300018: Leaves_2 2
+    3300020: Leaves_3 1
+    3300022: Leaves_3 2
+    3300024: Leaves_4 1
+    3300026: Leaves_4 2
+    3300028: Leaves_5 1
+    3300030: Leaves_5 2
+    3300032: Tree_2 1
+    3300034: Tree_2 2
     4300000: Tree_2
     4300002: Leaves_5
     4300004: Leaves_4
     4300006: Leaves_2
     4300008: Leaves_1
     4300010: Leaves_3
+    4300012: Tree_2
+    4300014: Leaves_5
+    4300016: Leaves_4
+    4300018: Leaves_3
+    4300020: Leaves_2
+    4300022: Leaves_1
+    4300024: Tree_2
+    4300026: Leaves_5
+    4300028: Leaves_4
+    4300030: Leaves_3
+    4300032: Leaves_2
+    4300034: Leaves_1
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Brown.2
+    second: {fileID: 2100000, guid: f7c2deb7be33c61418c105b4da4da2d8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Green.11
+    second: {fileID: 2100000, guid: 9bceac9e437c11447a0839f938aaa270, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -55,6 +135,8 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -69,6 +151,7 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -79,16 +162,23 @@ ModelImporter:
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
@@ -103,7 +193,6 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1

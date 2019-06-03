@@ -16,6 +16,8 @@ namespace DefinitiveScript
 
         protected PlayerBehaviour player;
 
+        public PuzleController PuzleController;
+
         public virtual void StartPuzle()
         {
 
