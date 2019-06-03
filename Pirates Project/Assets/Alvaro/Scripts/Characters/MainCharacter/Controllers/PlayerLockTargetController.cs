@@ -13,6 +13,8 @@ public class PlayerLockTargetController : MonoBehaviour
     public float distanceToDeactivateTargeting;
 
     public GameObject targetMark;
+    public Color targetingColor;
+    public Color untargetingColor;
     private Image targetMarkRenderer;
     private Transform targetMarkTransform;
 
@@ -25,11 +27,21 @@ public class PlayerLockTargetController : MonoBehaviour
 
     private EnemyBehaviour currentTarget;
 
+    private PlayerBehaviour m_PlayerBehaviour;
+    public PlayerBehaviour PlayerBehaviour 
+    {
+        get {
+            if(m_PlayerBehaviour == null) m_PlayerBehaviour = GetComponent<PlayerBehaviour>();
+            return m_PlayerBehaviour;
+        }
+    }
+
     void Start()
     {
         enemyList = new List<EnemyBehaviour>();
         
         targetMarkRenderer = targetMark.GetComponent<Image>();
+        targetMarkRenderer.color = untargetingColor;
         targetMarkTransform = targetMark.transform;
     }
 
@@ -48,7 +60,7 @@ public class PlayerLockTargetController : MonoBehaviour
             Vector3 vectorToTarget = currentTarget.transform.position - transform.position;
             vectorToTarget.y = 0f;
             float distanceFromTarget = vectorToTarget.magnitude;
-            if(distanceFromTarget > distanceToDeactivateTargeting)
+            if(distanceFromTarget > distanceToDeactivateTargeting && PlayerBehaviour.GetAlive())
             {
                 DeactivateTargeting();
             }
@@ -178,12 +190,14 @@ public class PlayerLockTargetController : MonoBehaviour
     {
         if(!lockedTarget && currentTarget != null)
         {
+            targetMarkRenderer.color = targetingColor;
             lockedTarget = true;
             thirdPersonLockedTargetCamera.m_LookAt = currentTarget.transform;
             return true;
         }
         else
         {
+            targetMarkRenderer.color = untargetingColor;
             lockedTarget = false;
             thirdPersonLockedTargetCamera.m_LookAt = null;
             return false;
@@ -192,7 +206,7 @@ public class PlayerLockTargetController : MonoBehaviour
 
     private void DeactivateTargeting()
     {
-        GetComponent<PlayerBehaviour>().LockUnlockTarget();
+        PlayerBehaviour.LockUnlockTarget();
     }
 
     public Transform GetCurrentTargetTransform()

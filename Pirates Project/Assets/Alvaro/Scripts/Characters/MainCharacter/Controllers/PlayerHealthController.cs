@@ -55,7 +55,6 @@ namespace DefinitiveScript
 
                 if(health <= 0f)
                 {   
-                    CharacterController.enabled = false;
                     GameManager.Instance.AIEnemyController.PlayerDead();
 
                     GameManager.Instance.SceneController.ShowDeathText();
