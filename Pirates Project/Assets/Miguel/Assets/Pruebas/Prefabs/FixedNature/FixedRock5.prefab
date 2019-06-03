@@ -15,7 +15,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 18
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1733195683860538786
 Transform:
@@ -62,6 +62,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Rock_5 Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262924044286212505, guid: f8fe84590d4cafb4798e70337c5252bf,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967294
       objectReference: {fileID: 0}
     - target: {fileID: 2264491753454690925, guid: f8fe84590d4cafb4798e70337c5252bf,
         type: 3}

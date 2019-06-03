@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 namespace DefinitiveScript 
 {
@@ -14,6 +15,8 @@ namespace DefinitiveScript
         private GameObject GM;
 
         public Image blackScreen;
+        public TextMeshProUGUI deathText;
+
         public float fadingTime = 0.5f;
 
         private int lastScene;
@@ -49,6 +52,8 @@ namespace DefinitiveScript
             DontDestroyOnLoad(GameManager.Instance.GameObject);
             DontDestroyOnLoad(this.gameObject);
 
+            SceneManager.sceneLoaded += InitializeScene;
+
             created = true;
         }
 
@@ -60,15 +65,15 @@ namespace DefinitiveScript
             else GameManager.Instance.CursorController.LockCursor();
 
             blackScreen.enabled = false;
-            InitializeScene();
+            InitializeScene(SceneManager.GetActiveScene(), LoadSceneMode.Single);
         }
 
         void Update() {
-            if(changedScene && lastScene != SceneManager.GetActiveScene().buildIndex)
+            /*if(changedScene)
             {
                 InitializeScene();
                 changedScene = false;
-            }
+            }*/
         }
 
         private void FindPlayer()
@@ -142,21 +147,23 @@ namespace DefinitiveScript
             if(aux != null) enterIntoCavernSpawnPoint = aux.transform;
         }
 
-        private void InitializeScene()
+        private void InitializeScene(Scene scene, LoadSceneMode mode)
         {
-            StartCoroutine(InitializeSceneCoroutine());
+            deathText.enabled = false;
+
+            StartCoroutine(InitializeSceneCoroutine(scene));
         }
 
-        private IEnumerator InitializeSceneCoroutine()
+        private IEnumerator InitializeSceneCoroutine(Scene scene)
         {
             if(lastScene != -1)
             {
-                if(SceneManager.GetActiveScene().buildIndex == mainMenuID)
+                if(scene.buildIndex == mainMenuID)
                 {
                     GameManager.Instance.CursorController.UnlockCursor();
                     yield return StartCoroutine(FadeIn(fadingTime));
                 }
-                else if(SceneManager.GetActiveScene().buildIndex == boatSceneID)
+                else if(scene.buildIndex == boatSceneID)
                 {
                     GameManager.Instance.CursorController.LockCursor();
 
@@ -184,7 +191,7 @@ namespace DefinitiveScript
                     
                     yield return StartCoroutine(FadeIn(fadingTime));
                 }
-                else if(SceneManager.GetActiveScene().buildIndex == islandSceneID)
+                else if(scene.buildIndex == islandSceneID)
                 {
                     GameManager.Instance.CursorController.LockCursor();
                     FindPlayer();
@@ -214,13 +221,13 @@ namespace DefinitiveScript
 
                     PlayerBehaviour.stopInput = false;
                 }
-                else if(SceneManager.GetActiveScene().buildIndex == cavernSceneID)
+                else if(scene.buildIndex == cavernSceneID)
                 {
                     GameManager.Instance.CursorController.LockCursor();
                     FindPlayer();
                     FindEnterCavernSpawnPoint();
 
-                    if(lastScene == islandSceneID)
+                    if(lastScene == islandSceneID || lastScene == cavernSceneID)
                     {   
                         PlayerBehaviour.stopInput = true;
 
@@ -276,6 +283,53 @@ namespace DefinitiveScript
         public void ExitFromTheCavern()
         {
             StartCoroutine(ChangeToScene(islandSceneID));
+        }
+
+        public void ShowDeathText()
+        {
+            deathText.enabled = true;
+            StartCoroutine(FadeInDeathText(1.5f));
+        }
+
+        private IEnumerator FadeInDeathText(float time)
+        {
+            Color c = deathText.color;
+            c.a = 0f;
+            deathText.color = c;
+
+            float initialAlpha = 0f;
+            float finalAlpha = 1f;
+
+            RectTransform deathTextTransform = deathText.GetComponent<RectTransform>();
+
+            Vector3 finalScale = deathTextTransform.localScale;
+            Vector3 initialScale = finalScale * 0.5f;
+
+            deathText.GetComponent<RectTransform>().localScale = initialScale;
+
+            float elapsedTime = 0.0f;
+
+            while(elapsedTime < time)
+            {
+                elapsedTime += Time.deltaTime;
+
+                c.a = Mathf.Lerp(initialAlpha, finalAlpha, elapsedTime / time);
+                deathText.color = c;
+
+                deathTextTransform.localScale = Vector3.Lerp(initialScale, finalScale, elapsedTime / time);
+
+                yield return null;
+            }
+
+            c.a = finalAlpha;
+            deathText.color = c;
+
+            deathTextTransform.localScale = finalScale;
+        }
+
+        public void PlayerDead()
+        {
+            StartCoroutine(ChangeToScene(SceneManager.GetActiveScene().buildIndex));
         }
 
         /*public void ChangeToScene(string name)
