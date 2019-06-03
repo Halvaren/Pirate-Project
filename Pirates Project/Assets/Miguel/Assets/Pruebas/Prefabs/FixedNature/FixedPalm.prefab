@@ -15,7 +15,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 18
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &8110535595881491224
 Transform:
@@ -58,6 +58,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8110535595881491224}
     m_Modifications:
+    - target: {fileID: 2177578945014207398, guid: 0e12bb7a27f63ca46b80bd8214b79a32,
+        type: 3}
+      propertyPath: m_Name
+      value: Palm_Tree
+      objectReference: {fileID: 0}
+    - target: {fileID: 2177578945014207398, guid: 0e12bb7a27f63ca46b80bd8214b79a32,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 2177578945014555562, guid: 0e12bb7a27f63ca46b80bd8214b79a32,
         type: 3}
       propertyPath: m_LocalPosition.x

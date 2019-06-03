@@ -8,13 +8,22 @@ public class AIEnemyController : MonoBehaviour
     private Transform playerTransform;
     private bool playerDetect;
 
+    private EnemyBehaviour[] enemies;
+
     private bool enemyAttacking;
 
     // Start is called before the first frame update
     void Start()
     {
         enemyAttacking = false;
-        playerTransform = GameManager.Instance.LocalPlayer.transform;
+
+        GameObject[] enemyObjects = GameObject.FindGameObjectsWithTag("Enemy");
+        enemies = new EnemyBehaviour[enemyObjects.Length];
+
+        for(int i = 0; i < enemies.Length; i++)
+        {
+            enemies[i] = enemyObjects[i].GetComponent<EnemyBehaviour>();
+        }
     }
 
     // Update is called once per frame
@@ -41,5 +50,14 @@ public class AIEnemyController : MonoBehaviour
     public void SetEnemyAttacking(bool value)
     {
         enemyAttacking = value;
+    }
+
+    public void PlayerDead()
+    {
+        for(int i = 0; i < enemies.Length; i++)
+        {
+            enemies[i].PlayerDead();
+            enemies[i].SetPatrolling();
+        }
     }
 }

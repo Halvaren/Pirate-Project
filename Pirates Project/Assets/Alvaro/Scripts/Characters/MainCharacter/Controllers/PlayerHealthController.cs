@@ -23,6 +23,8 @@ namespace DefinitiveScript
         private bool ableToShoot;
         private float reloadEnergy = 100f;
 
+        private int currentMoney = 0;
+
         protected override void Update()
         {
             base.Update();
@@ -52,8 +54,14 @@ namespace DefinitiveScript
                 health -= damage;
 
                 if(health <= 0f)
-                {    
+                {   
+                    GameManager.Instance.AIEnemyController.PlayerDead();
+
+                    GameManager.Instance.SceneController.ShowDeathText();
+
+                    GetComponent<PlayerBehaviour>().stopInput = true;
                     CharacterBehaviour.SetAlive(false);
+
                     GetComponent<PlayerAnimatorController>().Die();
                 }
 
@@ -112,6 +120,14 @@ namespace DefinitiveScript
         public bool GetAbleToShoot()
         {
             return ableToShoot;
+        }
+
+        public void IncreaseMoney(int increase)
+        {
+            currentMoney += increase;
+            if(currentMoney < 0) currentMoney = 0;
+
+            PlayerUIController.IncreaseMoney(increase);
         }
     }
 }

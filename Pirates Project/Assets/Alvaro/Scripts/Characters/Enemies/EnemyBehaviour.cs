@@ -32,14 +32,6 @@ public class EnemyBehaviour : CharacterBehaviour
     public float seekingTime = 3f;
 
     private bool running;
-
-    private bool patrolling;
-    private bool following;
-    private bool searching;
-    private bool staring;
-    
-    private bool blocking;
-    private bool attacking;
     private bool aroundPlayer;
 
     private EnemyState enemyState;
@@ -70,6 +62,15 @@ public class EnemyBehaviour : CharacterBehaviour
         get {
             if(m_EnemySableController == null) m_EnemySableController = GetComponent<EnemySableController>();
             return m_EnemySableController;
+        }
+    }
+
+    private EnemyLootController m_EnemyLootController;
+    public EnemyLootController EnemyLootController
+    {
+        get {
+            if(m_EnemyLootController == null) m_EnemyLootController = GetComponent<EnemyLootController>();
+            return m_EnemyLootController;
         }
     }
 
@@ -233,6 +234,11 @@ public class EnemyBehaviour : CharacterBehaviour
         Animator.SetTrigger("Attack");
     }
 
+    public void PlayerDead()
+    {
+        Animator.SetTrigger("PlayerDead");
+    }
+
     public void Die()
     {
         Animator.SetTrigger("Die");
@@ -240,6 +246,7 @@ public class EnemyBehaviour : CharacterBehaviour
 
     public void Disappear()
     {
+        EnemyLootController.ReleaseLoot();
         StartCoroutine(FadeOut(1.0f));
     }
 
@@ -258,7 +265,7 @@ public class EnemyBehaviour : CharacterBehaviour
             yield return null;
         }
 
-        Destroy(gameObject); //?
+        Destroy(gameObject);
     }
     
     public bool IsRunning()

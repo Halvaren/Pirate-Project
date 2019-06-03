@@ -30,7 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7460918056816371426}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &572540463
 MonoBehaviour:
@@ -149,7 +149,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7460918056816371426}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &3662672660937041636
 ParticleSystem:
@@ -4903,7 +4903,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7460918056816371426}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7460918055069117808
 GameObject:
@@ -10905,6 +10905,7 @@ GameObject:
   - component: {fileID: 7460918056816371436}
   - component: {fileID: 7460918056816371433}
   - component: {fileID: 6674416327000943288}
+  - component: {fileID: 2384185243352137218}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Enemy
@@ -10927,6 +10928,7 @@ Transform:
   - {fileID: 7460918055527882918}
   - {fileID: 7460918056164574859}
   - {fileID: 1723140044}
+  - {fileID: 7483198376130351708}
   - {fileID: 1849211419858622076}
   - {fileID: 572540461}
   - {fileID: 9162144763774682650}
@@ -11159,6 +11161,26 @@ MonoBehaviour:
   UI: {fileID: 8646552559473917501}
   healthBarFill: {fileID: 8646552558820219637}
   timeToFillFullBar: 2
+--- !u!114 &2384185243352137218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7460918056816371434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 089788864a7231a47a76c674230df4b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smallSackObj: {fileID: 3218732307923974056, guid: 6e27e0071e2631a4e9cf85a887ea6526,
+    type: 3}
+  mediumSackObj: {fileID: 6487463402317012386, guid: 4df4ef910cfd1b3409ba0896b28a62b7,
+    type: 3}
+  bigSackObj: {fileID: 1150336235867752581, guid: 57dcf410f9eeb2f4c9edb0d8ce16e76d,
+    type: 3}
+  releasePoint: {fileID: 7550526567435273716}
+  releaseForce: 110
 --- !u!1 &7460918056828424455
 GameObject:
   m_ObjectHideFlags: 0
@@ -11503,6 +11525,36 @@ Transform:
   m_Father: {fileID: 7460918056981319161}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 31.787584, y: 6.3876524, z: 4.3914847}
+--- !u!1 &7550526567435273716
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7483198376130351708}
+  m_Layer: 0
+  m_Name: ReleaseLootPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7483198376130351708
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7550526567435273716}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.46, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7460918056816371426}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8646552558789192974
 GameObject:
   m_ObjectHideFlags: 0
@@ -11683,7 +11735,7 @@ RectTransform:
   m_Children:
   - {fileID: 8646552559656988240}
   m_Father: {fileID: 7460918056816371426}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -11873,7 +11925,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9114415575687732379}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.365, z: 0}
+  m_LocalPosition: {x: 0, y: 0.365, z: 0.16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7460918056816371426}
@@ -11895,11 +11947,11 @@ Light:
   m_SpotAngle: 75
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
-    m_Bias: 0.05
+    m_Bias: 0
     m_NormalBias: 0.4
     m_NearPlane: 0.2
   m_Cookie: {fileID: 0}
