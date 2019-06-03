@@ -38,7 +38,12 @@ public class AIEnemyController : MonoBehaviour
 
     public Transform GetPlayerTransform()
     {
-        return GameManager.Instance.LocalPlayer.transform;
+        return playerTransform;
+    }
+
+    public void SetPlayerTransform(Transform param)
+    {
+        playerTransform = param;
     }
 
     public bool GetEnemyAttacking()

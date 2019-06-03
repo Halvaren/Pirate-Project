@@ -46,7 +46,7 @@ LODGroup:
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.013266975
+  - screenRelativeHeight: 0.054660574
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 5326881302352670960}
@@ -122,6 +122,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3161699324355115417, guid: ab4443aaceb6b9746aa860b579f4b144,
+        type: 3}
+      propertyPath: m_Name
+      value: Rock_3 Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab4443aaceb6b9746aa860b579f4b144, type: 3}

@@ -31,14 +31,16 @@ public class EndlessWaterSquare : MonoBehaviour
     //Has the thread finished updating the water so we can add the stuff from the thread to the main thread
     bool hasThreadUpdateWater;
 
-    public float seaBottomDepth = 5f;
-
     // Start is called before the first frame update
     void Start()
     {
         CreateEndlessSea();
 
         secondsSinceStart = Time.time;
+
+        //ThreadPool.QueueUserWorkItem(new WaitCallback(UpdateWaterWithThreadPooling));
+
+        //StartCoroutine(UpdateWater());
     }
 
     // Update is called once per frame
@@ -72,13 +74,12 @@ public class EndlessWaterSquare : MonoBehaviour
         for(int i = 0; i < waterSquares.Count; i++)
         {
             waterSquares[i].MoveSea(oceanPos, Time.time);
-            seaBottoms[i].squareTransform.position = new Vector3(seaBottoms[i].squareTransform.position.x, oceanPos.y - seaBottomDepth, seaBottoms[i].squareTransform.position.z);
         }
     }
 
     //The loop that gives the updated vertices from the thread to the meshes
     //which we can't do in its own thread
-    /*IEnumerator UpdateWater()
+    IEnumerator UpdateWater()
     {
         while(true)
         {
@@ -108,7 +109,44 @@ public class EndlessWaterSquare : MonoBehaviour
             //Don't need to update the water every frame
             yield return new WaitForSeconds(Time.deltaTime * 3f);
         }
-    }*/
+    }
+
+    //The thread that updates the water vertices
+    void UpdateWaterWithThreadPooling(object state)
+    {
+        //Move the water to the boat
+        MoveWaterToBoat();
+
+        //Loop through all water squares
+        for(int i = 0; i < waterSquares.Count; i++)
+        {
+            //The local center pos of this square
+            Vector3 waterCenterPos = waterSquares[i].centerPos;
+            //All the vertices this square consists of
+            Vector3[] waterVertices = waterSquares[i].vertices;
+
+            //Update the vertices in this square
+            for(int j = 0; j < waterVertices.Length; j++)
+            {
+                //The local position of the vertex
+                Vector3 waterVertexPos = waterVertices[j];
+
+                //Can't use transformpoint in a thread, so to find the global position of the vertex
+                //we just add the position of the ocean and the square because rotation and and scale is always 0 and 1
+                Vector3 waterVertexPosGlobal = waterVertexPos + waterCenterPos + oceanPos;
+
+                //Get the water height
+                waterVertexPos.y = WaterController.current.GetWaveYPos(waterVertexPosGlobal, secondsSinceStart);
+
+                //Save the new y coordinate, but x and z are still in local position
+                waterVertices[j] = waterVertexPos;
+            }
+        }
+
+        hasThreadUpdateWater = true;
+
+        //print("Thread finished");
+    }
 
     //Move the endless water to the boat's position in steps that's the same as the water's resolution
     void MoveWaterToBoat()
@@ -165,7 +203,7 @@ public class EndlessWaterSquare : MonoBehaviour
         waterPlane.transform.position = centerPos;
 
         centerPos.x = xCoord;
-        centerPos.y -= seaBottomDepth;
+        centerPos.y = seaBottom.transform.position.y - 2f;
         centerPos.z = zCoord;
 
         seaBottom.transform.localPosition = centerPos;

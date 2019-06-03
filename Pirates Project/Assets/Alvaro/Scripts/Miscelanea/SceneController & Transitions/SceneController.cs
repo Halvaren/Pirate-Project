@@ -24,8 +24,6 @@ namespace DefinitiveScript
         
         private bool changedScene = false;
 
-        private bool resolvedPuzles = false;
-
         private DockController[] BoatDocks;
         private DockController[] IslandDocks;
 
@@ -84,6 +82,8 @@ namespace DefinitiveScript
                 PlayerBehaviour = aux.GetComponent<PlayerBehaviour>();
                 
                 PlayerBehaviour.enabled = true;
+
+                GameManager.Instance.CursorController.LockCursor();
             }
         }
 
@@ -160,13 +160,10 @@ namespace DefinitiveScript
             {
                 if(scene.buildIndex == mainMenuID)
                 {
-                    GameManager.Instance.CursorController.UnlockCursor();
                     yield return StartCoroutine(FadeIn(fadingTime));
                 }
                 else if(scene.buildIndex == boatSceneID)
                 {
-                    GameManager.Instance.CursorController.LockCursor();
-
                     FindBoatInitialPoint();
                     FindBoat();
                     FindBoatDocks();
@@ -177,23 +174,13 @@ namespace DefinitiveScript
                     }
                     else if(lastScene == islandSceneID)
                     {
-                        Vector3 dockDestinationPoint = Vector3.zero;
-                        for(int i = 0; i < BoatDocks.Length; i++)
-                        {
-                            if(BoatDocks[i].dockID == dockID)
-                            {
-                                dockDestinationPoint = BoatDocks[i].boatSpawnPoint.position;
-                                break;
-                            } 
-                        }
-                        BoatTransform.position = dockDestinationPoint;
+                        BoatTransform.position = BoatDocks[dockID].boatSpawnPoint.position;
                     }
                     
                     yield return StartCoroutine(FadeIn(fadingTime));
                 }
                 else if(scene.buildIndex == islandSceneID)
                 {
-                    GameManager.Instance.CursorController.LockCursor();
                     FindPlayer();
                     FindIslandDocks();
                     FindExitCavernSpawnPoint();
@@ -201,16 +188,7 @@ namespace DefinitiveScript
                     PlayerBehaviour.stopInput = true;
                     if(lastScene == boatSceneID)
                     {
-                        Vector3 dockDestinationPoint = Vector3.zero;
-                        for(int i = 0; i < IslandDocks.Length; i++)
-                        {
-                            if(IslandDocks[i].dockID == dockID)
-                            {
-                                dockDestinationPoint = IslandDocks[i].playerSpawnPoint.position;
-                                break;
-                            } 
-                        }
-                        PlayerBehaviour.transform.position = dockDestinationPoint;
+                        PlayerBehaviour.transform.position = IslandDocks[dockID].playerSpawnPoint.position;
                     }
                     else if(lastScene == cavernSceneID)
                     {
@@ -223,7 +201,6 @@ namespace DefinitiveScript
                 }
                 else if(scene.buildIndex == cavernSceneID)
                 {
-                    GameManager.Instance.CursorController.LockCursor();
                     FindPlayer();
                     FindEnterCavernSpawnPoint();
 
@@ -358,7 +335,6 @@ namespace DefinitiveScript
 
         private IEnumerator FadeOut(float time)
         {
-            blackScreen.enabled = true;
             float initialAlpha = 0f;
             float finalAlpha = 1f;
 
@@ -398,17 +374,6 @@ namespace DefinitiveScript
 
             c.a = finalAlpha;
             blackScreen.color = c;
-            blackScreen.enabled = false;
-        }
-
-        public bool GetResolvedPuzles()
-        {
-            return resolvedPuzles;
-        }
-        
-        public void SetResolvedPuzles(bool value)
-        {
-            resolvedPuzles = value;
         }
     }
 }

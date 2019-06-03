@@ -136,14 +136,12 @@ namespace DefinitiveScript
             {
                 for(int i = 0; i < balls.Length; i++)
                 {
-                    //Physics.BoxCast(selectedObject.transform.position, size, direction * Vector3.right, Quaternion.identity, distanceToMove, blockingLayerMask)
-
                     if(movedObject == balls[i]) 
                     {
                         Vector3 ballPosition = balls[i].transform.position;
                         Vector3 pointPosition = points[i].transform.position;
                         print((ballPosition.x - pointPosition.x) + " " + (ballPosition.y - pointPosition.y));
-                        if(Mathf.Abs(ballPosition.x - pointPosition.x) < 0.001f && Mathf.Abs(ballPosition.y - pointPosition.y) < 0.001f)
+                        if(Mathf.Abs(ballPosition.x - pointPosition.x) < 0.0001f && Mathf.Abs(ballPosition.y - pointPosition.y) < 0.0001f)
                         {
                             ballsInCorrectPlace[i] = true;
                             print("Una menos");
@@ -155,7 +153,6 @@ namespace DefinitiveScript
 
                             if(win)
                             {
-                                PuzleController.PuzleResolved();
                                 endedPuzle = true;
                                 FinishPuzle();
                             }

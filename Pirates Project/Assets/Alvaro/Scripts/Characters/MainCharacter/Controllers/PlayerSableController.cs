@@ -121,7 +121,7 @@ namespace DefinitiveScript {
                 elapsedTime += Time.deltaTime;
 
                 //La velocidad del movimiento viene dada por la curva de animación recibida por parámetro
-                CharacterController.Move((transform.forward * speedCurve.Evaluate(elapsedTime / time) + transform.up * Physics.gravity.y) * Time.deltaTime); 
+                CharacterController.Move(transform.forward * speedCurve.Evaluate(elapsedTime / time) * Time.deltaTime); 
 
                 yield return null;
             }
