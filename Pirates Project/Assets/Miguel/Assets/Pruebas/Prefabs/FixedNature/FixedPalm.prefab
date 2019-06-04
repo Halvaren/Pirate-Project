@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8110535595881491224}
   - component: {fileID: 8970960310891467577}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FixedPalm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ LODGroup:
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.07192888
+  - screenRelativeHeight: 0.030604938
     fadeTransitionWidth: 0.5
     renderers:
     - renderer: {fileID: 6828675157490671417}
@@ -122,11 +122,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2177578945014207398, guid: 0e12bb7a27f63ca46b80bd8214b79a32,
-        type: 3}
-      propertyPath: m_Name
-      value: Palm_Tree
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e12bb7a27f63ca46b80bd8214b79a32, type: 3}

@@ -55,6 +55,7 @@
   <ItemGroup>
      <Compile Include="Assets\Alvaro\Scripts\BoatPhysics\BoatManaging\BoatController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\BoatPhysics\BoatManaging\BoatEngine.cs" />
+     <Compile Include="Assets\Alvaro\Scripts\BoatPhysics\BoatManaging\BoatSoundController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\BoatPhysics\BoatUIController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\BoatPhysics\BuoyancyScripts\BoatPhysics.cs" />
      <Compile Include="Assets\Alvaro\Scripts\BoatPhysics\BuoyancyScripts\BoatPhysicsMath.cs" />
@@ -84,6 +85,7 @@
      <Compile Include="Assets\Alvaro\Scripts\Characters\Enemies\StateMachineBehaviour\EnemyStarePlayerBehaviour.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Characters\HealthController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Characters\MainCharacter\Controllers\PlayerAnimatorController.cs" />
+     <Compile Include="Assets\Alvaro\Scripts\Characters\MainCharacter\Controllers\PlayerCameraController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Characters\MainCharacter\Controllers\PlayerGunController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Characters\MainCharacter\Controllers\PlayerHealthController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Characters\MainCharacter\Controllers\PlayerLockTargetController.cs" />
@@ -104,6 +106,7 @@
      <Compile Include="Assets\Alvaro\Scripts\Miscelanea\AIEnemyController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Miscelanea\AssetBundles\BundleController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Miscelanea\AssetBundles\SoundData.cs" />
+     <Compile Include="Assets\Alvaro\Scripts\Miscelanea\CursorController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Miscelanea\ExtendedFlycam.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Miscelanea\GameManager.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Miscelanea\HealthPackageBehaviour.cs" />
@@ -113,7 +116,6 @@
      <Compile Include="Assets\Alvaro\Scripts\Miscelanea\SceneController &amp; Transitions\CavernEntry.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Miscelanea\SceneController &amp; Transitions\DockController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Miscelanea\SceneController &amp; Transitions\SceneController.cs" />
-     <Compile Include="Assets\Alvaro\Scripts\NoUsados\CursorController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\NoUsados\Probaturas.cs" />
      <Compile Include="Assets\Alvaro\Scripts\NoUsados\ThirdPersonCamera.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Puzzles\ArrowButtonBehaviour.cs" />
@@ -122,6 +124,7 @@
      <Compile Include="Assets\Alvaro\Scripts\Puzzles\FourBallsPuzle.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Puzzles\MazePuzle.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Puzzles\Puzle.cs" />
+     <Compile Include="Assets\Alvaro\Scripts\Puzzles\PuzleController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Puzzles\PuzleTrigger.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Puzzles\SimonSays.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Puzzles\VisualPuzle.cs" />
@@ -471,19 +474,19 @@
      <None Include="Assets\Asset Packs\Escenario de árboles 1\NatureStarterKit2\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlurAndFlares.shader" />
      <None Include="Assets\Asset Packs\Escenario de árboles 1\NatureStarterKit2\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendForBloom.shader" />
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>C:/Users/pc/Documents/UNIVERSIDAD/Pirate-Project/Pirates Project/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>C:/Users/halva/Documents/GitHub/Pirate-Project/Pirates Project/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.PackageManagerUI.Editor">
- <HintPath>C:/Users/pc/Documents/UNIVERSIDAD/Pirate-Project/Pirates Project/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+ <HintPath>C:/Users/halva/Documents/GitHub/Pirate-Project/Pirates Project/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.CollabProxy.Editor">
- <HintPath>C:/Users/pc/Documents/UNIVERSIDAD/Pirate-Project/Pirates Project/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+ <HintPath>C:/Users/halva/Documents/GitHub/Pirate-Project/Pirates Project/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>C:/Users/pc/Documents/UNIVERSIDAD/Pirate-Project/Pirates Project/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>C:/Users/halva/Documents/GitHub/Pirate-Project/Pirates Project/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.DataPrivacy">
- <HintPath>C:/Users/pc/Documents/UNIVERSIDAD/Pirate-Project/Pirates Project/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+ <HintPath>C:/Users/halva/Documents/GitHub/Pirate-Project/Pirates Project/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.13f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -687,13 +690,13 @@
  <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.13f1/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.Editor">
- <HintPath>C:/Users/pc/Documents/UNIVERSIDAD/Pirate-Project/Pirates Project/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
+ <HintPath>C:/Users/halva/Documents/GitHub/Pirate-Project/Pirates Project/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.StandardEvents">
- <HintPath>C:/Users/pc/Documents/UNIVERSIDAD/Pirate-Project/Pirates Project/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
+ <HintPath>C:/Users/halva/Documents/GitHub/Pirate-Project/Pirates Project/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.Tracker">
- <HintPath>C:/Users/pc/Documents/UNIVERSIDAD/Pirate-Project/Pirates Project/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
+ <HintPath>C:/Users/halva/Documents/GitHub/Pirate-Project/Pirates Project/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
  </Reference>
  <Reference Include="netstandard">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.13f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
