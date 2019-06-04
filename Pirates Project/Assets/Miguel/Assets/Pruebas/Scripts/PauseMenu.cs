@@ -27,7 +27,7 @@ public class PauseMenu : MonoBehaviour
     }
     public void Resume()
     {
-        GameManager.Instance.LocalPlayer.stopInput = false;
+        if(GameManager.Instance.LocalPlayer != null) GameManager.Instance.LocalPlayer.stopInput = false;
 
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
