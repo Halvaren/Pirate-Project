@@ -104,6 +104,7 @@ namespace DefinitiveScript
                 if(distance < finishDistance)
                 {
                     endedPuzle = true;
+                    PuzleController.PuzleResolved();
                     FinishPuzle();
                 }
             }

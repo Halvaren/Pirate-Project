@@ -17,6 +17,13 @@ namespace DefinitiveScript
         public bool BlockInput;
         public bool GrabInput;
 
+        public bool IncreaseNumber;
+        public bool DecreaseNumber;
+        public bool ChangeSelectedNumberRight;
+        public bool ChangeSelectedNumberLeft;
+        public bool CheckNumbers;
+        public bool ExitFromPuzle;
+
         void Update()
         {
             Vertical = Input.GetAxis("Vertical");
@@ -29,6 +36,13 @@ namespace DefinitiveScript
             AttackInput = Input.GetButtonDown("MouseLeftClick") || Input.GetKeyDown(KeyCode.F);
             BlockInput = Input.GetButton("MouseRightClick");
             GrabInput = Input.GetButton("MouseLeftClick");
+
+            IncreaseNumber = Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow);
+            DecreaseNumber = Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow);
+            ChangeSelectedNumberRight = Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow);
+            ChangeSelectedNumberLeft = Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow);
+            CheckNumbers = Input.GetKeyDown(KeyCode.Return);
+            ExitFromPuzle = Input.GetKeyDown(KeyCode.Z);
         } 
     }
 }

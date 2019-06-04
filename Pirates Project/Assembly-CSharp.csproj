@@ -55,6 +55,7 @@
   <ItemGroup>
      <Compile Include="Assets\Alvaro\Scripts\BoatPhysics\BoatManaging\BoatController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\BoatPhysics\BoatManaging\BoatEngine.cs" />
+     <Compile Include="Assets\Alvaro\Scripts\BoatPhysics\BoatManaging\BoatSoundController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\BoatPhysics\BoatUIController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\BoatPhysics\BuoyancyScripts\BoatPhysics.cs" />
      <Compile Include="Assets\Alvaro\Scripts\BoatPhysics\BuoyancyScripts\BoatPhysicsMath.cs" />
@@ -84,6 +85,7 @@
      <Compile Include="Assets\Alvaro\Scripts\Characters\Enemies\StateMachineBehaviour\EnemyStarePlayerBehaviour.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Characters\HealthController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Characters\MainCharacter\Controllers\PlayerAnimatorController.cs" />
+     <Compile Include="Assets\Alvaro\Scripts\Characters\MainCharacter\Controllers\PlayerCameraController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Characters\MainCharacter\Controllers\PlayerGunController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Characters\MainCharacter\Controllers\PlayerHealthController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Characters\MainCharacter\Controllers\PlayerLockTargetController.cs" />
@@ -104,6 +106,7 @@
      <Compile Include="Assets\Alvaro\Scripts\Miscelanea\AIEnemyController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Miscelanea\AssetBundles\BundleController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Miscelanea\AssetBundles\SoundData.cs" />
+     <Compile Include="Assets\Alvaro\Scripts\Miscelanea\CursorController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Miscelanea\ExtendedFlycam.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Miscelanea\GameManager.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Miscelanea\HealthPackageBehaviour.cs" />
@@ -113,7 +116,6 @@
      <Compile Include="Assets\Alvaro\Scripts\Miscelanea\SceneController &amp; Transitions\CavernEntry.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Miscelanea\SceneController &amp; Transitions\DockController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Miscelanea\SceneController &amp; Transitions\SceneController.cs" />
-     <Compile Include="Assets\Alvaro\Scripts\NoUsados\CursorController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\NoUsados\Probaturas.cs" />
      <Compile Include="Assets\Alvaro\Scripts\NoUsados\ThirdPersonCamera.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Puzzles\ArrowButtonBehaviour.cs" />
@@ -122,6 +124,7 @@
      <Compile Include="Assets\Alvaro\Scripts\Puzzles\FourBallsPuzle.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Puzzles\MazePuzle.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Puzzles\Puzle.cs" />
+     <Compile Include="Assets\Alvaro\Scripts\Puzzles\PuzleController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Puzzles\PuzleTrigger.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Puzzles\SimonSays.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Puzzles\VisualPuzle.cs" />
