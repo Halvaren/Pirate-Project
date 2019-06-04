@@ -1,7 +1,9 @@
 fileFormatVersion: 2
 guid: c52a1ad28de5ec447a225e11be0fe132
+timeCreated: 1504768178
+licenseType: Store
 ModelImporter:
-  serializedVersion: 23
+  serializedVersion: 21
   fileIDToRecycleName:
     100000: Leaves
     100002: Leaves_1
@@ -9,97 +11,28 @@ ModelImporter:
     100006: Leaves_3
     100008: //RootNode
     100010: Tree_1
-    100012: Leaves003
-    100014: Leaves1
-    100016: Leaves2
-    100018: Leaves_004
-    100020: Leaves_005
-    100022: Leaves_006
-    100024: Leaves_007
-    100026: Leaves_008
-    100028: Leaves_009
-    100030: LOD1
-    100032: LOD2
-    100034: LOD3
-    100036: Tree_002
-    100038: Tree_003
     400000: Leaves
     400002: Leaves_1
     400004: Leaves_2
     400006: Leaves_3
     400008: //RootNode
     400010: Tree_1
-    400012: Leaves003
-    400014: Leaves1
-    400016: Leaves2
-    400018: Leaves_004
-    400020: Leaves_005
-    400022: Leaves_006
-    400024: Leaves_007
-    400026: Leaves_008
-    400028: Leaves_009
-    400030: LOD1
-    400032: LOD2
-    400034: LOD3
-    400036: Tree_002
-    400038: Tree_003
     2300000: Leaves_1
     2300002: Leaves_2
     2300004: Leaves_3
     2300006: Tree_1
-    2300008: Leaves_004
-    2300010: Leaves_005
-    2300012: Leaves_006
-    2300014: Leaves_007
-    2300016: Leaves_008
-    2300018: Leaves_009
-    2300020: Tree_002
-    2300022: Tree_003
     3300000: Leaves_1
     3300002: Leaves_2
     3300004: Leaves_3
     3300006: Tree_1
-    3300008: Leaves_004
-    3300010: Leaves_005
-    3300012: Leaves_006
-    3300014: Leaves_007
-    3300016: Leaves_008
-    3300018: Leaves_009
-    3300020: Tree_002
-    3300022: Tree_003
     4300000: Leaves_1
     4300002: Leaves_2
     4300004: Leaves_3
     4300006: Tree_1
-    4300008: Leaves_006
-    4300010: Leaves_005
-    4300012: Leaves_004
-    4300014: Tree_002
-    4300016: Leaves_007
-    4300018: Leaves_008
-    4300020: Leaves_009
-    4300022: Tree_003
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Brown.2
-    second: {fileID: 2100000, guid: f7c2deb7be33c61418c105b4da4da2d8, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Brown.3
-    second: {fileID: 2100000, guid: 2852b271d0d088643a66c25efe4b5aa0, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Green.10
-    second: {fileID: 2100000, guid: aa67d82998ecf8841a3adf9bfa27b1c2, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -112,8 +45,6 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    importAnimatedCustomProperties: 0
-    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -128,7 +59,6 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
-    useSRGBMaterialColor: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -139,23 +69,16 @@ ModelImporter:
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
-    preserveHierarchy: 0
-    indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
-    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
-    blendShapeNormalImportMode: 1
-    normalSmoothingSource: 0
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
@@ -170,6 +93,7 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1

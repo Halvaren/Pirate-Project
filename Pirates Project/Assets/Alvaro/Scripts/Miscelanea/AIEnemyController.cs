@@ -16,7 +16,6 @@ public class AIEnemyController : MonoBehaviour
     void Start()
     {
         enemyAttacking = false;
-<<<<<<< HEAD
 
         GameObject[] enemyObjects = GameObject.FindGameObjectsWithTag("Enemy");
         enemies = new EnemyBehaviour[enemyObjects.Length];
@@ -29,8 +28,6 @@ public class AIEnemyController : MonoBehaviour
 
             if(i == enemyWithKey) enemies[i].GetComponent<EnemyLootController>().SetHasKey(true);
         }
-=======
->>>>>>> parent of 8a6f75546... con animacion del cofre
     }
 
     // Update is called once per frame
@@ -41,7 +38,12 @@ public class AIEnemyController : MonoBehaviour
 
     public Transform GetPlayerTransform()
     {
-        return GameManager.Instance.LocalPlayer.transform;
+        return playerTransform;
+    }
+
+    public void SetPlayerTransform(Transform param)
+    {
+        playerTransform = param;
     }
 
     public bool GetEnemyAttacking()
