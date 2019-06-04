@@ -76,8 +76,6 @@ public class AIEnemyController : MonoBehaviour
         if(enemiesDetectedPlayer == null) enemiesDetectedPlayer = new bool[enemies.Length];
         enemiesDetectedPlayer[enemyID] = value;
 
-        print(value + " " + playerDetect);
-
         if(!value && playerDetect)
         {
             bool aux = false;
