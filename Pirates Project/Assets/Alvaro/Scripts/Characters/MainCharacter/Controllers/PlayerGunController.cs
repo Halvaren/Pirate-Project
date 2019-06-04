@@ -46,6 +46,15 @@ namespace DefinitiveScript
             }
         }
 
+        private PlayerSoundController m_PlayerSoundController;
+        public PlayerSoundController PlayerSoundController
+        {
+            get {
+                if(m_PlayerSoundController == null) m_PlayerSoundController = GetComponent<PlayerSoundController>();
+                return m_PlayerSoundController;
+            }
+        }
+
         // Start is called before the first frame update
         void Awake()
         {
@@ -80,6 +89,8 @@ namespace DefinitiveScript
                 Vector3 shootingPoint;
                 Vector3 hitDirection;
                 EnemyBehaviour enemy = CalculateShootingPoint(out shootingPoint, out hitDirection);
+
+                PlayerSoundController.PlayGunShot();
                 StartCoroutine(PlayEffects(effectsDisplayTime, shootingPoint, hitDirection, enemy));
 
                 HealthController.PlayerHasShot();

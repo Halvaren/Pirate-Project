@@ -20,9 +20,13 @@ public class AIEnemyController : MonoBehaviour
         GameObject[] enemyObjects = GameObject.FindGameObjectsWithTag("Enemy");
         enemies = new EnemyBehaviour[enemyObjects.Length];
 
+        int aux = Random.Range(0, enemyObjects.Length);
+
         for(int i = 0; i < enemies.Length; i++)
         {
             enemies[i] = enemyObjects[i].GetComponent<EnemyBehaviour>();
+
+            if(i == aux) enemies[i].GetComponent<EnemyLootController>().SetHasKey(true);
         }
     }
 
@@ -55,4 +59,13 @@ public class AIEnemyController : MonoBehaviour
             enemies[i].SetPatrolling();
         }
     }
+/* 
+    private void IsPlayerDetected()
+    {
+        bool aux = true;
+        for(int i = 0; i < enemies[i]; i++)
+        {
+
+        }
+    }*/
 }

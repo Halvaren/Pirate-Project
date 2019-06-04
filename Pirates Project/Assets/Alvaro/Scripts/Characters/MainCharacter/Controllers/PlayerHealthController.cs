@@ -57,6 +57,7 @@ namespace DefinitiveScript
 
                 if(health <= 0f)
                 {   
+
                     GameManager.Instance.AIEnemyController.PlayerDead();
 
                     GameManager.Instance.SceneController.ShowDeathText();
@@ -64,10 +65,12 @@ namespace DefinitiveScript
                     GetComponent<PlayerBehaviour>().stopInput = true;
                     CharacterBehaviour.SetAlive(false);
 
+                    
+                    GetComponent<PlayerSoundController>().PlayDeath();
                     GetComponent<PlayerAnimatorController>().Die();
                 }
 
-                PlayerUIController.UpdateHealthBar(health <= 0f ? 0f : health);
+                PlayerUIController.UpdateHealthBar(health <= 0f ? 0f : health, false);
 
                 return health <= 0f;
             }
@@ -79,7 +82,7 @@ namespace DefinitiveScript
             health += amount;
             if(health > initialHealth) health = initialHealth;
 
-            PlayerUIController.UpdateHealthBar(health);
+            PlayerUIController.UpdateHealthBar(health, true);
         }
 
         public override bool ReduceStamina(float amount)

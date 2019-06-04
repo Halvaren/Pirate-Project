@@ -72,6 +72,15 @@ namespace DefinitiveScript
             }
         }
 
+        private PlayerSoundController m_PlayerSoundController;
+        public PlayerSoundController PlayerSoundController
+        {
+            get {
+                if(m_PlayerSoundController == null) m_PlayerSoundController = GetComponent<PlayerSoundController>();
+                return m_PlayerSoundController;
+            }
+        }
+
         private Vector2 m_MouseInput; //Atributo donde se guardará los valores graduales del input del ratón hasta alcanzar el valor final
         public Vector2 mouseInput {
             get {
@@ -309,6 +318,9 @@ namespace DefinitiveScript
 
         void ChangeWeapon()
         {
+            if(sableMode) PlayerSoundController.PlaySableDrawn();
+            else PlayerSoundController.PlayGunDrawn();
+
             sableObject.SetActive(sableMode);
             gunObject.SetActive(!sableMode);
         }
