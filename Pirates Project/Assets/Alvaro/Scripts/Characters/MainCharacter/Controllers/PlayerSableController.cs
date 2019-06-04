@@ -26,6 +26,14 @@ namespace DefinitiveScript {
             }
         }
 
+        private PlayerSoundController m_PlayerSoundController;
+        public PlayerSoundController PlayerSoundController {
+            get {
+                if(m_PlayerSoundController == null) m_PlayerSoundController = GetComponent<PlayerSoundController>();
+                return m_PlayerSoundController;
+            }
+        }
+
         protected void Update()
         {       
             if(blocking) //Si se está bloqueando, el HealthController deberá reducir la stamina progresivamente
@@ -103,7 +111,10 @@ namespace DefinitiveScript {
             HealthController.Knockback(2.5f, hitDirection, false); //Se hace un retroceso
 
             if(!HealthController.TakeDamage(damage)) //Se le produce un daño y si no se muere
+            {
+                PlayerSoundController.PlayHurt();
                 PlayerAnimatorController.HitOnBody(); //Se ejecuta la animación de golpe en el cuerpo
+            }
 
             //Independientemente del estado (atacando, bloqueando o normal), se cancelan el bloque y el ataque
             blocking = false;

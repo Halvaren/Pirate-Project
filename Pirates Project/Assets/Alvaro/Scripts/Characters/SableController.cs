@@ -33,6 +33,15 @@ namespace DefinitiveScript {
             }
         }
 
+        protected CharacterSoundController m_SoundController;
+        public CharacterSoundController SoundController
+        {
+            get {
+                if(m_SoundController == null) m_SoundController = GetComponent<CharacterSoundController>();
+                return m_SoundController;
+            }
+        }
+
         //Lista que se llenará con aquellos componentes SableController con los que se colisione mientras el collider del sable esté activo
         //Un SableController puede ser añadido a la lista si se colisiona con el cuerpo del otro character o con la espada
         //Dependiendo del orden de las colisiones y el estado del otro character, se realizarán unas acciones u otras
@@ -129,6 +138,7 @@ namespace DefinitiveScript {
                     {
                         if(!enemySableController.GetBlocking() && !enemySableController.GetAttacking()) //Y además no está bloqueando o atacando
                         {
+                            SoundController.PlaySableHitOnBody();
                             enemySableController.HitOnBody(characterForward); //Debe recibir un golpe
                         }
                         //En cualquier otro caso, cuando se detectó la espada antes que el cuerpo, se habrá golpeado la espada
@@ -142,16 +152,19 @@ namespace DefinitiveScript {
 
                             if(angle > 110f) //Si el ángulo es mayor de 110 quiere decir que están bastante encarados el uno al otro, por lo que se puede considerar bloqueado el golpe
                             {
+                                SoundController.PlaySableHitOnSable();
                                 enemySableController.HitOnSword(characterForward); //Golpea en la espada del enemigo
                                 HitOnSword(enemyForward); //Y él también se ve afectado
                             }
                             else //Está atacando al enemigo por un flanco por el cual no se está protegiendo
-                            {
+                            { 
+                                SoundController.PlaySableHitOnBody();
                                 enemySableController.HitOnBody(characterForward); //Golpea en el cuerpo del enemigo
                             }
                         }
                         else //Si en general no se está protegiendo o atacando y ha atacado en el cuerpo antes de golpear en la espada
                         {
+                            SoundController.PlaySableHitOnBody();
                             enemySableController.HitOnBody(characterForward); //Golpea en el cuerpo del enemigo
                         }
 
@@ -161,6 +174,7 @@ namespace DefinitiveScript {
                 }
                 else //Si, independientemente de si es el jugador o un enemigo, no lleva la espada
                 {
+                    SoundController.PlaySableHitOnBody();
                     enemySableController.HitOnBody(characterForward); //Se golpea en el cuerpo del enemigo
                 }
             }

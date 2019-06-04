@@ -55,7 +55,13 @@ namespace DefinitiveScript
                 {    
                     EnemyUIController.EnableUI(false);
                     GetComponent<CharacterBehaviour>().SetAlive(false);
+
+                    GetComponent<CharacterSoundController>().PlayDeath();
                     GetComponent<EnemyBehaviour>().Die();
+                }
+                else
+                {
+                    GetComponent<CharacterSoundController>().PlayHurt();
                 }
                 return health <= 0f;
             }

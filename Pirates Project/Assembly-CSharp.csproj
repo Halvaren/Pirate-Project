@@ -69,6 +69,7 @@
      <Compile Include="Assets\Alvaro\Scripts\BoatPhysics\WavesAndSea\WaterSquare.cs" />
      <Compile Include="Assets\Alvaro\Scripts\BoatPhysics\WavesAndSea\WaveTypes.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Characters\CharacterBehaviour.cs" />
+     <Compile Include="Assets\Alvaro\Scripts\Characters\CharacterSoundController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Characters\Enemies\Controllers\EnemyGunController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Characters\Enemies\Controllers\EnemyHealthController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Characters\Enemies\Controllers\EnemyLootController.cs" />
@@ -91,9 +92,11 @@
      <Compile Include="Assets\Alvaro\Scripts\Characters\MainCharacter\Controllers\PlayerLockTargetController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Characters\MainCharacter\Controllers\PlayerMoveController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Characters\MainCharacter\Controllers\PlayerSableController.cs" />
+     <Compile Include="Assets\Alvaro\Scripts\Characters\MainCharacter\Controllers\PlayerSoundController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Characters\MainCharacter\PlayerBehaviour.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Characters\MainCharacter\PlayerEnemyDetection.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Characters\MainCharacter\PlayerUIController.cs" />
+     <Compile Include="Assets\Alvaro\Scripts\Characters\MainCharacter\PlayerUISoundController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Characters\MainCharacter\StateMachineBehaviour\PlayerExitingModeBehaviour.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Characters\MainCharacter\StateMachineBehaviour\PlayerGunModeBehaviour.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Characters\MainCharacter\StateMachineBehaviour\PlayerHitBehaviour.cs" />
@@ -118,6 +121,11 @@
      <Compile Include="Assets\Alvaro\Scripts\Miscelanea\SceneController &amp; Transitions\CavernEntry.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Miscelanea\SceneController &amp; Transitions\DockController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Miscelanea\SceneController &amp; Transitions\SceneController.cs" />
+     <Compile Include="Assets\Alvaro\Scripts\Miscelanea\SoundControllers\BoatSceneSoundController.cs" />
+     <Compile Include="Assets\Alvaro\Scripts\Miscelanea\SoundControllers\CavernSceneSoundController.cs" />
+     <Compile Include="Assets\Alvaro\Scripts\Miscelanea\SoundControllers\GeneralSoundController.cs" />
+     <Compile Include="Assets\Alvaro\Scripts\Miscelanea\SoundControllers\IslandSceneSoundController.cs" />
+     <Compile Include="Assets\Alvaro\Scripts\Miscelanea\SoundControllers\MainMenuSoundController.cs" />
      <Compile Include="Assets\Alvaro\Scripts\NoUsados\Probaturas.cs" />
      <Compile Include="Assets\Alvaro\Scripts\NoUsados\ThirdPersonCamera.cs" />
      <Compile Include="Assets\Alvaro\Scripts\Puzzles\ArrowButtonBehaviour.cs" />

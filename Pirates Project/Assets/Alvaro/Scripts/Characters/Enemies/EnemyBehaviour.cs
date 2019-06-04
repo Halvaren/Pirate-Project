@@ -76,6 +76,8 @@ public class EnemyBehaviour : CharacterBehaviour
 
     public bool sableEnemy; //true = lleva sable; false = lleva gun
 
+    private int enemyID;
+
     void Awake()
     {
         NavMeshAgent = GetComponent<NavMeshAgent>();
@@ -344,11 +346,13 @@ public class EnemyBehaviour : CharacterBehaviour
 
     public void SetPatrolling()
     {
+        AIEnemyController.SetPlayerDetected(enemyID, false);
         enemyState = EnemyState.Patrolling;
     }
 
     public void SetFollowing()
     {
+        AIEnemyController.SetPlayerDetected(enemyID, true);
         enemyState = EnemyState.Following;
     }
 
@@ -375,5 +379,10 @@ public class EnemyBehaviour : CharacterBehaviour
     public void SetMovingAroundPlayer(bool value)
     {
         aroundPlayer = value;
+    }
+
+    public void SetEnemyID(int value)
+    {
+        enemyID = value;
     }
 }

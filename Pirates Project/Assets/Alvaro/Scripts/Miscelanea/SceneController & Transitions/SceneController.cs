@@ -38,6 +38,8 @@ namespace DefinitiveScript
         private int islandSceneID = 2;
         private int cavernSceneID = 3;
 
+        private GeneralSoundController soundController;
+
         void Awake()
         {
             GameObject[] objs = GameObject.FindGameObjectsWithTag("SceneController");
@@ -149,9 +151,11 @@ namespace DefinitiveScript
 
         private void InitializeScene(Scene scene, LoadSceneMode mode)
         {
-            deathText.enabled = false;
+            deathText.enabled = false;        
 
             StartCoroutine(InitializeSceneCoroutine(scene));
+
+            soundController = GameObject.FindWithTag("SoundController").GetComponent<GeneralSoundController>();
         }
 
         private IEnumerator InitializeSceneCoroutine(Scene scene)
@@ -244,6 +248,8 @@ namespace DefinitiveScript
 
         private IEnumerator ChangeToScene(int sceneID)
         {
+            soundController.FadeOutTheme();
+
             lastScene = SceneManager.GetActiveScene().buildIndex;
             changedScene = true;
             yield return StartCoroutine(FadeOut(fadingTime));

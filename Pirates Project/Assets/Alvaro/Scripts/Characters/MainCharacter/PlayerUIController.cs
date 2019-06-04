@@ -32,6 +32,15 @@ public class PlayerUIController : MonoBehaviour
 
     private bool aux = true;
 
+    private PlayerUISoundController m_PlayerUISoundController;
+    public PlayerUISoundController PlayerUISoundController
+    {
+        get {
+            if(m_PlayerUISoundController == null) m_PlayerUISoundController = GetComponent<PlayerUISoundController>();
+            return m_PlayerUISoundController;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +54,7 @@ public class PlayerUIController : MonoBehaviour
 
     void Update() 
     {
+        PlayerUISoundController.PlayCoinSound(currentMoney != newMoney);
         if(currentMoney != newMoney)
         {
             moneyTimer += Time.deltaTime;
@@ -57,9 +67,11 @@ public class PlayerUIController : MonoBehaviour
         }
     }
 
-    public void UpdateHealthBar(float currentValue)
+    public void UpdateHealthBar(float currentValue, bool recovered)
     {
         newHealthBarWidth = (currentValue * barMaxWidth) / 100;
+
+        if(recovered) PlayerUISoundController.PlayRecoverHealth();
 
         if(updateHealthBarCoroutine != null)
         {
@@ -170,6 +182,7 @@ public class PlayerUIController : MonoBehaviour
 
     public void EnableKey(bool value)
     {
+        if(value) PlayerUISoundController.PlayPickKey();
         if(value) keyImage.color = keyEnabledColor;
         else keyImage.color = keyDisabledColor;
     }
