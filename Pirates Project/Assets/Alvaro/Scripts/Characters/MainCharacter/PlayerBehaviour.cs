@@ -178,6 +178,18 @@ namespace DefinitiveScript
             }
             set {
                 m_StopInput = value;
+                print(value);                
+                PlayerCameraController.InputChanged(value);
+            }
+        }
+
+        private bool m_FinishedGame; //Permitirá para el movimiento en los casos necesarios (inutiliza el Update)
+        public bool finishedGame {
+            get {
+                return m_FinishedGame;
+            }
+            set {
+                m_FinishedGame = value;    
                 PlayerCameraController.InputChanged(value);
             }
         }
@@ -203,7 +215,7 @@ namespace DefinitiveScript
         {
             if(alive)
             {
-                if(!stopInput)
+                if(!stopInput && !finishedGame)
                 {
                     if(!lockedTarget && InputController.ChangeMoveModeInput)
                     {

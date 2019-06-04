@@ -16,12 +16,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 43
-    width: 1366
-    height: 685
+    width: 1920
+    height: 1007
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 950, y: 300}
+  m_MinSize: {x: 950, y: 548}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -43,9 +43,9 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1366
-    height: 685
-  m_MinSize: {x: 950, y: 300}
+    width: 1920
+    height: 1007
+  m_MinSize: {x: 950, y: 548}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &3
 MonoBehaviour:
@@ -64,7 +64,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1366
+    width: 1920
     height: 30
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
@@ -85,8 +85,8 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 665
-    width: 1366
+    y: 987
+    width: 1920
     height: 20
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
@@ -110,9 +110,9 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 30
-    width: 1366
-    height: 635
-  m_MinSize: {x: 713, y: 498}
+    width: 1920
+    height: 957
+  m_MinSize: {x: 613, y: 498}
   m_MaxSize: {x: 18008, y: 14048}
   vertical: 0
   controlID: 161
@@ -303,7 +303,7 @@ MonoBehaviour:
   - {fileID: 16}
   - {fileID: 15}
   m_Selected: 0
-  m_LastSelected: 2
+  m_LastSelected: 4
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -658,7 +658,7 @@ MonoBehaviour:
     speed: 2
     m_Value: 0
   m_ShowGlobalGrid: 1
-  m_LastSceneViewRotation: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
+  m_LastSceneViewRotation: {x: 0.5066454, y: -0.2850016, z: 0.18207467, w: 0.7930532}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
@@ -685,10 +685,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1366
+    x: 0
     y: 73
-    width: 906
-    height: 466
+    width: 904
+    height: 447
   m_PersistentViewDataDictionary: {fileID: 0}
 --- !u!114 &20
 MonoBehaviour:
@@ -736,15 +736,16 @@ MonoBehaviour:
     - {fileID: 1107561633984227508, guid: 6c4d28eda35d41b4ab9a384273c643c5, type: 2}
     - {fileID: 1107412799987397354, guid: c731bf82c6cbc1b4a82098fbb35c8516, type: 2}
     - {fileID: 1107046521603279552, guid: 1d203358db068a6448b60eb4fbfc6388, type: 2}
+    - {fileID: 1107806894239665508, guid: 0ae078f98d11d984e9f6cc53f68c1424, type: 2}
     m_ValueSerializationHelper:
-    - e00: 0.5307377
+    - e00: 0.48258197
       e01: 0
       e02: 0
-      e03: 2.2622986
+      e03: 3.4180298
       e10: 0
-      e11: 0.5307377
+      e11: 0.48258197
       e12: 0
-      e13: 104.80533
+      e13: 122.44365
       e20: 0
       e21: 0
       e22: 1
@@ -849,14 +850,14 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-    - e00: 0.69057375
+    - e00: 0.96516395
       e01: 0
       e02: 0
-      e03: 349.04507
+      e03: 489.86066
       e10: 0
-      e11: 0.69057375
+      e11: 0.96516395
       e12: 0
-      e13: 174.24385
+      e13: 260.94467
       e20: 0
       e21: 0
       e22: 1
@@ -865,14 +866,14 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-    - e00: 0.3512665
+    - e00: 0.91847897
       e01: 0
       e02: 0
-      e03: -104.49243
+      e03: 251.86736
       e10: 0
-      e11: 0.3512665
+      e11: 0.91847897
       e12: 0
-      e13: 44.235962
+      e13: -48.52907
       e20: 0
       e21: 0
       e22: 1
@@ -993,14 +994,14 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-    - e00: 0.7539174
+    - e00: 0.5233333
       e01: 0
       e02: 0
-      e03: 108.271164
+      e03: -11.1666565
       e10: 0
-      e11: 0.7539174
+      e11: 0.5233333
       e12: 0
-      e13: 76.67479
+      e13: 112.15501
       e20: 0
       e21: 0
       e22: 1
@@ -1017,6 +1018,22 @@ MonoBehaviour:
       e11: 0.5452632
       e12: 0
       e13: 116.52737
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    - e00: 0.49578947
+      e01: 0
+      e02: 0
+      e03: -9.789459
+      e10: 0
+      e11: 0.49578947
+      e12: 0
+      e13: 161.8579
       e20: 0
       e21: 0
       e22: 1
@@ -1292,7 +1309,7 @@ MonoBehaviour:
   m_LockTracker:
     m_IsLocked: 0
   m_PreviewResizer:
-    m_CachedPref: 162
+    m_CachedPref: 431
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_PreviewWindow: {fileID: 0}
